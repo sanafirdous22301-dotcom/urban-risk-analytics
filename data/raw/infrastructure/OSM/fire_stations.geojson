@@ -1,0 +1,129 @@
+{
+  "type": "FeatureCollection",
+  "generator": "overpass-turbo",
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
+  "timestamp": "2026-11-11T16:28:31Z",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "way/357036757",
+      "properties": {
+        "@id": "way/357036757",
+        "amenity": "fire_station",
+        "building": "yes",
+        "name": "Fire St.",
+        "@geometry": "center"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          78.4664168,
+          17.4507306
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/582824404",
+      "properties": {
+        "@id": "node/582824404",
+        "amenity": "fire_station",
+        "name": "S P Road Fire Station"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          78.4855137,
+          17.4430832
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/3200943739",
+      "properties": {
+        "@id": "node/3200943739",
+        "amenity": "fire_station"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          78.5384579,
+          17.4224207
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/3628741330",
+      "properties": {
+        "@id": "node/3628741330",
+        "amenity": "fire_station",
+        "name": "Malakpet Fire Station",
+        "name:ur": "ملکپیٹ فائر اسٹیشن",
+        "phone": "040 2344 9213",
+        "website": "https://fire.telangana.gov.in/"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          78.5018438,
+          17.3684668
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/8111098052",
+      "properties": {
+        "@id": "node/8111098052",
+        "amenity": "fire_station",
+        "name": "panjagutta firestation"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          78.4088851,
+          17.4127048
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/8978092814",
+      "properties": {
+        "@id": "node/8978092814",
+        "amenity": "fire_station",
+        "contact:mobile": "91-9963728750",
+        "contact:phone": "040 23449226",
+        "name": "مغل پورہ فائر اسٹیشن",
+        "name:en": "Moghulpura Fire Station",
+        "website": "https://fire.telangana.gov.in/"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          78.4767749,
+          17.3595023
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/11736392871",
+      "properties": {
+        "@id": "node/11736392871",
+        "amenity": "fire_station",
+        "check_date": "2024-03-16",
+        "description": "JNTU fire station"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          78.3910857,
+          17.4913591
+        ]
+      }
+    }
+  ]
+}

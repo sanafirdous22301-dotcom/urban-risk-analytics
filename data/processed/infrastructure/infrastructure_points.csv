@@ -1,0 +1,2084 @@
+osm_id,category,name,subtype,latitude,longitude
+relation/5321005,hospital,Shadan Hospital,hospital,17.3521089,78.3736138
+relation/5330163,hospital,Nizams Institute of Medical Sciences Hospital (NIMS),hospital,17.4226245,78.4534359
+relation/11902466,hospital,AIG HOSPITALS,hospital,17.4432083,78.3661953
+way/31549640,hospital,Axon Hospital,hospital,17.4393282,78.4423762
+way/116037991,hospital,Virinchi Hospitals,hospital,17.4080796,78.4514946
+way/131503627,hospital,Fernandez Hospital,hospital,17.3982231,78.4830646
+way/146312947,hospital,Kamineni Hospital,hospital,17.3515397,78.5561728
+way/182703660,hospital,Olive Hospital,hospital,17.3936246,78.427292
+way/200173462,hospital,"Government Area Hospital, Kondapur",hospital,17.4631371,78.3530148
+way/237976870,hospital,Nizam's Institute Of Medical Sciences,hospital,17.4219081,78.4515489
+way/238194521,hospital,Nizamia Government General Hospital,hospital,17.360376,78.4750511
+way/238195448,hospital,Niloufer Hospital,hospital,17.3986264,78.4613767
+way/238282935,hospital,Durgabai Deshmukh Hospital and Research Centre,hospital,17.4020365,78.5102829
+way/238284087,hospital,Victoria Zenana Maternity Hospital,hospital,17.3694395,78.4741015
+way/238298641,hospital,"Modern Government Maternity Hospital, Petla Burz",hospital,17.3684482,78.467419
+way/238302531,hospital,Osmania General Hospital,hospital,17.372887,78.4735108
+way/238860802,hospital,Ramdev Rao Hospital,hospital,17.4902582,78.4068344
+way/246257880,hospital,NIRD Health Centre,hospital,17.3140127,78.4046049
+way/251804751,hospital,"Lotus Hospitals, Kukatpally",hospital,17.4910279,78.3931243
+way/252285892,hospital,,hospital,17.4253104,78.5308477
+way/253465843,hospital,Shreeda Children's Hospital,hospital,17.4010952,78.5708375
+way/253467402,hospital,Anitha Nursing Home,hospital,17.4058679,78.5914451
+way/254295845,hospital,Continental Hospitals,hospital,17.4176645,78.3391307
+way/265036384,hospital,pananeeya dental hospital,hospital,17.3649018,78.5341006
+way/265204509,hospital,BHEL Hospital,hospital,17.4968074,78.3052771
+way/265627804,hospital,Sridevi Fertility Center,hospital,17.4101981,78.4893998
+way/265632074,hospital,Sri Narmada Hospital,hospital,17.4135437,78.4905333
+way/274482470,hospital,KIMS Hospital,hospital,17.4371696,78.4824784
+way/281543243,hospital,مامدیپیڈی نگرجنہ ایریا اسپتال,hospital,17.3725003,78.4985901
+way/319567707,hospital,Sir Ronald Ross Institute of Tropical and Communicable Diseases (FEVER HOSPITAL),hospital,17.3963561,78.5009536
+way/319567708,hospital,Gandhi Hospital,hospital,17.423101,78.5036034
+way/331629144,hospital,Poulomi Hospital,hospital,17.4826137,78.552897
+way/331631567,hospital,Apollo Hospital,hospital,17.494155,78.4031704
+way/331633380,hospital,lucid diagnostics,hospital,17.4763763,78.5631157
+way/331773168,hospital,Sai Datta Hospital,hospital,17.3966339,78.5191536
+way/337928613,hospital,Care Hospital,hospital,17.4125349,78.4504102
+way/341185823,hospital,Remedy Hospital,hospital,17.495446,78.3966804
+way/341192059,hospital,Remedy Hosptials,hospital,17.4946835,78.3985358
+way/343606383,hospital,lahari dental hospital,hospital,17.5033832,78.388436
+way/344478708,hospital,Apollo DRDO Hospital,hospital,17.3423925,78.5073401
+node/349267517,hospital,Vikram Hospitals,hospital,17.4406857,78.3916647
+node/349270023,hospital,Image Hospitals,hospital,17.4444337,78.3860746
+way/353782722,hospital,Woodlands Hospital,hospital,17.393066,78.4978277
+way/355678228,hospital,Kiran Skin Care Hospital,hospital,17.4966619,78.3975936
+way/355678288,hospital,Sri Sri Holistic Hospitals,hospital,17.5019842,78.3890493
+way/355688230,hospital,People's Hospital,hospital,17.5184633,78.3968713
+way/355979902,hospital,Southern Regional Centre of Ali Yavar Jung National Institute for the Hearing Handicapped (AYJNIHH),hospital,17.468807,78.4895434
+way/356159628,hospital,Pace Hospitals,hospital,17.4467602,78.3840567
+way/356200125,hospital,Bhaskara Orthopaedic Centre,hospital,17.4692948,78.5648686
+way/356234454,hospital,DR SHARATH CHANDRA,hospital,17.4307944,78.4172096
+way/356234494,hospital,Appolo Cradle Hospital,hospital,17.4164192,78.4175575
+way/356240039,hospital,"VHeal ENT, ORTHO and Multispeciality Center",hospital,17.4953973,78.3197494
+way/356248376,hospital,Govt hospital,hospital,17.4510205,78.5339402
+way/356249092,hospital,Ctomatodont Dental Care,hospital,17.4502629,78.5349646
+way/356253303,hospital,Pulse hospital,hospital,17.4216675,78.5042811
+way/356261664,hospital,Lakshmi Narayana Speciality Clinics,hospital,17.4307215,78.4242797
+way/356270074,hospital,ASVINS Specialty Cancer Hospital,hospital,17.4249606,78.4563902
+way/356271386,hospital,Omega Hospital,hospital,17.4135898,78.4240188
+way/356439747,hospital,Yashoda Super Speciality Hospital - secunderabad,hospital,17.4418003,78.4971353
+way/356464777,hospital,Sowmya Children's Hospital,hospital,17.4430285,78.4438236
+way/356484492,hospital,SIDDHARTH EYE CENTRE,hospital,17.394004,78.4823861
+way/356517417,hospital,Swarup Eye Centre,hospital,17.3950421,78.4720698
+way/356534891,hospital,WIN VISION EYE HOSPITAL,hospital,17.4349272,78.4550851
+way/356535696,hospital,Hyderabad Nursing Home,hospital,17.4069029,78.4761142
+way/356535887,hospital,"Nirmala Maternity, Orthopaedic & General Hospital",hospital,17.3943494,78.451799
+way/356548444,hospital,SRIKARA HOSPITALS,hospital,17.4352432,78.5065684
+way/357036757,fire_station,Fire St.,fire_station,17.4507306,78.4664168
+way/357056659,hospital,apollo pharmacy,hospital,17.3555734,78.521561
+way/357057519,hospital,Gleneagles Global Hospital,hospital,17.4052733,78.4631442
+way/357101267,hospital,Sunshine Heart Institute,hospital,17.4415771,78.4863946
+way/357101676,hospital,Sunshine Hospitals Out Patient Care,hospital,17.4405948,78.4860508
+way/357179813,hospital,Urban health centre,hospital,17.3555266,78.5658987
+way/357184145,hospital,Aditya Hospital,hospital,17.3904121,78.4811818
+way/357444200,hospital,ITMR Speciality Diagnostics,hospital,17.4212689,78.4491146
+way/357710710,hospital,حیدرآباد ملٹی اسپیشلیٹی ہسپتال,hospital,17.371588,78.5005651
+way/357710826,hospital,انڈو یو ایس ہسپتال,hospital,17.3726172,78.5006547
+way/357971564,hospital,Pharmacy,hospital,17.3869715,78.5261703
+way/357971577,hospital,Vasudeva Rao Clinic,hospital,17.3870379,78.5262011
+way/360984466,hospital,Healing touch hospital,hospital,17.4402801,78.497587
+way/361374554,hospital,Shenoy Hospital,hospital,17.4478356,78.5089611
+way/361655217,hospital,Sunshine Hospital,hospital,17.4411729,78.4869278
+way/362515707,hospital,khuteja hospitals,hospital,17.3714964,78.4437525
+way/364871053,hospital,Owaisi Hospital and Research Centre,hospital,17.3409222,78.5067856
+way/378458223,hospital,Maxcure Hospital,hospital,17.4065246,78.4716449
+way/410283789,hospital,Sai Vani Super Specialty Hospital,hospital,17.4109126,78.4834649
+way/413246550,hospital,Vijaya Health Care,hospital,17.4388627,78.4986615
+way/413292045,hospital,Apollo Hospitals,hospital,17.4395601,78.5047044
+way/413311009,hospital,Care Hospitals - Secunderabad,hospital,17.4400559,78.4977239
+way/413327528,hospital,Medicover Hospitals Secunderabad,hospital,17.4405052,78.5045932
+way/417220229,hospital,Dr. Ramayya's Urology Nephrology Institute and Hospital Private Limited,hospital,17.4047518,78.4751131
+way/417241491,hospital,Government General and Chest Hospital,hospital,17.4453109,78.4348356
+way/417247417,hospital,Medwin Hospital,hospital,17.3935869,78.4719415
+way/417285596,hospital,Ravi Helios Hospital,hospital,17.4110085,78.4831621
+way/422917298,hospital,,hospital,17.4707341,78.310754
+node/513439512,hospital,Ameerpet Government Hospital,hospital,17.4417142,78.4478775
+node/513439517,hospital,Sri Vijaya Hospitals,hospital,17.4422795,78.4480341
+node/538425761,hospital,Sree Priya Multi Speciality Hospital,hospital,17.4415414,78.4461255
+way/563524286,hospital,Basavatarakam Indo American Cancer Institute And Research Centre,hospital,17.4173344,78.4305408
+node/582824404,fire_station,S P Road Fire Station,fire_station,17.4430832,78.4855137
+way/596480014,hospital,,hospital,17.4787512,78.3202943
+way/608308376,hospital,Primary Healthcare Center,hospital,17.4123906,78.5838525
+node/626897112,hospital,Rahmat Ali hospital,hospital,17.3672265,78.4859878
+way/630869585,hospital,Care Hospitals,hospital,17.4305355,78.3721906
+way/630961248,hospital,ESI Hospital,hospital,17.4477154,78.4396977
+node/634123949,hospital,Satya Hospital,hospital,17.407574,78.512174
+way/642171981,hospital,,hospital,17.4467916,78.3796688
+way/645162358,hospital,Yashoda Super Speciality Hospitals,hospital,17.4245445,78.4569528
+way/660771331,hospital,L V Prasad Eye Institute,hospital,17.4246754,78.4275696
+node/665132280,hospital,Innova Children's Heart Hospital,hospital,17.4293162,78.533452
+node/665132281,hospital,Apollo Clinic,hospital,17.4290954,78.5333362
+way/689847043,hospital,Asha Hospital,hospital,17.4211633,78.4345245
+way/690384774,hospital,Supraja Hospital,hospital,17.3768491,78.55833
+way/691648389,hospital,Mamtha Hospital,hospital,17.4966966,78.3978239
+way/695655536,hospital,Vijaya Lakshmi Hospital,hospital,17.2650107,78.3889311
+way/698602581,hospital,Dr VRK Hospital,hospital,17.352139,78.3342817
+way/698701428,hospital,Bhaskar General Hospital,hospital,17.3326346,78.2999025
+way/700248245,hospital,Apollo,hospital,17.3882657,78.4610655
+node/726165655,hospital,Vasavi ENT Hospital,hospital,17.40681,78.4645023
+node/726240837,hospital,Mahavir Hospital and Research Centre,hospital,17.4036641,78.4570626
+node/727283253,hospital,Old Apollo Hospital,hospital,17.3985586,78.4814113
+node/728848279,hospital,Krishna Children's Hospital,hospital,17.4021334,78.4625295
+way/733458157,hospital,,hospital,17.4273257,78.5191726
+way/740696766,hospital,,hospital,17.4945033,78.3544335
+way/741855446,hospital,Srikara  Robotics and Super Speciality Hospital,hospital,17.495179,78.3574422
+way/758967948,hospital,,hospital,17.4333608,78.4874416
+node/827576106,hospital,Arogyasree Health care trust,hospital,17.4301742,78.3937323
+way/849385520,hospital,ప్రకృతి చికిత్సాలయము,hospital,17.4446381,78.4518215
+way/849386241,hospital,Aakar Asha Hospital,hospital,17.4891867,78.4078079
+way/853755273,hospital,Prasad Hospital,hospital,17.5056274,78.3956175
+way/859679417,hospital,,hospital,17.4462393,78.4358697
+way/860344899,hospital,Apollo Hospitals,hospital,17.4149895,78.413651
+way/860550549,hospital,Rainbow Children’s Hospital,hospital,17.4254533,78.4319236
+way/863515999,hospital,فیتھ اسپتال,hospital,17.3591158,78.4945315
+way/872851196,hospital,Sri Rn ayurved,hospital,17.5277532,78.395331
+way/874573425,hospital,Indira Hospital,hospital,17.2653005,78.3912502
+way/878105762,hospital,Usha Mullapudi Cardiac Centre,hospital,17.5202341,78.4291372
+way/879583475,hospital,ESI Hospital,hospital,17.5107038,78.4470872
+node/893195080,hospital,Surojini Devi Eye Hospital,hospital,17.3990359,78.4447966
+node/894082495,hospital,Star Hospital,hospital,17.4156911,78.4454609
+node/894082503,hospital,Rainbow Hospitals,hospital,17.4148145,78.4475692
+node/898965110,hospital,Fernandez Hospital,hospital,17.3921498,78.4793651
+node/902311398,hospital,Oxygen Hospital,hospital,17.4556983,78.4984034
+way/902925307,hospital,Lakshmi hospital,hospital,17.4905853,78.3374034
+node/1050786520,hospital,,hospital,17.4693193,78.4778376
+node/1050844412,hospital,Remedy Hospitals,hospital,17.4636217,78.4567398
+way/1076262700,hospital,ground,hospital,17.4001346,78.540756
+way/1122005587,hospital,Maxwell Hospital,hospital,17.4544692,78.4220082
+way/1123874129,hospital,Ragi hospital,hospital,17.4938625,78.4105007
+node/1215214084,hospital,LEAF HOSPITAL,hospital,17.4629614,78.3673949
+node/1224523179,hospital,Ambicare Hospital,hospital,17.4535178,78.364084
+way/1225570310,hospital,Gemini Health Care,hospital,17.3376757,78.4733384
+way/1300732264,hospital,Sankaraya Eye Hospital,hospital,17.4015386,78.3499741
+way/1392514385,hospital,ESI Hospital,hospital,17.4319493,78.5528537
+way/1408647364,hospital,Vivekananda Hospital,hospital,17.4312125,78.4555511
+way/1409678578,hospital,Sai Krishna Neuro Hospital,hospital,17.3900886,78.4958661
+way/1409986482,hospital,Yashoda Hospital,hospital,17.424515,78.4569836
+way/1430785676,hospital,Pulse Clinics and Diagnostics,hospital,17.4504056,78.5030891
+node/1435322433,hospital,L.K. Diagnostic,hospital,17.4512881,78.5354859
+node/1435322445,hospital,L.K. Hospitals,hospital,17.4513853,78.5352525
+node/1438252866,hospital,Dental Hospital,hospital,17.451435,78.5311968
+way/1455535745,hospital,,hospital,17.3410389,78.5064811
+way/1465001202,hospital,Eye Hospital,hospital,17.4087303,78.5024169
+node/1504756065,hospital,Lakshmi Childrens Hospital,hospital,17.3688309,78.5301893
+way/1544841405,hospital,,hospital,17.3482103,78.3923532
+node/1553576934,hospital,Apollo Emergency Hospital,hospital,17.3993955,78.4792005
+way/1568846336,hospital,siddarth hospital,hospital,17.4941996,78.3465269
+way/1568846337,hospital,siddarth neuro hospital,hospital,17.4939372,78.3465236
+node/1598149460,hospital,Omni Hospital,hospital,17.3684777,78.5387483
+node/1702266641,hospital,haritha hospitals,hospital,17.4696017,78.3660584
+node/1883475928,hospital,Care Clinic,hospital,17.4206569,78.4481619
+node/1985544651,hospital,Anupama Hospital,hospital,17.4856038,78.3903262
+node/2052640886,hospital,Anu Test Tube Centre,hospital,17.4217792,78.4602059
+node/2192962541,hospital,Hope Children's Hospital,hospital,17.4064283,78.4738814
+node/2208162453,hospital,Swapna Health Care,hospital,17.4291646,78.4567382
+node/2217950153,hospital,OZONE HOSPITALS,hospital,17.3594287,78.5450683
+node/2352095456,hospital,Asian Institute of Gastroenterology,hospital,17.4211366,78.4566557
+node/2354679489,hospital,Matpathy Clinic,hospital,17.4068493,78.3922011
+node/2428125212,hospital,Lucid Clinic,hospital,17.4979039,78.3911608
+node/2429955121,hospital,Yashoda Super Speciality Hospital,hospital,17.3746556,78.4998723
+node/2583708951,hospital,Tarnaka Flyover;TGSRTC Hospital,hospital,17.4255371,78.5306786
+node/2607590422,hospital,Nova ENT Hospital,hospital,17.4184365,78.457264
+node/2632328586,hospital,Mamata Nursing Home,hospital,17.4888555,78.3959947
+node/2710949939,hospital,Kirloskar Hospital,hospital,17.4036074,78.4753627
+node/2712623077,hospital,ramesh eye care,hospital,17.4089088,78.4894972
+node/2712662990,hospital,Tapadia Medical Centre's Eashwar Lakshmi Hospital,hospital,17.4118751,78.4888572
+node/2715310633,hospital,K Prakash Rao (eye specialist),hospital,17.4073049,78.4816422
+node/2715310996,hospital,Radha Rani Nursing Home,hospital,17.40696,78.4821099
+node/2779844594,hospital,Dental Care,hospital,17.4103854,78.4852768
+node/2835226156,hospital,Sri Bhargavi Hospital,hospital,17.4511937,78.4208721
+node/2835658220,hospital,Jaiswal Multi Speciality Hospitals,hospital,17.4510973,78.4224934
+node/2835659213,hospital,Government Ayurvedic Hospital,hospital,17.4480669,78.4337319
+node/3159027236,hospital,Raghava Multi Speciality Hospital,hospital,17.4388238,78.4420946
+node/3159027238,hospital,VCARE Hospitals,hospital,17.4385124,78.4425646
+node/3166260336,hospital,Deepthi Diagnostics,hospital,17.4390074,78.4406383
+node/3200943739,fire_station,,fire_station,17.4224207,78.5384579
+node/3200948738,hospital,Healthcare Hospitals,hospital,17.345698,78.549763
+node/3200948976,hospital,,hospital,17.3348812,78.5372101
+node/3207060834,hospital,Cygnus Institute of Gastroenterology Centre,hospital,17.4976626,78.3901045
+node/3384203436,hospital,hospital,hospital,17.3526774,78.5542584
+node/3390837564,hospital,,hospital,17.3940456,78.5104248
+node/3390967828,hospital,Carewell Diabetes and General Hospital,hospital,17.5113399,78.4469461
+node/3391103941,hospital,Sigma Hospitals,hospital,17.5220823,78.4431753
+node/3506878894,hospital,Meena Hospital,hospital,17.44165,78.5218514
+node/3533084115,hospital,Life Spring Hospitals,hospital,17.4289946,78.5120703
+node/3534837998,hospital,Malla Reddy Narayana Multispeciality Hospital,hospital,17.5439866,78.4333819
+node/3541446144,hospital,Saraswathi Nursing Home,hospital,17.4160221,78.3916108
+node/3598267888,hospital,Janapareddy Hospital,hospital,17.4631717,78.4904751
+node/3619348034,hospital,Apoolo Clinic,hospital,17.4599321,78.3660837
+node/3628741330,fire_station,Malakpet Fire Station,fire_station,17.3684668,78.5018438
+node/3640604684,hospital,Childrens Hospital,hospital,17.516119,78.4388993
+node/3943900977,hospital,ayurvedic clinic,hospital,17.398766,78.448595
+node/3943909643,hospital,The crescent hospital,hospital,17.3985187,78.4458137
+node/4366549489,hospital,,hospital,17.4377225,78.521976
+node/4413453793,hospital,RELIEF HOSPITAL,hospital,17.3983822,78.4161649
+node/4416373792,hospital,Jagadamba Hospitals,hospital,17.4115391,78.4904614
+node/4417145293,hospital,med plus,hospital,17.4045834,78.4893402
+node/4419091498,hospital,Century hospital,hospital,17.4072675,78.4442572
+node/4422254585,hospital,Blood Bank,hospital,17.4249205,78.4139937
+node/4431246690,hospital,Med plus,hospital,17.4044822,78.4893121
+node/4432377490,hospital,CENTURY SUPER SPECIALITY HOSPITAL,hospital,17.4072495,78.4447338
+node/4436525395,hospital,"Vasan Healthcare Private Limited, Himayath Nagar",hospital,17.4009037,78.4875706
+node/4451580789,hospital,,hospital,17.4269993,78.4488484
+node/4482541490,hospital,Asian Institute of Nephrology and Urology,hospital,17.4166539,78.4534763
+node/4486660717,hospital,Challa Hospital,hospital,17.4396192,78.450794
+node/4517094891,hospital,Shresta Orange Hospitals,hospital,17.3451071,78.5537805
+node/4576289992,hospital,AMMA EYE CARE HOSPITAL,hospital,17.3412305,78.5581563
+node/4576325189,hospital,OXYGEN AND Medicity Hospital,hospital,17.3416722,78.5576405
+node/4614311358,hospital,Pace Hospital,hospital,17.4444782,78.469498
+node/4625163789,hospital,Rainbow children Hospital,hospital,17.3418162,78.5588085
+node/4665371689,hospital,Vasan Eye Care Hospital,hospital,17.4955259,78.332226
+node/4679716389,hospital,KIMS HOSPITAL,hospital,17.466147,78.3677443
+node/4693614990,hospital,Happy Children's Hospital,hospital,17.4928587,78.327984
+node/4695632089,hospital,Vanaja Hospital,hospital,17.4921861,78.3275773
+node/4703894689,hospital,SUDHA Hospital,hospital,17.4899292,78.601832
+node/4711614465,hospital,"Area Hospital, Vanasthalipuram",hospital,17.3289104,78.563899
+node/4715099192,hospital,Pushpagiri Eye Institute,hospital,17.4439091,78.5043433
+node/4716995091,hospital,Archana Hospital,hospital,17.4959755,78.337417
+node/4972310519,hospital,Health Care Clinic,hospital,17.3448605,78.4599543
+node/5118590649,hospital,Guru Nanak Care Hospital,hospital,17.4153976,78.4979892
+node/5324874933,hospital,Tanvir Hospital,hospital,17.4297764,78.4340161
+node/5405055776,hospital,Himagiri Hospital,hospital,17.4422328,78.3587144
+node/5538998266,hospital,Spark Hospitals,hospital,17.4027495,78.5826543
+node/5539039096,hospital,"Surya Hospital, Hyderabad",hospital,17.405751,78.5871698
+node/5539102501,hospital,PANACEA MERIDIAN HOSPITAL,hospital,17.5087613,78.300147
+node/5563162636,hospital,S.V. Pooja Hospital,hospital,17.498762,78.384027
+node/5608402071,hospital,APEX HOSPITAL,hospital,17.4080743,78.5988119
+node/5608460083,hospital,Sri Devi Maternity & Nursing Home,hospital,17.4227862,78.5165968
+node/5636923030,hospital,OM Sai Hospital,hospital,17.3136981,78.5087313
+node/5637353960,hospital,Sri Srinivasa Hospital,hospital,17.3506727,78.5078608
+node/5679345122,hospital,Sitara medical center,hospital,17.3497123,78.4707124
+node/5773420134,hospital,Anukrushna Hospitals,hospital,17.446158,78.5383502
+node/5783995954,hospital,Raja Hospital,hospital,17.4943337,78.3448275
+node/5876735151,hospital,NIRD heatlth centre,hospital,17.3140538,78.4045957
+node/6061219781,hospital,Malla Reddy Health City (MRHC),hospital,17.5454734,78.4326051
+node/6078227506,hospital,Neelima - Sanath Nagar,hospital,17.4564341,78.4388653
+node/6078236947,hospital,Poojitha Hospital,hospital,17.456281,78.4369269
+node/6133853785,hospital,Surekha Hospital,hospital,17.536328,78.4885233
+node/6151537449,hospital,"Apollo Dental Clinic, Hitech City",hospital,17.4503845,78.3825608
+node/6177956183,hospital,RAJUS DENTAL,hospital,17.4571109,78.5465732
+node/6212803089,hospital,VINN Hospital,hospital,17.4379741,78.4563758
+node/6216425386,hospital,Mahatma Sriramachandra Centenary Memorial Hospital,hospital,17.3948133,78.4525058
+node/6216425387,hospital,Nice Hospital,hospital,17.3972385,78.4562128
+node/6217853185,hospital,Red Cross Nature Cure Centre,hospital,17.4257981,78.4207625
+node/6218850786,hospital,Goodwill Kidney and Surgical Centre,hospital,17.4057018,78.4508868
+node/6220365686,hospital,Rohan Hospital,hospital,17.3946344,78.4519084
+node/6222433385,hospital,Primary Veternary Hospital,hospital,17.3979621,78.4543414
+node/6235740285,hospital,Sriven Hospital,hospital,17.4858906,78.3875314
+node/6237524890,hospital,Vijaya Diagnostic Centre,hospital,17.494517,78.39876
+node/6246261938,hospital,Vijaya Hospital,hospital,17.4817165,78.5951467
+node/6248864185,hospital,Medical Store,hospital,17.4949239,78.3969527
+node/6248961986,hospital,Ankura Hospital for Women & Children,hospital,17.4729982,78.3872074
+node/6261444586,hospital,Ankura Multispeciality clinic,hospital,17.4731914,78.3872633
+node/6269697486,hospital,Aurobindo Nethralaya,hospital,17.491694,78.3958249
+node/6308287072,hospital,Sri Krishna,hospital,17.4103873,78.4844653
+node/6308345580,hospital,Krishnaveni Hospitals,hospital,17.328667,78.599351
+node/6372428649,hospital,sri sai womens hospital,hospital,17.3709786,78.5425682
+node/6375038698,hospital,Siva Eye Hospital,hospital,17.3703144,78.5276104
+node/6400644686,hospital,,hospital,17.3682666,78.5135597
+node/6471883031,hospital,Centre For Sight Superspecialty Eye Hospital,hospital,17.4248083,78.4225617
+node/6477199878,hospital,Vasan Eye Care Hospital,hospital,17.3455423,78.5226305
+node/6477289985,hospital,Pragna Hospital,hospital,17.4238105,78.449832
+node/6477295602,hospital,Swarup Eye Centre,hospital,17.4232839,78.4505488
+node/6479934028,hospital,Udai Omni Hospital,hospital,17.3969132,78.4722613
+node/6479941227,hospital,Udbhava Children's Hospital,hospital,17.4911264,78.4010815
+node/6479951769,hospital,"Rainbow Hospital for Women and Children, Secunderabad",hospital,17.4553191,78.5008281
+node/6479961202,hospital,Apoorva Hospital,hospital,17.3913878,78.4369875
+node/6480023416,hospital,Ankith Multi Speciality Hospital,hospital,17.3503945,78.5105337
+node/6480033798,hospital,Lions Club of Hyderabad Sadhuram Eye Hospital,hospital,17.4077141,78.4781628
+node/6480048646,hospital,Al-Noor Hospital,hospital,17.4033637,78.4172847
+node/6480067093,hospital,"Lotus Children's Hospital, Lakdikapul",hospital,17.4041136,78.4611649
+node/6480099631,hospital,Aruna Hospital,hospital,17.4760702,78.5640143
+node/6480117503,hospital,Preeti Urology and Kidney Hospital,hospital,17.4912927,78.3969096
+node/6480130350,hospital,Vasan Healthcare Private Limited,hospital,17.4444929,78.4662196
+node/6481937416,hospital,ADR Hospital,hospital,17.458369,78.5378788
+node/6481946699,hospital,Bristlecone Hospital,hospital,17.3920174,78.4961598
+node/6481950561,hospital,Abhaya Multi Speciality Hospital,hospital,17.5007182,78.3825836
+node/6481952537,hospital,"Care Hospital, Nampally",hospital,17.3854315,78.4747114
+node/6481959033,hospital,Aarogya Hospital,hospital,17.3851141,78.4754102
+node/6481978987,hospital,Arvind Eye Hospital,hospital,17.3918945,78.4378043
+node/6482035085,hospital,Disha Children's Hospital,hospital,17.3525175,78.5551161
+node/6482049740,hospital,Anvitha Hospital,hospital,17.4311263,78.4266108
+node/6482100116,hospital,New Life Line Multi Specialty Hospital,hospital,17.4878467,78.5647274
+node/6482108938,hospital,Homeocare International,hospital,17.4432007,78.4796964
+node/6482123599,hospital,Konark Hospitals,hospital,17.5123618,78.4754596
+node/6482123642,hospital,Sree Netralaya Eye Hospital and Laser Centre,hospital,17.3676358,78.5404511
+node/6482129255,hospital,Leads Medical Centre,hospital,17.4252477,78.4537243
+node/6482139039,hospital,Pranaam Hospitals,hospital,17.4966133,78.3398798
+node/6482139577,hospital,Vignesh Nursing Home,hospital,17.4925267,78.39749
+node/6482139683,hospital,Sridhar Multi Speciality Hospital,hospital,17.344919,78.5087555
+node/6484699042,hospital,Geetha Multi Speciality Hospital,hospital,17.447062,78.5082445
+node/6484704654,hospital,Amar Maternity Nursing Home,hospital,17.3987452,78.5069785
+node/6484721973,hospital,Sai Preethi Life Line Hospital,hospital,17.3942929,78.4419228
+node/6484727717,hospital,Prasad Hospital,hospital,17.4920608,78.4015616
+node/6484730153,hospital,Praanadah Hospital,hospital,17.4372474,78.3942747
+node/6484735190,hospital,Dristi Netralaya Hospital,hospital,17.4691656,78.4773293
+node/6484754716,hospital,Geeta Clinic And Maternity Home,hospital,17.391947,78.4969578
+node/6484770090,hospital,Vasavi Hospital,hospital,17.4064439,78.464393
+node/6484770861,hospital,Sankhya Hospital,hospital,17.4876454,78.4000755
+node/6484775841,hospital,Kiran Hospital,hospital,17.3452764,78.5282483
+node/6484856482,hospital,Smt. Bhagwan Devi Hospital,hospital,17.3644409,78.4731994
+node/6484867650,hospital,Nest Children's Hospital,hospital,17.4593374,78.5004204
+node/6484873593,hospital,V.M.R Hospital,hospital,17.4918932,78.3972265
+node/6484884147,hospital,Mamata Fertility Hospital,hospital,17.4396489,78.4991692
+node/6484886609,hospital,Kishorechand Chordia Eye Centre,hospital,17.3729437,78.4673019
+node/6484888144,hospital,Praja Sai Hospital,hospital,17.4073263,78.492862
+node/6484901165,hospital,Ram Hospital,hospital,17.5160805,78.4476453
+node/6484905715,hospital,Soorya Orthopaedic Hospital,hospital,17.4738034,78.5692647
+node/6484931583,hospital,Smiline Dental Hospital,hospital,17.429802,78.4487075
+node/6484947125,hospital,Sushma Nursing Home,hospital,17.494399,78.4020397
+node/6484947325,hospital,Ratna Maternity and Nursing Home,hospital,17.3534936,78.5068591
+node/6484965004,hospital,Kishan Rao Hospital,hospital,17.3942993,78.5079373
+node/6485002885,hospital,Thatha Hospital,hospital,17.4769771,78.5627764
+node/6485021712,hospital,Sudarshan Hospital,hospital,17.4142,78.5021076
+node/6485054519,hospital,Kid Care Children's Hospital,hospital,17.4841162,78.4488925
+node/6485054528,hospital,Vijaya Nursing Home,hospital,17.4956729,78.3250616
+node/6485066503,hospital,Dangoria Maternity and Nursing Home,hospital,17.4077787,78.4975089
+node/6485092243,hospital,Sainath Hospital,hospital,17.4390949,78.4406662
+node/6485092469,hospital,C.C. Shroff Memorial Hospital,hospital,17.3908042,78.4965339
+node/6485104985,hospital,Hyderabad Kidney And Laparoscopic Centre,hospital,17.3717457,78.5005935
+node/6485134606,hospital,Sadanand Nursing Home,hospital,17.4406252,78.4242403
+node/6485236733,hospital,Tanvi Eye Center,hospital,17.4500557,78.5115261
+node/6485264332,hospital,Kosaraju Hospitals Private Ltd.,hospital,17.3755381,78.4190255
+node/6485316309,hospital,Dr. Laxman's Children Hospital,hospital,17.5160364,78.4472698
+node/6485325429,hospital,Maternal Health and Research Trust,hospital,17.4240881,78.4317076
+node/6485435755,hospital,Meda Hospital Pvt. Ltd,hospital,17.4837017,78.5373142
+node/6485441362,hospital,Nisha Hospital,hospital,17.3944196,78.4626817
+node/6485458540,hospital,"Aditya Hospital, Uppal",hospital,17.4017218,78.5756557
+node/6485500890,hospital,Medicare Hospital,hospital,17.3403283,78.5495599
+node/6485566735,hospital,Dr.Agarwal's Eye Hospital,hospital,17.4298167,78.4506487
+node/6485587478,hospital,Goshamahal Hospital,hospital,17.3818518,78.4727287
+node/6485594351,hospital,Niyar Nursing Home,hospital,17.3313005,78.4879965
+node/6485603800,hospital,Shalini Hospitals,hospital,17.3925332,78.4957641
+node/6485621541,hospital,Vivek Hospital,hospital,17.3598544,78.504485
+node/6485645255,hospital,Vijay Marie Hospital,hospital,17.4073909,78.4559655
+node/6485663642,hospital,Madhava Nursing Home,hospital,17.4409578,78.5020941
+node/6485668057,hospital,Deepa Hospital,hospital,17.3763924,78.4676445
+node/6485763799,hospital,Vinciti Hospital,hospital,17.4767414,78.4798486
+node/6485786103,hospital,Sandhya Nursing Home,hospital,17.4932209,78.327158
+node/6485824573,hospital,Premier Hospital,hospital,17.3915772,78.4268716
+node/6485835298,hospital,Vasundhara Nursing Home,hospital,17.4226373,78.4951296
+node/6485848266,hospital,L.V. Prasad Eye Institute,hospital,17.4391256,78.3958378
+node/6485852123,hospital,Shamshad Children's Hospital,hospital,17.3979236,78.4175335
+node/6485868703,hospital,Curewell Hospital,hospital,17.4059206,78.4606527
+node/6485873602,hospital,Saluja Hospital,hospital,17.4350761,78.5028817
+node/6485880627,hospital,Vijaya Krishna Nursing Home,hospital,17.4525697,78.4444669
+node/6485889000,hospital,Vasu Hospital,hospital,17.376004,78.4190007
+node/6486018651,hospital,Jaferia Hospital,hospital,17.370373,78.487161
+node/6486037407,hospital,Cure Hospitals,hospital,17.4595888,78.4780213
+node/6486039380,hospital,Sravani Hospital,hospital,17.3503388,78.4916899
+node/6486047722,hospital,Sun City Nursing Home,hospital,17.3652026,78.3969207
+node/6486059355,hospital,Rishab Eye Centre,hospital,17.4810002,78.5334009
+node/6486149790,hospital,Raghavendra Orthopaedic and Diagnostic Centre,hospital,17.4570199,78.4784049
+node/6486930279,hospital,Micro Care Ent Hospital and Research Institute,hospital,17.4940242,78.3985448
+node/6486935781,hospital,Anand Vitreo Retina Institute Pvt Ltd,hospital,17.4255423,78.5340929
+node/6486941192,hospital,Vanaja Hospitals,hospital,17.4775643,78.5529341
+node/6486957243,hospital,"Ankura Hospital, Boduppal",hospital,17.4028902,78.5828997
+node/6487033522,hospital,Geetanjali Test Tube Baby Centre,hospital,17.4812995,78.5563056
+node/6487092948,hospital,Princess Durru Shehvar Children's And General Hospital,hospital,17.367312,78.4826575
+node/6487102159,hospital,"SRI LAXMI MULTI SPECIALITY HOSPITAL, LAPROSCOPIC AND RESEARCH CENTRE",hospital,17.3760514,78.5569091
+node/6487115764,hospital,Thumbay Hospital New Life,hospital,17.376873,78.490338
+node/6487116810,hospital,Srivision Super Speciality Eye Hospital,hospital,17.4343967,78.4173229
+node/6487122129,hospital,Anantha Lakshmi Kidney and Multi Specialty Hospital,hospital,17.3974654,78.5366464
+node/6487127620,hospital,Susheela Hospital,hospital,17.4352974,78.4365799
+node/6487137845,hospital,Jaya Bhushan Hospitals Pvt. Ltd,hospital,17.394618,78.4386519
+node/6487162039,hospital,Asian E.N.T. Care Centre,hospital,17.4216154,78.4556772
+node/6487200705,hospital,Ayodhya Nursing Home,hospital,17.3913379,78.4348029
+node/6487263499,hospital,Sree Raghavendra Hospital,hospital,17.3178961,78.4453909
+node/6487281382,hospital,NephroPlus Dialysis Centre,hospital,17.4502892,78.5099416
+node/6487288564,hospital,Aware gleneagles Global Hospital;Aware Gleneagles Global Hospital's Blood Bank,hospital,17.345958,78.5399126
+node/6487305068,hospital,Sai Siva Children’s Hospital,hospital,17.4941988,78.3240189
+node/6487326328,hospital,Sri Tirumala Maternity and Nursing Home,hospital,17.4232391,78.5163756
+node/6487365747,hospital,Marvel Maternity and Nursing Home,hospital,17.3292521,78.4787576
+node/6487452726,hospital,Akira Eye Surgical Annexe,hospital,17.4034853,78.4924355
+node/6487508103,hospital,Kadimi Nursing Home,hospital,17.4939308,78.3267166
+node/6487508548,hospital,Jayasai Hospital For Women,hospital,17.4850586,78.4471166
+node/6487609803,hospital,Ragi Hospital,hospital,17.4957541,78.3410724
+node/6487635185,hospital,SRESHTA SRI KAMALA HOSPITALS,hospital,17.3682886,78.5220303
+node/6487647064,hospital,Bhavan's Sarada Devi Hospital,hospital,17.4825166,78.5510686
+node/6487654694,hospital,Sree Maruthi Nursing Home,hospital,17.4549634,78.5087728
+node/6487663429,hospital,Sulochana Eye Centre,hospital,17.4019445,78.4776311
+node/6487670042,hospital,Parvathi Multispeciality Hospital,hospital,17.4565491,78.5014417
+node/6487670477,hospital,Muslim Maternity and Children's Hospital,hospital,17.3751644,78.4898807
+node/6487677480,hospital,Shashi Hospital,hospital,17.3695416,78.5213698
+node/6487685466,hospital,Sundari Maternity and General Hospital,hospital,17.5028854,78.5132843
+node/6487777184,hospital,Bhavya Hospital,hospital,17.3771559,78.557005
+node/6487866891,hospital,Fehmi Care Hospital,hospital,17.437122,78.4272954
+node/6487879316,hospital,Sriya Hospital,hospital,17.4751261,78.5394748
+node/6487886439,hospital,Mirra Multi Specialty Hospital,hospital,17.5044701,78.3564663
+node/6487901010,hospital,Jayaprada Hospital,hospital,17.4951472,78.5130295
+node/6487920155,hospital,Pulse Hospitals,hospital,17.421726,78.5041333
+node/6488469834,hospital,S.V. Hospital,hospital,17.4467703,78.4504817
+node/6488483046,hospital,Krishna Multi Speciality Hospital,hospital,17.3973433,78.5603427
+node/6488599602,hospital,Sri Sai Kidney Centre,hospital,17.4354676,78.4514661
+node/6488608462,hospital,Sunrise Superspeciality Children's Hospital,hospital,17.3930464,78.4890948
+node/6488677506,hospital,Raghavendra Hospital,hospital,17.4747705,78.5678552
+node/6489576234,hospital,GSN Hospital,hospital,17.4418419,78.4452461
+node/6489591500,hospital,Challa Eye Care Centre,hospital,17.4281872,78.432519
+node/6489607238,hospital,Royal Hospital For Dentistry and Facial Surgery,hospital,17.4121475,78.4569848
+node/6489610677,hospital,Matrix Hospital,hospital,17.4002374,78.5405061
+node/6489613991,hospital,M S Reddy Lions Eye Hospital,hospital,17.4571396,78.5631077
+node/6489688950,hospital,Santhigiri Auyrveda and Siddha Hospital,hospital,17.4229122,78.452197
+node/6489762038,hospital,Shree Jaya Krishna Hospital,hospital,17.397102,78.5319123
+node/6489782205,hospital,Allwin Hospital,hospital,17.4091262,78.459209
+node/6489786900,hospital,Sai Institute Of Arthroscopy And Sports Injury,hospital,17.4186198,78.4524223
+node/6489790935,hospital,Sree Balaji Hospital,hospital,17.5185239,78.4822022
+node/6489835094,hospital,Sathya Hospital,hospital,17.401288,78.5648384
+node/6489843355,hospital,Leela Hospital,hospital,17.4554163,78.4238099
+node/6489894585,hospital,Anusha Hospital,hospital,17.3879656,78.4397234
+node/6489964063,hospital,RR Orthopedic Hospital,hospital,17.4954209,78.3226825
+node/6490004584,hospital,Partha Dental Clinic,hospital,17.4059203,78.4793389
+node/6490016089,hospital,Susrutha Hospital,hospital,17.373217,78.5032857
+node/6490029456,hospital,Venkatesh Borgaonker Nursing Home,hospital,17.390579,78.4911588
+node/6490089435,hospital,Harsha Hospitals,hospital,17.520925,78.484531
+node/6490143313,hospital,Sri Sai Srinivasa Speciality Hospitals Pvt. Ltd,hospital,17.3979338,78.492064
+node/6490181234,hospital,Sai Krishna Neuro Hospital,hospital,17.389948,78.4959277
+node/6490329242,hospital,Sagar Lal Memorial Hospital and Matadin Goel Research Center,hospital,17.4156652,78.4988473
+node/6490770019,hospital,Matrika Hospital,hospital,17.4274156,78.4607056
+node/6490784114,hospital,Dr. Mohan's Diabetes Specialities Centre,hospital,17.4111077,78.482968
+node/6490833350,hospital,Seha Hospital,hospital,17.404143,78.4622929
+node/6490857331,hospital,Krishna Maternity And Nursing Home,hospital,17.4281006,78.5170508
+node/6490864509,hospital,Sri Srinivasa Nursing Home,hospital,17.3646867,78.5441633
+node/6490913751,hospital,Global Eye Hospital,hospital,17.4912076,78.4011693
+node/6490973815,hospital,Kerala Sanjeevani Ayurvedic Centre,hospital,17.417401,78.4577723
+node/6491342836,hospital,Rajagiri Hospitals,hospital,17.410791,78.5434699
+node/6491348622,hospital,Aravind Nursing Home,hospital,17.4364471,78.4961886
+node/6491359724,hospital,G.N.R. Multispeciality Hospital,hospital,17.49926,78.5129283
+node/6491362879,hospital,Ramana Maternity Nursing Home,hospital,17.3937202,78.5095339
+node/6491365368,hospital,Surakshaka Multi Speciality Hospital,hospital,17.4932836,78.4017017
+node/6493336766,hospital,Aries Maternity Hospital,hospital,17.3926842,78.4455183
+node/6493463498,hospital,Ragani Children's Hospital,hospital,17.5141839,78.4470136
+node/6493489981,hospital,Sathya Kidney Centre and Super Speciality Hospital,hospital,17.4047804,78.4821191
+node/6493547008,hospital,Chandana Hospitals,hospital,17.4593055,78.4785913
+node/6494135269,hospital,Pratibha Maternity Home,hospital,17.4711657,78.5050875
+node/6494235890,hospital,Vivekananda Hospital,hospital,17.4312043,78.4553486
+node/6494242172,hospital,Ravi Hospital,hospital,17.4936289,78.4000562
+node/6494269592,hospital,Nightingale Hospital,hospital,17.3512003,78.5094488
+node/6494384142,hospital,Eva Care The Every Woman's Clinic,hospital,17.4078913,78.4426578
+node/6494385067,hospital,Habsiguda Poly Clinic and Nursing Home,hospital,17.4173069,78.5412021
+node/6494411875,hospital,Unity Centre For Orthopaedics And Trauma,hospital,17.3962241,78.4889916
+node/6494412250,hospital,Merit Care Hospital,hospital,17.493721,78.3983745
+node/6494422626,hospital,SECUNDERABAD NURSING HOME,hospital,17.4458107,78.504999
+node/6494447237,hospital,Ramantapur Hospital,hospital,17.3974917,78.5339528
+node/6494458034,hospital,Sai Sanjeevini Hospital,hospital,17.3608928,78.5432218
+node/6494465425,hospital,Harsha Hospitals,hospital,17.4953109,78.415377
+node/6494474204,hospital,Sowmya Hospital,hospital,17.4097327,78.5084336
+node/6494489670,hospital,Meds Hospital,hospital,17.3655046,78.4620085
+node/6494788582,hospital,Sarada Nursing Home,hospital,17.494784,78.3404388
+node/6494810755,hospital,"Vasan Healthcare Private Limited, Secunderabad",hospital,17.4404883,78.4978656
+node/6494829945,hospital,Devi Maternity Home,hospital,17.4936174,78.5127834
+node/6494952509,hospital,Vatsalya Institute Of Pediatrics Hospital,hospital,17.4405861,78.4503195
+node/6494956566,hospital,Sandeep Nursing Home,hospital,17.484821,78.3881754
+node/6495015780,hospital,Maa Ent Institute,hospital,17.4260772,78.457375
+node/6495023719,hospital,Sanjeevani Children and General Hospital,hospital,17.496063,78.4541865
+node/6495031117,hospital,Hyderabad Eye Centre,hospital,17.3995642,78.4843923
+node/6495079282,hospital,Santoshi Maternity Hospital,hospital,17.4466174,78.5360288
+node/6495246032,hospital,Vishnu Hospital,hospital,17.4954561,78.3208955
+node/6495284151,hospital,Sai Sharan Hospital,hospital,17.3393852,78.5572883
+node/6495303036,hospital,Clear Vision Eye Hospital,hospital,17.39863,78.4849159
+node/6495375554,hospital,Sai Nursing Home,hospital,17.3601882,78.5047261
+node/6496578004,hospital,Neo Vision Eye Care and Laser Center,hospital,17.4171112,78.5440868
+node/6496590575,hospital,Stopiles,hospital,17.4301078,78.4061931
+node/6496690608,hospital,Centre For Sight - New Vision Laser Centers,hospital,17.40665,78.4759131
+node/6496708723,hospital,Life Spring Maternity Hospital,hospital,17.459459,78.5576695
+node/6496837455,hospital,Sri Rama Krishna Hospital,hospital,17.3863466,78.4942286
+node/6496875044,hospital,Majestic Hospital,hospital,17.379978,78.421019
+node/6496877818,hospital,Aruna Hospital,hospital,17.3446309,78.5546158
+node/6496885010,hospital,Eswar Eye Hospital,hospital,17.4917263,78.3970112
+node/6496903933,hospital,,hospital,17.4782302,78.5558448
+node/6496907674,hospital,Dr.Shantabai Nursing Home,hospital,17.3913737,78.4757126
+node/6496916240,hospital,Apollo Spectra Hospitals,hospital,17.4376427,78.4524706
+node/6496940849,hospital,Manjary Multispeciality Hospital,hospital,17.4348983,78.5429897
+node/6496953497,hospital,Taraporewalla Nursing Home,hospital,17.4465502,78.5133715
+node/6496960846,hospital,Shenoy Nursing Home,hospital,17.4478066,78.508915
+node/6496965130,hospital,Kiran Swetha Children Clinic,hospital,17.4947378,78.3225725
+node/6496972191,hospital,Dr. Zaibunnisa's Imtiyaz Hospital,hospital,17.3737769,78.4958902
+node/6496972211,hospital,Alpha Super Speciality Hospital,hospital,17.3586618,78.4780816
+node/6497026146,hospital,Mythri Multi Speciality Hospital,hospital,17.4982349,78.3144481
+node/6497172349,hospital,Vasan Healthcare,hospital,17.3692242,78.5189867
+node/6497294673,hospital,BSR ENT & Eye Nursing Home,hospital,17.4416577,78.4908745
+node/6497354554,hospital,Siris Hospital,hospital,17.4097647,78.5441056
+node/6497360893,hospital,Srinivasa Hospital,hospital,17.4938323,78.5398865
+node/6497362076,hospital,ASTER PRIME HOSPITALS (SRI SAINATHA MULTISPECIALITY HOSPITAL PVT.LTD.),hospital,17.4373484,78.4462573
+node/6497366546,hospital,Janani Hospital,hospital,17.3937938,78.5302003
+node/6497369555,hospital,Amrutha Diabetic Centre,hospital,17.4292454,78.4531264
+node/6497391583,hospital,Azam Hospital,hospital,17.3648685,78.4626402
+node/6497571978,hospital,Oarchid Hospital,hospital,17.3688485,78.5343739
+node/6497577133,hospital,Sri Venkateswara Multi Speciality Hospital,hospital,17.3446513,78.5167946
+node/6497611600,hospital,Sri Santosh Hospital,hospital,17.43595,78.5425988
+node/6497614668,hospital,Dr. Sreedhar's Kidney & Infertility Hospital,hospital,17.3910723,78.4267851
+node/6497866894,hospital,G.M.C. Multi Speciality Dental Hospital,hospital,17.3621837,78.4826327
+node/6497913444,hospital,Nikhil Hospital,hospital,17.3682105,78.5203962
+node/6498004164,hospital,Dr. Saxena Integrative Medicine Private Ltd.,hospital,17.4052775,78.476577
+node/6498013229,hospital,Prerana Hospital,hospital,17.48489,78.4096652
+node/6498031548,hospital,Shubhodaya Nursing Home,hospital,17.4381142,78.5049681
+node/6498040562,hospital,Shekars Ent Hospital,hospital,17.4620995,78.5006364
+node/6498046738,hospital,Shreyas Hospital,hospital,17.4779001,78.5626893
+node/6502946680,hospital,Mythri Hospital,hospital,17.3836628,78.4292413
+node/6502966455,hospital,Rukkus Dental Hospital & Implant Center,hospital,17.394801,78.4990337
+node/6503081897,hospital,Hyderabad Eye Hospital,hospital,17.3942462,78.4989743
+node/6503086685,hospital,Sai Anurag Hosptial,hospital,17.4946701,78.3268218
+node/6503106727,hospital,Bloom Hospitals - Unit of Janapareddy Hospitals.,hospital,17.4606974,78.4904668
+node/6503145065,hospital,Hedge Maternity and Nursing Home,hospital,17.3709739,78.5147515
+node/6503155785,hospital,St.Theresa's Hospitals,hospital,17.4517957,78.4377721
+node/6503195186,hospital,Sunita Children's Hospital,hospital,17.3502416,78.5121296
+node/6503203211,hospital,Dr. Akbar Eye Hospital,hospital,17.3935545,78.4435281
+node/6503211364,hospital,Medi Vision Eye Care Centre,hospital,17.3988488,78.4479502
+node/6503288232,hospital,Sunrich Hospital,hospital,17.4490629,78.4317237
+node/6503302425,hospital,Induss Hospitals,hospital,17.3674854,78.5358477
+node/6503370083,hospital,J.J. Hospital,hospital,17.4448064,78.4324291
+node/6503384572,hospital,Lifespring Hospital,hospital,17.4660729,78.4832785
+node/6503394122,hospital,Ankura Children's Hospital,hospital,17.4820222,78.5525036
+node/6503410509,hospital,SKM Multi Speciality Hospital,hospital,17.4713934,78.4849957
+node/6503431340,hospital,Ambaa Hospitals,hospital,17.3763547,78.4203096
+node/6503431563,hospital,S.V.K. Hospital Private Ltd.,hospital,17.5119189,78.4465805
+node/6503438537,hospital,Mansoor Maternity And Childrens Hospital,hospital,17.393511,78.4568185
+node/6503446084,hospital,Xenia Multi Speciality Hospital,hospital,17.4727007,78.5713568
+node/6503655627,hospital,Avis Ankura Hospital for Women & Children,hospital,17.4116829,78.4324009
+node/6503660417,hospital,Ammaji Childrens Hospital,hospital,17.4002489,78.5665409
+node/6503669088,hospital,Tulasi Hospitals,hospital,17.4748831,78.5709384
+node/6503723809,hospital,Ashok Kumar Hospital,hospital,17.3920533,78.4961564
+node/6503747239,hospital,Banjara 12 Hospital,hospital,17.4075461,78.4496157
+node/6503755850,hospital,Anitha Nursing Home,hospital,17.4943913,78.3232471
+node/6503794648,hospital,Health Care Hospitals,hospital,17.3453352,78.5492826
+node/6504077179,hospital,Sri Krishna Swathi Children's Hospital,hospital,17.3946084,78.5304907
+node/6504097065,hospital,Manas Eye Hospital,hospital,17.4514829,78.424402
+node/6504107685,hospital,Pavithra Hospital,hospital,17.467585,78.4819903
+node/6504110557,hospital,Rainbow Childrens Hospital,hospital,17.4997851,78.3841534
+node/6504123689,hospital,Shantilal Navodaya Multi Speciality Hospital,hospital,17.398678,78.5136256
+node/6504150659,hospital,Tilaknagar ABHAYA-BBC HOSPITAL,hospital,17.3941335,78.5099286
+node/6504154905,hospital,Sumana Hospital,hospital,17.4920026,78.4093373
+node/6504255627,hospital,Bhavika Nursing Home,hospital,17.4407735,78.4492117
+node/6504261883,hospital,Icon Hospital,hospital,17.4853224,78.3899282
+node/6504269305,hospital,Sree Srinivasa ENT Care and Research Institute,hospital,17.4251451,78.4510457
+node/6504284028,hospital,Kavya Nursing Home,hospital,17.494147,78.4053522
+node/6504286989,hospital,Peoples Health Centre,hospital,17.4575848,78.4523016
+node/6505167632,hospital,Shiva Sai Hospital,hospital,17.4004716,78.5666549
+node/6505170700,hospital,Shilpa Nursing Home,hospital,17.4947648,78.3600202
+node/6505184710,hospital,Dr. P. Siva Reddy Eye Hospital,hospital,17.3978302,78.4842937
+node/6505187568,hospital,KIMS BIBI Hospital,hospital,17.3702559,78.5005438
+node/6505207797,hospital,K.G.H The Family Hospital,hospital,17.3727325,78.509658
+node/6505218409,hospital,Dr.Rao's ENT Super Speciality Hospital,hospital,17.4305671,78.4503329
+node/6505303419,hospital,Pushpa Maternity and Nursing Home,hospital,17.3710405,78.5008154
+node/6505307085,hospital,Ramya Nursing Home,hospital,17.4759595,78.4837787
+node/6505322583,hospital,Care Well Hospital,hospital,17.3452876,78.4567943
+node/6505329556,hospital,Raksha Multi Speciality Hospital,hospital,17.3398185,78.5575941
+node/6505352702,hospital,Neo Retina Eye Care,hospital,17.3967872,78.4728447
+node/6505370525,hospital,Spark Eye Care Hospital,hospital,17.3724317,78.5077295
+node/6505386986,hospital,Ganga Orthopaedic and Maternity Hospital,hospital,17.3719492,78.5358806
+node/6505444434,hospital,Varsha Hospital,hospital,17.4948223,78.4016588
+node/6505447806,hospital,Vasan Eye Care,hospital,17.4776666,78.5630205
+node/6505485733,hospital,Sagar Hospital,hospital,17.4858827,78.3890216
+node/6505499664,hospital,Midas ENT Head and Neck Super Speciality Hospital,hospital,17.3689017,78.5168678
+node/6505503898,hospital,Lions Patny Hospital,hospital,17.45035,78.5034782
+node/6505507940,hospital,Seethal Nursing Home,hospital,17.4299337,78.4271117
+node/6505516403,hospital,Dharani Hospital,hospital,17.3837869,78.4367287
+node/6505528362,hospital,Desai Nursing Home,hospital,17.3982154,78.4843661
+node/6505550308,hospital,Prashamsha Hospital,hospital,17.503255,78.5095681
+node/6505556901,hospital,NEO BBC Childrens Hospital,hospital,17.4030515,78.5100617
+node/6505570504,hospital,Soumya Multispeciality Hospital,hospital,17.4591328,78.5007772
+node/6505593241,hospital,Sri Gayatri Hospital,hospital,17.3900901,78.5314
+node/6505593801,hospital,FMS Dental Hospital,hospital,17.3855301,78.4801885
+node/6505613357,hospital,Suraksha Childrens Hospital,hospital,17.4261322,78.5324286
+node/6505671806,hospital,Prema Eye Care Centre,hospital,17.4811326,78.5541297
+node/6506106769,hospital,J S Mahaveer Hospital,hospital,17.4486471,78.4849052
+node/6507570343,hospital,The Dental Venue Multi Speciality Hospital (unit of Dr.Gowd’s),hospital,17.4422795,78.5043204
+node/6507652189,hospital,Padmaavathi Netralaya,hospital,17.4915108,78.4013115
+node/6507797498,hospital,Mahesh Hospital And Research Foundation,hospital,17.4004729,78.4914961
+node/6507837294,hospital,Deccan College Of Medical Sciences,hospital,17.3403386,78.5072333
+node/6508501597,hospital,CDR Hospitals,hospital,17.3991381,78.483151
+node/6508963155,hospital,Moosi Maternity and Genernal Hospital,hospital,17.3758914,78.4971612
+node/6510205415,hospital,Hyma Children's Hospital,hospital,17.3676268,78.5508728
+node/6510356260,hospital,Shree Hospital,hospital,17.4306004,78.4388973
+node/6510472444,hospital,Sai Jyothi Eye Institute,hospital,17.4466871,78.5027158
+node/6510503879,hospital,Little Star Children's Hospital (A Unit Of Thirumala Child Health Services Pvt. Ltd),hospital,17.4270433,78.450353
+node/6510820223,hospital,Basant Sahney Hospitals,hospital,17.4505451,78.5032415
+node/6511011214,hospital,RR Hospital,hospital,17.5218368,78.4831209
+node/6511165512,hospital,Krishna Sai Multispeciality Hospital,hospital,17.345084,78.5288881
+node/6511251151,hospital,Lazarus Hospitals,hospital,17.3995348,78.4630345
+node/6511672655,hospital,Sowmya Hospital,hospital,17.447338,78.437815
+node/6512526669,hospital,Pulse Hospital,hospital,17.4900948,78.4481992
+node/6512822726,hospital,Gupta Hospital,hospital,17.3662637,78.473135
+node/6512969319,hospital,Maruthi Hospital,hospital,17.3497321,78.5151807
+node/6513085407,hospital,Himabindu Multi Speciality Hospital,hospital,17.3512682,78.5092865
+node/6513113356,hospital,Tadla Eye Hospital,hospital,17.4961817,78.4055095
+node/6513234521,hospital,Kailash Diagnostic and Rehabilitation Center,hospital,17.3854802,78.4752171
+node/6513267731,hospital,Lions Dundoo Eye Institute,hospital,17.4504779,78.5062201
+node/6513323438,hospital,Image Hospital,hospital,17.4314653,78.4466797
+node/6513396181,hospital,Sri Balaji Hospital,hospital,17.4016591,78.3848655
+node/6513406843,hospital,Lakshmi Maternity and Nursing Home,hospital,17.4002182,78.4840006
+node/6518192361,hospital,RBM Multi-Speciality Hospital,hospital,17.4183783,78.5835349
+node/6518297217,hospital,AVI Clinic,hospital,17.4090144,78.5864131
+node/6527671224,hospital,Disneys Medi-Kid Hospitals Pvt. Ltd,hospital,17.4322118,78.4490681
+node/6527832466,hospital,Akshaya Care Multi Speciality Hospital,hospital,17.4174357,78.5118319
+node/6527839627,hospital,Dr.Padmaja Fertility Centre and Nursing Home,hospital,17.4150148,78.5452451
+node/6528257924,hospital,Focus Hospital,hospital,17.3473217,78.5195889
+node/6528301302,hospital,Meenakshi Mother and Child Hospital,hospital,17.5130968,78.5541491
+node/6528552348,hospital,Geeta Multispeciality Hospital,hospital,17.370156,78.5320289
+node/6528554861,hospital,SV Multispeciality Hospital,hospital,17.3210258,78.5201099
+node/6528602779,hospital,Lakshmi Health Care Hospital,hospital,17.3320827,78.5732733
+node/6528604456,hospital,Sri Sai Balaji Hospital,hospital,17.3617057,78.5620603
+node/6528608362,hospital,Bapuji Maternity and Nursing Home,hospital,17.4227606,78.5469769
+node/6528632311,hospital,Abinav Orthopedic Hospital,hospital,17.3700395,78.5278568
+node/6530719501,hospital,Ganga Nursing Home,hospital,17.3623277,78.4685625
+node/6530722593,hospital,Sujatha Nursing Home,hospital,17.4951345,78.4024782
+node/6530741984,hospital,Suguna Sree Nursing Home,hospital,17.5420919,78.4335503
+node/6530750454,hospital,SVS Hospitals,hospital,17.3891213,78.4928083
+node/6530758515,hospital,Vishwa Medi Care and Diagnostic Centre,hospital,17.3836896,78.4897466
+node/6530772004,hospital,Dhanunjaya Nursing Home,hospital,17.4524815,78.5685701
+node/6530792770,hospital,Live Life Hospital,hospital,17.4383029,78.3994983
+node/6531290879,hospital,Healing Touch Hospital,hospital,17.3903338,78.4514802
+node/6531328860,hospital,Jain Multi Speciality Hospital,hospital,17.5019044,78.5405564
+node/6531332945,hospital,Maxivision Eye Hospital,hospital,17.4458529,78.4663644
+node/6531352585,hospital,Chandamama Hospital,hospital,17.4273708,78.5517687
+node/6531378729,hospital,Avis Hospitals,hospital,17.4293887,78.4178258
+node/6531656648,hospital,Jaya Hospital,hospital,17.3208562,78.5613281
+node/6531706878,hospital,Bhagyalatha Hospital,hospital,17.331248,78.5882561
+node/6531743149,hospital,Anusha Maternity and Nursing Home,hospital,17.3309842,78.5780563
+node/6531745861,hospital,Lakshmi Children's Hospital,hospital,17.369612,78.5302386
+node/6531874857,hospital,G.B.R. Hospital,hospital,17.3692696,78.5346776
+node/6531924300,hospital,Sri Mahalaxmi Eye Hospital,hospital,17.3369064,78.5699487
+node/6531941189,hospital,Chaithanya Multi Speciality Hospital,hospital,17.3362996,78.5692929
+node/6532106149,hospital,Sri Pallavi Hospital,hospital,17.5046076,78.3088705
+node/6532116388,hospital,Sri Rohini Hospital,hospital,17.3495087,78.5128967
+node/6532260599,hospital,Manju Sudha Multispeciality Hospital,hospital,17.3696005,78.5292421
+node/6532261279,hospital,Aruna Hospital,hospital,17.3295126,78.5261227
+node/6532267718,hospital,Sai Venkateshwara Hospital,hospital,17.3444401,78.529845
+node/6532274757,hospital,TKR's IKON Hospital,hospital,17.3693752,78.5209313
+node/6532277404,hospital,Sri JRD Hospital,hospital,17.3665529,78.535367
+node/6532278196,hospital,Sidhartha Nursing Home,hospital,17.5022005,78.3129877
+node/6532315949,hospital,Raghava Hospital,hospital,17.3716433,78.5340057
+node/6532327359,hospital,Harsha Neuro and General Hospital,hospital,17.3681674,78.5267378
+node/6532327920,hospital,Padmaja Hospital,hospital,17.347104,78.5213564
+node/6532335482,hospital,Anurag Orthopedic and Multispecial Hospital,hospital,17.3689234,78.5299851
+node/6532342640,hospital,Krishna Hospital,hospital,17.3334758,78.531298
+node/6532347117,hospital,Rajya Lakshmi Hospital,hospital,17.3358644,78.5747552
+node/6532348899,hospital,Sigma Hospitals,hospital,17.36803,78.5206215
+node/6532378061,hospital,Sri Ramadevi Orthopaedic Hospital,hospital,17.3286133,78.5685231
+node/6532379590,hospital,Goodlife Hospitals,hospital,17.3694424,78.5314201
+node/6536327470,hospital,Aashritha Hospital,hospital,17.4455011,78.5678539
+node/6536715096,hospital,American Oncology Institute,hospital,17.4707013,78.3109143
+node/6536715097,hospital,Citizens Specialty Hospital,hospital,17.4707742,78.3113113
+node/6536841915,hospital,Maruthi Hospital,hospital,17.5057043,78.3072115
+node/6536842812,hospital,Usha Mohan Hospital,hospital,17.36424,78.4275663
+node/6537086759,hospital,Trident Hospital,hospital,17.2599543,78.3840267
+node/6537106287,hospital,Sri Sai Orthopaedic and Multi Speciality Hospital,hospital,17.3389598,78.5226278
+node/6537138789,hospital,Swapna Hospital Private Limited,hospital,17.3697132,78.5319766
+node/6537169461,hospital,Ankura Kodali Hospital,hospital,17.4840637,78.4487262
+node/6537176722,hospital,Sri Raghavendra Hospital,hospital,17.2738453,78.5391707
+node/6537199550,hospital,Paramitha Children's Hospital,hospital,17.3597254,78.5448767
+node/6537210759,hospital,Padmavathi Hospital,hospital,17.344506,78.5296565
+node/6537306558,hospital,Sai Nikith Speciality Hospital And Laproscopic Centre,hospital,17.3740649,78.5409902
+node/6537308259,hospital,Jeevan Sai Hospitals,hospital,17.3314886,78.5721809
+node/6537312813,hospital,Sunrise Hospitals,hospital,17.3279207,78.6017188
+node/6537360032,hospital,Rajitha Hospital,hospital,17.4506967,78.3640308
+node/6538849589,hospital,The Doctors Multi Speciality Hospital,hospital,17.3707739,78.5275
+node/6539071275,hospital,Medi Sight Eye Care centre,hospital,17.3587987,78.5237382
+node/6542441846,hospital,"Area Hospital, Nampally",hospital,17.3922555,78.4631672
+node/6543812599,hospital,"Community Health Centre, Jangammet",hospital,17.3342065,78.4698338
+node/6546851783,hospital,"Area Hospital, Golconda",hospital,17.3852587,78.4026083
+node/6547206093,hospital,MEDISYS HOSPITALS (A UNIT OF OXYEN MEDICARE CANCER CARE PVT LTD ),hospital,17.3411496,78.557759
+node/6548781242,hospital,Sri Aurobindo Nethralaya,hospital,17.4926185,78.3964245
+node/6548782136,hospital,MAXCURE SUYOSHA WOMAN & CHILD HOSPITAL,hospital,17.4464363,78.3786482
+node/6548786015,hospital,CALCIUM HOSPITAL,hospital,17.5066316,78.3842419
+node/6548789473,hospital,MAAX LIFE HOSPITALS,hospital,17.3452377,78.5276489
+node/6548796448,hospital,KRUTI HOSPITAL ADVANCED EYE & DENTAL CARE,hospital,17.469289,78.4862155
+node/6548797464,hospital,DELTA HOSPITALS,hospital,17.3253704,78.5576025
+node/6548807629,hospital,NETHRA EYE INSTITUE,hospital,17.4391832,78.4425692
+node/6548823374,hospital,MAYFLOWER HOSPITAL FOR WOMEN & CHILDREN,hospital,17.4832707,78.5523789
+node/6548826056,hospital,KASTURI MULTISPECIALITY HOSPITAL,hospital,17.4389273,78.5060866
+node/6548828778,hospital,RISE CHILDRENS HOSPITAL (A UNIT OF RISE HOSPITALS PVT. LTD.),hospital,17.3802341,78.4297081
+node/6548833978,hospital,AVANI LASER EYE HOSPITAL,hospital,17.3658656,78.5522434
+node/6548846382,hospital,SANJEEVANI HOSPITAL,hospital,17.3739165,78.5521227
+node/6548854401,hospital,Kakatiya Hospital,hospital,17.4497269,78.3672388
+node/6548861206,hospital,ARUNODAYA HOSPITAL,hospital,17.5254356,78.3709408
+node/6548866161,hospital,SUNLIFES HOSPITAL,hospital,17.4962857,78.5960509
+node/6548867226,hospital,LIMS HOSPITAL,hospital,17.2602591,78.3846268
+node/6548874152,hospital,SOLIS EYE CARE HOSPITALS PVT LTD,hospital,17.473687,78.571436
+node/6548877079,hospital,Shadow Hospitals,hospital,17.3270322,78.6032966
+node/6548879008,hospital,SRISHTI EYE CENTRE,hospital,17.3949495,78.4573924
+node/6548891585,hospital,LEGEND HOSPITAL,hospital,17.3360462,78.5762921
+node/6548894505,hospital,SAI SURYA HOSPITAL,hospital,17.3612589,78.4280745
+node/6548903087,hospital,Apple Multi Speciality Hospital,hospital,17.3985564,78.4143068
+node/6548910436,hospital,SUDHA HOSPITAL,hospital,17.4657813,78.5389222
+node/6548918441,hospital,Nakshatra Hospitals,hospital,17.3623879,78.5570419
+node/6548950430,hospital,EVYA HOSPITALS AND DIABETIC RESERACH CENTER,hospital,17.3392197,78.570819
+node/6549028392,hospital,"District Hospital, King Koti",hospital,17.3932243,78.481999
+node/6549122751,hospital,Wellness Hospital,hospital,17.435904,78.4499786
+node/6549122919,hospital,Refracto Eye Hospital,hospital,17.5072656,78.4788038
+node/6549133126,hospital,FATIMA HOSPITAL,hospital,17.3448357,78.4590373
+node/6549138754,hospital,JANAPAREDDY HOSPITAL PVT LTD,hospital,17.5246107,78.482795
+node/6549141042,hospital,ENT CARE HOSPITAL,hospital,17.4951101,78.3706122
+node/6549141640,hospital,NAIDU EYE HOSPITAL,hospital,17.4944322,78.3415653
+node/6549145505,hospital,JEEVAN HOSPITAL,hospital,17.344755,78.5269153
+node/6549145506,hospital,Times Hospital,hospital,17.4205712,78.4416855
+node/6549150687,hospital,MEDIVISION SUPER SPECIALTY HOSPITAL,hospital,17.5162288,78.4472376
+node/6549150740,hospital,HEALIX HOSPITAL,hospital,17.494321,78.3461505
+node/6549152212,hospital,ZOI HOSPITALS,hospital,17.3632928,78.4284984
+node/6549158450,hospital,SRI RADHIKA MULTI SPECIALITY HOSPITAL,hospital,17.3203965,78.5173801
+node/6549159475,hospital,RAJA HOSPITAL,hospital,17.4366563,78.4399192
+node/6549162107,hospital,THE BIRTHPLACE,hospital,17.4246755,78.433091
+node/6549162110,hospital,MANKINDD HOSPITAL,hospital,17.4055156,78.4801617
+node/6549172458,hospital,PADMVATI MEDICAL CENTRE,hospital,17.426232,78.5322033
+node/6549176002,hospital,IRIS EYE HOSPITAL,hospital,17.3696216,78.4273417
+node/6549183267,hospital,Lakshmi Sailaja Hospiatal,hospital,17.5084337,78.4614305
+node/6549184413,hospital,Oakridge Hospitals,hospital,17.4448396,78.3855052
+node/6549186461,hospital,RAMA EYE HOSPITAL,hospital,17.3910435,78.4712635
+node/6549189965,hospital,Sri Vijaya Hospitals,hospital,17.3893119,78.4422313
+node/6549190771,hospital,SRIKARA HOSPITALS,hospital,17.4921363,78.348083
+node/6549196760,hospital,Amrita ENT Head & Neck Hospital,hospital,17.4885611,78.3915214
+node/6549197262,hospital,B.V.K. REDDY HOSPITAL,hospital,17.4185789,78.5179152
+node/6549197557,hospital,Human Touch Hospital,hospital,17.3529175,78.4180733
+node/6549198596,hospital,REFRACTO EYE HOSPITAL (A GROUP OF CREDIBLE HEALTH CARE PVT LTD ),hospital,17.4620023,78.3669068
+node/6549203906,hospital,GERMANTEN HOSPITALS,hospital,17.3619565,78.4281778
+node/6549206565,hospital,SHYAM HOSPITAL,hospital,17.3230275,78.557235
+node/6549206566,hospital,STERLING HOSPITALS PVT LTD,hospital,17.470118,78.5086575
+node/6549209512,hospital,ANAND EYE INSITUTE,hospital,17.4183281,78.5427846
+node/6549210041,hospital,SRI KARA HOSPITAL,hospital,17.344508,78.5484628
+node/6549211440,hospital,HIGH SIGHT SUPER SPECILAITY EYE HOSPITAL,hospital,17.4160331,78.4473536
+node/6549215300,hospital,NAVJEEVAN HOSPITAL,hospital,17.45558,78.4981728
+node/6549219226,hospital,SMART VISION EYE SPECIALITIES PRIVATE LIMITED,hospital,17.4288986,78.4398817
+node/6549219227,hospital,KS MULTISPECIALTY HOSPITAL,hospital,17.4691425,78.4777518
+node/6549236738,hospital,RAMESH LASIK & LASER CENTRE,hospital,17.3985583,78.4847268
+node/6549287021,hospital,VIJAYA SREE HOSPITAL,hospital,17.4954081,78.3213112
+node/6549290634,hospital,ORIENT EYE HOSPITAL,hospital,17.3942641,78.4307253
+node/6549292101,hospital,SHINE CHILDREN'S HOSPITAL,hospital,17.3482504,78.5520463
+node/6549292128,hospital,Sri Sri Holistic Hospitals,hospital,17.4887428,78.4005457
+node/6549295174,hospital,Saptagiri Hospital,hospital,17.3690962,78.5301608
+node/6549296470,hospital,SAFE KIDS HOSPITALS PRIVATE LIMITED,hospital,17.3753068,78.4295377
+node/6549298910,hospital,DR RAJASHEKAR REDDY LAPAROSCOPY HOSPITAL,hospital,17.3542853,78.5470426
+node/6549301063,hospital,ADRM HOSPITAL,hospital,17.3984982,78.536071
+node/6549313395,hospital,SHRI ADITHYA HOSPITALS,hospital,17.5015719,78.5893062
+node/6549314900,hospital,Smart Vision Eye Hospitals Pvt Ltd,hospital,17.4893785,78.4008153
+node/6549315980,hospital,SOUTHERN GEM HOSPITAL,hospital,17.4058342,78.4754223
+node/6549320016,hospital,ARC HOSPITAL,hospital,17.4714919,78.5676406
+node/6549322814,hospital,Ozone Hospitals,hospital,17.5064398,78.5160054
+node/6549324353,hospital,SHARADA EYE CARE,hospital,17.3355392,78.5708083
+node/6549328685,hospital,SREE ROYAL HOSPITAL,hospital,17.4635323,78.4562123
+node/6549328982,hospital,SRI SIDDESHWARA HOSPITAL,hospital,17.346624,78.5211218
+node/6549331502,hospital,NEPHROPLUS KIDNEY CARE HOSPITALS,hospital,17.4161502,78.4338641
+node/6549332628,hospital,METRO CURE HOSPITAL,hospital,17.3726148,78.5010025
+node/6549335308,hospital,Green Leaf Health Centre,hospital,17.4915939,78.4096941
+node/6549338256,hospital,RUSSH SUPER SPECIALITY HOSPITAL,hospital,17.4997723,78.477497
+node/6549341748,hospital,SHREE POOJA HOSPITAL,hospital,17.4230318,78.5470144
+node/6549343859,hospital,Vascular Care Center,hospital,17.4183012,78.4582441
+node/6549348757,hospital,MCS NEURO HOSPITAL,hospital,17.4925596,78.3977428
+node/6549349841,hospital,HAPPY HOSPITAL,hospital,17.4947571,78.3432363
+node/6549350559,hospital,Landmark Hospital,hospital,17.4992274,78.3880024
+node/6549356692,hospital,HIRANYAA MULTI SPECIALITY & CHILDREN'S HOSPITAL,hospital,17.3198217,78.519841
+node/6549358302,hospital,NETRA EYE AND MULTI SPECIALITY HOSPITAL,hospital,17.4955297,78.4541658
+node/6549358836,hospital,SECUNDERABAD WOMENS HOSPITAL,hospital,17.4392005,78.4803766
+node/6549364392,hospital,SBR Pulse Hospital,hospital,17.3673811,78.5358068
+node/6549366073,hospital,CITI NEURO CENTER,hospital,17.4137266,78.4244857
+node/6549371813,hospital,Magnas ENT Hospital,hospital,17.368126,78.530836
+node/6549374700,hospital,EYE CARE HYDERABAD,hospital,17.3739817,78.4985831
+node/6549378688,hospital,SREE SREYAS HOSPITAL,hospital,17.3458905,78.5292422
+node/6549381430,hospital,SAI GURU RAGHAVENDRA ORTHOPEADIC & MULTISPECIALITY,hospital,17.4566496,78.4786342
+node/6549400717,hospital,PACIFIC CLINICS (A Unit of Pacific Hospitals Pvt Ltd.),hospital,17.4194759,78.3715081
+node/6549420102,hospital,STORK HOME FERNANDEZ HOSPITAL,hospital,17.4070512,78.4412871
+node/6549431958,hospital,Baabaji Nethralaya Eye Hospital,hospital,17.4910196,78.3967075
+node/6549437828,hospital,MOTHERHOOD FERTILITY CENTRE,hospital,17.496072,78.3452386
+node/6549439100,hospital,SUMITHRA HOSPITALS,hospital,17.3960244,78.559704
+node/6549439330,hospital,MedWise Hospital (A unit of Chirayu Avigna Healthcare),hospital,17.490815,78.396851
+node/6549440030,hospital,SAI SIDDHARTHA HOSPITAL,hospital,17.5171414,78.4449886
+node/6559228898,hospital,Sai Bhavani Super Speciality Hospital,hospital,17.5162813,78.4473006
+node/6559245433,hospital,Apollo Emergency Centre,hospital,17.3722481,78.5008469
+node/6559309139,hospital,Amrutha Hospital For Health and Fitness,hospital,17.3918869,78.4406219
+node/6559338844,hospital,Pavithra Nursing Home,hospital,17.4401185,78.4236932
+node/6560362897,hospital,Military Hospital,hospital,17.4722792,78.5170314
+node/6560524869,hospital,Osmania General Hospital's Blood Bank,hospital,17.3728426,78.4740262
+node/6560815058,hospital,Neelima Hospital,hospital,17.4562216,78.4256515
+node/6561022554,hospital,,hospital,17.3568423,78.4738019
+node/6561161964,hospital,Nikhil Hospital,hospital,17.43034,78.4370834
+node/6561169422,hospital,Vijaya Nursing Home - Vanasthalipuram,hospital,17.3349862,78.5706618
+node/6561171891,hospital,Vamshi Hospital - Trimulgherry,hospital,17.4711388,78.5078877
+node/6561211170,hospital,Dr.Agarwal's Eye Hospital - Santhosh Nagar,hospital,17.3455135,78.5081814
+node/6561341420,hospital,Happy Children Hospital - Chintal,hospital,17.4963994,78.4523928
+node/6561351099,hospital,Vijaya Hospital - Ranga Reddy,hospital,17.3316717,78.5336658
+node/6562261140,hospital,Vijaya Hospital,hospital,17.4953327,78.3461183
+node/6562374170,hospital,Sri Venkateshwara Nursing Home - Narayanguda,hospital,17.3944702,78.4889225
+node/6562402576,hospital,Kamineni Fertility Centre,hospital,17.3929299,78.4797553
+node/6562454569,hospital,Asha Hospital,hospital,17.483593,78.5580665
+node/6562677269,hospital,Motherhood Clinic,hospital,17.4300284,78.3742265
+node/6562751438,hospital,Life Spring Maternity Hospital,hospital,17.5051697,78.5071749
+node/6563028513,hospital,Susheela Hospital - R.K Puram,hospital,17.3678054,78.5496034
+node/6563250152,hospital,Omni Hospital - Banjara Hills,hospital,17.4074076,78.4428254
+node/6563256137,hospital,Dr.Agarwal's Eye Hospital - Dilsukhnagar,hospital,17.3690898,78.5224923
+node/6566862238,hospital,S.S Multi Speciality Hospital,hospital,17.3369525,78.5507843
+node/6567311932,hospital,Jayanti Maternity and Nursing Home,hospital,17.3893491,78.4734696
+node/6567338346,hospital,Whitus Hospital (A Unit Of Sri Shikhara Hospitals India Pvt Ltd),hospital,17.4186403,78.5420912
+node/6573966514,hospital,SAFE CHLIDRENS HOSPITAL,hospital,17.3696696,78.5142714
+node/6632844432,hospital,Satya Multi Speciality Hospital,hospital,17.4189151,78.5654264
+node/6652963085,hospital,"Royal Ear, Nose and Throat (ENT) Hospital",hospital,17.385132,78.482281
+node/6779797471,hospital,Dr.syed Ajaz hussain & Dr.syed mumtaz hussain,hospital,17.3774807,78.4996403
+node/6811748985,hospital,Apex Hospital,hospital,17.3429186,78.541484
+node/6811748990,hospital,Shiva Homoeo Stores and clinic,hospital,17.442029,78.440725
+node/6811748994,hospital,Srija Hospital,hospital,17.4279239,78.3240814
+node/6811749001,hospital,Madhusudhan Hospital,hospital,17.488394,78.39696
+node/6811749004,hospital,Lions Club Of Hyderabad Multi Speciality Hospital,hospital,17.5198207,78.4427883
+node/6811749006,hospital,Pooja Hospital,hospital,17.4898215,78.6018077
+node/6811749014,hospital,Vijaylaxmi Maternity Hospital,hospital,17.468492,78.4576658
+node/6811749023,hospital,Health Care General Hospital,hospital,17.539151,78.433749
+node/6811749024,hospital,Amma Hospitals,hospital,17.372487,78.522991
+node/6811749025,hospital,Cocoon Hospital,hospital,17.360911,78.389319
+node/6811749027,hospital,Keerthi Hospital,hospital,17.4932248,78.6045666
+node/6811749029,hospital,Saroornagar Hospital,hospital,17.354892,78.532407
+node/6811749031,hospital,Srihitha Hospital,hospital,17.367644,78.529654
+node/6811749040,hospital,Prolife Hospital,hospital,17.4003659,78.3894309
+node/6811749041,hospital,Lifeline Hospital,hospital,17.493471,78.604817
+node/6811749045,hospital,Hayatt Hospital,hospital,17.4012253,78.4124091
+node/6811749047,hospital,Gutta Eye Clinic,hospital,17.4329564,78.4461388
+node/6811749053,hospital,"Apple Diagnostic & Medical Centre, Kukatpally",hospital,17.493087,78.4096964
+node/6811749054,hospital,Vajra Hospitals,hospital,17.417667,78.632292
+node/6811749056,hospital,Janani Hospital for Women and Children,hospital,17.4897271,78.6017722
+node/6811749062,hospital,Alavi Hospital,hospital,17.492517,78.451227
+node/6811749066,hospital,Chaitanya Hospital,hospital,17.4694418,78.4256774
+node/6811749070,hospital,ZOI Hospital,hospital,17.4277736,78.4573355
+node/6811749075,hospital,Nadipathy Hospital,hospital,17.321219,78.568712
+node/6811749082,hospital,Trichos Skin Care,hospital,17.4889369,78.4006671
+node/6811749084,hospital,Harsha Dental Dantam Network Dental Hospitals,hospital,17.4958036,78.4524391
+node/6811749088,hospital,Srikara Hospital,hospital,17.5314158,78.4875009
+node/6811749093,hospital,JBI Hospital,hospital,17.4092386,78.4007023
+node/6811749096,hospital,J.K. Hospital,hospital,17.4933988,78.3979717
+node/6811749113,hospital,Bakoban Hospital,hospital,17.322434,78.4801
+node/6811749114,hospital,Sri Sai Rama Clinic,hospital,17.4452339,78.4617537
+node/6811749118,hospital,Medicare Hospital,hospital,17.3554702,78.4636083
+node/6811749120,hospital,Sri Lakshmi Hospital,hospital,17.3222518,78.4307242
+node/6811749127,hospital,Suraksha Women And Children Hospital,hospital,17.517046,78.480475
+node/6811749130,hospital,Sujatha Hospital,hospital,17.3223098,78.4305647
+node/6811749133,hospital,Vasundhara Hospital,hospital,17.473479,78.421673
+node/6811749134,hospital,Salamah Hospital,hospital,17.3921804,78.4264492
+node/6811749139,hospital,Aradhya Multi Speciality Hospital,hospital,17.4691677,78.4275318
+node/6811749141,hospital,Raman Hospital,hospital,17.4956577,78.4532466
+node/6811749142,hospital,Skorts Multi Speciality Clinics,hospital,17.443615,78.434617
+node/6811749143,hospital,IBM Hospital,hospital,17.3957352,78.4175241
+node/6811749144,hospital,Al Madina General Hospital,hospital,17.3058624,78.4683878
+node/6811749146,hospital,Shreya Hospitals,hospital,17.4795083,78.3202454
+node/6811749148,hospital,Lakshmi Priya Nursing,hospital,17.4028303,78.5741446
+node/6811749150,hospital,Shobha Hospital,hospital,17.4003589,78.382573
+node/6811749151,hospital,SKIMS Hospital,hospital,17.4023438,78.5670163
+node/6811749152,hospital,బిబిఆర్ సూపర్ స్పెషలిటీ హాస్పిటల్,hospital,17.4642455,78.4571122
+node/6811749160,hospital,Sri Nitya Hospital,hospital,17.324086,78.556886
+node/6811749163,hospital,Sri Balaji Nagar Nursing Home,hospital,17.512371,78.557713
+node/6811749169,hospital,Aditya Hospital,hospital,17.513357,78.556607
+node/6811749170,hospital,Sunray Hospital,hospital,17.5160299,78.3819324
+node/6811749174,hospital,St Joseph's Hospital,hospital,17.2743514,78.5953443
+node/6811749178,hospital,Sakhi Hospital,hospital,17.3293045,78.5645447
+node/6811749180,hospital,Archana Multi Speciality Hospital,hospital,17.4934982,78.3209211
+node/6811749182,hospital,SAI RAM MULTI SPECIALITY HOSPITAL (ARK HEALTH CARE PVT LTD),hospital,17.3659362,78.5255259
+node/6822125026,hospital,SRU Facture & Plastic Surgery,hospital,17.4942384,78.3995332
+node/6830806688,hospital,Gangaram Community Hall Health Sub Center,hospital,17.4944955,78.3296853
+node/6846152947,hospital,"Community Health Centre, Panipura",hospital,17.3732371,78.446451
+node/6846152948,hospital,SHREYA HOSPITAL,hospital,17.4509475,78.4235564
+node/6846423887,hospital,DR NAVEEN REDDYS GENERAL HOSPITAL,hospital,17.4546149,78.4200095
+node/6846423892,hospital,Medicure Diagnostic and Research Center(Alekhya Scanning Center),hospital,17.3953666,78.4544152
+node/6855228385,hospital,KIMS Cruddle,hospital,17.4659669,78.3678073
+node/6866161636,hospital,srisri holistic,hospital,17.5028997,78.3887517
+node/6866161637,hospital,,hospital,17.5029831,78.3887796
+node/6868572410,hospital,Durga prasad,hospital,17.4234633,78.5478069
+node/6934778614,hospital,,hospital,17.3745451,78.5455972
+node/6935540196,hospital,SHEKAR HOSPITAL,hospital,17.4787553,78.4816433
+node/6937779552,hospital,Apollo,hospital,17.4594547,78.3659801
+node/7007970916,hospital,Titan eye plus,hospital,17.4947985,78.3402527
+node/7008089080,hospital,Mythri Clinic,hospital,17.5035172,78.4156543
+node/7025820758,hospital,Srinivasa Hospital,hospital,17.4406949,78.3943588
+node/7025820786,hospital,lifespan hospitals,hospital,17.44582,78.3924173
+node/7025820915,hospital,Samanta Homeopathy,hospital,17.4413783,78.3880897
+node/7088862151,hospital,,hospital,17.3290827,78.4276336
+node/7113646686,hospital,Shresta hospital,hospital,17.4366221,78.4457432
+node/7174077374,hospital,Tirumala Hospital,hospital,17.5133146,78.3022088
+node/7243959583,hospital,Ankura Children hospital,hospital,17.4947296,78.341244
+node/7244033607,hospital,konark diagonistic center,hospital,17.3685916,78.5187388
+node/7244052167,hospital,,hospital,17.4103807,78.4640961
+node/7244059229,hospital,,hospital,17.5422595,78.474491
+node/7244398147,hospital,Dr.agarwals,hospital,17.493937,78.351628
+node/7244480650,hospital,Dr. Moinuddin clinic,hospital,17.394532,78.4352772
+node/7244480682,hospital,Vijaya Diagnostic Centre,hospital,17.3946261,78.4384798
+node/7246495528,hospital,Vijaya diagnostics,hospital,17.3364058,78.569899
+node/7246517948,hospital,saidatha homeo stores and clinic,hospital,17.4866535,78.3912724
+node/7357915007,hospital,Govt Hospital,hospital,17.397386,78.4294337
+node/7925585585,hospital,Bhaskara Hospital,hospital,17.51644,78.445742
+node/8007022925,hospital,Tirumala Nursing home,hospital,17.4998816,78.3574735
+node/8044148228,hospital,FAITH HOSIPTAL,hospital,17.3591366,78.4945773
+node/8082315379,hospital,Raaj Hospital,hospital,17.4044163,78.4838359
+node/8111098052,fire_station,panjagutta firestation,fire_station,17.4127048,78.4088851
+node/8113834531,hospital,Bharati Nursing Home,hospital,17.4492625,78.4473693
+node/8151182017,hospital,Sri sanjeevini,hospital,17.493969,78.513036
+node/8230992868,hospital,,hospital,17.2996609,78.5854994
+node/8233048690,hospital,,hospital,17.4591866,78.5007832
+node/8233132093,hospital,,hospital,17.4376777,78.5220997
+node/8233804190,hospital,,hospital,17.3088672,78.4942526
+node/8233811325,hospital,Osmania clinic,hospital,17.3713436,78.5018929
+node/8236632956,hospital,,hospital,17.4402772,78.4975865
+node/8386162815,hospital,Holistic Hospital,hospital,17.5149211,78.3975763
+node/8386235346,hospital,People's Hospital,hospital,17.518463,78.3968731
+node/8386256231,hospital,People's health care,hospital,17.5361942,78.4362911
+node/8386643937,hospital,VITAL'S Hospital,hospital,17.5070065,78.395168
+node/8387157871,hospital,yashoda,hospital,17.3914914,78.5113902
+node/8733731577,hospital,"Medicover Hospital ,Chandanagar",hospital,17.498279,78.3146178
+node/8733734629,hospital,"Preeti Urology & Kidney Hospital ,BHEL, Lingampally",hospital,17.4943209,78.3168615
+node/8739430485,hospital,AMVI Hospital,hospital,17.3988443,78.3652937
+node/8739449727,hospital,Dr Shaivalini - Gynecologist,hospital,17.3987165,78.3653
+node/8745836201,hospital,Kamineni Hospital,hospital,17.3614317,78.5539533
+node/8747916250,hospital,Aware Global Hospitals,hospital,17.3347442,78.5530454
+node/8747920907,hospital,Archana Hospital,hospital,17.4940216,78.3227858
+node/8747950688,hospital,Hegde Hospital,hospital,17.4446234,78.384659
+node/8748429666,hospital,Rainbow Children Hospital,hospital,17.4554623,78.3720097
+node/8748452003,hospital,DIVA Multispeciality Clinics,hospital,17.3641376,78.3947106
+node/8748479530,hospital,"Pace Hospitals ,Madinaguda",hospital,17.4940229,78.3470745
+node/8751713608,hospital,Uchvaas Hospital,hospital,17.4121129,78.4229918
+node/8751748313,hospital,Bhrungi Hospitals,hospital,17.3137197,78.560974
+node/8751762404,hospital,Chavan Hospitals,hospital,17.3138528,78.5084604
+node/8751771666,hospital,Health Valley Hospital,hospital,17.4644176,78.3682452
+node/8751844086,hospital,Viswas Hospital,hospital,17.3401158,78.52185
+node/8752914428,hospital,Tricolour Hospital,hospital,17.393868,78.5226426
+node/8759154274,hospital,Prathima Hospitals,hospital,17.3902616,78.495225
+node/8759163871,hospital,"Government ENT Hospital ,Koti",hospital,17.3845228,78.4820151
+node/8759169871,hospital,SKS Hospital,hospital,17.4753103,78.4857756
+node/8759181367,hospital,Navodaya Hospital,hospital,17.4416653,78.4860599
+node/8759230773,hospital,Tapadia Diagnostics Centre,hospital,17.4012471,78.5636616
+node/8759239032,hospital,Brinnova rehabilation centre,hospital,17.4109164,78.432519
+node/8759254022,hospital,"Vijaya Diagnostic Centre, Himayatnagar",hospital,17.4041507,78.479872
+node/8759273395,hospital,Oasis Fertility Centre,hospital,17.4419494,78.4899303
+node/8759287302,hospital,Basant Sahney Hospital,hospital,17.4444622,78.5048595
+node/8759319675,hospital,Oasis Fertility Centre,hospital,17.4263881,78.4204343
+node/8759335242,hospital,Vasavi Hospital,hospital,17.3632288,78.5449317
+node/8759356830,hospital,Partha Dental Skin Hair Clinic,hospital,17.438752,78.4505019
+node/8759371402,hospital,S L Diagnostic Center,hospital,17.4102165,78.461228
+node/8759381105,hospital,"Praba's VCare Health Clinic (P) Ltd, Gachibowli",hospital,17.4507108,78.3631503
+node/8759435760,hospital,"Government Hospital, Suraj Bhan",hospital,17.3535608,78.4745425
+node/8759531975,hospital,Mina multi speciality Hospital,hospital,17.3730487,78.4838444
+node/8759630720,hospital,Dr Naveen Reddy Hospital,hospital,17.4535446,78.4206489
+node/8759707780,hospital,"Railway Health Unit, Kachiguda",hospital,17.3867056,78.4950359
+node/8759738256,hospital,Madhava Nursing Home,hospital,17.4401505,78.4936257
+node/8760246825,hospital,MAA E.N.T. Hospitals,hospital,17.4272659,78.4143269
+node/8760595032,hospital,Mamata Academy of Medical Sciences Hospital,hospital,17.5385472,78.3574721
+node/8760672940,hospital,OMNI Hospitals,hospital,17.4853838,78.4109567
+node/8760787195,hospital,Rainbow Children's Medicare Pvt Ltd,hospital,17.4557195,78.4992805
+node/8760794581,hospital,Remedy Hospitals,hospital,17.4855041,78.3908053
+node/8760858403,hospital,"Prasad Hospitals ,Nacharam",hospital,17.4384053,78.5551261
+node/8760895243,hospital,Sivananda Rehabilitation Home,hospital,17.48884,78.4083858
+node/8760905236,hospital,Cosmo Derma,hospital,17.4908668,78.3970173
+node/8760926820,hospital,Padmaja Hospital,hospital,17.4869463,78.3994145
+node/8760933526,hospital,Pathcare Labs Pvt Ltd,hospital,17.444713,78.4691593
+node/8760959031,hospital,Save Hospitals,hospital,17.4058368,78.5875386
+node/8760982633,hospital,Srujana Hospitals,hospital,17.5057005,78.4670243
+node/8761004351,hospital,Paramitha Children's Hospital,hospital,17.3582035,78.5444422
+node/8763113701,hospital,Tesla Diagnostics,hospital,17.4957164,78.4525108
+node/8763119685,hospital,K K Reddy Hospital,hospital,17.4919994,78.3972386
+node/8763123207,hospital,Goutam Neuro Care,hospital,17.4928129,78.397999
+node/8763135141,hospital,Dr. Rao's ENT Super Speciality International Hospital,hospital,17.4881237,78.3949721
+node/8763259938,hospital,Centre for DNA Fingerprinting and Diagnostics,hospital,17.3931001,78.5575394
+node/8763260113,hospital,Sri Swastik Multispeciality Hospital,hospital,17.5380971,78.3638048
+node/8763276400,hospital,Nandini Hospital,hospital,17.4867461,78.5540117
+node/8763316074,hospital,"Udbhava Hospital ,Miyapur",hospital,17.4951229,78.3574077
+node/8763392113,hospital,Sri Dharani Multispeciality Hospital,hospital,17.4897846,78.601926
+node/8763411325,hospital,Excel Hospitals,hospital,17.5079988,78.5022081
+node/8763496906,hospital,Ananya Hospital,hospital,17.4847174,78.4129804
+node/8763519730,hospital,People's Hospital,hospital,17.4829023,78.4134217
+node/8763591483,hospital,SLG Hospitals,hospital,17.5281685,78.3625871
+node/8763598296,hospital,Shree Healthcare Multi Specialty Hospital,hospital,17.4009873,78.5794678
+node/8891813172,hospital,Ferticare IVF Asist,hospital,17.4274056,78.4321671
+node/8909248529,hospital,DTC TB Unit Erragadda,hospital,17.4452155,78.4324096
+node/8909248538,hospital,Dr.Vivek's Multispeciality Dental care,hospital,17.4472339,78.4326449
+node/8941817855,hospital,Shakti Ayurvedic Clinic,hospital,17.4475965,78.5089418
+node/8978092814,fire_station,مغل پورہ فائر اسٹیشن,fire_station,17.3595023,78.4767749
+node/9355590863,hospital,,hospital,17.4801489,78.5121788
+node/9369549952,hospital,Rahul Meidials,hospital,17.4527375,78.5648775
+node/9369555762,hospital,Nandini,hospital,17.4527443,78.5647251
+node/9369819271,hospital,vijaya diagonistics,hospital,17.4632492,78.5615635
+node/9369819272,hospital,Government uphc,hospital,17.4622327,78.5587486
+node/9391261140,hospital,,hospital,17.4274216,78.5517653
+node/9527080374,hospital,kamineni,hospital,17.3532901,78.5589741
+node/9605389618,hospital,Chenna reddy hospital,hospital,17.4940583,78.3212245
+node/9605465495,hospital,,hospital,17.2975367,78.4460149
+node/9611895277,hospital,,hospital,17.438001,78.4563763
+node/9679093983,hospital,Rikshith medical,hospital,17.4366107,78.6038388
+node/9728614166,hospital,balaji hospital,hospital,17.5026194,78.4207649
+node/9852600026,hospital,PRAANAA PAIN CLINIC,hospital,17.3646406,78.4286144
+node/9870554869,hospital,Vijaya Diagnostics Center,hospital,17.4113015,78.5859926
+node/9903919151,hospital,,hospital,17.4287042,78.5182344
+node/9903987802,hospital,sri sri holistic hospitals,hospital,17.5020423,78.3889444
+node/9924565993,hospital,Railway hospital,hospital,17.4434504,78.5461318
+node/10087214571,hospital,آئی کیئر حیدرآباد (سپر اسپیشلٹی آئی ہسپتال),hospital,17.3759689,78.4973599
+node/10112896286,hospital,Mythri Hospital,hospital,17.3836203,78.4292848
+node/10139228459,hospital,Vinayaka Nethralaya Eye Hospital,hospital,17.3932979,78.4261156
+node/10150942414,hospital,,hospital,17.4605484,78.3547514
+node/10277755873,hospital,,hospital,17.4628046,78.5619053
+node/10277927480,hospital,hs,hospital,17.4359366,78.5426952
+node/10279481534,hospital,,hospital,17.3607193,78.4408817
+node/10707719605,hospital,Avinash child hospital,hospital,17.4146159,78.4539247
+node/10790318146,hospital,Dr Agarwals Eye Hospital,hospital,17.4310175,78.3716983
+node/10810253919,hospital,Trinity Hospital,hospital,17.4913757,78.5991521
+node/10817244976,hospital,,hospital,17.362556,78.5224832
+node/10898562903,hospital,,hospital,17.400154,78.5405264
+node/10959100965,hospital,Sri rama clinic,hospital,17.4410992,78.5720791
+node/10969330843,hospital,"Community Health Centre, Lalapet",hospital,17.4388301,78.54187
+node/10970003770,hospital,,hospital,17.3923182,78.4624848
+node/10989359035,hospital,"Community Health Centre, AMBERPET",hospital,17.3921953,78.5178213
+node/10993267945,hospital,Area Hospital,hospital,17.3314694,78.5652052
+node/11001513668,hospital,"Community Health Centre, Seethaphalmandi",hospital,17.4265349,78.5192979
+node/11001534025,hospital,Sarojini Devi EYE Hospital,hospital,17.4137227,78.4911923
+node/11001544010,hospital,AREA HOSPITAL MALKAJGIRI,hospital,17.4504805,78.5321201
+node/11005197974,hospital,"DK Govt Homoeopathic Hospital, Ramanthapur, Hyd",hospital,17.3979133,78.5310178
+node/11005951281,hospital,CHC KHAIRATABAD,hospital,17.4448127,78.4219109
+node/11005968513,hospital,"Community Health Centre, AMEERPET",hospital,17.4485486,78.4248854
+node/11027534552,hospital,Shishira hospitals,hospital,17.4317717,78.4455728
+node/11027534563,hospital,Image Hospital,hospital,17.4314966,78.4473474
+node/11027534564,hospital,Medkid children's hospital,hospital,17.4302495,78.4487075
+node/11082456129,hospital,Maholla Clinic,hospital,17.4566753,78.4115501
+node/11082456132,hospital,Mohammadi Clinic,hospital,17.4564341,78.4103806
+node/11098927505,hospital,Susheela Hospital,hospital,17.3934464,78.5365962
+node/11365536218,hospital,,hospital,17.337349,78.4680874
+node/11489967865,hospital,,hospital,17.5458731,78.3359459
+node/11690468635,hospital,appolo medical shop1,hospital,17.3147451,78.6007159
+node/11736376192,hospital,JNTU Hospital,hospital,17.4915484,78.3910656
+node/11736392871,fire_station,,fire_station,17.4913591,78.3910857
+node/11770988839,hospital,Omega Hospitals,hospital,17.4364246,78.3675806
+node/11770993373,hospital,Amar Hospitals,hospital,17.4771569,78.4204028
+node/11770993380,hospital,Yashoda Hospitals,hospital,17.4622687,78.384176
+node/11821271825,hospital,Sunridge Multi-Speciality Hospital,hospital,17.4538625,78.421752
+node/11925953631,hospital,D.K.GOVT. HOMOEO HOSPITAL,hospital,17.3841667,78.4562354
+node/11934311883,hospital,"Government Ayurvedic Hospital, Erragadda, Hyderabad",hospital,17.4487092,78.4338427
+node/11935458418,hospital,Community Health Centre Rajendranagar,hospital,17.3203486,78.4018045
+node/11936156147,hospital,"Community Health Centre, BARKAS",hospital,17.3144808,78.4831721
+node/11936158149,hospital,Niloufer Hospital,hospital,17.3986812,78.4610376
+node/11936638169,hospital,"Area Hospital, Golconda",hospital,17.3975018,78.4293977
+node/11936671649,hospital,Government Chest Hospital,hospital,17.4454284,78.434959
+node/11937489795,hospital,"MG Govt Maternity Hospital, Petla Burz",hospital,17.3684615,78.4674183
+node/11938622049,hospital,MNJ Institute of Oncology and Regional Cancer Center,hospital,17.392244,78.4601927
+node/11940092750,hospital,Institute of Mental Health,hospital,17.4506724,78.4361121
+node/12185383852,hospital,MK Dentistry,hospital,17.3951477,78.4556625
+node/12289411655,hospital,Swasthya Dental Clinic,hospital,17.3667392,78.5811285
+node/12536226054,hospital,SK + Diagnostics,hospital,17.4754498,78.5681603
+node/12565848764,hospital,,hospital,17.3535776,78.4745244
+node/12669348711,hospital,Revive Multispeciality Hospital,hospital,17.4865279,78.4497546
+node/12852366410,hospital,Sai charan Children's hospital,hospital,17.3959816,78.5299056
+node/12852371077,hospital,Janani infertility center,hospital,17.3943514,78.5299096
+node/13020731415,hospital,Reborn Skin and Hair Clinic,hospital,17.4731157,78.3872398
+node/13169104952,hospital,Sai Ayush Ayurveda Hospital - wellness Hyderabad,hospital,17.473193,78.3871998
+node/13181481501,hospital,CGHS Bandlaguda,hospital,17.363751,78.585004
+node/13227662859,hospital,Renova Hospitals,hospital,17.3733681,78.414395
+node/13285248846,hospital,Pi Health Hospital,hospital,17.4482414,78.3605759
+node/13334012866,hospital,Oneders Clinics,hospital,17.4090636,78.3999909
+node/13337356007,hospital,Medicare Hospitals,hospital,17.349695,78.5483858
+node/13423743515,hospital,Arete Hospitals,hospital,17.4276743,78.3749073
+node/13436948463,hospital,Dental clinic,hospital,17.3968148,78.5014822
+node/13436972602,hospital,eyes specalist,hospital,17.4126071,78.4901536
+node/13531355136,hospital,Medicover,hospital,17.4552142,78.37756
+node/13597379930,hospital,Govt street Hospital,hospital,17.3327926,78.5367482
+node/13673586497,hospital,Eye Hospital centre,hospital,17.3731304,78.4672542
+node/13673824533,hospital,Chanda Nursing homes,hospital,17.3747716,78.4691254
+node/13673824534,hospital,Pilies Clinic,hospital,17.3750071,78.4690221
+node/13673868798,hospital,childern hospital,hospital,17.5030699,78.4262632
+node/13707203217,hospital,Chetana Hospital,hospital,17.4360061,78.4832145
+node/13715414722,hospital,Hospital,hospital,17.4915494,78.3910632
+node/13715482751,hospital,Jntu Hospital,hospital,17.491566,78.3910771
+node/13845243023,hospital,Gokul Speciality Clinics,hospital,17.4946528,78.3881636
+node/14065542879,hospital,"Office Of The Director Of Health, Telangana",hospital,17.3881003,78.488338
+node/14076472616,hospital,,hospital,17.4877126,78.3996886
+node/14076472617,hospital,Saritha Dental Clinic,hospital,17.4877382,78.399687
+relation/2271868,building,Potti Sreeramulu Telugu University,university,17.3952896,78.469926
+relation/5167100,building,,commercial,17.4481612,78.3733548
+relation/5167102,building,Tech Mahindra,commercial,17.4519323,78.3739365
+relation/5313953,building,Pragati Enclave,commercial,17.5071543,78.3855996
+relation/5317572,building,,industrial,17.5053548,78.3590052
+relation/5317573,building,,industrial,17.5061772,78.3591825
+relation/5320433,building,Nasr Boys School,school,17.4385221,78.3705457
+relation/5320443,building,Mariner Building,commercial,17.4347966,78.3844597
+relation/5320744,building,Johnson Grammar School,school,17.4253809,78.5543052
+relation/5320745,building,Johnson Grammar School,school,17.4254156,78.5540088
+relation/5320889,building,Main Block,school,17.418869,78.4099564
+relation/5327924,building,,hospital,17.3555266,78.5658987
+relation/5333673,building,,commercial,17.457836,78.3744816
+relation/5381973,building,Huda Maithrivanam,commercial,17.4372258,78.4441915
+relation/5424794,building,,hospital,17.3409222,78.5067856
+relation/6136846,building,Chenoy Trade Centre (CTC),commercial,17.4405685,78.4895025
+relation/6163041,building,Nilgiri,university,17.4472291,78.3487283
+relation/6200801,building,,school,17.4336323,78.2974369
+relation/6203684,building,Kohli Research Block,university,17.445107,78.3495362
+relation/6203954,building,EEE Department,university,17.4951102,78.391064
+relation/6204115,building,,commercial,17.4073248,78.4723106
+relation/6544899,building,,hospital,17.4219889,78.4522049
+relation/11910908,building,,school,17.4007128,78.5590515
+relation/12569474,building,,school,17.4984347,78.3472329
+relation/19418013,building,తెలంగాణా సెక్రటేరియట్,public,17.4097769,78.4692193
+relation/19696225,building,"Centre for Digital Learning, Training and Resources",university,17.4646697,78.3322227
+relation/19710504,building,Prithvi Bhavan - Department of Earth Sciences,university,17.4653134,78.3275258
+relation/19716198,building,School of Physics,university,17.4648267,78.3269374
+relation/19716199,building,School of Engineering Sciences and Technology,university,17.4629782,78.3266996
+relation/19716200,building,Malaviya Mission Teacher Training Center,university,17.4625294,78.3279637
+relation/21656320,building,Himalaya Academic Block,university,17.4454488,78.3491188
+relation/21844460,building,Vindhya,university,17.4457751,78.3498634
+way/31548357,building,Aditya Trade Centre,commercial,17.4365175,78.4464247
+way/36776806,building,Tata Communications,commercial,17.4415543,78.3779199
+way/41712706,building,Swarna Jayanthi Complex,commercial,17.4380459,78.4440314
+way/51327327,building,iLabs Centre,commercial,17.4324517,78.3871996
+way/68876742,building,,commercial,17.4329887,78.3877817
+way/68883426,building,SoftSol,commercial,17.4395806,78.3780511
+way/68883439,building,JVP,commercial,17.4395151,78.3786505
+way/68883445,building,,commercial,17.4400621,78.3783691
+way/68907564,building,,commercial,17.437891,78.38038
+way/68907571,building,Cyient,commercial,17.4375485,78.3807579
+way/68907576,building,Building 9,commercial,17.4411744,78.3809505
+way/68907601,building,NCC House,commercial,17.4363895,78.3877808
+way/75364517,building,Lifestyle Building,commercial,17.4361697,78.45707
+way/75364518,building,White House Building,commercial,17.4359067,78.4564781
+way/89898294,building,Building 5A,commercial,17.4415842,78.3796269
+way/89898297,building,Building 5B,commercial,17.4418843,78.3788943
+way/89898428,building,Building 7,commercial,17.4401754,78.3801431
+way/89898429,building,Building 8,commercial,17.4405955,78.3804491
+way/89914109,building,HSBC,commercial,17.4457136,78.3753409
+way/89914112,building,Cyber Pearl I,commercial,17.4451212,78.3766538
+way/89914725,building,Cyber Pearl II,commercial,17.4453953,78.376136
+way/90465060,building,Ananth Info Park Building C,commercial,17.4502362,78.3717374
+way/112653405,building,Ideal Towers,commercial,17.4640388,78.4842976
+way/116078979,building,Building 10,commercial,17.439063,78.3812762
+way/116078983,building,Building 2A,commercial,17.4446001,78.3803033
+way/116078985,building,Building 2B,commercial,17.4445889,78.3793381
+way/116397239,building,,commercial,17.431257,78.4477706
+way/121543584,building,Genpact IT company Uppal,commercial,17.4114784,78.5483244
+way/122449732,building,Building 3A,commercial,17.4436664,78.3798024
+way/122449734,building,Building 1A,commercial,17.444608,78.3817029
+way/122449736,building,Building 1B,commercial,17.4446023,78.3811285
+way/122449737,building,Building 4,commercial,17.4426625,78.3791897
+way/122449741,building,Building 6,commercial,17.4410351,78.3789914
+way/129389889,building,CSE department,university,17.4932527,78.3923021
+way/129389905,building,Civil Department,university,17.4951201,78.3905219
+way/129394063,building,UGC Staff College and School of Management,university,17.4958893,78.3934773
+way/129394331,building,JNTU Hyderabad Administrative Block,university,17.4965579,78.3924075
+way/233492238,building,,commercial,17.4419355,78.4465919
+way/233493253,building,Aditya Enclave,commercial,17.4362883,78.4447268
+way/233493254,building,Adithya Enclave (Nilgiri block),commercial,17.4366197,78.4451143
+way/233493257,building,,commercial,17.4380169,78.4485563
+way/233493258,building,,commercial,17.4376883,78.448628
+way/233493359,building,,commercial,17.4423462,78.4480113
+way/234426625,building,Regency Plaza,commercial,17.4373532,78.4460555
+way/234428172,building,,commercial,17.4413425,78.4481407
+way/234428173,building,,commercial,17.4413483,78.4475915
+way/234428175,building,,commercial,17.4417851,78.4476472
+way/234428177,building,,commercial,17.4418976,78.4467645
+way/234428477,building,,commercial,17.4420647,78.4467915
+way/234543935,building,,commercial,17.4414499,78.4470648
+way/246114117,building,,school,17.3161255,78.4004266
+way/250644357,building,,hospital,17.4147753,78.4125115
+way/251805379,building,,commercial,17.4825743,78.3931185
+way/251903453,building,Distance Education Building,university,17.4240866,78.5256739
+way/252108219,building,Gulshan-e-Khaleel,commercial,17.4044882,78.4492606
+way/252288527,building,Film Nagar Society Complex,commercial,17.4158779,78.4108104
+way/253462469,building,Uppal Electrical Sub-station,commercial,17.4018651,78.5616207
+way/253463456,building,Hari dosa & Vindu Vihar,food_court,17.4012014,78.5681491
+way/256666882,building,Jawaharlal Nehru Govt. Polytechnic College,college,17.39212,78.5278694
+way/261478386,building,Microsoft Central Kitchen,commercial,17.4304972,78.3405394
+way/264586058,building,,school,17.5010418,78.4746537
+way/264586059,building,Volkswagen service stop,commercial,17.5020561,78.4793604
+way/264882569,building,University Health Center,commercial,17.4915524,78.391048
+way/264994424,building,vijaya diagnostic center,commercial,17.4366557,78.4337007
+way/264994428,building,Rathnadeep Supermarket,commercial,17.4366334,78.4338873
+way/265030098,building,School of Information Technology,university,17.4953109,78.3928791
+way/265391479,building,The sleep company,commercial,17.4046893,78.4071077
+way/265417966,building,IIFL India Infoline,commercial,17.4990401,78.4761553
+way/265429427,building,,commercial,17.4997831,78.4749492
+way/265627632,building,balaji provision store,commercial,17.493912,78.3319163
+way/265627810,building,apollo pharmacy,commercial,17.4934925,78.3321095
+way/265635252,building,arohana high school,school,17.4945462,78.3333339
+way/273913647,building,"Rythu Bazar, Mehdipatnam",marketplace,17.3950776,78.44113
+way/292730757,building,iLabs Oval Office,commercial,17.4320851,78.3883933
+way/292748904,building,Building 11,commercial,17.4383216,78.3821251
+way/292750667,building,Building 14,commercial,17.4368492,78.3831631
+way/292755261,building,Building 20,commercial,17.4364596,78.3842061
+way/292769248,building,Divyasree Solitaire,commercial,17.4366418,78.3817229
+way/296969037,building,Pioneer Towers,commercial,17.4363715,78.3821933
+way/296975218,building,KTC Illumination,commercial,17.4410527,78.3825468
+way/297095564,building,Building 3B,commercial,17.4436886,78.3791721
+way/297099095,building,Kishan Sir IMAX,commercial,17.4233798,78.3775411
+way/297108912,building,Building 21,commercial,17.4434844,78.3815395
+way/309521565,building,,commercial,17.4448163,78.3752958
+way/324531850,building,,commercial,17.395021,78.4786763
+way/331354110,building,LIFE SPRING HOSPITAL,hospital,17.3957939,78.5234172
+way/331629108,building,South India Shopping Mall,commercial,17.4929506,78.4046634
+way/331632894,building,mother theresa government school,school,17.4726256,78.5642354
+way/331633241,building,KalyanaKanchi,commercial,17.4963569,78.3968249
+way/331633616,building,PullaReddy Sweets,commercial,17.4920786,78.4066749
+way/331634138,building,Kalyan Jewellers,commercial,17.485567,78.4106598
+way/331634162,building,vertex pearl,commercial,17.4784159,78.5616404
+way/331635497,building,dr. kkr gowtham concept school,school,17.467144,78.5633591
+way/331772095,building,rose buds high school,school,17.3958909,78.5238009
+way/331777744,building,,commercial,17.4961459,78.3976667
+way/331785031,building,sri chaitanya techno schhol,school,17.4874307,78.4138155
+way/337928574,building,Delta Seacon,commercial,17.4131922,78.4476739
+way/339553027,building,,commercial,17.4525105,78.3902093
+way/339553531,building,,commercial,17.4527929,78.3903764
+way/339553674,building,,commercial,17.4523514,78.389899
+way/339553741,building,,commercial,17.4534732,78.389162
+way/339553753,building,,commercial,17.4531057,78.3894016
+way/339553765,building,,commercial,17.4530573,78.3898237
+way/339553850,building,,commercial,17.4530205,78.3899777
+way/339553900,building,,commercial,17.4531596,78.3891645
+way/339553909,building,,commercial,17.4533957,78.3894492
+way/339553917,building,,commercial,17.4533075,78.3900569
+way/339553954,building,,commercial,17.453444,78.3902988
+way/339553956,building,,commercial,17.4532124,78.3911335
+way/339702073,building,Ruchi Restaurent,food_court,17.4521601,78.3917278
+way/339702143,building,Cyberabad Uptown Building,commercial,17.4520398,78.3934499
+way/339718080,building,Gautham Grammar High School,school,17.4617278,78.3660795
+way/340063139,building,,school,17.4871052,78.3887466
+way/340230806,building,,hospital,17.4254345,78.4319165
+way/340234130,building,iQi Solutions Pvt.Ltd,commercial,17.4301659,78.4302335
+way/340797449,building,,commercial,17.4741549,78.3877071
+way/340904952,building,,commercial,17.4875878,78.3868634
+way/340935026,building,,school,17.4797231,78.2878214
+way/340937489,building,,school,17.480645,78.2852267
+way/341125536,building,,school,17.4822218,78.2853401
+way/341139999,building,,school,17.4801977,78.2869228
+way/341140001,building,,school,17.4802039,78.2870568
+way/341140004,building,,school,17.4802816,78.2870537
+way/341140006,building,,school,17.4802799,78.2869214
+way/341140008,building,,school,17.4803693,78.2869189
+way/341140010,building,,school,17.4803755,78.2870529
+way/341140011,building,,school,17.4804533,78.2870499
+way/341140013,building,,school,17.4804515,78.2869174
+way/341140015,building,,school,17.4805492,78.2869087
+way/341140019,building,,school,17.4805553,78.2870425
+way/341140022,building,,school,17.4806427,78.2870437
+way/341140024,building,,school,17.480641,78.2869113
+way/341140027,building,,school,17.4807305,78.2869088
+way/341140028,building,,school,17.4807367,78.2870427
+way/341140029,building,,school,17.4808144,78.2870397
+way/341140030,building,,school,17.4808127,78.2869072
+way/341140033,building,,school,17.4802192,78.2873298
+way/341140034,building,,school,17.4803013,78.2873283
+way/341140035,building,,school,17.4803908,78.2873259
+way/341140036,building,,school,17.480473,78.2873244
+way/341140037,building,,school,17.4805706,78.2873156
+way/341140038,building,,school,17.4806625,78.2873182
+way/341140039,building,,school,17.480752,78.2873158
+way/341140040,building,,school,17.4808342,78.2873143
+way/341140041,building,,school,17.4808359,78.2874468
+way/341140045,building,,school,17.4802253,78.2874638
+way/341140046,building,,school,17.480303,78.2874608
+way/341140047,building,,school,17.4803971,78.2874599
+way/341140048,building,,school,17.4804747,78.2874568
+way/341140049,building,,school,17.4805768,78.2874495
+way/341140050,building,,school,17.4806642,78.2874506
+way/341140051,building,,school,17.4807582,78.2874498
+way/341140052,building,,school,17.4800315,78.2877704
+way/341140053,building,,school,17.4800376,78.2879043
+way/341140054,building,,school,17.4801213,78.2878982
+way/341140055,building,,school,17.4801195,78.2877658
+way/341140056,building,,school,17.4802133,78.2877611
+way/341140057,building,,school,17.4802194,78.2878951
+way/341140058,building,,school,17.4802971,78.287892
+way/341140059,building,,school,17.4802954,78.2877596
+way/341140060,building,,school,17.480385,78.2877572
+way/341140061,building,,school,17.4803911,78.2878912
+way/341140062,building,,school,17.4804689,78.2878882
+way/341140063,building,,school,17.4804671,78.2877557
+way/341140064,building,,school,17.4805647,78.2877469
+way/341140065,building,,school,17.480571,78.2878808
+way/341140066,building,,school,17.4806583,78.2878819
+way/341140067,building,,school,17.4806566,78.2877496
+way/341140068,building,,school,17.4807461,78.2877471
+way/341140069,building,,school,17.4807523,78.2878811
+way/341140070,building,,school,17.48083,78.2878781
+way/341140071,building,,school,17.4808283,78.2877455
+way/341140936,building,,school,17.4800509,78.28873
+way/341140939,building,,school,17.4801345,78.2887239
+way/341140941,building,,school,17.4802327,78.2887208
+way/341140943,building,,school,17.4803104,78.2887178
+way/341140945,building,,school,17.4803087,78.2885854
+way/341140946,building,,school,17.4800448,78.288596
+way/341140949,building,,school,17.4801328,78.2885914
+way/341140951,building,,school,17.4802266,78.2885869
+way/341140953,building,,school,17.4800421,78.2883168
+way/341140955,building,,school,17.4801256,78.2883106
+way/341140957,building,,school,17.4802239,78.2883074
+way/341140959,building,,school,17.4803016,78.2883044
+way/341140961,building,,school,17.4802999,78.2881721
+way/341140962,building,,school,17.4800359,78.2881828
+way/341140964,building,,school,17.4801239,78.2881781
+way/341140966,building,,school,17.4802177,78.2881736
+way/341140968,building,,school,17.4803937,78.288583
+way/341140969,building,,school,17.4804717,78.2881697
+way/341140971,building,,school,17.4803957,78.288305
+way/341140973,building,,school,17.4804734,78.288302
+way/341140975,building,,school,17.4803896,78.2881711
+way/341140977,building,,school,17.4805607,78.288165
+way/341140979,building,,commercial,17.4806825,78.2885037
+way/341140981,building,,commercial,17.4811237,78.2878809
+way/341140983,building,,commercial,17.4810663,78.2873825
+way/341140985,building,,school,17.4812715,78.2868895
+way/341140987,building,,school,17.4810142,78.2870248
+way/341140990,building,,school,17.4810079,78.286891
+way/341140992,building,,school,17.4810998,78.2868936
+way/341140993,building,,school,17.4811015,78.287026
+way/341140994,building,,school,17.4811955,78.287025
+way/341140995,building,,school,17.4811893,78.2868911
+way/341155242,building,,school,17.4809778,78.2840509
+way/341155243,building,,school,17.4810696,78.2840536
+way/341155244,building,,school,17.4811591,78.2840511
+way/341155245,building,,school,17.4812413,78.2840495
+way/341155246,building,,school,17.4813318,78.2840393
+way/341155247,building,,school,17.4814237,78.2840419
+way/341155248,building,,school,17.4815132,78.2840394
+way/341155249,building,,school,17.4815954,78.2840379
+way/341155250,building,,school,17.4816798,78.2840293
+way/341155251,building,,school,17.481762,78.2840279
+way/341159360,building,,school,17.4813238,78.2814235
+way/341159362,building,,school,17.481458,78.2814128
+way/341159363,building,,school,17.4814816,78.2815905
+way/341159367,building,,school,17.4812843,78.2815949
+way/341159368,building,,school,17.4813776,78.281594
+way/341159369,building,,school,17.4811929,78.2815913
+way/341159370,building,,school,17.4814779,78.2819638
+way/341159374,building,,school,17.4812964,78.2819688
+way/341159375,building,,school,17.4813865,78.2819667
+way/341159376,building,,school,17.4812006,78.2819633
+way/341159380,building,,school,17.4812135,78.2817979
+way/341159381,building,,school,17.4812978,78.2817884
+way/341159382,building,,school,17.4813831,78.2817906
+way/341159383,building,,school,17.4814765,78.2817897
+way/341159384,building,,school,17.4814967,78.2823628
+way/341159388,building,,school,17.4813038,78.2823567
+way/341159389,building,,school,17.4813941,78.2823527
+way/341159390,building,,school,17.481215,78.2823594
+way/341159393,building,,school,17.4812071,78.28218
+way/341159395,building,,school,17.4812999,78.2821733
+way/341159396,building,,school,17.4813906,78.2821807
+way/341159397,building,,school,17.4814885,78.2821675
+way/341159398,building,,school,17.4815014,78.28277
+way/341159400,building,,school,17.4815093,78.2826154
+way/341159401,building,,school,17.4814026,78.2827697
+way/341159402,building,,school,17.4814093,78.282615
+way/341163951,building,Oxygen Hospitals,hospital,17.4910571,78.3818832
+way/341189992,building,BSR Bellezza,commercial,17.4941333,78.3944125
+way/341192658,building,KLM Shoping Mall,commercial,17.4951159,78.3975644
+way/341740430,building,Divyasree Omega Building - Block C,commercial,17.4589791,78.3735358
+way/342031390,building,Amazon,commercial,17.4202721,78.3394096
+way/342032153,building,,commercial,17.4212554,78.3379695
+way/342032577,building,Meenakshi Technova,commercial,17.421499,78.3395527
+way/342033505,building,,commercial,17.4212041,78.3443776
+way/342034212,building,,commercial,17.4155699,78.3440593
+way/342034942,building,,commercial,17.4187008,78.3366777
+way/342034943,building,,commercial,17.4193189,78.3371188
+way/342034944,building,,commercial,17.4182881,78.3371959
+way/342044135,building,,commercial,17.4439562,78.3728945
+way/342044137,building,,commercial,17.4432659,78.3728394
+way/342044717,building,Divyasree Omega Building - Block B,commercial,17.4593089,78.3728652
+way/342045453,building,JayaBheri Silicon Towers,commercial,17.4586175,78.370661
+way/342045800,building,,commercial,17.4593434,78.3711811
+way/342045801,building,,commercial,17.4594729,78.370892
+way/342045802,building,,commercial,17.4590595,78.3706998
+way/342045803,building,,commercial,17.4589233,78.3709834
+way/342045804,building,,commercial,17.4591239,78.3711499
+way/342045805,building,,commercial,17.4592965,78.3707301
+way/342045807,building,,commercial,17.4599128,78.3710406
+way/342045808,building,,commercial,17.4596822,78.3710089
+way/342045809,building,,commercial,17.4595614,78.3712738
+way/342045810,building,,commercial,17.4597312,78.3714404
+way/342045811,building,,commercial,17.4599699,78.3714634
+way/342045812,building,,commercial,17.4600841,78.3711971
+way/342045815,building,,commercial,17.4603236,78.371307
+way/342045939,building,,commercial,17.4602105,78.3716051
+way/342062007,building,,commercial,17.4585025,78.3743405
+way/342062008,building,,commercial,17.4581584,78.3741024
+way/342062757,building,,commercial,17.4607518,78.37582
+way/342062758,building,,commercial,17.4603899,78.3756714
+way/342062759,building,,commercial,17.4604272,78.3759253
+way/342062760,building,,commercial,17.4604568,78.3762495
+way/342062761,building,,commercial,17.4600607,78.3756789
+way/342062762,building,,commercial,17.4598547,78.3757653
+way/342064508,building,Divyasree Omega Building - Block A,commercial,17.4583776,78.3724448
+way/342248703,building,,commercial,17.4253339,78.3357071
+way/342250600,building,,commercial,17.4254318,78.3372592
+way/342254662,building,Sai Amu Residency 1,commercial,17.4268352,78.3260588
+way/342254663,building,,commercial,17.426063,78.3249816
+way/342254664,building,,commercial,17.4265739,78.3251419
+way/342260937,building,,commercial,17.4446911,78.3571527
+way/342261567,building,"Spotways, infologitech systems",commercial,17.4336248,78.3687738
+way/342261568,building,,commercial,17.4334103,78.3691566
+way/342261630,building,New City Church,commercial,17.4331807,78.3694543
+way/342266845,building,,commercial,17.4328314,78.3691725
+way/342675327,building,The Sri Ram Universal School,school,17.4173008,78.3496306
+way/342675328,building,,commercial,17.417301,78.3495479
+way/343409002,building,,commercial,17.4912006,78.3961402
+way/343607661,building,,commercial,17.4937914,78.4030154
+way/343607667,building,,commercial,17.4934187,78.4038661
+way/343668533,building,,school,17.503469,78.3869217
+way/343671017,building,,school,17.5037131,78.3864624
+way/343687721,building,,commercial,17.5063638,78.3856462
+way/343857116,building,,industrial,17.5254362,78.450239
+way/343857213,building,,industrial,17.5250951,78.4505365
+way/343858159,building,,industrial,17.5250421,78.450586
+way/346564027,building,St. Xavier's High School,school,17.492495,78.5055283
+way/346564098,building,Mahabodhi High School,school,17.4924808,78.5047345
+way/346764503,building,B.MALLESH YADAV LANDMARK,commercial,17.4516117,78.392172
+way/350756292,building,Ammul estste,commercial,17.4766476,78.5636268
+way/355659654,building,Narayana Hospital,hospital,17.5433627,78.4335268
+way/355678345,building,Kolan Veera Reddy Complex,commercial,17.5022092,78.3889855
+way/355716152,building,,commercial,17.5282216,78.4877922
+way/355733381,building,triveni,school,17.4934948,78.3473742
+way/355777383,building,Hyd's NRI Concept School,school,17.3349786,78.5795862
+way/355866811,building,Sri Laxmi Narayana Medical & General Stores,commercial,17.5049669,78.3090488
+way/355877836,building,,commercial,17.5059812,78.3628152
+way/355885317,building,Kidzonia International Perschool,school,17.4750988,78.3074097
+way/355887315,building,D.Y.R. Gardens - Function Hall A/C,commercial,17.5002746,78.546564
+way/355891473,building,,commercial,17.5060239,78.3619647
+way/355893515,building,Green Trends,commercial,17.4851724,78.3879343
+way/355905754,building,Punjab National Bank,bank,17.4666641,78.4934695
+way/355909975,building,Sunetra Eye Hospital,hospital,17.4939981,78.3264746
+way/355910795,building,Sanskriti School,school,17.4714983,78.3549038
+way/355914554,building,Ratnadeep Super Market,commercial,17.5025762,78.5440502
+way/355953377,building,Sri Chaitanya School,school,17.4892029,78.4493281
+way/355954191,building,Revive Multispeciality hospital,hospital,17.486544,78.4497075
+way/355956648,building,,school,17.5010434,78.4742837
+way/355956656,building,,school,17.5018938,78.4749101
+way/355956684,building,,school,17.5016447,78.4737566
+way/355956734,building,,school,17.5012475,78.4740439
+way/355956766,building,,school,17.5021106,78.4752755
+way/355956800,building,,school,17.5019897,78.4746021
+way/355963993,building,Sri Balaji High School,school,17.516762,78.4287474
+way/355990526,building,CAL Public School,school,17.4832772,78.5643899
+way/356005861,building,Genesis Nino,school,17.4936585,78.3365912
+way/356005961,building,Genesis International School,school,17.4945331,78.3365999
+way/356009113,building,,school,17.4862905,78.3176827
+way/356020069,building,,school,17.4494291,78.3913923
+way/356020342,building,Krishe Sapphire,commercial,17.4423435,78.3871281
+way/356020400,building,Zilla Parishad Boys High School,school,17.4655826,78.4719899
+way/356021519,building,Sarojini Naidu school of Arts and Communication,university,17.4506122,78.3391846
+way/356159637,building,DSR Inspire,commercial,17.4462939,78.3844254
+way/356163701,building,,school,17.4624223,78.3557809
+way/356163723,building,,hospital,17.4606481,78.3550089
+way/356172984,building,Spencers,commercial,17.4570963,78.5369927
+way/356175835,building,,industrial,17.4915152,78.445138
+way/356175909,building,,industrial,17.492328,78.4450263
+way/356193013,building,KIOT,commercial,17.4406272,78.4000176
+way/356193059,building,91Springboard,commercial,17.4407143,78.3983005
+way/356195405,building,st peter high school,school,17.4640803,78.4774277
+way/356200020,building,,commercial,17.4385057,78.3793696
+way/356200229,building,Cyient Ltd,commercial,17.4384225,78.3802268
+way/356201547,building,,commercial,17.4381113,78.3902739
+way/356201653,building,,commercial,17.4379987,78.3901225
+way/356203965,building,National High School,school,17.4567044,78.5331281
+way/356225879,building,Ananth Info Park Building A,commercial,17.4507665,78.3712108
+way/356227384,building,,school,17.4698057,78.5674202
+way/356229054,building,,hospital,17.4628149,78.561959
+way/356233648,building,CVR NEWS,commercial,17.4194009,78.412195
+way/356233724,building,Devi Curries point,commercial,17.5056309,78.3562462
+way/356245931,building,pioneer-soft,industrial,17.4163827,78.4317895
+way/356251327,building,Sri Sai Grammar High School,school,17.4670611,78.4807052
+way/356251779,building,,school,17.4911387,78.4500225
+way/356252880,building,Watermark,commercial,17.4542384,78.3709377
+way/356252892,building,inovies,commercial,17.4463996,78.3811219
+way/356261697,building,Vijetha Cinemas,commercial,17.4543793,78.4191753
+way/356262141,building,,commercial,17.4218633,78.4335942
+way/356262263,building,Infinitium Network Solutions,commercial,17.4345595,78.4039524
+way/356262302,building,Shangrila Plaza,commercial,17.4339049,78.405827
+way/356266354,building,Government Girl's High School,school,17.4377895,78.4862562
+way/356268810,building,,commercial,17.4284083,78.5110112
+way/356268886,building,,commercial,17.4285296,78.5110198
+way/356268926,building,,commercial,17.428689,78.5107179
+way/356268954,building,,commercial,17.428731,78.5096053
+way/356268969,building,,commercial,17.4284298,78.5109293
+way/356269041,building,,commercial,17.4288529,78.5105754
+way/356269944,building,Ratnadeep Supermarket,commercial,17.4255333,78.4568207
+way/356270154,building,Yashoda Hospital Block-B,hospital,17.4244113,78.4560577
+way/356270818,building,Little Nenos Academy,school,17.4971521,78.3535267
+way/356275121,building,Med Plus,commercial,17.4371553,78.3661455
+way/356275387,building,,hospital,17.4221344,78.3792117
+way/356276436,building,,hospital,17.438501,78.5224255
+way/356279397,building,Athidhi Guest House,commercial,17.4624077,78.4900243
+way/356280419,building,Sri Vinayaka Stationary,commercial,17.4183352,78.5058417
+way/356282710,building,Sarada Vidya Mandir,school,17.4980338,78.3610796
+way/356287382,building,St. Peter's Model School,school,17.4267563,78.5518843
+way/356295731,building,Sundari Reddy Bhavan,commercial,17.4425577,78.4393262
+way/356416545,building,Zonah Neptune,commercial,17.4316382,78.4066102
+way/356419745,building,,school,17.419244,78.3639807
+way/356435956,building,Bharat Petroleum,commercial,17.436129,78.4290879
+way/356436888,building,Mahmood Function Hall,commercial,17.4355158,78.4295379
+way/356439238,building,Indian Oil Corporation Corporate Office,commercial,17.4411544,78.5044405
+way/356445537,building,SV Model High School,school,17.5158434,78.4451888
+way/356451688,building,The Brilliant High School,school,17.4579556,78.4765606
+way/356459206,building,Apollo Pharmacy,commercial,17.4328702,78.4262033
+way/356460538,building,SBI branch,commercial,17.4235144,78.460173
+way/356464802,building,"Himalaya Book World, SR Nagar, Ameerpet, Hyderabad",commercial,17.4419049,78.4447488
+way/356464824,building,,commercial,17.4439825,78.4480193
+way/356464855,building,,commercial,17.4412342,78.4485716
+way/356465141,building,,commercial,17.4426958,78.4487723
+way/356465164,building,,commercial,17.4425723,78.4482804
+way/356465190,building,,commercial,17.443195,78.4488463
+way/356465217,building,,commercial,17.4431136,78.4484363
+way/356465336,building,,commercial,17.4418907,78.446917
+way/356465350,building,,commercial,17.4430597,78.4488741
+way/356465410,building,,commercial,17.4428416,78.4487874
+way/356465420,building,,commercial,17.4422966,78.4482839
+way/356465527,building,,commercial,17.4436008,78.4484791
+way/356465537,building,Academic Heights Public School,school,17.4430373,78.447206
+way/356480505,building,ADP,commercial,17.4249114,78.458571
+way/356484177,building,Deccan Towers,commercial,17.4001726,78.47489
+way/356484350,building,Mogul’s Court,commercial,17.3999172,78.4747674
+way/356493210,building,Johnson Grammar School,school,17.4252593,78.5546089
+way/356493795,building,St. Peter's Model School,school,17.4264114,78.5518497
+way/356493797,building,St. Peter's Model School,school,17.4265536,78.5515659
+way/356501566,building,Roxana Towers,commercial,17.4356623,78.4552946
+way/356520200,building,Veeramachaneni Padagaiah High school,school,17.4277642,78.5176405
+way/356522114,building,Mahmood Function Hall,commercial,17.4358905,78.4298269
+way/356534819,building,Apollo Spectra Hospitals,hospital,17.4376918,78.4523696
+way/356534821,building,Government High school,school,17.4388763,78.4511565
+way/356534878,building,Sister nivedita school,school,17.4401232,78.4524497
+way/356534898,building,,hospital,17.4220433,78.4515625
+way/356534946,building,NKM's Grand Hotel,commercial,17.4172114,78.4556832
+way/356535038,building,,hospital,17.4217789,78.4516731
+way/356535053,building,,commercial,17.4396974,78.4484671
+way/356535219,building,,commercial,17.4387441,78.4504494
+way/356548246,building,,school,17.4534206,78.383816
+way/356548500,building,,hospital,17.4604307,78.3546639
+way/356548519,building,,hospital,17.4601818,78.3549518
+way/356567951,building,Hindu public school,school,17.4531047,78.4409022
+way/357035088,building,Aishwarya Tiffins,commercial,17.455747,78.4128428
+way/357036064,building,,school,17.367806,78.5276951
+way/357037691,building,sri niharika hospital,hospital,17.3820449,78.4405357
+way/357051553,building,Vinayaka Plaza,commercial,17.3588625,78.543954
+way/357051923,building,narsingh kothaprt,commercial,17.3605974,78.5437656
+way/357069873,building,Institute of Mental Health,hospital,17.4502588,78.4359189
+way/357071324,building,,government,17.4616229,78.3579071
+way/357075722,building,Kamala Towers,commercial,17.4090047,78.4893221
+way/357077801,building,Nagarjuna High School,school,17.3380232,78.5312141
+way/357081014,building,Vishwa bharthi high school,school,17.4508711,78.4464672
+way/357083495,building,Kulsum designer,commercial,17.3954044,78.4322802
+way/357092972,building,Al-Mannan MNS Tours And Travels,commercial,17.4500574,78.4290664
+way/357094029,building,,school,17.4261769,78.5191088
+way/357098388,building,,commercial,17.4433775,78.4489185
+way/357101616,building,NEEMiiT Private Limited,commercial,17.4463268,78.4854122
+way/357102666,building,Mehfil,restaurant,17.3986834,78.4934755
+way/357104644,building,Noma Kalyana Vedika,commercial,17.4477126,78.5722049
+way/357104679,building,Noma Kalyana Vedika,commercial,17.4479786,78.572261
+way/357104975,building,Noma Kalyana Vedika,commercial,17.4473937,78.5722574
+way/357107210,building,Sujatha High School,school,17.3946217,78.4730917
+way/357129237,building,Padmavathi Nagar Community hall,commercial,17.3437402,78.5683236
+way/357141959,building,,hospital,17.4601314,78.3551763
+way/357157987,building,Loyola Model High School,school,17.3309375,78.5681737
+way/357158226,building,Tapadia diagonistics,commercial,17.3309467,78.5683935
+way/357158470,building,Lotus Lap School,school,17.3334046,78.5677924
+way/357158583,building,Lotus Lap School,school,17.333455,78.5665253
+way/357161760,building,Saeed Plaza,commercial,17.4045232,78.4648236
+way/357161801,building,Toyota showroom,commercial,17.4011693,78.4767121
+way/357161889,building,Little Flower High School,school,17.3937176,78.4747572
+way/357166485,building,Abroad study rover,commercial,17.3693359,78.5279224
+way/357184173,building,Sunshine Complex,commercial,17.4067368,78.462968
+way/357310712,building,Nirmalam Lifestyle Clinic,hospital,17.4361173,78.4412452
+way/357310798,building,,commercial,17.3710344,78.5275743
+way/357312876,building,,school,17.3560594,78.5661602
+way/357314825,building,,school,17.4408602,78.5551631
+way/357314835,building,,school,17.4408333,78.5540104
+way/357322836,building,Commercial complex PP Reddy,commercial,17.3456067,78.5089478
+way/357324553,building,V D Prasad Rao Memorial High School,school,17.3667182,78.551876
+way/357327082,building,,commercial,17.4347499,78.4480985
+way/357328609,building,renova hospitals,hospital,17.3733813,78.4144137
+way/357329789,building,nalanda public school,school,17.3951379,78.4270023
+way/357345052,building,,commercial,17.3689072,78.5341182
+way/357357516,building,,school,17.3578715,78.5057513
+way/357359780,building,Toonz kids store,commercial,17.3317099,78.5694874
+way/357376521,building,idar-e-miliya high school,school,17.377494,78.498091
+way/357381560,building,Sree mahitha projects Pvt. Ltd.,commercial,17.4096463,78.4506341
+way/357383905,building,Generic Medical Shop,commercial,17.3983841,78.5624348
+way/357384810,building,Sri Chaitanya Residential School,school,17.3985979,78.5625821
+way/357384950,building,Sri Chaitanya Residential School,school,17.3986444,78.5623293
+way/357385277,building,,commercial,17.3975607,78.5658132
+way/357385286,building,Diagnostic Centre,commercial,17.3979018,78.5656211
+way/357390431,building,,school,17.4212703,78.4434363
+way/357396995,building,Sanman Pmr,commercial,17.4040364,78.4658744
+way/357396999,building,Babukhan Estates,commercial,17.4006763,78.4748239
+way/357405005,building,Reliance Jio,commercial,17.3894318,78.5272703
+way/357410811,building,Vasavi MPM Grand,commercial,17.4342515,78.4448535
+way/357414025,building,Hair Saloon,commercial,17.3993258,78.5666218
+way/357414057,building,CMR Jewellers & Shopping Mall,commercial,17.4008177,78.5674626
+way/357414215,building,,commercial,17.3988948,78.565172
+way/357414278,building,,commercial,17.4002307,78.5656802
+way/357414381,building,Girls hostel,commercial,17.4011299,78.5659248
+way/357414598,building,Leela Shop,commercial,17.3977957,78.5654118
+way/357414727,building,,commercial,17.3990092,78.5654124
+way/357414742,building,Kirana General Store,commercial,17.3988146,78.5657546
+way/357414749,building,Tutions,commercial,17.3991835,78.5656075
+way/357415040,building,Ashok Goud House,commercial,17.4011927,78.5659432
+way/357415120,building,,hospital,17.3978653,78.5654181
+way/357415236,building,,commercial,17.3995553,78.5658557
+way/357415263,building,Mirchi Point,commercial,17.3975853,78.5655981
+way/357415318,building,Ramaswamy Function Hall,events_venue,17.3999043,78.5655454
+way/357415392,building,,commercial,17.4012883,78.5659359
+way/357415420,building,Mobile Whole Sale Shop,commercial,17.4010321,78.5657488
+way/357415426,building,Book Store,commercial,17.4008254,78.5657172
+way/357415489,building,,commercial,17.397587,78.5659403
+way/357415510,building,Life Care Hospital Uppal,hospital,17.4005305,78.5656563
+way/357416555,building,,school,17.3446977,78.5323182
+way/357434037,building,,commercial,17.4108862,78.5076451
+way/357434465,building,,commercial,17.4103712,78.5075848
+way/357443039,building,Jalkshatriya prakash hindi vidyalaya,school,17.3742781,78.4625066
+way/357451090,building,Reliance Jio,commercial,17.3866914,78.5260575
+way/357456084,building,,commercial,17.3994122,78.4501508
+way/357464383,building,,commercial,17.4372592,78.4479965
+way/357588991,building,,school,17.3310472,78.5370377
+way/357589001,building,,school,17.3308046,78.53706
+way/357590810,building,conway,commercial,17.33069,78.5760048
+way/357590940,building,shruthi kirana,commercial,17.3303483,78.577804
+way/357607151,building,"GHR Digitals (Flex/Cloth Bannner's/Digital Wall Poster's Designing, Printing, Advertising)",commercial,17.3827714,78.5175938
+way/357609913,building,millennium high school,school,17.3294407,78.5828348
+way/357629982,building,Reliance Jio,commercial,17.3863098,78.5260987
+way/357651935,building,Dharani hospital,hospital,17.3837029,78.4367266
+way/357675917,building,Naveena monty school,school,17.3292092,78.5537198
+way/357676092,building,Nagarjuna school,school,17.3290409,78.5534557
+way/357701682,building,Sai Grace High School,school,17.404295,78.5078126
+way/357718568,building,,commercial,17.409841,78.4497279
+way/357739815,building,NSL IT Park,commercial,17.4027451,78.5464712
+way/357739866,building,,commercial,17.4021608,78.5461009
+way/357755354,building,,university,17.4030988,78.4559577
+way/357779290,building,Royal Enfield Service Shop,commercial,17.3926385,78.5610606
+way/357779371,building,Indane Gas Dealer Uppal,commercial,17.3963066,78.5597768
+way/357779652,building,Reddy Chicken Shop,commercial,17.3985735,78.5614116
+way/357779790,building,Maheswar Reddy Arcade,commercial,17.3928493,78.5603607
+way/357779876,building,Pai Electronics,commercial,17.3979678,78.5604376
+way/357780043,building,Xerox Shop,commercial,17.3929706,78.5593712
+way/357780091,building,,commercial,17.3986914,78.5605327
+way/357983277,building,Sri Gayathri School,school,17.4040089,78.5634759
+way/358818357,building,IB palace,commercial,17.3457378,78.4152922
+way/359812187,building,NTV Office,commercial,17.4154108,78.4183187
+way/360462638,building,Rage Club & Kitchen,commercial,17.4350638,78.4017602
+way/360462644,building,Lush Cafe | By the Lake,cafe,17.4364458,78.3919929
+way/360812785,building,,commercial,17.4419899,78.4459724
+way/360812787,building,,commercial,17.4421202,78.445994
+way/360814269,building,,commercial,17.4425905,78.4422136
+way/360822789,building,THE SECUNDERABAD PUBLIC SCHOOL,school,17.4446769,78.5003704
+way/360822947,building,THE SECUNDERABAD PUBLIC SCHOOL,school,17.4450981,78.5000874
+way/360984715,building,Laxmi Plaza,commercial,17.4475786,78.5088854
+way/360999991,building,Pavan Motors,commercial,17.4289464,78.4883554
+way/361364724,building,,commercial,17.4913535,78.391099
+way/361374495,building,Bakshi Hospital,hospital,17.4619528,78.4912663
+way/361374524,building,,commercial,17.4625812,78.4908402
+way/361380637,building,Mujtaba Grills,restaurant,17.4572693,78.4956551
+way/361505744,building,,school,17.4196559,78.4431869
+way/361505753,building,St john's high school,school,17.4386172,78.4603336
+way/361511123,building,,hospital,17.438021,78.522895
+way/361511165,building,,hospital,17.4381455,78.5231776
+way/361514335,building,Raghuram Constructions,commercial,17.4350292,78.449776
+way/362020240,building,St Paul's High School,school,17.497356,78.423358
+way/362069763,building,kakatiya talent high school,school,17.3706453,78.4422822
+way/362515743,building,Nehru's children high school,school,17.3755639,78.4377542
+way/362592732,building,newgen,school,17.381135,78.4393904
+way/364851785,building,TV5 Office,commercial,17.4280918,78.4175273
+way/366435783,building,,school,17.4826004,78.3194687
+way/366435784,building,,school,17.4820056,78.3193601
+way/367241630,building,Mapples,school,17.5074994,78.3866551
+way/375911881,building,JN Audi,townhall,17.4920034,78.3914156
+way/383049581,building,NCC,commercial,17.4640745,78.4841038
+way/383939538,building,Good Samaritan High School,school,17.4428816,78.436694
+way/384659823,building,Shopping Complex North Campus (Shopcom),commercial,17.4590602,78.3321753
+way/385367735,building,Kotak Bank,commercial,17.4095923,78.4382116
+way/385369464,building,"Star bed works,Salon,Scrap dealer",commercial,17.4902789,78.3179427
+way/386163830,building,,commercial,17.4175574,78.4480076
+way/386897463,building,Waverock Tower 1,commercial,17.4185703,78.3477987
+way/411233797,building,Kirana And General Stores,commercial,17.4181696,78.5058123
+way/413246630,building,Hotel Sreenidhi Nivas,commercial,17.4401828,78.4986967
+way/413287762,building,Jaini Pvt.Ltd,commercial,17.4582573,78.3716929
+way/413294004,building,Minerva Complex,commercial,17.4421238,78.4880661
+way/413323124,building,,school,17.4390557,78.4979415
+way/413543727,building,Babulal Prakashnarayan,commercial,17.4369677,78.4909227
+way/413783553,building,Deloitte G/H Block,commercial,17.443656,78.3697278
+way/413843414,building,Vivekananda Health Centre,hospital,17.4113074,78.482502
+way/413902512,building,,commercial,17.4288526,78.5106619
+way/413902521,building,,commercial,17.4288934,78.5104855
+way/413902538,building,,commercial,17.4290139,78.5100293
+way/413902542,building,,commercial,17.4289578,78.5102222
+way/413902548,building,,commercial,17.4287561,78.5106256
+way/413902556,building,,commercial,17.4289736,78.5101682
+way/413902558,building,,commercial,17.4289117,78.5103677
+way/413902559,building,,commercial,17.4289472,78.5097643
+way/413909981,building,,commercial,17.4287445,78.5105532
+way/413910964,building,Watan Chicken Shop,commercial,17.4158935,78.5042396
+way/414050503,building,,commercial,17.4288199,78.5107474
+way/414084203,building,,commercial,17.4286214,78.5106025
+way/414084204,building,,commercial,17.4285291,78.5107547
+way/414084208,building,,commercial,17.4285728,78.5106861
+way/414084211,building,,commercial,17.4290516,78.5097901
+way/414084213,building,,commercial,17.428475,78.5108309
+way/414084214,building,,commercial,17.4285905,78.5106454
+way/414084215,building,,commercial,17.4285074,78.5107945
+way/414084217,building,,commercial,17.428644,78.5105712
+way/414084218,building,,commercial,17.4285496,78.5107184
+way/414084220,building,,commercial,17.4288337,78.5096733
+way/414084221,building,,commercial,17.4288969,78.5097052
+way/414304364,building,,school,17.3989901,78.5219015
+way/416891348,building,,commercial,17.4725594,78.309466
+way/416916263,building,HealOMantra,commercial,17.4464613,78.3632775
+way/416945035,building,Reliance Commnications,commercial,17.4506714,78.3746852
+way/417165267,building,Mech Department,university,17.49441,78.3911722
+way/417165968,building,Balaji sweet Bhandar,commercial,17.432749,78.4265434
+way/417218394,building,,hospital,17.424544,78.4275607
+way/417224435,building,Khan Lateef Khan Estate,commercial,17.3981555,78.4723421
+way/417514833,building,Sri Vivekananda High School,school,17.412382,78.4874857
+way/419665860,building,,commercial,17.4399678,78.4858423
+way/435431317,building,ARD Prkrithi,commercial,17.4270894,78.4439822
+way/439929098,building,,hospital,17.4212751,78.4524124
+way/439929099,building,,hospital,17.4222859,78.4522497
+way/466651713,building,,school,17.4403477,78.4865309
+way/466852885,building,,school,17.4445931,78.4570509
+way/476705264,building,,commercial,17.4297201,78.3746919
+way/477290533,building,Venkataramana Motors -Tata Motors Service Center,commercial,17.4696169,78.3530677
+way/477290919,building,Stone Profits Sytems,commercial,17.4696856,78.3557584
+way/477667902,building,,school,17.4046744,78.5577425
+way/492998636,building,IIC Academy,commercial,17.4251172,78.4446095
+way/499025233,building,,commercial,17.4320709,78.3850005
+way/502048933,building,Building 12C,commercial,17.4374124,78.3854771
+way/502403410,building,,commercial,17.4118609,78.4980369
+way/502403753,building,,commercial,17.4117258,78.4980393
+way/520464008,building,Epistemo Global,school,17.468415,78.3042988
+way/535310490,building,DCB Bank,commercial,17.4946593,78.326372
+way/543748698,building,Vaishnavi Cynosure,commercial,17.4368373,78.3671059
+way/543748703,building,,parking,17.4293422,78.3420638
+way/558276571,building,Salapuria Sattva Knowledge City,commercial,17.4325444,78.3811622
+way/558351785,building,Novartis,commercial,17.4351123,78.3814259
+way/558355088,building,,hospital,17.4365072,78.3675511
+way/563511631,building,Ratnadeep,commercial,17.4624115,78.4902504
+way/569608044,building,,commercial,17.4031231,78.4660802
+way/589208742,building,GutenBurg IT park,commercial,17.4619552,78.3429187
+way/596477874,building,YMS function hall,events_venue,17.4908389,78.4451806
+way/596738251,building,Spring Board International Pre-School,school,17.5215028,78.3987568
+way/596749834,building,,commercial,17.4959917,78.3916615
+way/596751284,building,JNTU Examination Branch,commercial,17.4964286,78.3917355
+way/602099076,building,,school,17.3306559,78.5373129
+way/609133903,building,Desoddhara Complex,commercial,17.3993803,78.4746104
+way/613451639,building,TCS Kohinoor Park,commercial,17.4590188,78.3681681
+way/620641351,building,sowjanya book stall,commercial,17.3301195,78.5785147
+way/624085198,building,Shanti Jyoti Children hospital,commercial,17.3299801,78.5789045
+way/625040462,building,Cognizant Technologies,commercial,17.4381445,78.3834557
+way/625040466,building,Optum,commercial,17.4382849,78.3846646
+way/625488923,building,,hospital,17.4175179,78.3394649
+way/626551304,building,Medicover Hospitals,hospital,17.4466301,78.3801369
+way/626552618,building,PVR Icon,commercial,17.4481231,78.3844925
+way/626554610,building,Jigya Software Services,commercial,17.4386629,78.3869782
+way/630869581,building,,hospital,17.430529,78.3721695
+way/630968565,building,Genpact IT company Uppal,commercial,17.4104437,78.5480503
+way/632024799,building,Singhania Mansion,commercial,17.4303181,78.4488764
+way/632252788,building,,commercial,17.4449973,78.3857266
+way/642086170,building,Zaggle Prepaid Ocean Services Pvt Ltd.,commercial,17.4454126,78.3851531
+way/642086174,building,,commercial,17.4455111,78.3830445
+way/642086175,building,Melange Tower,commercial,17.4450098,78.3832731
+way/642086177,building,,commercial,17.4447179,78.3828611
+way/642086179,building,,commercial,17.4447311,78.3830387
+way/642086181,building,,commercial,17.4446675,78.3832066
+way/642086182,building,,commercial,17.4444007,78.383435
+way/642086183,building,,commercial,17.4433146,78.3833939
+way/642159384,building,,commercial,17.4481189,78.3795401
+way/642167927,building,,commercial,17.4480861,78.3797029
+way/642167928,building,,commercial,17.4480451,78.3798659
+way/642167929,building,,commercial,17.4478125,78.3802538
+way/642167930,building,,commercial,17.4476253,78.3810193
+way/642167932,building,Phoenix Tower,commercial,17.4478679,78.3789952
+way/642167933,building,,commercial,17.4480875,78.3791065
+way/642167934,building,,commercial,17.4477352,78.3795494
+way/642167935,building,,commercial,17.4476512,78.3792657
+way/642167936,building,,commercial,17.4476103,78.3794548
+way/642167939,building,,commercial,17.4474131,78.3801208
+way/642167940,building,,commercial,17.4473876,78.3802742
+way/642175109,building,,commercial,17.4465656,78.3788674
+way/642193845,building,Westside Hotel,commercial,17.4463924,78.3813106
+way/642206224,building,,commercial,17.4412985,78.3883388
+way/642221220,building,,school,17.4345295,78.3988933
+way/645161652,building,Deccan Heart Institute,hospital,17.4248365,78.45552
+way/645757428,building,,commercial,17.4167795,78.4168824
+way/645761788,building,,commercial,17.4175856,78.4138897
+way/645761789,building,used car showroom,commercial,17.4184971,78.4125542
+way/645761790,building,,commercial,17.4201908,78.411196
+way/645761791,building,,commercial,17.4239069,78.4126914
+way/645761793,building,,commercial,17.4254318,78.4260465
+way/645761795,building,,commercial,17.4239398,78.4302431
+way/646826664,building,Next Galleria Mall,commercial,17.4209587,78.4551575
+way/653405751,building,Smiline Dental Hospital,commercial,17.4600441,78.3845515
+way/660640103,building,hari hara kala bhavan,public,17.442676,78.4962057
+way/669370128,building,,school,17.4767678,78.5129893
+way/669370129,building,,school,17.4777821,78.5126849
+way/669370130,building,,school,17.4778342,78.5130322
+way/674873957,building,Dr Homi J. Bhaba Convention Centre,conference_centre,17.4707802,78.572414
+way/679993505,building,,industrial,17.5100668,78.4082669
+way/680121141,building,studio,commercial,17.4365379,78.4431679
+way/680311328,building,,commercial,17.3672758,78.5218001
+way/684386313,building,,commercial,17.4215969,78.345782
+way/692940432,building,,school,17.4116614,78.4921929
+way/700252641,building,Nakshatra Hospital,hospital,17.3624521,78.5570724
+way/721888814,building,Central Bank of India,commercial,17.4330856,78.3695721
+way/733208906,building,,commercial,17.4281869,78.4538062
+way/733440574,building,NEWTON HIGH SCHOOL,school,17.4564201,78.4221846
+way/733440577,building,,school,17.4552811,78.4222209
+way/733460792,building,,commercial,17.4534806,78.3701313
+way/740695877,building,ST. JOSEPH'S HIGH SCHOOL,school,17.3971684,78.5341855
+way/740752456,building,,commercial,17.4501797,78.3874426
+way/740929785,building,,commercial,17.496001,78.356685
+way/748555959,building,,commercial,17.448103,78.3860849
+way/750398138,building,HDFC Bank ATM,commercial,17.4194343,78.3871989
+way/750398139,building,"FDDI, An Institue of National Importance, Ministry of Commerce & Industry, Government of India",commercial,17.4191898,78.3889636
+way/753867330,building,karthikeya mens PG,commercial,17.4508378,78.3643322
+way/758924321,building,R Complex,commercial,17.4612579,78.5634046
+way/758941493,building,Government Primary School,school,17.4373111,78.4863458
+way/769174858,building,unit hospital police line,hospital,17.4370913,78.4224335
+way/776426188,building,GHMC Multi Function Hall,events_venue,17.5394,78.2662907
+way/776427372,building,,commercial,17.4093127,78.5088386
+way/776427377,building,,commercial,17.4110299,78.5074964
+way/776683617,building,,commercial,17.3694047,78.5331756
+way/776683619,building,,commercial,17.371633,78.5320994
+way/776683620,building,,commercial,17.3752812,78.5411097
+way/776683621,building,,commercial,17.3925963,78.558582
+way/794660051,building,Naveena monty school,school,17.3290968,78.552725
+way/812866028,building,Rao's International High School,school,17.5304933,78.4495754
+way/814524147,building,Nisum,commercial,17.4645113,78.3677115
+way/814531559,building,Tagores Home High School,school,17.4389642,78.4979236
+way/814542021,building,Geetanjali Convent School,school,17.4402073,78.4627273
+way/814833548,building,Ratnadeep,commercial,17.4560875,78.3650817
+way/825739160,building,Meru International School,school,17.493544,78.3360661
+way/827605902,building,,public,17.3536792,78.5322751
+way/835077247,building,,commercial,17.5058013,78.3868872
+way/837808480,building,Chennai shopping mall,commercial,17.4754846,78.4226838
+way/839555777,building,,commercial,17.4966131,78.3585295
+way/842633541,building,,commercial,17.398837,78.5625648
+way/842634481,building,Sri Chaitanya IIT,school,17.3987716,78.5621001
+way/846888556,building,,commercial,17.4591886,78.3732141
+way/846889810,building,Western Pearl,commercial,17.4581467,78.3732059
+way/852979201,building,Salapuria Sattva Knowledge City,commercial,17.4339127,78.3828668
+way/852979202,building,Salapuria Sattva Knowledge City,commercial,17.4341206,78.3820628
+way/863262041,building,Mekala Bharathi Gardens,conference_centre,17.3961367,78.5601001
+way/863266267,building,,industrial,17.3972567,78.5616954
+way/865332013,building,,commercial,17.5225824,78.3966091
+way/865889987,building,,hospital,17.4430378,78.3660598
+way/868253761,building,,commercial,17.395019,78.4759596
+way/870698071,building,Pasha Chicken Centre,commercial,17.4178824,78.5060268
+way/874590933,building,,commercial,17.4018345,78.5620591
+way/875437633,building,Commercial complex,commercial,17.3557444,78.5676381
+way/879136183,building,,commercial,17.4725335,78.3088814
+way/880892744,building,,commercial,17.52214,78.3965521
+way/881196037,building,Maruti Suzuki Uppal,commercial,17.4009494,78.5685697
+way/883123401,building,Gill Plaza,commercial,17.4993153,78.511647
+way/902979192,building,Zilla Parishath Primary School,school,17.4727744,78.3899454
+way/929582794,building,Canary the school,school,17.4983448,78.3479351
+way/957767190,building,Amaan Hospital,hospital,17.4014402,78.4176206
+way/961226838,building,Queens International School,school,17.4321945,78.43585
+way/971915555,building,TSPDCL,industrial,17.4900941,78.3535371
+way/982083972,building,,commercial,17.3667741,78.5435813
+way/1001183812,building,Petrol Bunk,commercial,17.3854502,78.5590255
+way/1001279846,building,,commercial,17.4180963,78.4824667
+way/1058754956,building,SANTHI NIKETHAN EDUCATIONAL INSTITUTIONS,school,17.3297995,78.5929398
+way/1076262686,building,,school,17.4002838,78.5431229
+way/1078193968,building,"Office of commissioner, TSIIC - IALA",commercial,17.4656401,78.4384481
+way/1078197878,building,Big Basket Warehouse,commercial,17.4673464,78.4374291
+way/1082280094,building,Medivision Hospital,hospital,17.5148971,78.4474681
+way/1082280095,building,Ram Hospital,hospital,17.5151715,78.4484089
+way/1082290121,building,Vani convent high school,school,17.4699398,78.4789323
+way/1082290123,building,Anil trading.co,commercial,17.4717484,78.4756935
+way/1082296015,building,ZPHS school,school,17.5155331,78.4375504
+way/1082803679,building,Krishnaveni high School,school,17.5117816,78.4302029
+way/1082807840,building,Freedom High School,school,17.5107419,78.4284915
+way/1082939715,building,,commercial,17.4797371,78.4778831
+way/1083199701,building,,commercial,17.4571957,78.30665
+way/1083199708,building,Navodaya,school,17.4582063,78.3078466
+way/1083199741,building,,commercial,17.4659204,78.3093422
+way/1083199742,building,,commercial,17.465063,78.3092518
+way/1083199743,building,Podar Jumbo Kids Plus,school,17.4655824,78.3091053
+way/1083199748,building,,commercial,17.4645888,78.309115
+way/1083199749,building,,commercial,17.4635524,78.3085949
+way/1083199750,building,,commercial,17.4637467,78.3087208
+way/1083199752,building,,commercial,17.4689021,78.309642
+way/1083199753,building,,commercial,17.4686245,78.3096469
+way/1083199755,building,,commercial,17.4584506,78.3072658
+way/1087159211,building,vijay saloon,commercial,17.3880836,78.4365316
+way/1087159225,building,,industrial,17.4907341,78.4444246
+way/1087165276,building,MedQuest Diagnostics Center,commercial,17.3944571,78.4306888
+way/1091525774,building,Medicover oncology Block,hospital,17.4466913,78.3782552
+way/1096233368,building,Kushaiguda Police Station,public,17.4727515,78.5708477
+way/1098480833,building,Sloka School,school,17.3283753,78.5932491
+way/1122033440,building,vidhyarthi public school,school,17.3736443,78.4443961
+way/1122033443,building,Reliance high tech school,school,17.3790006,78.442167
+way/1122038424,building,st. mark's school,school,17.3785647,78.4382161
+way/1122214529,building,T-hub 2.0,commercial,17.4340009,78.3791799
+way/1122214740,building,Dallas Center,commercial,17.4328129,78.3784781
+way/1123874110,building,Rainbow school,school,17.3351719,78.5580755
+way/1124068128,building,Meerpet Ward office,public,17.4580965,78.5646487
+way/1124070149,building,,commercial,17.3987133,78.5614111
+way/1124108798,building,,commercial,17.332789,78.5695576
+way/1126830984,building,,industrial,17.4508943,78.3065383
+way/1133394530,building,Sohini Tech Park,commercial,17.4226606,78.3470114
+way/1133460476,building,Qualcomm Commerzone,commercial,17.429325,78.3801106
+way/1133460477,building,T-Works,commercial,17.4353753,78.3783854
+way/1137787721,building,Bharatiya Vidya Bhavan Vidyashram,school,17.3161141,78.4007884
+way/1138695307,building,Cient foundation,commercial,17.4834999,78.3286949
+way/1138695308,building,,commercial,17.4839472,78.3166076
+way/1138695309,building,,commercial,17.4836715,78.3286738
+way/1138695318,building,ZPHS school,school,17.483949,78.3209238
+way/1147844670,building,,industrial,17.5299713,78.2573817
+way/1147844675,building,,industrial,17.5237218,78.2592236
+way/1147844676,building,,industrial,17.5236528,78.2593408
+way/1147844677,building,,industrial,17.5241949,78.2595807
+way/1152313410,building,,commercial,17.4480016,78.3801534
+way/1152313411,building,,commercial,17.4480244,78.3800171
+way/1152313413,building,,commercial,17.4477934,78.3793005
+way/1152313448,building,,commercial,17.4445603,78.3741148
+way/1158586282,building,,commercial,17.4038062,78.5481748
+way/1158587261,building,Internationa IT Park - Uppal,commercial,17.3996721,78.5555074
+way/1163530296,building,Amaron Automotive Batteries Cars & Bikes,commercial,17.3936986,78.5594247
+way/1163530527,building,,commercial,17.3930585,78.5609803
+way/1163530528,building,,commercial,17.3911315,78.5612294
+way/1163532394,building,Mutton Shop,commercial,17.3982671,78.5641179
+way/1172892220,building,Vegetable & Fruits Dealer,commercial,17.3953561,78.5651659
+way/1172892221,building,,commercial,17.397449,78.5655575
+way/1172957616,building,Sholay Mutton Shop,commercial,17.3954466,78.5365037
+way/1173384711,building,Academic Office,university,17.4449151,78.349872
+way/1178248550,building,,industrial,17.3885893,78.5520206
+way/1178255346,building,,industrial,17.3870201,78.5544742
+way/1185206961,building,,school,17.3483094,78.5600163
+way/1193899663,building,,commercial,17.3768502,78.4701268
+way/1194181758,building,,commercial,17.4531899,78.4137163
+way/1196271430,building,Hero MotoCorp,commercial,17.4110944,78.5496495
+way/1202324614,building,Sravani Hospitals,hospital,17.4511048,78.3985464
+way/1209375360,building,,commercial,17.5211117,78.4593091
+way/1209376630,building,,industrial,17.5369561,78.2524483
+way/1209946954,building,Commercial Building,commercial,17.5028358,78.5471569
+way/1212194479,building,Aparna Neo Mall,commercial,17.4669088,78.310379
+way/1212211120,building,Apollo Hospitals,hospital,17.4167037,78.3548004
+way/1222803958,building,World Trade Center,commercial,17.4211869,78.3477793
+way/1227512110,building,,commercial,17.4002944,78.5659439
+way/1236750011,building,Neekidia Furnitures,commercial,17.3487058,78.5532704
+way/1236750012,building,service centre,commercial,17.3493975,78.5528214
+way/1236750013,building,car showroom,commercial,17.3492249,78.5525305
+way/1236750038,building,,commercial,17.3464963,78.5520653
+way/1236750041,building,Bike Showroom,commercial,17.3476598,78.5522788
+way/1236750042,building,,commercial,17.3469385,78.5509077
+way/1238340051,building,Nexa Service center,commercial,17.5055985,78.3962761
+way/1243625976,building,,commercial,17.4721292,78.4971063
+way/1243625977,building,,commercial,17.4722946,78.4974447
+way/1243625978,building,,commercial,17.4724297,78.4968838
+way/1243625979,building,,commercial,17.4720916,78.498269
+way/1243625980,building,,commercial,17.4718614,78.4982106
+way/1243625981,building,,commercial,17.4728657,78.4973446
+way/1243625982,building,,commercial,17.4726037,78.496322
+way/1243625983,building,,commercial,17.4713045,78.4983104
+way/1243625984,building,,commercial,17.4713945,78.4974566
+way/1243625985,building,,commercial,17.4714816,78.4966875
+way/1257362866,building,,school,17.491962,78.4480279
+way/1257366202,building,,commercial,17.4892682,78.4509175
+way/1257379869,building,,commercial,17.4890523,78.4457639
+way/1257381768,building,navaJyothi,school,17.4901948,78.4450752
+way/1257540745,building,,school,17.472384,78.5496246
+way/1273264871,building,,commercial,17.4316582,78.3824029
+way/1273264872,building,,commercial,17.4304876,78.3832963
+way/1273264873,building,,commercial,17.4310936,78.3837985
+way/1273264874,building,,commercial,17.4326619,78.3842572
+way/1279888548,building,,school,17.4336079,78.2979395
+way/1310439997,building,Garage By DLABS,commercial,17.4382145,78.3395038
+way/1310455726,building,Makerspace by TSRA,school,17.4281803,78.3232138
+way/1313558022,building,,commercial,17.4289961,78.5100987
+way/1313558023,building,,commercial,17.4290311,78.509958
+way/1313558024,building,,commercial,17.4290836,78.5098742
+way/1313558025,building,,commercial,17.4289607,78.5102933
+way/1313558026,building,,commercial,17.4289081,78.5102747
+way/1313558027,building,,commercial,17.428938,78.5103538
+way/1313558028,building,,commercial,17.4283621,78.5093306
+way/1313558029,building,,commercial,17.4283259,78.509305
+way/1313558030,building,,commercial,17.4282879,78.5092811
+way/1313558031,building,,commercial,17.4282229,78.5092196
+way/1313558032,building,,commercial,17.4281925,78.509197
+way/1313558033,building,,commercial,17.4281617,78.5091748
+way/1313558044,building,,commercial,17.4282591,78.5092455
+way/1322947562,building,,commercial,17.473241,78.309013
+way/1328436281,building,,commercial,17.4610976,78.3664969
+way/1335146548,building,Lucky Plaza,commercial,17.4186452,78.3772361
+way/1344037686,building,Microsoft Building 4,commercial,17.4333144,78.3441104
+way/1345419641,building,Microsoft Horticulture Office,commercial,17.4303395,78.3408157
+way/1347933992,building,Naresh i Technologies,commercial,17.438244,78.4526346
+way/1382299725,building,,school,17.4978545,78.4068744
+way/1392312485,building,SVSS Nivas,commercial,17.4545288,78.4355383
+way/1393011065,building,,school,17.5016189,78.4740278
+way/1395170217,building,Dr Homi J. Bhaba Convention Centre,conference_centre,17.4711,78.5728324
+way/1409434923,building,SPC Vision Towers,commercial,17.4827915,78.541786
+way/1410864197,building,Shopping  Mall,commercial,17.4597292,78.5364275
+way/1411719161,building,,commercial,17.457217,78.3726788
+way/1413007503,building,Vishal Mega Mart,commercial,17.35299,78.4195615
+way/1413617252,building,,commercial,17.4594346,78.3703484
+way/1417212853,building,,school,17.4526189,78.2857572
+way/1419571132,building,,hospital,17.3884736,78.430504
+way/1419571391,building,Ankura Hospital,hospital,17.3885396,78.4302947
+way/1419698340,building,Forum Mall,commercial,17.3067743,78.4205233
+way/1420099597,building,,school,17.4600431,78.2979979
+way/1420099598,building,,school,17.4597596,78.2984558
+way/1420099599,building,,school,17.459531,78.2985429
+way/1420727810,building,,school,17.4445122,78.2793315
+way/1424082348,building,Maruthi Driving School,commercial,17.5400354,78.3941217
+way/1430535077,building,,commercial,17.4315646,78.5629963
+way/1430535258,building,,commercial,17.4312388,78.5622798
+way/1442070840,building,,university,17.461244,78.3332939
+way/1442267219,building,School of Physics (Annexe),university,17.4651763,78.3263916
+way/1446745377,building,,industrial,17.5002672,78.3772533
+way/1446745378,building,,industrial,17.5000626,78.3773448
+way/1446745379,building,,industrial,17.4999625,78.3774181
+way/1446745380,building,,industrial,17.4995733,78.3776943
+way/1446745398,building,Hotel Shubham Celebrations,commercial,17.5033848,78.362627
+way/1446756507,building,,commercial,17.506385,78.3618345
+way/1451079068,building,,hospital,17.4706071,78.3111292
+way/1452398451,building,,school,17.3616155,78.5635116
+way/1452398452,building,,school,17.361138,78.5635053
+way/1454106437,building,TVR Model School,school,17.4951694,78.4511178
+way/1456244367,building,,school,17.4349574,78.2860472
+way/1456925790,building,NCL Pearl,commercial,17.4403818,78.5083615
+way/1461900902,building,KRS Arcade,commercial,17.4201393,78.3796539
+way/1461906011,building,G Square,commercial,17.4235905,78.3799479
+way/1463683975,building,,commercial,17.4938401,78.3351817
+way/1463692052,building,,commercial,17.4951515,78.3352402
+way/1463692055,building,,commercial,17.4947256,78.3350373
+way/1463692056,building,,commercial,17.4949607,78.3349745
+way/1463692058,building,,commercial,17.4944073,78.3353613
+way/1463692059,building,,commercial,17.4942957,78.3353807
+way/1463692063,building,,commercial,17.4936338,78.3355485
+way/1463692065,building,,commercial,17.4931476,78.3352892
+way/1463692066,building,,commercial,17.4930243,78.335293
+way/1464993946,building,,commercial,17.4278525,78.3285029
+way/1464993947,building,,commercial,17.4279681,78.3282909
+way/1464993948,building,,commercial,17.4280971,78.3280445
+way/1464995325,building,,commercial,17.4301405,78.3260454
+way/1465001572,building,,commercial,17.4294806,78.3257961
+way/1465001573,building,,commercial,17.4293819,78.3261226
+way/1465001574,building,,commercial,17.4292289,78.3261823
+way/1465001575,building,,commercial,17.4298975,78.3248441
+way/1465001581,building,,commercial,17.4295656,78.3244969
+way/1465001584,building,,commercial,17.4295701,78.3256569
+way/1465014352,building,BVB,school,17.4606201,78.459047
+way/1465014353,building,ST josephs high school,school,17.4601481,78.4583088
+way/1471529495,building,Samastha Kitchen,commercial,17.4676003,78.3093308
+way/1480581766,building,,commercial,17.4560248,78.4346781
+way/1482791235,building,,hospital,17.3327734,78.5367723
+way/1492056630,building,Bung exclusive,commercial,17.3719779,78.4657432
+way/1492056631,building,Pooja store,commercial,17.3746043,78.4652064
+way/1492070855,building,Commette Hall,commercial,17.3711043,78.4697267
+way/1492117651,building,,commercial,17.3733506,78.4712717
+way/1492117652,building,,commercial,17.3736398,78.4712483
+way/1492117654,building,,commercial,17.3739605,78.4712905
+way/1492122082,building,Coal supply building,commercial,17.3765474,78.464977
+way/1492122083,building,Mahalaxmi Tiffin centre,commercial,17.3808738,78.4639485
+way/1492133081,building,,commercial,17.5024815,78.426321
+way/1494971707,building,Bajaj electronics,commercial,17.5360385,78.394152
+way/1494973416,building,,commercial,17.3691,78.5395374
+way/1494973417,building,,commercial,17.3665793,78.5400243
+way/1496345306,building,,commercial,17.4340971,78.3805038
+way/1496345307,building,,commercial,17.435592,78.3831213
+way/1498581052,building,Microsoft Central Kitchen,commercial,17.427695,78.3406272
+way/1510996024,building,Vasavi Sky City,commercial,17.4388773,78.3650169
+way/1511551523,building,,university,17.4570662,78.3225197
+way/1517350752,building,Microsoft Visitor Center,commercial,17.4332079,78.3448746
+way/1522043847,building,,commercial,17.4197813,78.4406466
+way/1522084722,building,Green Valley,commercial,17.4215312,78.4429023
+way/1522084725,building,Vimbri Boulevard,commercial,17.4211073,78.44292
+way/1531865235,building,Amulya Square,commercial,17.4873555,78.5673008
+way/1534518465,building,,commercial,17.4174746,78.3575843
+way/1539369608,building,"SBI ARISA (AI, Robotics & IoT for Smart Agriculture) Lab",university,17.3231276,78.3977096
+way/1551058200,building,Club Emporio,commercial,17.4542473,78.4974889
+way/1568846342,building,triveni,school,17.4934133,78.3471878
+way/1568846343,building,zphs madinaguda,school,17.4944274,78.344681
+way/1573262940,building,,university,17.4471353,78.3475251
+way/1573887401,building,,university,17.4461178,78.349263
+way/1573887402,building,,university,17.4460682,78.3492274
+way/1574938927,building,Gyan jyothi school kishan bagh,school,17.3608918,78.4386441
