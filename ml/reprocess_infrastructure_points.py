@@ -121,6 +121,5 @@ print("Total unique OSM objects:", len(records))
 
 print("Duplicate IDs remaining:",
       len(records) - len(set(records.keys())))
-
 print("\nSaved:", output_path)
 print("Point preprocessing corrected!")
