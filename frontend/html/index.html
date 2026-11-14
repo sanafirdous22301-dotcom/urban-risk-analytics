@@ -1,0 +1,520 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Urban Risk Analytics | Hyderabad</title>
+
+    <!-- Existing Dashboard CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+
+    <!-- Leaflet Map CSS -->
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+</head>
+
+<body>
+
+    <div class="app-layout">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+
+            <div class="brand">
+                <div class="brand-icon">UR</div>
+
+                <div>
+                    <h2>URBAN<span>RISK</span></h2>
+                    <p>INTELLIGENCE SYSTEM</p>
+                </div>
+            </div>
+
+            <div class="nav-label">WORKSPACE</div>
+
+            <nav class="navigation">
+
+                <a href="#overview" class="nav-item active">
+                    <span class="nav-icon">◫</span>
+                    Overview
+                </a>
+
+                <a href="#assessment" class="nav-item">
+                    <span class="nav-icon">⌖</span>
+                    Plot Assessment
+                </a>
+
+                <a href="#risk-analysis" class="nav-item">
+                    <span class="nav-icon">▥</span>
+                    Risk Analysis
+                </a>
+
+                <a href="#prioritization" class="nav-item">
+                    <span class="nav-icon">⇧</span>
+                    Resource Priority
+                </a>
+
+            </nav>
+
+            <div class="nav-label management-label">MANAGEMENT</div>
+
+            <nav class="navigation">
+
+                <a href="#data-management" class="nav-item">
+                    <span class="nav-icon">▤</span>
+                    Data Management
+                </a>
+
+                <a href="#system-status" class="nav-item">
+                    <span class="nav-icon">⚙</span>
+                    System Status
+                </a>
+
+            </nav>
+
+            <div class="sidebar-bottom">
+
+                <div class="project-tag">PROJECT ENVIRONMENT</div>
+
+                <div class="environment">
+                    <span class="online-dot"></span>
+                    Development Mode
+                </div>
+
+                <p>Integrated Urban Risk Analytics</p>
+                <p class="version">Version 1.0.0</p>
+
+            </div>
+
+        </aside>
+
+
+        <!-- MAIN WORKSPACE -->
+        <main class="main-content">
+
+            <!-- TOPBAR -->
+            <header class="topbar">
+
+                <div>
+                    <div class="breadcrumb">
+                        Workspace / <strong>Overview</strong>
+                    </div>
+
+                    <h1>Urban Risk Dashboard</h1>
+                </div>
+
+                <div class="topbar-right">
+
+                    <div class="location-label">
+                        <span>◎</span>
+                        Hyderabad, Telangana
+                    </div>
+
+                    <button class="admin-button" id="adminBtn">
+                        <span>⚙</span> Admin
+                    </button>
+
+                </div>
+
+            </header>
+
+
+            <div class="dashboard-content">
+
+                <!-- INTRO -->
+                <section class="intro-section" id="overview">
+
+                    <div>
+                        <p class="eyebrow">URBAN INTELLIGENCE PLATFORM</p>
+
+                        <h2>Integrated Risk Monitoring</h2>
+
+                        <p class="intro-description">
+                            Analyse urban vulnerabilities, assess individual locations
+                            and support data-driven resource allocation across Hyderabad.
+                        </p>
+                    </div>
+
+                    <div class="date-info">
+                        <span class="date-label">SYSTEM</span>
+                        <strong>Development Environment</strong>
+                    </div>
+
+                </section>
+
+
+                <!-- SUMMARY CARDS -->
+                <section class="summary-grid">
+
+                    <article class="summary-card">
+
+                        <div class="card-top">
+                            <span class="card-label">FLOOD ANALYSIS</span>
+                            <span class="card-symbol blue">F</span>
+                        </div>
+
+                        <h3>Awaiting Output</h3>
+                        <p>Flood module integration pending</p>
+
+                        <div class="card-footer">
+                            <span class="status-indicator"></span>
+                            Module in development
+                        </div>
+
+                    </article>
+
+
+                    <article class="summary-card">
+
+                        <div class="card-top">
+                            <span class="card-label">HEAT ANALYSIS</span>
+                            <span class="card-symbol orange">H</span>
+                        </div>
+
+                        <h3>Awaiting Output</h3>
+                        <p>Heat module integration pending</p>
+
+                        <div class="card-footer">
+                            <span class="status-indicator"></span>
+                            Module in development
+                        </div>
+
+                    </article>
+
+
+                    <article class="summary-card">
+
+                        <div class="card-top">
+                            <span class="card-label">INFRASTRUCTURE</span>
+                            <span class="card-symbol purple">I</span>
+                        </div>
+
+                        <h3>Awaiting Output</h3>
+                        <p>Infrastructure module integration pending</p>
+
+                        <div class="card-footer">
+                            <span class="status-indicator"></span>
+                            Module in development
+                        </div>
+
+                    </article>
+
+
+                    <article class="summary-card">
+
+                        <div class="card-top">
+                            <span class="card-label">OVERALL RISK</span>
+                            <span class="card-symbol dark">Σ</span>
+                        </div>
+
+                        <h3>Not Calculated</h3>
+                        <p>Requires integrated module outputs</p>
+
+                        <div class="card-footer">
+                            <span class="status-indicator"></span>
+                            Integration pending
+                        </div>
+
+                    </article>
+
+                </section>
+
+
+                <!-- MAIN GRID -->
+                <div class="content-grid">
+
+                    <!-- LOCATION ASSESSMENT -->
+                    <section class="panel assessment-panel" id="assessment">
+
+                        <div class="panel-heading">
+
+                            <div>
+                                <p class="eyebrow">LOCATION INTELLIGENCE</p>
+                                <h2>Individual Plot Assessment</h2>
+                            </div>
+
+                            <span class="panel-number">01</span>
+
+                        </div>
+
+                        <p class="panel-description">
+                            Select a geographical location on the map or enter
+                            coordinates to initiate a location-specific assessment.
+                        </p>
+
+                        <form id="assessmentForm">
+
+                            <div class="form-row">
+
+                                <div class="form-group">
+
+                                    <label for="latitude">LATITUDE</label>
+
+                                    <input
+                                        type="number"
+                                        id="latitude"
+                                        placeholder="e.g. 17.3850"
+                                        step="any"
+                                        min="-90"
+                                        max="90"
+                                        required
+                                    >
+
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label for="longitude">LONGITUDE</label>
+
+                                    <input
+                                        type="number"
+                                        id="longitude"
+                                        placeholder="e.g. 78.4867"
+                                        step="any"
+                                        min="-180"
+                                        max="180"
+                                        required
+                                    >
+
+                                </div>
+
+                            </div>
+
+                            <button type="submit" class="primary-button">
+                                Run Location Assessment
+                                <span>→</span>
+                            </button>
+
+                        </form>
+
+                        <div class="assessment-message" id="assessmentMessage">
+                            <span class="message-icon">i</span>
+                            Select a point on the map or enter coordinates.
+                        </div>
+
+                    </section>
+
+
+                    <!-- INTERACTIVE MAP -->
+                    <section class="panel map-panel">
+
+                        <div class="panel-heading">
+
+                            <div>
+                                <p class="eyebrow">GEOSPATIAL VIEW</p>
+                                <h2>Hyderabad Study Area</h2>
+                            </div>
+
+                            <span class="map-tag">LIVE MAP</span>
+
+                        </div>
+
+                        <div id="map" class="map-container"></div>
+
+                        <div class="map-footer">
+                            <span>Geographical analysis</span>
+                            <span class="map-status">
+                                Select a location on the map
+                            </span>
+                        </div>
+
+                    </section>
+
+                </div>
+
+
+                <!-- RISK ANALYSIS -->
+                <section class="panel risk-panel" id="risk-analysis">
+
+                    <div class="panel-heading">
+
+                        <div>
+                            <p class="eyebrow">ANALYTICAL MODULES</p>
+                            <h2>Risk Analysis Overview</h2>
+                        </div>
+
+                        <span class="muted-text">3 analytical modules</span>
+
+                    </div>
+
+                    <div class="module-list">
+
+                        <div class="module-row">
+
+                            <div class="module-icon flood-icon">F</div>
+
+                            <div class="module-info">
+                                <h3>Flood Risk Analysis</h3>
+                                <p>Rainfall patterns and historical flood information</p>
+                            </div>
+
+                            <span class="module-state">In development</span>
+
+                        </div>
+
+
+                        <div class="module-row">
+
+                            <div class="module-icon heat-icon">H</div>
+
+                            <div class="module-info">
+                                <h3>Urban Heat Analysis</h3>
+                                <p>Surface temperature and urban heat characteristics</p>
+                            </div>
+
+                            <span class="module-state">In development</span>
+
+                        </div>
+
+
+                        <div class="module-row">
+
+                            <div class="module-icon infra-icon">I</div>
+
+                            <div class="module-info">
+                                <h3>Infrastructure Analysis</h3>
+                                <p>Infrastructure distribution and spatial accessibility</p>
+                            </div>
+
+                            <span class="module-state">In development</span>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- RESOURCE PRIORITY -->
+                <section class="panel priority-panel" id="prioritization">
+
+                    <div class="panel-heading">
+
+                        <div>
+                            <p class="eyebrow">DECISION SUPPORT</p>
+                            <h2>Resource Prioritization</h2>
+                        </div>
+
+                        <span class="panel-number">02</span>
+
+                    </div>
+
+                    <div class="priority-content">
+
+                        <div>
+                            <h3>Identify areas requiring intervention</h3>
+
+                            <p>
+                                The system will combine risk indicators and
+                                infrastructure information to support resource
+                                allocation decisions.
+                            </p>
+                        </div>
+
+                        <div class="priority-status">
+                            <span class="status-indicator"></span>
+                            Awaiting integration engine
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- DATA MANAGEMENT -->
+                <section class="panel data-panel" id="data-management">
+
+                    <div class="panel-heading">
+
+                        <div>
+                            <p class="eyebrow">ADMINISTRATION</p>
+                            <h2>Data Management</h2>
+                        </div>
+
+                    </div>
+
+                    <div class="data-management-content">
+
+                        <div>
+                            <h3>Dataset administration</h3>
+
+                            <p>
+                                Upload and validate updated datasets before
+                                processing and publishing new analytical results.
+                            </p>
+                        </div>
+
+                        <button class="secondary-button" id="dataManagementBtn">
+                            Open Data Management
+                            <span>→</span>
+                        </button>
+
+                    </div>
+
+                </section>
+
+
+                <!-- SYSTEM STATUS -->
+                <section class="panel system-panel" id="system-status">
+
+                    <div class="panel-heading">
+
+                        <div>
+                            <p class="eyebrow">APPLICATION HEALTH</p>
+                            <h2>System Status</h2>
+                        </div>
+
+                    </div>
+
+                    <div class="system-grid">
+
+                        <div>
+                            <span class="system-label">Frontend</span>
+                            <strong class="system-value">Available</strong>
+                        </div>
+
+                        <div>
+                            <span class="system-label">Backend API</span>
+                            <strong class="system-value pending">Connected</strong>
+                        </div>
+
+                        <div>
+                            <span class="system-label">ML Integration</span>
+                            <strong class="system-value pending">Pending</strong>
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- FOOTER -->
+                <footer class="footer">
+
+                    <span>
+                        Integrated Urban Risk Analytics and Resource Prioritization System
+                    </span>
+
+                    <span>Academic Project · 2026</span>
+
+                </footer>
+
+            </div>
+
+        </main>
+
+    </div>
+
+
+    <!-- Leaflet Map JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <!-- Dashboard JavaScript -->
+    <script src="../js/script.js"></script>
+
+</body>
+</html>

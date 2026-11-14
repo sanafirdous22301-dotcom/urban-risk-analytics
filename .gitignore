@@ -25,3 +25,5 @@ Thumbs.db
 # Generated ML models
 ml/models/*.pkl
 ml/models/*.joblib
+
+.env
