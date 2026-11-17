@@ -1,6 +1,6 @@
-
+from backend.routers.map_layers import router as map_layers_router
 from pathlib import Path
-
+from backend.routers.assessments import router as assessments_router
 from fastapi import FastAPI, Depends
 from fastapi.staticfiles import StaticFiles
 from sqlalchemy.orm import Session
@@ -28,7 +28,8 @@ app = FastAPI(
 
 app.include_router(datasets_router)
 app.include_router(locations_router)
-
+app.include_router(map_layers_router)
+app.include_router(assessments_router)
 
 # =====================================
 # 3. HOME ENDPOINT

@@ -1,0 +1,52 @@
+HYDERABAD SPATIAL INTEGRATION REPORT
+=======================================================
+Output rows: 1326
+Output columns: 30
+Rainfall dates: 2020-09-25, 2021-10-08
+Historical flood records kept separate: 40
+MODIS source records: 1326
+Yale source records: 5939
+Infrastructure source records: 2083
+Road source records: 93437
+
+MISSING VALUES
+-------------------------------------------------------
+pixel_id                              0
+latitude                              0
+longitude                             0
+daytime_temp_c                        0
+nighttime_temp_c                      0
+rainfall_2020_09_25_mm                0
+rainfall_2020_09_25_distance_km       0
+rainfall_2020_09_25_matched           0
+rainfall_2021_10_08_mm                0
+rainfall_2021_10_08_distance_km       0
+rainfall_2021_10_08_matched           0
+daytime_uhi                         117
+nighttime_uhi                       117
+yale_nearest_distance_km              0
+yale_matched                          0
+hospital_count_1km                    0
+fire_station_count_1km                0
+building_count_1km                    0
+hospital_nearest_distance_km          0
+fire_station_nearest_distance_km      0
+building_nearest_distance_km          0
+road_count_1km                        0
+road_length_km_1km_approx             0
+road_nearest_distance_km              0
+modis_source                          0
+modis_temporal_reference              0
+yale_source                           0
+yale_temporal_reference               0
+infrastructure_source                 0
+roads_source                          0
+
+IMPORTANT LIMITATIONS
+-------------------------------------------------------
+Historical flood events do not contain point coordinates.
+Rainfall observations are retained as separate dated features.
+MODIS and Yale heat observations have different historical periods.
+Infrastructure and road extraction dates are not recorded here.
+Road lengths are approximate local aggregates based on representative coordinates.
+No supervised predictions or artificial risk scores were generated.
