@@ -1,0 +1,12 @@
+{
+    "source_file": "c:\\Users\\sanaf\\OneDrive\\Desktop\\urban-risk-analytics\\data\\processed\\flood\\hyderabad_historical_flood_events.csv",
+    "source_records": 40,
+    "valid_event_start_dates": 40,
+    "duration_mismatches": 1,
+    "weather_downloaded": true,
+    "weather_records": 15316,
+    "event_weather_matches": 37,
+    "verified_negative_examples": 0,
+    "flood_classifier_trained": false,
+    "cleaned_dataset": "c:\\Users\\sanaf\\OneDrive\\Desktop\\urban-risk-analytics\\data\\processed\\flood\\historical_flood_experiments\\clean_historical_flood_events.csv"
+}

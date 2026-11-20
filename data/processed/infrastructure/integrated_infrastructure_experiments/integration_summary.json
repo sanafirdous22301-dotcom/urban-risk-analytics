@@ -1,0 +1,29 @@
+{
+    "infrastructure_source_file": "C:\\Users\\sanaf\\OneDrive\\Desktop\\urban-risk-analytics\\data\\processed\\infrastructure\\infrastructure_points_experiments\\infrastructure_points_with_clusters_and_density.csv",
+    "roads_source_file": "C:\\Users\\sanaf\\OneDrive\\Desktop\\urban-risk-analytics\\data\\processed\\infrastructure\\roads_processed.csv",
+    "infrastructure_source_records_after_coordinate_filter": 2083,
+    "road_source_records_after_coordinate_filter": 93437,
+    "grid_size_km": 1.0,
+    "grid_origin_latitude": 17.2599543,
+    "grid_origin_longitude": 78.23883746666667,
+    "integrated_grid_cells": 791,
+    "infrastructure_categories": [
+        "building",
+        "fire_station",
+        "hospital"
+    ],
+    "road_types": [
+        "motorway",
+        "primary",
+        "residential",
+        "secondary",
+        "tertiary",
+        "trunk",
+        "unclassified"
+    ],
+    "cells_flagged_for_further_investigation": 133,
+    "supervised_model_trained": false,
+    "validated_risk_labels_available": false,
+    "road_geometry_available": false,
+    "interpretation": "Exploratory common-grid aggregation of infrastructure records and road representative points. Relative low-count flags are for investigation only; not validated risk or service-adequacy labels."
+}

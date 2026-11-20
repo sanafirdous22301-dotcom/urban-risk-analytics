@@ -1,0 +1,16 @@
+{
+    "dataset": "Hyderabad rainfall observations",
+    "dataset_file": "C:\\Users\\sanaf\\OneDrive\\Desktop\\urban-risk-analytics\\data\\processed\\flood\\hyderabad_rainfall.csv",
+    "observed_date": "2020-09-25",
+    "target": "rainfall_mm",
+    "features": [
+        "latitude",
+        "longitude"
+    ],
+    "algorithm": "SVR",
+    "spatial_cv_mae_mm": 0.6159811028290483,
+    "model_type": "date-specific spatial interpolation candidate",
+    "not_a_forecast": true,
+    "not_a_flood_risk_classifier": true,
+    "deployment_approval": "pending scientific and integration review"
+}

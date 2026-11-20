@@ -1,0 +1,8 @@
+,infra_building_count,infra_building_count,infra_building_count,infra_hospital_count,infra_hospital_count,infra_hospital_count,infra_fire_station_count,infra_fire_station_count,infra_fire_station_count,road_representative_point_count,road_representative_point_count,road_representative_point_count,road_segment_length_sum_km,road_segment_length_sum_km,road_segment_length_sum_km,unique_road_types,unique_road_types,unique_road_types
+,count,mean,median,count,mean,median,count,mean,median,count,mean,median,count,mean,median,count,mean,median
+cluster,,,,,,,,,,,,,,,,,,
+0,166,0.25903614457831325,0.0,166,2.3674698795180724,2.0,166,0.0,0.0,166,175.33734939759037,180.5,166,22.446086144578313,23.913899999999998,166,3.108433734939759,3.0
+1,36,0.0,0.0,36,1.5833333333333333,1.0,36,0.0,0.0,36,1.2777777777777777,0.0,36,0.3314611111111111,0.0,36,0.25,0.0
+2,7,1.2857142857142858,0.0,7,5.0,0.0,7,1.0,1.0,7,133.71428571428572,138.0,7,17.1739,19.0401,7,3.142857142857143,2.0
+3,106,4.386792452830188,2.0,106,0.3584905660377358,0.0,106,0.0,0.0,106,107.62264150943396,99.0,106,15.7218320754717,14.1035,106,2.7641509433962264,3.0
+4,101,4.811881188118812,3.0,101,5.445544554455446,5.0,101,0.0,0.0,101,176.15841584158414,183.0,101,22.95850891089109,23.0156,101,3.7524752475247523,4.0

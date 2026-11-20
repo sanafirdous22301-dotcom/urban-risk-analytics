@@ -1,0 +1,20 @@
+{
+  "dataset": "Hyderabad MODIS Heat",
+  "dataset_file": "hyderabad_modis_heat.csv",
+  "target": "daytime_temp_c",
+  "features": [
+    "latitude",
+    "longitude",
+    "nighttime_temp_c"
+  ],
+  "task": "cross-variable estimation of measured daytime temperature; not forecasting",
+  "selected_algorithm": "Random Forest Regressor",
+  "spatial_block_degrees": 0.04,
+  "spatial_cv_mae_c": 0.5057216703141942,
+  "heldout_spatial_test_mae_c": 0.9492512455488068,
+  "heldout_spatial_test_rmse_c": 1.359945230174111,
+  "heldout_spatial_test_r2": 0.35660668793927064,
+  "baseline_heldout_test_mae_c": 1.2048227344262619,
+  "candidate_saved": true,
+  "deployment_approval": "pending scientific and integration review"
+}

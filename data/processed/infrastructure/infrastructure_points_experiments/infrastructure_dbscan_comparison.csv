@@ -1,0 +1,6 @@
+algorithm,eps_km,min_samples,n_clusters_excluding_noise,silhouette_non_noise,clustered_records,noise_records,noise_percent
+DBSCAN,0.25,5,78,0.686264510649891,1055,1028,49.35
+DBSCAN,0.5,5,71,0.41116692882475725,1706,377,18.1
+DBSCAN,0.75,5,36,0.12677773496428688,1919,164,7.87
+DBSCAN,1.0,5,21,-0.14223230706987067,2001,82,3.94
+DBSCAN,1.5,5,8,-0.12052203599001432,2039,44,2.11

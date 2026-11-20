@@ -1,0 +1,279 @@
+{
+  "info": {
+    "_postman_id": "a93e582d-4bfb-4811-9f89-8d7d91e6b9a1",
+    "name": "Urban Risk Analytics & ML Prediction API",
+    "description": "Comprehensive Postman collection for testing the Integrated Urban Risk Analytics and Resource Prioritization System backend and deployed Machine Learning models.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://127.0.0.1:8000",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. System & Health",
+      "item": [
+        {
+          "name": "API Root Health",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/",
+              "host": ["{{baseUrl}}"],
+              "path": [""]
+            },
+            "description": "Checks whether the FastAPI application is alive."
+          }
+        },
+        {
+          "name": "MongoDB Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/health/db",
+              "host": ["{{baseUrl}}"],
+              "path": ["health", "db"]
+            },
+            "description": "Verifies active MongoDB ping, database name, and server version."
+          }
+        },
+        {
+          "name": "System Status & Collection Counts",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/system-status",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "system-status"]
+            },
+            "description": "Returns counts for all 9 migrated collections from MongoDB."
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. Machine Learning Endpoints",
+      "item": [
+        {
+          "name": "ML Model Information & Metrics",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/ml/info",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "ml", "info"]
+            },
+            "description": "Returns architecture, input features, dataset origin, and held-out validation metrics (MAE, RMSE, R²) for all active ML models."
+          }
+        },
+        {
+          "name": "Predict Heat Risk (POST /api/ml/predict)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"latitude\": 17.3850,\n  \"longitude\": 78.4867,\n  \"nighttime_temp_c\": 24.5\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/ml/predict",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "ml", "predict"]
+            },
+            "description": "Predicts daytime surface temperature, diurnal difference, and heat risk band using trained Random Forest Regressor."
+          }
+        },
+        {
+          "name": "Predict Heat Risk - Root Alias (POST /predict)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"latitude\": 17.4375,\n  \"longitude\": 78.4482,\n  \"nighttime_temp_c\": 28.0\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/predict",
+              "host": ["{{baseUrl}}"],
+              "path": ["predict"]
+            },
+            "description": "Compatibility endpoint on root /predict path."
+          }
+        },
+        {
+          "name": "Predict Daytime UHI Anomaly (POST /api/ml/predict/uhi)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"latitude\": 17.3850,\n  \"longitude\": 78.4867,\n  \"nighttime_uhi\": 1.5\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/ml/predict/uhi",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "ml", "predict", "uhi"]
+            },
+            "description": "Predicts Urban Heat Island anomaly using the Yale model."
+          }
+        },
+        {
+          "name": "ML Validation Error Test (Out of bounds latitude)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"latitude\": 250.0,\n  \"longitude\": 78.4867,\n  \"nighttime_temp_c\": 24.5\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/ml/predict",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "ml", "predict"]
+            },
+            "description": "Negative test case: verifies HTTP 422 Unprocessable Entity when latitude exceeds 90."
+          }
+        },
+        {
+          "name": "ML Validation Error Test (Missing required field)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"latitude\": 17.3850,\n  \"longitude\": 78.4867\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/ml/predict",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "ml", "predict"]
+            },
+            "description": "Negative test case: verifies HTTP 422 Unprocessable Entity when nighttime_temp_c is missing."
+          }
+        }
+      ]
+    },
+    {
+      "name": "3. Spatial & Risk Analytics",
+      "item": [
+        {
+          "name": "Saved Plots List",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/locations/plots",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "locations", "plots"]
+            }
+          }
+        },
+        {
+          "name": "Plot Risk Assessment",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/assessments/plots/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "assessments", "plots", "1"]
+            }
+          }
+        },
+        {
+          "name": "Infrastructure Map Layer (GeoJSON)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/map-layers/infrastructure?west=78.3&south=17.3&east=78.6&north=17.5",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "map-layers", "infrastructure"],
+              "query": [
+                { "key": "west", "value": "78.3" },
+                { "key": "south", "value": "17.3" },
+                { "key": "east", "value": "78.6" },
+                { "key": "north", "value": "17.5" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Road Segments Map Layer (GeoJSON)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/map-layers/roads?west=78.3&south=17.3&east=78.6&north=17.5",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "map-layers", "roads"],
+              "query": [
+                { "key": "west", "value": "78.3" },
+                { "key": "south", "value": "17.3" },
+                { "key": "east", "value": "78.6" },
+                { "key": "north", "value": "17.5" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Citywide IUPS Summary & Weights",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/assessments/summary",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "assessments", "summary"]
+            },
+            "description": "Returns precomputed citywide 1-km IUPS screening grid summary, coverage statistics, and analytical weights."
+          }
+        },
+        {
+          "name": "Datasets Registry",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/datasets/",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "datasets", ""]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

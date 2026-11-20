@@ -1,0 +1,8 @@
+algorithm,spatial_cv_mae_c,best_parameters
+Random Forest Regressor,0.5057216703141942,"{'model__max_depth': 15, 'model__max_features': 0.8, 'model__min_samples_leaf': 1}"
+SVR,0.5602928671513119,"{'model__C': 1, 'model__epsilon': 0.2, 'model__kernel': 'rbf'}"
+Decision Tree Regressor,0.5925467183422704,"{'model__max_depth': 12, 'model__min_samples_leaf': 1}"
+Gradient Boosting Regressor,0.6067387038715533,"{'model__learning_rate': 0.03, 'model__max_depth': 2, 'model__n_estimators': 100}"
+Ridge Regression,0.6847636141958879,{'model__alpha': 100.0}
+Lasso Regression,0.690357321453671,{'model__alpha': 0.01}
+Linear Regression,0.6915114584693729,{}

@@ -1,0 +1,23 @@
+{
+    "source_records": 93437,
+    "records_after_cleaning": 93437,
+    "invalid_records_removed": 0,
+    "duplicate_osm_ids_in_source": 0,
+    "missing_road_name": 85798,
+    "missing_maxspeed": 90037,
+    "missing_oneway": 86222,
+    "missing_coordinates_after_cleaning": 0,
+    "missing_or_nonpositive_lengths_after_cleaning": 0,
+    "clean_records": 93437,
+    "road_type_count": 7,
+    "selected_kmeans_k": 4,
+    "dbscan_comparison_sample_size": 15000,
+    "density_radii_km": [
+        0.5,
+        1.0
+    ],
+    "supervised_model_trained": false,
+    "road_geometry_available": false,
+    "interpretation": "Spatial clustering and representative-point density analysis only; no validated road-risk labels or route-network analysis.",
+    "outputs_directory": "C:\\Users\\sanaf\\OneDrive\\Desktop\\urban-risk-analytics\\data\\processed\\infrastructure\\roads_experiments"
+}

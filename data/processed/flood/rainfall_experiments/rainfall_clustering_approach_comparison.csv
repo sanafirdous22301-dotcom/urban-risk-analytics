@@ -1,0 +1,15 @@
+approach,k,silhouette_score
+spatial_plus_rainfall,2,0.30044064407844157
+spatial_plus_rainfall,3,0.30563684958179815
+spatial_plus_rainfall,4,0.3167433924748836
+spatial_plus_rainfall,5,0.329538629294633
+spatial_plus_rainfall,6,0.3474734145439069
+spatial_plus_rainfall,7,0.3427755876985618
+spatial_plus_rainfall,8,0.3271433983518149
+rainfall_only,2,0.5788312880297592
+rainfall_only,3,0.5775689163369252
+rainfall_only,4,0.5408314461146342
+rainfall_only,5,0.5304486827740749
+rainfall_only,6,0.5728466681934874
+rainfall_only,7,0.5466607792382161
+rainfall_only,8,0.5593557838020423

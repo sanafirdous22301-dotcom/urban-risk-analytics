@@ -1,0 +1,19 @@
+{
+    "source_file": "C:\\Users\\sanaf\\OneDrive\\Desktop\\urban-risk-analytics\\data\\processed\\infrastructure\\infrastructure_points.csv",
+    "source_records": 2083,
+    "analysis_records": 2083,
+    "invalid_coordinate_records": 0,
+    "exact_duplicate_rows_removed": 0,
+    "unique_categories": 3,
+    "unique_coordinate_pairs": 2081,
+    "latitude_min": 17.2599543,
+    "latitude_max": 17.5458731,
+    "longitude_min": 78.2524483,
+    "longitude_max": 78.632292,
+    "selected_kmeans_k": 2,
+    "selected_dbscan_eps_km": 0.25,
+    "nearby_count_radius_km": 1.0,
+    "supervised_model_trained": false,
+    "cluster_interpretation": "Exploratory spatial groups only; not validated infrastructure-risk labels.",
+    "outputs_directory": "C:\\Users\\sanaf\\OneDrive\\Desktop\\urban-risk-analytics\\data\\processed\\infrastructure\\infrastructure_points_experiments"
+}

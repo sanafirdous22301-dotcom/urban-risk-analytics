@@ -1,0 +1,12 @@
+{
+    "source_event_file": "C:\\Users\\sanaf\\OneDrive\\Desktop\\urban-risk-analytics\\data\\processed\\flood\\hyderabad_historical_flood_events.csv",
+    "source_event_records": 40,
+    "records_with_valid_start_date": 40,
+    "distinct_event_start_dates": 40,
+    "weather_file_loaded": false,
+    "weather_file": null,
+    "weather_numeric_columns": [],
+    "event_weather_matches": null,
+    "supervised_flood_classifier_trained": false,
+    "reason": "Historical inventory does not provide verified non-flood labels."
+}

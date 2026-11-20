@@ -1,0 +1,21 @@
+{
+  "dataset": "Hyderabad Yale Urban Heat",
+  "dataset_file": "hyderabad_yale_heat.csv",
+  "target": "daytime_uhi",
+  "features": [
+    "latitude",
+    "longitude",
+    "nighttime_uhi"
+  ],
+  "task": "cross-variable estimation of measured daytime UHI; not forecasting",
+  "uhi_interpretation": "urban heat island anomaly; not absolute air temperature",
+  "selected_algorithm": "Random Forest Regressor",
+  "spatial_block_degrees": 0.04,
+  "spatial_cv_mae_c": 0.3928935429038483,
+  "heldout_spatial_test_mae_c": 0.24005195803547894,
+  "heldout_spatial_test_rmse_c": 0.32293766360278636,
+  "heldout_spatial_test_r2": 0.5089555650212294,
+  "baseline_heldout_test_mae_c": 0.34255364992842313,
+  "candidate_saved": true,
+  "deployment_approval": "pending scientific and integration review"
+}

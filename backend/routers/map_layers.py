@@ -1,9 +1,7 @@
 
-from fastapi import APIRouter, Depends, HTTPException, Query
-from sqlalchemy.orm import Session
-from sqlalchemy import text
+from fastapi import APIRouter, HTTPException, Query
 
-from database.session import get_db
+from database.mongodb import db
 
 
 router = APIRouter(
@@ -14,7 +12,7 @@ router = APIRouter(
 
 def make_bbox(west, south, east, north):
     """
-    Create a geographic bounding polygon.
+    Create a GeoJSON bounding polygon.
     Coordinates are longitude first, latitude second.
     """
 
@@ -24,13 +22,16 @@ def make_bbox(west, south, east, north):
             detail="Invalid map boundaries. West must be less than east and south less than north."
         )
 
-    return (
-        f"POLYGON(({west} {south}, "
-        f"{east} {south}, "
-        f"{east} {north}, "
-        f"{west} {north}, "
-        f"{west} {south}))"
-    )
+    return {
+        "type": "Polygon",
+        "coordinates": [[
+            [west, south],
+            [east, south],
+            [east, north],
+            [west, north],
+            [west, south]
+        ]]
+    }
 
 
 @router.get("/infrastructure")
@@ -40,69 +41,76 @@ def get_infrastructure(
     east: float = Query(..., ge=-180, le=180),
     north: float = Query(..., ge=-90, le=90),
     category: str | None = Query(default=None, max_length=80),
-    limit: int = Query(default=3000, ge=1, le=10000),
-    db: Session = Depends(get_db)
+    limit: int = Query(default=3000, ge=1, le=10000)
 ):
-    bbox_wkt = make_bbox(west, south, east, north)
 
-    query = text("""
-        SELECT
-            asset_id,
-            category,
-            asset_name,
-            subtype,
-            latitude,
-            longitude
-        FROM infrastructure_assets
-        WHERE MBRIntersects(
-            ST_GeomFromText(
-                :bbox_wkt,
-                4326,
-                'axis-order=long-lat'
-            ),
-            geom
-        )
-        AND (:category IS NULL OR category = :category)
-        ORDER BY asset_id
-        LIMIT :limit
-    """)
+    if not isinstance(limit, int):
+        limit = 3000
+    if not isinstance(category, str):
+        category = None
 
-    result = db.execute(
-        query,
-        {
-            "bbox_wkt": bbox_wkt,
-            "category": category,
-            "limit": limit
-        }
-    )
+    bbox_geometry = make_bbox(west, south, east, north)
 
-    features = []
-
-    for row in result.mappings().all():
-        features.append({
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    float(row["longitude"]),
-                    float(row["latitude"])
-                ]
-            },
-            "properties": {
-                "asset_id": row["asset_id"],
-                "category": row["category"],
-                "name": row["asset_name"],
-                "subtype": row["subtype"]
+    query_filter = {
+        "geom": {
+            "$geoWithin": {
+                "$geometry": bbox_geometry
             }
-        })
-
-    return {
-        "type": "FeatureCollection",
-        "total": len(features),
-        "limit": limit,
-        "truncated": len(features) == limit,
-        "features": features
+        }
     }
+
+    if category is not None:
+        query_filter["category"] = category
+
+    try:
+        records = list(
+            db.infrastructure_assets.find(
+                query_filter,
+                {
+                    "_id": 0,
+                    "asset_id": 1,
+                    "category": 1,
+                    "asset_name": 1,
+                    "subtype": 1,
+                    "latitude": 1,
+                    "longitude": 1
+                }
+            ).sort("asset_id", 1).limit(limit)
+        )
+
+        features = []
+
+        for record in records:
+            features.append({
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [
+                        float(record["longitude"]),
+                        float(record["latitude"])
+                    ]
+                },
+                "properties": {
+                    "asset_id": record["asset_id"],
+                    "category": record["category"],
+                    "name": record["asset_name"],
+                    "subtype": record["subtype"]
+                }
+            })
+
+        return {
+            "type": "FeatureCollection",
+            "total": len(features),
+            "limit": limit,
+            "truncated": len(features) == limit,
+            "features": features
+        }
+
+    except Exception:
+        raise HTTPException(
+            status_code=503,
+            detail="Unable to retrieve infrastructure map data"
+        )
 
 
 @router.get("/roads")
@@ -111,72 +119,76 @@ def get_roads(
     south: float = Query(..., ge=-90, le=90),
     east: float = Query(..., ge=-180, le=180),
     north: float = Query(..., ge=-90, le=90),
-    limit: int = Query(default=3000, ge=1, le=10000),
-    db: Session = Depends(get_db)
+    limit: int = Query(default=3000, ge=1, le=10000)
 ):
-    bbox_wkt = make_bbox(west, south, east, north)
 
-    query = text("""
-        SELECT
-            road_id,
-            road_name,
-            road_type,
-            maxspeed,
-            oneway,
-            length_km,
-            latitude,
-            longitude
-        FROM road_segments
-        WHERE MBRIntersects(
-            ST_GeomFromText(
-                :bbox_wkt,
-                4326,
-                'axis-order=long-lat'
-            ),
-            representative_point
-        )
-        ORDER BY road_id
-        LIMIT :limit
-    """)
+    if not isinstance(limit, int):
+        limit = 3000
 
-    result = db.execute(
-        query,
-        {
-            "bbox_wkt": bbox_wkt,
-            "limit": limit
-        }
-    )
+    bbox_geometry = make_bbox(west, south, east, north)
 
-    features = []
-
-    for row in result.mappings().all():
-        features.append({
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    float(row["longitude"]),
-                    float(row["latitude"])
-                ]
-            },
-            "properties": {
-                "road_id": row["road_id"],
-                "road_name": row["road_name"],
-                "road_type": row["road_type"],
-                "maxspeed": row["maxspeed"],
-                "oneway": row["oneway"],
-                "length_km": (
-                    float(row["length_km"])
-                    if row["length_km"] is not None
-                    else None
-                )
+    query_filter = {
+        "representative_point": {
+            "$geoWithin": {
+                "$geometry": bbox_geometry
             }
-        })
-
-    return {
-        "type": "FeatureCollection",
-        "total": len(features),
-        "limit": limit,
-        "truncated": len(features) == limit,
-        "features": features
+        }
     }
+
+    try:
+        records = list(
+            db.road_segments.find(
+                query_filter,
+                {
+                    "_id": 0,
+                    "road_id": 1,
+                    "road_name": 1,
+                    "road_type": 1,
+                    "maxspeed": 1,
+                    "oneway": 1,
+                    "length_km": 1,
+                    "latitude": 1,
+                    "longitude": 1
+                }
+            ).sort("road_id", 1).limit(limit)
+        )
+
+        features = []
+
+        for record in records:
+            features.append({
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [
+                        float(record["longitude"]),
+                        float(record["latitude"])
+                    ]
+                },
+                "properties": {
+                    "road_id": record["road_id"],
+                    "road_name": record["road_name"],
+                    "road_type": record["road_type"],
+                    "maxspeed": record["maxspeed"],
+                    "oneway": record["oneway"],
+                    "length_km": (
+                        float(record["length_km"])
+                        if record["length_km"] is not None
+                        else None
+                    )
+                }
+            })
+
+        return {
+            "type": "FeatureCollection",
+            "total": len(features),
+            "limit": limit,
+            "truncated": len(features) == limit,
+            "features": features
+        }
+
+    except Exception:
+        raise HTTPException(
+            status_code=503,
+            detail="Unable to retrieve road map data"
+        )

@@ -1,0 +1,40 @@
+{
+    "input_file": "C:\\Users\\sanaf\\OneDrive\\Desktop\\urban-risk-analytics\\data\\processed\\infrastructure\\integrated_infrastructure_experiments\\integrated_infrastructure_road_grid_1km.csv",
+    "total_grid_cells": 791,
+    "infrastructure_present_cells": 416,
+    "cells_without_mapped_infrastructure_records": 375,
+    "algorithm": "KMeans",
+    "selected_k": 2,
+    "feature_columns": [
+        "infra_building_count",
+        "infra_hospital_count",
+        "road_representative_point_count",
+        "road_segment_length_sum_km",
+        "unique_road_types"
+    ],
+    "transformation": "log1p",
+    "scaling": "StandardScaler",
+    "random_state": 42,
+    "n_init": 20,
+    "evaluation_metrics": {
+        "silhouette": 0.5836824992935442,
+        "davies_bouldin": 0.5652490661856001,
+        "calinski_harabasz": 329.89982073601715
+    },
+    "cluster_sizes": {
+        "0": 375,
+        "1": 41
+    },
+    "cluster_descriptions": {
+        "0": "Higher mapped road representation",
+        "1": "Lower mapped road representation"
+    },
+    "dashboard_category_counts": {
+        "No mapped infrastructure records": 375,
+        "Higher mapped road representation": 375,
+        "Lower mapped road representation": 41
+    },
+    "validated_risk_labels_available": false,
+    "road_geometry_available": false,
+    "interpretation": "Exploratory clustering of mapped infrastructure and road-record representation. No validated risk labels, road-network connectivity, or travel-time analysis."
+}

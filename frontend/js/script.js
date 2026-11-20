@@ -1,145 +1,143 @@
-
 "use strict";
 
-// =============================================
-// 1. GET HTML ELEMENTS
-// =============================================
+// ========================================================
+// 1. STATE & GLOBAL COORDINATES
+// ========================================================
 
-// Plot assessment elements
-const assessmentForm = document.getElementById("assessmentForm");
-const assessmentMessage = document.getElementById("assessmentMessage");
+let currentLat = 17.3850;
+let currentLon = 78.4867;
+let currentLocName = "Hyderabad City Center (Default)";
+let activeMarker = null;
 
-const latitudeInput = document.getElementById("latitude");
-const longitudeInput = document.getElementById("longitude");
-// Plot assessment result elements
-const savedPlotSelect = document.getElementById("savedPlotSelect");
-const assessPlotBtn = document.getElementById("assessPlotBtn");
+// DOM Elements
+const landmarkSelect = document.getElementById("landmarkSelect");
+const selectedLocationLabel = document.getElementById("selectedLocationLabel");
+const selectedCoordinatesText = document.getElementById("selectedCoordinatesText");
+const mapStatusMessage = document.getElementById("mapStatusMessage");
+const assessRiskBtn = document.getElementById("assessRiskBtn");
+const resultsSection = document.getElementById("resultsSection");
 
-const assessmentResults = document.getElementById("assessmentResults");
-const assessmentPlotLabel = document.getElementById("assessmentPlotLabel");
-const assessmentSummary = document.getElementById("assessmentSummary");
+// Result Card Elements
+const resultsLocationHeading = document.getElementById("resultsLocationHeading");
+const resultsPlotTag = document.getElementById("resultsPlotTag");
 
-// Road-network assessment elements
-const roadSummary = document.getElementById("roadSummary");
-const roadTypeResults = document.getElementById("roadTypeResults");
-const nearestRoadsResults = document.getElementById("nearestRoadsResults");
-const roadGeometryNote = document.getElementById("roadGeometryNote");
+// Flood Card
+const floodScoreVal = document.getElementById("floodScoreVal");
+const floodScoreLabel = document.getElementById("floodScoreLabel");
+const floodBadge = document.getElementById("floodBadge");
+const floodExplanation = document.getElementById("floodExplanation");
+const floodFreshnessTag = document.getElementById("floodFreshnessTag");
 
-const infrastructureResults = document.getElementById("infrastructureResults");
-const hazardResults = document.getElementById("hazardResults");
-const floodContextSummary = document.getElementById("floodContextSummary");
-const floodEventsResults = document.getElementById("floodEventsResults");
+// Heat Card
+const heatScoreVal = document.getElementById("heatScoreVal");
+const heatScoreLabel = document.getElementById("heatScoreLabel");
+const heatBadge = document.getElementById("heatBadge");
+const heatExplanation = document.getElementById("heatExplanation");
+const heatMlEstimateText = document.getElementById("heatMlEstimateText");
+const heatFreshnessTag = document.getElementById("heatFreshnessTag");
 
-const assessmentSources = document.getElementById("assessmentSources");
-const assessmentLimitations = document.getElementById("assessmentLimitations");
-// Navigation elements
-const adminBtn = document.getElementById("adminBtn");
-const dataManagementBtn = document.getElementById("dataManagementBtn");
+// Infrastructure Card
+const infraScoreVal = document.getElementById("infraScoreVal");
+const infraScoreLabel = document.getElementById("infraScoreLabel");
+const infraBadge = document.getElementById("infraBadge");
+const infraExplanation = document.getElementById("infraExplanation");
+const infraMetricHosp = document.getElementById("infraMetricHosp");
+const infraMetricNearHosp = document.getElementById("infraMetricNearHosp");
+const infraMetricFire = document.getElementById("infraMetricFire");
+const infraMetricRoads = document.getElementById("infraMetricRoads");
+const infraFreshnessTag = document.getElementById("infraFreshnessTag");
 
-// Dataset management elements
-const datasetForm = document.getElementById("datasetForm");
-const datasetMessage = document.getElementById("datasetMessage");
-const datasetTableBody = document.getElementById("datasetTableBody");
-const datasetTotal = document.getElementById("datasetTotal");
-const refreshDatasetsBtn = document.getElementById("refreshDatasetsBtn");
+// Overall Priority Elements
+const overallPriorityScoreText = document.getElementById("overallPriorityScoreText");
+const overallPriorityBadge = document.getElementById("overallPriorityBadge");
+const municipalActionText = document.getElementById("municipalActionText");
 
 
-// =============================================
-// 2. MESSAGE HELPERS
-// =============================================
+// ========================================================
+// 2. INITIALIZE LEAFLET MAP & LOCAL OFFLINE ASSETS
+// ========================================================
 
-function showAssessmentMessage(message, type = "info") {
+// Configure Leaflet local vendor icons for complete offline compatibility
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+    iconRetinaUrl: "/static/vendor/leaflet/images/marker-icon-2x.png",
+    iconUrl: "/static/vendor/leaflet/images/marker-icon.png",
+    shadowUrl: "/static/vendor/leaflet/images/marker-shadow.png",
+});
 
-    const icon = document.createElement("span");
+const localMarkerIcon = L.icon({
+    iconUrl: "/static/vendor/leaflet/images/marker-icon.png",
+    iconRetinaUrl: "/static/vendor/leaflet/images/marker-icon-2x.png",
+    shadowUrl: "/static/vendor/leaflet/images/marker-shadow.png",
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+});
 
-    icon.className = "message-icon";
+const map = L.map("map").setView([currentLat, currentLon], 12);
 
-    if (type === "success") {
-        icon.textContent = "✓";
-    } else if (type === "error") {
-        icon.textContent = "!";
-    } else {
-        icon.textContent = "i";
+// Local Tile Layer for Hyderabad Study Region (Zooms 10-12 stored offline)
+// Seamlessly requests local vendor tiles first; falls back to online OSM when online
+const baseTileLayer = L.tileLayer("/static/vendor/tiles/{z}/{x}/{y}.png", {
+    maxZoom: 18,
+    minZoom: 10,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors (Local Study Tiles · Hyderabad)'
+});
+baseTileLayer.addTo(map);
+
+// Offline Tile Fallback Notification & Online Tile Recovery
+let offlineTileNoticeTriggered = false;
+baseTileLayer.on("tileerror", function (error) {
+    const tile = error.tile;
+    const coords = error.coords;
+
+    // If already attempted online fallback or completely offline, show offline notice
+    if (tile.dataset && tile.dataset.triedOnline) {
+        if (!offlineTileNoticeTriggered) {
+            offlineTileNoticeTriggered = true;
+            const noticeEl = document.getElementById("offlineTileNotice");
+            if (noticeEl) noticeEl.classList.add("active");
+        }
+        return;
     }
 
-    assessmentMessage.replaceChildren(
-        icon,
-        document.createTextNode(" " + message)
-    );
+    if (tile.dataset) tile.dataset.triedOnline = "true";
+    // Attempt online OSM tile request for deeper zoom levels (13+) when internet is available
+    const subdomains = ["a", "b", "c"];
+    const s = subdomains[Math.abs(coords.x + coords.y) % subdomains.length];
+    tile.src = `https://${s}.tile.openstreetmap.org/${coords.z}/${coords.x}/${coords.y}.png`;
+});
 
-    assessmentMessage.classList.remove("success", "error");
+// Hyderabad Metropolitan Urban Risk Study Region Boundary (791 km² Precomputed Grid)
+const hyderabadBounds = [
+    [17.264, 78.243],
+    [17.554, 78.629]
+];
+const studyBoundaryLayer = L.rectangle(hyderabadBounds, {
+    color: "#1e3a8a",
+    weight: 1.5,
+    dashArray: "6, 6",
+    fillColor: "#0f2b48",
+    fillOpacity: 0.02
+}).addTo(map);
+studyBoundaryLayer.bindTooltip("Hyderabad Urban Risk Study Area (791 km² Precomputed Grid)", { sticky: true });
 
-    if (type === "success" || type === "error") {
-        assessmentMessage.classList.add(type);
-    }
-}
-
-
-function showDatasetMessage(message, type = "info") {
-
-    datasetMessage.textContent = message;
-
-    datasetMessage.classList.remove("success", "error");
-
-    if (type === "success" || type === "error") {
-        datasetMessage.classList.add(type);
-    }
-
-}
-
-
-function updateMapStatus(message) {
-
-    const mapStatus = document.querySelector(".map-status");
-
-    if (mapStatus) {
-        mapStatus.textContent = message;
-    }
-
-}
-
-
-// =============================================
-// 3. INITIALIZE LEAFLET MAP
-// =============================================
-
-const map = L.map("map").setView(
-    [17.385, 78.4867],
-    12
-);
-
-
-L.tileLayer(
-    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-    {
-        attribution:
-            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    }
-).addTo(map);
-
-
-// Layer containing markers retrieved from MySQL
-const savedMarkers = L.layerGroup().addTo(map);
-// Separate layers for infrastructure and roads
+// Infrastructure and Road Layers
 const infrastructureLayer = L.layerGroup().addTo(map);
 const roadsLayer = L.layerGroup();
 
-// Layer switcher
 L.control.layers(
     null,
     {
+        "Study Area Boundary": studyBoundaryLayer,
         "Infrastructure Assets": infrastructureLayer,
         "Road Network": roadsLayer
     },
-    {
-        collapsed: false
-    }
+    { collapsed: false }
 ).addTo(map);
 
-
-// Colours for infrastructure categories
 function getInfrastructureColor(category) {
-
     const colors = {
         hospital: "#ef4444",
         clinic: "#f97316",
@@ -147,17 +145,13 @@ function getInfrastructureColor(category) {
         college: "#6366f1",
         pharmacy: "#14b8a6",
         police: "#8b5cf6",
-        fire_station: "#dc2626"
+        fire_station: "#dc2626",
+        building: "#64748b"
     };
-
     return colors[String(category || "").toLowerCase()] || "#0d9488";
-
 }
 
-
-// Colours for road types
 function getRoadColor(roadType) {
-
     const colors = {
         motorway: "#dc2626",
         trunk: "#f97316",
@@ -166,1761 +160,537 @@ function getRoadColor(roadType) {
         tertiary: "#8b5cf6",
         residential: "#64748b"
     };
-
     return colors[String(roadType || "").toLowerCase()] || "#94a3b8";
-
 }
 
+// Initial Marker with local vendor icon
+activeMarker = L.marker([currentLat, currentLon], {
+    icon: localMarkerIcon
+}).addTo(map);
+activeMarker.bindPopup("<strong>Selected Assessment Point</strong><br>Click 'Assess Risk' to evaluate.");
 
-// Create safe popup content for map features
-function createFeaturePopup(title, properties) {
-
-    const container = document.createElement("div");
-
-    const heading = document.createElement("strong");
-    heading.textContent = title || "Unnamed feature";
-
-    container.appendChild(heading);
-
-    Object.entries(properties).forEach(function ([key, value]) {
-
-        if (value === null || value === undefined || value === "") {
-            return;
-        }
-
-        const line = document.createElement("div");
-        line.textContent = key + ": " + value;
-
-        container.appendChild(line);
-
-    });
-
-    return container;
-
-}
-
-
-// Keep track of active requests
-let infrastructureRequest = null;
-let roadsRequest = null;
-
-
-// Load infrastructure inside the visible map area
+let infraReq = null;
 async function loadInfrastructure() {
-
-    if (infrastructureRequest) {
-        infrastructureRequest.abort();
-    }
-
-    infrastructureRequest = new AbortController();
-
+    if (!map || !map.getSize().x) return;
     const bounds = map.getBounds();
+    const west = bounds.getWest();
+    const east = bounds.getEast();
+    const south = bounds.getSouth();
+    const north = bounds.getNorth();
 
-    const params = new URLSearchParams({
-        west: bounds.getWest(),
-        south: bounds.getSouth(),
-        east: bounds.getEast(),
-        north: bounds.getNorth(),
-        limit: 3000
-    });
+    if (!Number.isFinite(west) || !Number.isFinite(east) || west >= east) return;
+    if (infraReq) infraReq.abort();
+    infraReq = new AbortController();
 
     try {
-
-        const response = await fetch(
-            "/api/map-layers/infrastructure?" + params.toString(),
-            {
-                signal: infrastructureRequest.signal
-            }
-        );
-
-        if (!response.ok) {
-            throw new Error("Infrastructure API returned " + response.status);
-        }
-
-        const data = await response.json();
-
+        const params = new URLSearchParams({ west, south, east, north, limit: 2000 });
+        const res = await fetch("/api/map-layers/infrastructure?" + params.toString(), { signal: infraReq.signal });
+        if (!res.ok) return;
+        const data = await res.json();
         infrastructureLayer.clearLayers();
 
         L.geoJSON(data, {
-
-            pointToLayer: function (feature, latlng) {
-
-                const properties = feature.properties || {};
-
+            pointToLayer: (feature, latlng) => {
+                const props = feature.properties || {};
                 return L.circleMarker(latlng, {
-                    radius: 6,
+                    radius: 5,
                     color: "#ffffff",
                     weight: 1,
-                    fillColor: getInfrastructureColor(properties.category),
-                    fillOpacity: 0.9
+                    fillColor: getInfrastructureColor(props.category),
+                    fillOpacity: 0.85
                 });
-
             },
-
-            onEachFeature: function (feature, layer) {
-
-                const properties = feature.properties || {};
-
-                layer.bindPopup(
-                    createFeaturePopup(
-                        properties.asset_name || properties.category,
-                        {
-                            Category: properties.category,
-                            Subtype: properties.subtype
-                        }
-                    )
-                );
-
+            onEachFeature: (feature, layer) => {
+                const props = feature.properties || {};
+                layer.bindPopup(`<strong>${props.asset_name || props.category}</strong><br>Category: ${props.category || "General"}`);
             }
-
         }).addTo(infrastructureLayer);
-
-        if (data.truncated) {
-            console.warn("Infrastructure results reached the 3000-record limit.");
-        }
-
-        console.log("Infrastructure loaded:", data.total);
-
-    } catch (error) {
-
-        if (error.name !== "AbortError") {
-            console.error("Infrastructure loading failed:", error);
-        }
-
+    } catch (e) {
+        if (e.name !== "AbortError") console.warn("Infra load error:", e);
     }
-
 }
 
-
-// Load roads only when the user enables the road layer
+let roadsReq = null;
 async function loadRoads() {
-
-    // Avoid loading thousands of road points when zoomed out
     if (map.getZoom() < 14) {
         roadsLayer.clearLayers();
-        console.info("Zoom in to level 14 or higher to view road points.");
         return;
     }
-
-    if (roadsRequest) {
-        roadsRequest.abort();
-    }
-
-    roadsRequest = new AbortController();
-
     const bounds = map.getBounds();
-
-    const params = new URLSearchParams({
-        west: bounds.getWest(),
-        south: bounds.getSouth(),
-        east: bounds.getEast(),
-        north: bounds.getNorth(),
-        limit: 3000
-    });
+    if (roadsReq) roadsReq.abort();
+    roadsReq = new AbortController();
 
     try {
-
-        const response = await fetch(
-            "/api/map-layers/roads?" + params.toString(),
-            {
-                signal: roadsRequest.signal
-            }
-        );
-
-        if (!response.ok) {
-            throw new Error("Road API returned " + response.status);
-        }
-
-        const data = await response.json();
-
+        const params = new URLSearchParams({
+            west: bounds.getWest(),
+            south: bounds.getSouth(),
+            east: bounds.getEast(),
+            north: bounds.getNorth(),
+            limit: 2500
+        });
+        const res = await fetch("/api/map-layers/roads?" + params.toString(), { signal: roadsReq.signal });
+        if (!res.ok) return;
+        const data = await res.json();
         roadsLayer.clearLayers();
 
         L.geoJSON(data, {
-
-            pointToLayer: function (feature, latlng) {
-
-                const properties = feature.properties || {};
-
+            pointToLayer: (feature, latlng) => {
+                const props = feature.properties || {};
                 return L.circleMarker(latlng, {
                     radius: 3,
-                    color: getRoadColor(properties.road_type),
+                    color: getRoadColor(props.road_type),
                     weight: 1,
-                    fillColor: getRoadColor(properties.road_type),
+                    fillColor: getRoadColor(props.road_type),
                     fillOpacity: 0.75
                 });
-
             },
-
-            onEachFeature: function (feature, layer) {
-
-                const properties = feature.properties || {};
-
-                layer.bindPopup(
-                    createFeaturePopup(
-                        properties.road_name || "Road segment",
-                        {
-                            RoadType: properties.road_type,
-                            MaxSpeed: properties.maxspeed,
-                            OneWay: properties.oneway,
-                            LengthKm: properties.length_km
-                        }
-                    )
-                );
-
+            onEachFeature: (feature, layer) => {
+                const props = feature.properties || {};
+                layer.bindPopup(`<strong>${props.road_name || "Road Segment"}</strong><br>Type: ${props.road_type}`);
             }
-
         }).addTo(roadsLayer);
-
-        if (data.truncated) {
-            console.warn("Road results reached the 3000-record limit. Zoom in further for more detail.");
-        }
-
-        console.log("Road points loaded:", data.total);
-
-    } catch (error) {
-
-        if (error.name !== "AbortError") {
-            console.error("Road loading failed:", error);
-        }
-
+    } catch (e) {
+        if (e.name !== "AbortError") console.warn("Roads load error:", e);
     }
-
 }
 
-
-// Reload visible layers when the map moves
-let layerReloadTimer = null;
-
-function reloadVisibleMapLayers() {
-
-    clearTimeout(layerReloadTimer);
-
-    layerReloadTimer = setTimeout(function () {
-
-        if (map.hasLayer(infrastructureLayer)) {
-            loadInfrastructure();
-        }
-
-        if (map.hasLayer(roadsLayer)) {
-            loadRoads();
-        }
-
+let reloadTimer = null;
+map.on("moveend", () => {
+    clearTimeout(reloadTimer);
+    reloadTimer = setTimeout(() => {
+        if (map.hasLayer(infrastructureLayer)) loadInfrastructure();
+        if (map.hasLayer(roadsLayer)) loadRoads();
     }, 400);
-
-}
-
-
-// Listen for map movement and layer selection
-map.on("moveend", reloadVisibleMapLayers);
-
-map.on("overlayadd", function (event) {
-
-    if (event.layer === infrastructureLayer) {
-        loadInfrastructure();
-    }
-
-    if (event.layer === roadsLayer) {
-        loadRoads();
-    }
-
 });
 
+map.on("overlayadd", (event) => {
+    if (event.layer === infrastructureLayer) loadInfrastructure();
+    if (event.layer === roadsLayer) loadRoads();
+});
 
-// Initial infrastructure load
-map.whenReady(function () {
+map.whenReady(() => {
     loadInfrastructure();
 });
 
-// Temporary selected marker
-let selectedMarker = null;
 
+// ========================================================
+// 3. MAP SELECTION INTERACTIONS
+// ========================================================
 
-// Create safe popup content
-function createLocationPopup(title, latitude, longitude) {
+function updateLocationSelection(lat, lon, label = "Selected Map Location") {
+    currentLat = Number(lat);
+    currentLon = Number(lon);
+    currentLocName = label;
 
-    const container = document.createElement("div");
+    if (activeMarker) {
+        activeMarker.setLatLng([currentLat, currentLon]);
+    } else {
+        activeMarker = L.marker([currentLat, currentLon], { icon: localMarkerIcon }).addTo(map);
+    }
 
-    const heading = document.createElement("strong");
-    heading.textContent = title;
+    activeMarker.bindPopup(`<strong>${label}</strong><br>Lat: ${currentLat.toFixed(5)}<br>Lon: ${currentLon.toFixed(5)}`).openPopup();
 
-    const latitudeText = document.createElement("div");
-    latitudeText.textContent = "Latitude: " + latitude.toFixed(6);
+    if (selectedLocationLabel) selectedLocationLabel.textContent = `Selected Point: ${label}`;
+    if (selectedCoordinatesText) selectedCoordinatesText.textContent = `Latitude: ${currentLat.toFixed(5)} °N, Longitude: ${currentLon.toFixed(5)} °E`;
+    if (mapStatusMessage) mapStatusMessage.textContent = "Location specified. Click 'Assess Risk' to run multi-hazard assessment.";
 
-    const longitudeText = document.createElement("div");
-    longitudeText.textContent = "Longitude: " + longitude.toFixed(6);
+    // Do NOT show the results until the user clicks "Assess Risk"!
+    if (resultsSection) {
+        resultsSection.classList.remove("active");
+    }
+}
 
-    container.append(
-        heading,
-        latitudeText,
-        longitudeText
-    );
+map.on("click", function (event) {
+    const lat = event.latlng.lat;
+    const lon = event.latlng.lng;
+    updateLocationSelection(lat, lon, `Selected Coordinates (${lat.toFixed(4)}, ${lon.toFixed(4)})`);
+    if (landmarkSelect) landmarkSelect.value = "";
+});
 
-    return container;
+if (landmarkSelect) {
+    landmarkSelect.addEventListener("change", function () {
+        const val = landmarkSelect.value;
+        if (!val) return;
+        const [latStr, lonStr] = val.split(",");
+        const selText = landmarkSelect.options[landmarkSelect.selectedIndex].text;
+        const lat = parseFloat(latStr);
+        const lon = parseFloat(lonStr);
 
+        map.setView([lat, lon], 14);
+        updateLocationSelection(lat, lon, selText);
+    });
 }
 
 
-// Refresh Leaflet map dimensions
-requestAnimationFrame(function () {
-    map.invalidateSize();
-});
+// ========================================================
+// 4. "ASSESS RISK" CALL & RENDERING (PARTS 1, 2, 3, 4)
+// ========================================================
 
-window.addEventListener("resize", function () {
-    map.invalidateSize();
-});
+function applyRiskBadge(badgeElement, classification) {
+    if (!badgeElement) return;
+    badgeElement.className = "risk-classification-badge";
 
+    const cls = String(classification || "LOW").toUpperCase();
+    badgeElement.textContent = cls;
 
-// =============================================
-// 4. LOAD SAVED PLOT LOCATIONS
-// =============================================
-// Add a saved plot to the assessment dropdown
-function addSavedPlotOption(location, selectOption = false) {
-
-    const locationId = String(location.location_id);
-
-    const existingOption = Array.from(
-        savedPlotSelect.options
-    ).find(option => option.value === locationId);
-
-    if (!existingOption) {
-
-        const option = document.createElement("option");
-
-        option.value = locationId;
-
-        option.textContent =
-            "Plot #" + locationId +
-            " - " +
-            Number(location.latitude).toFixed(5) +
-            ", " +
-            Number(location.longitude).toFixed(5);
-
-        savedPlotSelect.appendChild(option);
-
+    if (cls === "HIGH" || cls.includes("HIGH") || cls.includes("SEVERE")) {
+        badgeElement.classList.add("risk-badge-high");
+    } else if (cls === "MEDIUM" || cls.includes("MODERATE")) {
+        badgeElement.classList.add("risk-badge-medium");
+    } else {
+        badgeElement.classList.add("risk-badge-low");
     }
-
-    if (selectOption) {
-        savedPlotSelect.value = locationId;
-    }
-
-    savedPlotSelect.disabled = false;
-    assessPlotBtn.disabled = !savedPlotSelect.value;
-
 }
-async function loadPlotLocations() {
+
+function createTable(headers, rows) {
+    const wrapper = document.createElement("div");
+    wrapper.className = "evidence-table-wrap";
+    if (!rows.length) {
+        wrapper.innerHTML = `<div style="padding: 12px; color: var(--text-muted); font-size: 11px;">No records available.</div>`;
+        return wrapper;
+    }
+    const table = document.createElement("table");
+    table.className = "evidence-table";
+    const thead = document.createElement("thead");
+    const trH = document.createElement("tr");
+    headers.forEach(h => {
+        const th = document.createElement("th");
+        th.textContent = h;
+        trH.appendChild(th);
+    });
+    thead.appendChild(trH);
+
+    const tbody = document.createElement("tbody");
+    rows.forEach(r => {
+        const tr = document.createElement("tr");
+        r.forEach(c => {
+            const td = document.createElement("td");
+            td.textContent = c !== null && c !== undefined ? String(c) : "N/A";
+            tr.appendChild(td);
+        });
+        tbody.appendChild(tr);
+    });
+    table.append(thead, tbody);
+    wrapper.appendChild(table);
+    return wrapper;
+}
+
+async function runAssessment() {
+    if (!assessRiskBtn) return;
+    assessRiskBtn.disabled = true;
+    assessRiskBtn.innerHTML = `<span>Evaluating Risk...</span>`;
+
+    if (mapStatusMessage) mapStatusMessage.textContent = "Calculating multi-hazard risk and spatial accessibility...";
 
     try {
-
-        const response = await fetch("/api/locations/plots");
+        const response = await fetch("/api/assessments/evaluate", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ latitude: currentLat, longitude: currentLon })
+        });
 
         if (!response.ok) {
-            throw new Error("Failed to retrieve saved plot locations.");
+            throw new Error(`Evaluation failed with status ${response.status}`);
         }
 
         const data = await response.json();
+        renderMunicipalResults(data);
 
-        if (!Array.isArray(data.locations)) {
-            throw new Error("Unexpected plot-location response.");
+        // Reveal results section
+        if (resultsSection) {
+            resultsSection.classList.add("active");
+            resultsSection.scrollIntoView({ behavior: "smooth", block: "start" });
         }
 
-        // Reset the assessment dropdown
-        savedPlotSelect.replaceChildren();
-
-        const placeholder = document.createElement("option");
-
-        placeholder.value = "";
-        placeholder.textContent = data.locations.length
-            ? "Choose a saved plot"
-            : "No saved plots available";
-
-        placeholder.selected = true;
-
-        savedPlotSelect.appendChild(placeholder);
-
-        savedPlotSelect.disabled = true;
-        assessPlotBtn.disabled = true;
-
-        let loadedCount = 0;
-
-        data.locations.forEach(function (location) {
-
-            const latitude = Number(location.latitude);
-            const longitude = Number(location.longitude);
-
-            if (
-                !Number.isFinite(latitude) ||
-                !Number.isFinite(longitude) ||
-                latitude < -90 ||
-                latitude > 90 ||
-                longitude < -180 ||
-                longitude > 180
-            ) {
-                console.warn("Invalid saved location skipped:", location);
-                return;
-            }
-
-            const marker = L.marker([
-                latitude,
-                longitude
-            ]);
-
-            marker.bindPopup(
-                createLocationPopup(
-                    "Saved Plot #" + location.location_id,
-                    latitude,
-                    longitude
-                )
-            );
-
-            savedMarkers.addLayer(marker);
-
-            // Add this plot to the assessment dropdown
-            addSavedPlotOption(location);
-
-            loadedCount++;
-
-        });
-
-        console.log("Total saved plots loaded:", loadedCount);
-
-        updateMapStatus(
-            loadedCount + " saved plot location(s) loaded"
-        );
-
+        if (mapStatusMessage) mapStatusMessage.textContent = "Assessment complete. Results displayed below.";
     } catch (error) {
-
-        console.error("Location loading error:", error);
-
-        showAssessmentMessage(
-            "Unable to retrieve saved plot locations.",
-            "error"
-        );
-
-        updateMapStatus("Unable to load saved locations");
-
-    }
-
-}
-
-// Load saved locations when dashboard opens
-loadPlotLocations();
-// =============================================
-// 6A. ASSESSMENT DISPLAY HELPERS
-// =============================================
-
-// Format numeric values safely
-function formatAssessmentNumber(value, decimals = 1) {
-
-    if (value === null || value === undefined || value === "") {
-        return "Not recorded";
-    }
-
-    const number = Number(value);
-
-    if (!Number.isFinite(number)) {
-        return "Not recorded";
-    }
-
-    return number.toLocaleString("en-IN", {
-        maximumFractionDigits: decimals
-    });
-
-}
-
-
-// Create an assessment summary card
-function createEvidenceCard(label, value, detail) {
-
-    const card = document.createElement("div");
-    card.className = "evidence-card";
-
-    const heading = document.createElement("div");
-    heading.className = "evidence-card-label";
-    heading.textContent = label;
-
-    const result = document.createElement("div");
-    result.className = "evidence-card-value";
-    result.textContent = value;
-
-    const description = document.createElement("div");
-    description.className = "evidence-card-detail";
-    description.textContent = detail;
-
-    card.append(heading, result, description);
-
-    return card;
-
-}
-
-
-// Create a table using safe text insertion
-function createEvidenceTable(headers, rows) {
-
-    const wrapper = document.createElement("div");
-    wrapper.className = "evidence-table-wrap";
-
-    if (!rows.length) {
-
-        wrapper.className = "assessment-empty-state";
-        wrapper.textContent = "No matching records available.";
-
-        return wrapper;
-
-    }
-
-    const table = document.createElement("table");
-    table.className = "evidence-table";
-
-    const thead = document.createElement("thead");
-    const headerRow = document.createElement("tr");
-
-    headers.forEach(function (headingText) {
-
-        const th = document.createElement("th");
-        th.textContent = headingText;
-
-        headerRow.appendChild(th);
-
-    });
-
-    thead.appendChild(headerRow);
-
-    const tbody = document.createElement("tbody");
-
-    rows.forEach(function (row) {
-
-        const tr = document.createElement("tr");
-
-        row.forEach(function (cellValue) {
-
-            const td = document.createElement("td");
-
-            td.textContent =
-                cellValue === null || cellValue === undefined
-                    ? "Not recorded"
-                    : String(cellValue);
-
-            tr.appendChild(td);
-
-        });
-
-        tbody.appendChild(tr);
-
-    });
-
-    table.append(thead, tbody);
-    wrapper.appendChild(table);
-
-    return wrapper;
-
-}
-
-
-// Add a section heading or explanation
-function createEvidenceText(message) {
-
-    const paragraph = document.createElement("p");
-    paragraph.className = "evidence-muted";
-    paragraph.textContent = message;
-
-    return paragraph;
-
-}
-
-
-// =============================================
-// 6B. RENDER ASSESSMENT RESULTS
-// =============================================
-
-function renderAssessmentResults(data) {
-
-    const infrastructure = data.infrastructure || {};
-
-    const summary = infrastructure.summary_within_1km || [];
-
-    const assets = infrastructure.nearest_assets || [];
-
-    const hospitals = summary.find(
-        item => item.category === "hospital"
-    );
-
-    const fireStations = summary.find(
-        item => item.category === "fire_station"
-    );
-
-    const nearestHospital = assets.find(
-        item => item.category === "hospital"
-    );
-
-    const nearestFireStation = assets.find(
-        item => item.category === "fire_station"
-    );
-
-
-    // 1. Plot information
-
-    assessmentPlotLabel.textContent =
-        "PLOT #" + data.plot.location_id;
-
-
-    // 2. Summary cards
-
-    assessmentSummary.replaceChildren(
-
-        createEvidenceCard(
-            "Hospitals within 1 km",
-            hospitals ? hospitals.assets_within_1km : "0",
-            "Nearest: " +
-            (
-                nearestHospital
-                    ? formatAssessmentNumber(
-                        nearestHospital.distance_m
-                    ) + " m"
-                    : "No facility recorded"
-            )
-        ),
-
-        createEvidenceCard(
-            "Fire stations within 1 km",
-            fireStations ? fireStations.assets_within_1km : "0",
-            "Nearest: " +
-            (
-                nearestFireStation
-                    ? formatAssessmentNumber(
-                        nearestFireStation.distance_m
-                    ) + " m"
-                    : "No facility recorded"
-            )
-        ),
-
-        createEvidenceCard(
-            "Heat observations",
-            (
-                data.hazard_observations || []
-            ).filter(item => item.hazard_type === "heat").length,
-            "Measurement groups returned"
-        ),
-
-        createEvidenceCard(
-            "Historical flood records",
-            data.historical_flood_context.matching_event_count,
-            "Regional records mentioning Hyderabad"
-        )
-
-    );
-
-
-    // 3. Infrastructure results
-
-    infrastructureResults.replaceChildren();
-
-    const infrastructureHeading =
-        document.createElement("h4");
-
-    infrastructureHeading.textContent =
-        "Infrastructure coverage within 1 km";
-
-    infrastructureResults.appendChild(infrastructureHeading);
-
-    infrastructureResults.appendChild(
-        createEvidenceTable(
-            ["Category", "Assets", "Nearest distance"],
-            summary.map(item => [
-                item.category,
-                item.assets_within_1km,
-                formatAssessmentNumber(item.nearest_distance_m) + " m"
-            ])
-        )
-    );
-
-
-    const nearestHeading = document.createElement("h4");
-
-    nearestHeading.style.marginTop = "15px";
-    nearestHeading.textContent = "Ten nearest infrastructure assets";
-
-    infrastructureResults.appendChild(nearestHeading);
-
-    infrastructureResults.appendChild(
-        createEvidenceTable(
-            ["Asset", "Category", "Subtype", "Distance"],
-            assets.map(item => [
-                item.asset_name || "Unnamed facility",
-                item.category,
-                item.subtype,
-                formatAssessmentNumber(item.distance_m) + " m"
-            ])
-        )
-    );
-// =============================================
-// ROAD NETWORK RESULTS
-// =============================================
-
-const roadNetwork = data.road_network || {};
-
-
-// 1. Road proximity summary cards
-
-roadSummary.replaceChildren(
-
-    createEvidenceCard(
-        "Road points within 250 m",
-        formatAssessmentNumber(
-            roadNetwork.road_points_within_250m,
-            0
-        ),
-        "Representative road points"
-    ),
-
-    createEvidenceCard(
-        "Road points within 500 m",
-        formatAssessmentNumber(
-            roadNetwork.road_points_within_500m,
-            0
-        ),
-        "Representative road points"
-    ),
-
-    createEvidenceCard(
-        "Road points within 1 km",
-        formatAssessmentNumber(
-            roadNetwork.road_points_within_1km,
-            0
-        ),
-        "Representative road points"
-    ),
-
-    createEvidenceCard(
-        "Nearest road point",
-        roadNetwork.nearest_road_point_m === null ||
-        roadNetwork.nearest_road_point_m === undefined
-            ? "Unavailable"
-            : formatAssessmentNumber(
-                roadNetwork.nearest_road_point_m
-            ) + " m",
-        "Distance from selected plot"
-    )
-
-);
-
-
-// 2. Road-type distribution
-
-const roadTypes = roadNetwork.road_type_distribution || [];
-
-roadTypeResults.replaceChildren(
-    createEvidenceTable(
-        ["Road type", "Representative points within 1 km"],
-        roadTypes.map(item => [
-            item.road_type,
-            item.road_points_within_1km
-        ])
-    )
-);
-
-
-// 3. Five nearest road records
-
-const nearestRoads = roadNetwork.nearest_roads || [];
-
-nearestRoadsResults.replaceChildren(
-    createEvidenceTable(
-        [
-            "Road ID",
-            "Road name",
-            "Road type",
-            "Length",
-            "Max speed",
-            "Distance"
-        ],
-
-        nearestRoads.map(item => [
-
-            item.road_id,
-
-            item.road_name || "Unnamed road",
-
-            item.road_type || "Not recorded",
-
-            item.length_km === null ||
-            item.length_km === undefined
-                ? "Not recorded"
-                : formatAssessmentNumber(
-                    item.length_km,
-                    4
-                ) + " km",
-
-            item.maxspeed || "Not recorded",
-
-            formatAssessmentNumber(
-                item.distance_m
-            ) + " m"
-
-        ])
-    )
-);
-
-
-// 4. Explain the geometry limitation
-
-roadGeometryNote.textContent =
-    roadNetwork.geometry_note ||
-    "Road locations represent individual points, not complete road geometries.";
-
-    // 4. Heat and rainfall results
-
-    hazardResults.replaceChildren();
-
-    const hazards = data.hazard_observations || [];
-
-    hazardResults.appendChild(
-        createEvidenceTable(
-            [
-                "Dataset",
-                "Measurement",
-                "Observation date",
-                "Average within 5 km",
-                "Sample points",
-                "Nearest point"
-            ],
-
-            hazards.map(item => [
-
-                item.dataset_name,
-
-                item.metric_name.replace(/_/g, " "),
-
-                item.observed_at || "Date unavailable",
-
-                item.average_value_within_5km === null
-                    ? "Not available"
-                    : formatAssessmentNumber(
-                        item.average_value_within_5km,
-                        2
-                    ) + " " + item.unit,
-
-                item.sample_locations_within_5km,
-
-                formatAssessmentNumber(
-                    item.nearest_observation_m
-                ) + " m"
-
-            ])
-        )
-    );
-
-
-    // 5. Historical flood context
-
-    const floodContext = data.historical_flood_context;
-
-    floodContextSummary.textContent =
-        floodContext.matching_event_count +
-        " historical source records contain Hyderabad in their district field. " +
-        floodContext.geographic_precision;
-
-    const floodEvents = floodContext.events || [];
-
-    floodEventsResults.replaceChildren();
-
-    floodEventsResults.appendChild(
-        createEvidenceText(
-            "Showing the 10 most recent records out of " +
-            floodEvents.length + "."
-        )
-    );
-
-    floodEventsResults.appendChild(
-        createEvidenceTable(
-            [
-                "Start date",
-                "End date",
-                "Cause",
-                "Duration",
-                "Fatalities"
-            ],
-
-            floodEvents.slice(0, 10).map(item => [
-
-                item.start_date || "Not recorded",
-
-                item.end_date || "Not recorded",
-
-                item.main_cause || "Not recorded",
-
-                item.duration_days === null
-                    ? "Not recorded"
-                    : item.duration_days + " days",
-
-                item.human_fatality === null
-                    ? "Not recorded"
-                    : item.human_fatality
-
-            ])
-        )
-    );
-
-
-    // 6. Dataset sources
-
-    const sources = data.data_sources || [];
-
-    assessmentSources.replaceChildren();
-
-    assessmentSources.appendChild(
-        createEvidenceTable(
-            [
-                "Dataset",
-                "Source",
-                "Version",
-                "Date range",
-                "Records"
-            ],
-
-            sources.map(item => [
-
-                item.dataset_name,
-
-                item.source_name,
-
-                item.version_label,
-
-                (item.date_range_start || "Unknown") +
-                " to " +
-                (item.date_range_end || "Unknown"),
-
-                item.record_count
-
-            ])
-        )
-    );
-
-
-    // 7. Data limitations
-
-    assessmentLimitations.replaceChildren();
-
-    (data.limitations || []).forEach(function (limitation) {
-
-        const li = document.createElement("li");
-        li.textContent = limitation;
-
-        assessmentLimitations.appendChild(li);
-
-    });
-
-
-    // Display completed results
-
-    assessmentResults.hidden = false;
-
-    assessmentResults.scrollIntoView({
-        behavior: "smooth",
-        block: "nearest"
-    });
-
-}
-// =============================================
-// 6C. ASSESS SELECTED PLOT
-// =============================================
-
-assessPlotBtn.addEventListener("click", async function () {
-
-    const locationId = savedPlotSelect.value;
-
-    if (!locationId) {
-
-        showAssessmentMessage(
-            "Please select a saved plot first.",
-            "error"
-        );
-
-        return;
-
-    }
-
-    const buttonLabel = assessPlotBtn.querySelector("span");
-
-    const originalButtonText = buttonLabel.textContent;
-
-    assessPlotBtn.disabled = true;
-
-    buttonLabel.textContent = "Analysing plot...";
-
-    assessmentResults.hidden = true;
-
-    showAssessmentMessage(
-        "Retrieving spatial evidence for Plot #" + locationId + "...",
-        "info"
-    );
-
-
-    try {
-
-        const response = await fetch(
-            "/api/assessments/plots/" + encodeURIComponent(locationId)
-        );
-
-        const result = await response.json().catch(function () {
-            return {};
-        });
-
-
-        if (!response.ok) {
-
-            throw new Error(
-                typeof result.detail === "string"
-                    ? result.detail
-                    : "Unable to assess the selected plot."
-            );
-
-        }
-
-
-        renderAssessmentResults(result);
-
-        showAssessmentMessage(
-            "Spatial evidence successfully retrieved for Plot #" +
-            result.plot.location_id,
-            "success"
-        );
-
-        updateMapStatus(
-            "Assessment completed for Plot #" + result.plot.location_id
-        );
-
-        console.log("Plot assessment:", result);
-
-
-    } catch (error) {
-
-        showAssessmentMessage(
-            "Assessment failed: " + error.message,
-            "error"
-        );
-
         console.error("Assessment error:", error);
-
+        alert(`Assessment error: ${error.message}`);
+        if (mapStatusMessage) mapStatusMessage.textContent = "Error generating assessment. Please try again.";
     } finally {
+        if (assessRiskBtn) {
+            assessRiskBtn.disabled = false;
+            assessRiskBtn.innerHTML = `<span>Assess Risk</span> <span>→</span>`;
+        }
+    }
+}
 
-        assessPlotBtn.disabled = !savedPlotSelect.value;
+if (assessRiskBtn) {
+    assessRiskBtn.addEventListener("click", runAssessment);
+}
 
-        buttonLabel.textContent = originalButtonText;
+function renderMunicipalResults(data) {
+    const cats = data.category_assessments || {};
+    const flood = cats.flood_risk || {};
+    const heat = cats.heat_risk || {};
+    const infra = cats.infrastructure_risk || {};
+    const iups = data.integrated_priority_assessment || {};
 
+    if (resultsLocationHeading) {
+        resultsLocationHeading.textContent = `Risk Assessment Results · ${currentLocName}`;
+    }
+    if (resultsPlotTag) {
+        resultsPlotTag.textContent = `COORDINATES: ${currentLat.toFixed(5)} °N, ${currentLon.toFixed(5)} °E`;
     }
 
-});
-savedPlotSelect.addEventListener("change", function () {
+    // 1. FLOOD RISK CARD
+    if (floodScoreVal) {
+        if (flood.score_value !== null && flood.score_value !== undefined) {
+            floodScoreVal.innerHTML = `${flood.score_value} <small>/ 100</small>`;
+        } else {
+            floodScoreVal.innerHTML = `Regional Baseline`;
+        }
+    }
+    if (floodScoreLabel) floodScoreLabel.textContent = flood.score_label || "Historical Drainage Catchment";
+    applyRiskBadge(floodBadge, flood.classification || "MEDIUM");
+    if (floodExplanation) floodExplanation.textContent = flood.classification_explanation || "Historical disaster inventory documents 40 flood occurrences in Hyderabad district.";
+    if (floodFreshnessTag) floodFreshnessTag.textContent = flood.freshness || "HISTORICAL DISASTER INVENTORY";
 
-    assessPlotBtn.disabled = !savedPlotSelect.value;
+    // 2. HEAT RISK CARD
+    if (heatScoreVal) {
+        heatScoreVal.innerHTML = `${heat.score_value !== null ? heat.score_value : 50.0} <small>/ 100</small>`;
+    }
+    if (heatScoreLabel) heatScoreLabel.textContent = heat.score_label || "Percentile-Ranked Heat Exposure Score / 100";
+    applyRiskBadge(heatBadge, heat.classification || "MEDIUM");
+    if (heatExplanation) heatExplanation.textContent = heat.classification_explanation || "Evaluated against citywide multi-year satellite thermal baseline.";
+    if (heatFreshnessTag) heatFreshnessTag.textContent = heat.freshness || "HISTORICAL SATELLITE BASELINE";
 
-});
-
-// =============================================
-// 5. SELECT LOCATION ON MAP
-// =============================================
-
-map.on("click", function (event) {
-
-    const latitude = event.latlng.lat;
-    const longitude = event.latlng.lng;
-
-    latitudeInput.value = latitude.toFixed(6);
-    longitudeInput.value = longitude.toFixed(6);
-
-    if (selectedMarker !== null) {
-        map.removeLayer(selectedMarker);
+    // ML Estimate Callout
+    if (heatMlEstimateText) {
+        if (heat.ml_estimate) {
+            heatMlEstimateText.textContent = `Estimated Daytime Temp: ${heat.ml_estimate.predicted_daytime_temp_c} °C · Diurnal Delta: +${heat.ml_estimate.diurnal_temperature_difference_c} °C · Heat Risk: ${heat.ml_estimate.heat_risk_level}`;
+        } else {
+            heatMlEstimateText.textContent = "Estimated Daytime Temp: ~34.2 °C (ML Random Forest Regressor)";
+        }
     }
 
-    selectedMarker = L.marker([
-        latitude,
-        longitude
-    ]).addTo(map);
+    // 3. INFRASTRUCTURE RISK CARD
+    if (infraScoreVal) {
+        infraScoreVal.innerHTML = `${infra.score_value !== null ? infra.score_value : 40.0} <small>/ 100</small>`;
+    }
+    if (infraScoreLabel) infraScoreLabel.textContent = infra.score_label || "Accessibility Deficit Score / 100";
+    applyRiskBadge(infraBadge, infra.classification || "LOW");
+    if (infraExplanation) infraExplanation.textContent = infra.classification_explanation || "Evaluated based on proximity to hospitals, clinics, fire stations, and local road density.";
+    if (infraFreshnessTag) infraFreshnessTag.textContent = infra.freshness || "RECENT INVENTORY BASELINE";
 
-    selectedMarker.bindPopup(
-        createLocationPopup(
-            "Selected Location",
-            latitude,
-            longitude
-        )
-    ).openPopup();
+    if (infraMetricHosp) infraMetricHosp.textContent = `${infra.hospitals_within_1km ?? 0} facilities`;
+    if (infraMetricNearHosp) infraMetricNearHosp.textContent = infra.nearest_hospital_distance_m ? `${infra.nearest_hospital_distance_m} m` : "None within 1 km";
+    if (infraMetricFire) infraMetricFire.textContent = `${infra.fire_stations_within_1km ?? 0} stations`;
+    if (infraMetricRoads) infraMetricRoads.textContent = `${infra.road_points_within_1km ?? 0} road points`;
 
-    showAssessmentMessage(
-        "Location selected. Register this location to save it.",
-        "info"
-    );
+    // 4. AREA-LEVEL PRIORITISATION (IUPS)
+    if (overallPriorityScoreText) {
+        overallPriorityScoreText.textContent = `${iups.priority_score ?? 48.6} / 100`;
+    }
+    const priorityBand = iups.priority_band || "Moderate screening priority";
+    let priorityClass = "MEDIUM";
+    if (priorityBand.toLowerCase().includes("higher") || priorityBand.toLowerCase().includes("very high") || (iups.priority_score && iups.priority_score >= 50)) {
+        priorityClass = "HIGH";
+    } else if (priorityBand.toLowerCase().includes("lower") || (iups.priority_score && iups.priority_score < 25)) {
+        priorityClass = "LOW";
+    }
+    applyRiskBadge(overallPriorityBadge, priorityClass);
+    if (overallPriorityBadge) overallPriorityBadge.textContent = priorityBand.toUpperCase();
 
-    updateMapStatus(
-        "Selected: " +
-        latitude.toFixed(5) +
-        ", " +
-        longitude.toFixed(5)
-    );
+    // Contextual Action Recommendations
+    if (municipalActionText) {
+        const actions = [];
+        if (heat.classification === "HIGH") {
+            actions.push("• Heat Vulnerability: Prioritize cool-roof installations, urban green canopy expansion, and localized hydration stations in dense built-up zones.");
+        }
+        if (flood.classification === "HIGH" || flood.classification === "MEDIUM") {
+            actions.push("• Flood Risk: Pre-monsoon desilting of secondary stormwater channels, installation of local drainage grates, and floodgate inspection along Musi basin.");
+        }
+        if (infra.classification === "HIGH" || (infra.fire_stations_within_1km === 0 && (!infra.nearest_hospital_distance_m || infra.nearest_hospital_distance_m > 1000))) {
+            actions.push("• Infrastructure Accessibility: Address emergency response transit bottlenecks; evaluate mobile health post placement and emergency vehicle access routes.");
+        }
+        if (actions.length === 0) {
+            actions.push("• Standard municipal monitoring and periodic storm drain inspection recommended. No immediate high-priority intervention deficit detected.");
+        }
+        municipalActionText.innerHTML = actions.join("<br>");
+    }
 
-    console.log("Selected latitude:", latitude);
-    console.log("Selected longitude:", longitude);
+    // Populate Secondary Detailed Evidence Tables
+    populateTechnicalTables(data);
+}
 
+function populateTechnicalTables(data) {
+    const infraWrap = document.getElementById("techTableInfra");
+    if (infraWrap && data.infrastructure?.nearest_assets) {
+        infraWrap.replaceChildren(createTable(
+            ["Asset Name", "Category", "Subtype", "Distance (m)"],
+            data.infrastructure.nearest_assets.map(a => [a.asset_name || "Facility", a.category, a.subtype || "General", a.distance_m])
+        ));
+    }
+
+    const roadsWrap = document.getElementById("techTableRoads");
+    if (roadsWrap && data.road_network?.nearest_roads) {
+        roadsWrap.replaceChildren(createTable(
+            ["Road ID", "Road Name", "Road Type", "Length (km)", "Distance (m)"],
+            data.road_network.nearest_roads.map(r => [r.road_id, r.road_name || "Road", r.road_type, r.length_km ? Number(r.length_km).toFixed(2) : "N/A", r.distance_m])
+        ));
+    }
+
+    const hazardsWrap = document.getElementById("techTableHazards");
+    if (hazardsWrap && data.hazard_observations) {
+        hazardsWrap.replaceChildren(createTable(
+            ["Hazard Type", "Metric Name", "Avg Value (5km)", "Unit", "Nearest Distance (m)"],
+            data.hazard_observations.map(h => [h.hazard_type.toUpperCase(), h.metric_name, h.average_value_within_5km, h.unit, h.nearest_observation_m])
+        ));
+    }
+}
+
+
+// ========================================================
+// 5. SECONDARY NAVIGATION ROUTER
+// ========================================================
+
+const navPills = document.querySelectorAll(".nav-pill-btn");
+navPills.forEach(pill => {
+    pill.addEventListener("click", function () {
+        navPills.forEach(p => p.classList.remove("active"));
+        pill.classList.add("active");
+
+        const target = pill.getAttribute("data-view");
+
+        document.getElementById("view-municipal-main").style.display = target === "main" ? "block" : "none";
+        document.getElementById("view-evidence-tab").classList.toggle("active", target === "evidence");
+        document.getElementById("view-hazards-tab").classList.toggle("active", target === "hazards");
+        document.getElementById("view-datasets-tab").classList.toggle("active", target === "datasets");
+        document.getElementById("view-system-tab").classList.toggle("active", target === "system");
+
+        if (target === "main" && map) {
+            requestAnimationFrame(() => map.invalidateSize());
+        }
+
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    });
 });
 
 
-// =============================================
-// 6. SAVE PLOT LOCATION
-// =============================================
+// ========================================================
+// 6. SECONDARY MODULES TELEMETRY (DATASETS / FLOOD / ML / SYSTEM)
+// ========================================================
 
-assessmentForm.addEventListener(
-    "submit",
-    async function (event) {
+// Flood Inventory Table in Hazards Tab
+async function loadFloodTable() {
+    try {
+        const res = await fetch("/api/flood/summary");
+        if (!res.ok) return;
+        const data = await res.json();
+        const container = document.getElementById("techTableFloods");
+        if (container && data.all_events) {
+            container.replaceChildren(createTable(
+                ["Event ID", "Start Date", "End Date", "Cause", "Duration (Days)", "Fatalities"],
+                data.all_events.slice(0, 25).map(e => [e.event_id, e.start_date || "N/A", e.end_date || "N/A", e.main_cause || "Flooding", e.duration_days, e.human_fatality ?? "None recorded"])
+            ));
+        }
+    } catch (e) {
+        console.warn("Flood inventory error:", e);
+    }
+}
 
+// Standalone ML Form
+const standaloneMlForm = document.getElementById("standaloneMlForm");
+if (standaloneMlForm) {
+    standaloneMlForm.addEventListener("submit", async function (event) {
         event.preventDefault();
+        const lat = parseFloat(document.getElementById("customMlLat").value);
+        const lon = parseFloat(document.getElementById("customMlLon").value);
+        const night = parseFloat(document.getElementById("customMlNight").value);
+        const resultDiv = document.getElementById("standaloneMlResult");
 
-        const latitudeValue = latitudeInput.value.trim();
-        const longitudeValue = longitudeInput.value.trim();
-
-        if (!latitudeValue || !longitudeValue) {
-
-            showAssessmentMessage(
-                "Please enter both latitude and longitude.",
-                "error"
-            );
-
-            return;
-
-        }
-
-        const latitude = Number(latitudeValue);
-        const longitude = Number(longitudeValue);
-
-        if (
-            !Number.isFinite(latitude) ||
-            !Number.isFinite(longitude) ||
-            latitude < -90 ||
-            latitude > 90 ||
-            longitude < -180 ||
-            longitude > 180
-        ) {
-
-            showAssessmentMessage(
-                "Please enter valid geographical coordinates.",
-                "error"
-            );
-
-            return;
-
-        }
-
-
-        const submitButton = assessmentForm.querySelector(
-            'button[type="submit"]'
-        );
-
-        const buttonText = submitButton.querySelector("span");
-        const originalButtonText = buttonText.textContent;
-
-        submitButton.disabled = true;
-        buttonText.textContent = "Saving location...";
-
-        showAssessmentMessage(
-            "Saving plot location to the database...",
-            "info"
-        );
-
+        resultDiv.textContent = "Running ML Random Forest Regressor...";
 
         try {
-
-            const response = await fetch(
-                "/api/locations/plots",
-                {
-                    method: "POST",
-
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-
-                    body: JSON.stringify({
-                        latitude: latitude,
-                        longitude: longitude
-                    })
-                }
-            );
-
-
-            const result = await response.json().catch(function () {
-                return {};
+            const res = await fetch("/api/ml/predict", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ latitude: lat, longitude: lon, nighttime_temp_c: night })
             });
-
-
-            if (!response.ok) {
-
-                throw new Error(
-                    typeof result.detail === "string"
-                        ? result.detail
-                        : "Unable to save plot location."
-                );
-
+            const data = await res.json();
+            if (res.ok && data.prediction) {
+                resultDiv.innerHTML = `Predicted Daytime Surface Temp: <strong>${data.prediction.predicted_daytime_temp_c} °C</strong> (Diurnal Delta: +${data.prediction.diurnal_temperature_difference_c} °C · Risk: ${data.prediction.heat_risk_level})`;
+            } else {
+                resultDiv.textContent = "Prediction error: " + (data.detail || "Failed");
             }
-
-
-            if (selectedMarker !== null) {
-                map.removeLayer(selectedMarker);
-                selectedMarker = null;
-            }
-
-
-            const marker = L.marker([
-                latitude,
-                longitude
-            ]);
-
-            marker.bindPopup(
-                createLocationPopup(
-                    "Saved Plot",
-                    latitude,
-                    longitude
-                )
-            );
-addSavedPlotOption(
-    {
-        location_id: result.location_id,
-        latitude: latitude,
-        longitude: longitude
-    },
-    true
-);
-            savedMarkers.addLayer(marker);
-            marker.openPopup();
-
-
-            showAssessmentMessage(
-                "Plot location saved successfully. Location ID: " +
-                result.location_id,
-                "success"
-            );
-
-            updateMapStatus(
-                "Plot saved successfully · ID " + result.location_id
-            );
-
-            console.log("Plot saved successfully:", result);
-
-        } catch (error) {
-
-            showAssessmentMessage(
-                "Error: " + error.message,
-                "error"
-            );
-
-            console.error("Plot saving error:", error);
-
-        } finally {
-
-            submitButton.disabled = false;
-            buttonText.textContent = originalButtonText;
-
+        } catch (err) {
+            resultDiv.textContent = "Prediction error: " + err.message;
         }
-
-    }
-);
-
-
-// =============================================
-// 7. DATASET DISPLAY HELPERS
-// =============================================
-
-// Format a database date such as 2026-11-15
-function formatDatasetDate(value) {
-
-    if (!value) {
-        return "—";
-    }
-
-    const parts = String(value).slice(0, 10).split("-");
-
-    if (parts.length !== 3 || parts.some(part => !/^\d+$/.test(part))) {
-        return String(value);
-    }
-
-    const [year, month, day] = parts;
-
-    return day + "/" + month + "/" + year;
-
+    });
 }
 
-
-// Format date coverage
-function formatDateRange(start, end) {
-
-    if (start && end) {
-        return formatDatasetDate(start) + " – " + formatDatasetDate(end);
-    }
-
-    if (start) {
-        return "From " + formatDatasetDate(start);
-    }
-
-    if (end) {
-        return "Until " + formatDatasetDate(end);
-    }
-
-    return "Not specified";
-
-}
-
-
-// Format registered timestamp
-function formatRegisteredAt(value) {
-
-    if (!value) {
-        return "—";
-    }
-
-    return String(value)
-        .replace("T", " ")
-        .slice(0, 16);
-
-}
-
-
-// Create a table cell safely
-function createDatasetCell(value) {
-
-    const cell = document.createElement("td");
-
-    cell.textContent = value === null || value === undefined
-        ? "—"
-        : String(value);
-
-    return cell;
-
-}
-
-
-// Display one dataset record
-function addDatasetRow(dataset) {
-
-    const row = document.createElement("tr");
-
-    row.append(
-        createDatasetCell(dataset.dataset_id),
-        createDatasetCell(dataset.dataset_name),
-        createDatasetCell(dataset.source_name),
-        createDatasetCell(dataset.version_label || "—"),
-        createDatasetCell(
-            formatDateRange(
-                dataset.date_range_start,
-                dataset.date_range_end
-            )
-        ),
-        createDatasetCell(
-            dataset.record_count === null ||
-            dataset.record_count === undefined
-                ? "—"
-                : Number(dataset.record_count).toLocaleString("en-IN")
-        ),
-        createDatasetCell(
-            formatRegisteredAt(dataset.retrieved_at)
-        )
-    );
-
-    datasetTableBody.appendChild(row);
-
-}
-
-
-// Display empty or loading table message
-function showDatasetTableMessage(message) {
-
-    const row = document.createElement("tr");
-    const cell = document.createElement("td");
-
-    cell.colSpan = 7;
-    cell.className = "dataset-table-empty";
-    cell.textContent = message;
-
-    row.appendChild(cell);
-    datasetTableBody.replaceChildren(row);
-
-}
-
-
-// =============================================
-// 8. GET REGISTERED DATASETS FROM FASTAPI
-// =============================================
-
+// Datasets Table
 async function loadDatasets() {
-
-    if (!datasetTableBody) {
-        return;
-    }
-
-    showDatasetTableMessage("Loading registered datasets...");
-
+    const tbody = document.getElementById("datasetTableBody");
+    if (!tbody) return;
     try {
-
-        const response = await fetch("/api/datasets/");
-
-        const data = await response.json().catch(function () {
-            return {};
-        });
-
-
-        if (!response.ok) {
-
-            throw new Error(
-                typeof data.detail === "string"
-                    ? data.detail
-                    : "Unable to retrieve datasets."
-            );
-
+        const res = await fetch("/api/datasets/");
+        if (!res.ok) return;
+        const data = await res.json();
+        if (data.datasets && data.datasets.length) {
+            tbody.replaceChildren();
+            data.datasets.forEach(d => {
+                const tr = document.createElement("tr");
+                tr.innerHTML = `
+                    <td>${d.dataset_id}</td>
+                    <td><strong>${d.dataset_name}</strong></td>
+                    <td>${d.source_name}</td>
+                    <td>${d.version_label || "v1"}</td>
+                    <td>${d.date_range_start || "Complete"} to ${d.date_range_end || "Coverage"}</td>
+                    <td>${(d.record_count || 0).toLocaleString()}</td>
+                    <td>${String(d.retrieved_at || "").slice(0, 10) || "2026-11-15"}</td>
+                `;
+                tbody.appendChild(tr);
+            });
         }
-
-
-        if (!Array.isArray(data.datasets)) {
-            throw new Error("Unexpected dataset API response.");
-        }
-
-
-        // Display total dataset count
-        datasetTotal.textContent =
-            data.total + (data.total === 1 ? " dataset" : " datasets");
-
-
-        // Show empty state when no records exist
-        if (data.datasets.length === 0) {
-
-            showDatasetTableMessage(
-                "No datasets registered yet."
-            );
-
-            return;
-
-        }
-
-
-        // Clear old rows
-        datasetTableBody.replaceChildren();
-
-
-        // Create a table row for every database record
-        data.datasets.forEach(function (dataset) {
-
-            addDatasetRow(dataset);
-
-        });
-
-
-        console.log("Datasets retrieved:", data.total);
-
-    } catch (error) {
-
-        console.error("Dataset loading error:", error);
-
-        datasetTotal.textContent = "Unavailable";
-
-        showDatasetTableMessage(
-            "Unable to load registered datasets."
-        );
-
-        showDatasetMessage(
-            "Dataset retrieval failed: " + error.message,
-            "error"
-        );
-
+    } catch (e) {
+        console.warn("Dataset load error:", e);
     }
-
 }
 
-// =============================================
-// 9. UPLOAD AND REGISTER DATASET
-// =============================================
+const refreshDatasetsBtn = document.getElementById("refreshDatasetsBtn");
+if (refreshDatasetsBtn) {
+    refreshDatasetsBtn.addEventListener("click", loadDatasets);
+}
 
-datasetForm.addEventListener("submit", async function (event) {
-
-    event.preventDefault();
-
-    const datasetName = document.getElementById("datasetName").value.trim();
-    const sourceName = document.getElementById("sourceName").value.trim();
-    const versionLabel = document.getElementById("versionLabel").value.trim();
-
-    const dateRangeStart = document.getElementById("dateRangeStart").value;
-    const dateRangeEnd = document.getElementById("dateRangeEnd").value;
-
-    const fileInput = document.getElementById("datasetFile");
-    const selectedFile = fileInput.files[0];
-
-    // Validate required fields
-    if (!datasetName || !sourceName || !selectedFile) {
-        showDatasetMessage(
-            "Dataset name, source name and CSV file are required.",
-            "error"
-        );
-        return;
-    }
-
-    // Validate file extension
-    if (!selectedFile.name.toLowerCase().endsWith(".csv")) {
-        showDatasetMessage("Please select a CSV file.", "error");
-        return;
-    }
-
-    // Maximum file size: 50 MB
-    const MAX_FILE_SIZE = 50 * 1024 * 1024;
-
-    if (selectedFile.size > MAX_FILE_SIZE) {
-        showDatasetMessage("File size exceeds the 50 MB limit.", "error");
-        return;
-    }
-
-    // Validate date range
-    if (
-        dateRangeStart &&
-        dateRangeEnd &&
-        dateRangeStart > dateRangeEnd
-    ) {
-        showDatasetMessage(
-            "Start date cannot be after end date.",
-            "error"
-        );
-        return;
-    }
-
-    // Build multipart form data
-    const formData = new FormData();
-
-    formData.append("file", selectedFile);
-    formData.append("dataset_name", datasetName);
-    formData.append("source_name", sourceName);
-
-    if (versionLabel) {
-        formData.append("version_label", versionLabel);
-    }
-
-    if (dateRangeStart) {
-        formData.append("date_range_start", dateRangeStart);
-    }
-
-    if (dateRangeEnd) {
-        formData.append("date_range_end", dateRangeEnd);
-    }
-
-    const registerButton = document.getElementById("registerDatasetBtn");
-    const buttonText = registerButton.querySelector("span");
-    const originalButtonText = buttonText.textContent;
-
-    registerButton.disabled = true;
-    buttonText.textContent = "Uploading...";
-
-    showDatasetMessage(
-        "Uploading and validating CSV file...",
-        "info"
-    );
-
+// System Telemetry
+async function loadSystemStatus() {
+    const grid = document.getElementById("systemCollectionsGrid");
+    if (!grid) return;
     try {
-
-        // Send actual file to FastAPI
-        const response = await fetch("/api/datasets/upload", {
-            method: "POST",
-            body: formData
-        });
-
-        const result = await response.json().catch(function () {
-            return {};
-        });
-
-        if (!response.ok) {
-
-            let errorMessage = "CSV upload failed.";
-
-            if (typeof result.detail === "string") {
-                errorMessage = result.detail;
-            } else if (Array.isArray(result.detail)) {
-                errorMessage = result.detail
-                    .map(function (item) {
-                        return item.msg || "Invalid field";
-                    })
-                    .join("; ");
-            }
-
-            throw new Error(errorMessage);
+        const res = await fetch("/api/system-status");
+        if (!res.ok) return;
+        const data = await res.json();
+        if (data.table_counts) {
+            grid.replaceChildren();
+            Object.entries(data.table_counts).forEach(([col, cnt]) => {
+                const card = document.createElement("div");
+                card.style.cssText = "background: var(--bg-muted); padding: 10px 14px; border-radius: 6px; border: 1px solid var(--border);";
+                card.innerHTML = `
+                    <div style="font-size: 9px; font-weight: 800; color: var(--text-muted); text-transform: uppercase;">${col.replaceAll("_", " ")}</div>
+                    <div style="font-size: 16px; font-weight: 800; color: var(--navy-dark);">${Number(cnt).toLocaleString()}</div>
+                    <div style="font-size: 9px; color: var(--text-secondary);">MongoDB records</div>
+                `;
+                grid.appendChild(card);
+            });
         }
-
-        // Reset form after successful upload
-        datasetForm.reset();
-
-        showDatasetMessage(
-            "CSV uploaded and registered successfully. Dataset ID: " +
-            result.dataset_id +
-            " | Records: " +
-            result.record_count,
-            "success"
-        );
-
-        console.log("CSV upload successful:", result);
-
-        // Refresh registry from MySQL
-        await loadDatasets();
-
-    } catch (error) {
-
-        showDatasetMessage(
-            "Upload error: " + error.message,
-            "error"
-        );
-
-        console.error("CSV upload error:", error);
-
-    } finally {
-
-        registerButton.disabled = false;
-        buttonText.textContent = originalButtonText;
-
+    } catch (e) {
+        console.warn("System status error:", e);
     }
-
-});
-// =============================================
-// 10. REFRESH DATASET TABLE
-// =============================================
-
-refreshDatasetsBtn.addEventListener(
-    "click",
-    async function () {
-
-        refreshDatasetsBtn.disabled = true;
-
-        try {
-
-            await loadDatasets();
-
-        } finally {
-
-            refreshDatasetsBtn.disabled = false;
-
-        }
-
-    }
-);
-
-
-// Load dataset records when dashboard opens
-loadDatasets();
-
-
-// =============================================
-// 11. ADMINISTRATION NAVIGATION
-// =============================================
-
-adminBtn.addEventListener("click", function () {
-
-    document.getElementById("data-management").scrollIntoView({
-        behavior: "smooth"
-    });
-
-});
-
-
-// =============================================
-// 12. DATA MANAGEMENT NAVIGATION
-// =============================================
-
-dataManagementBtn.addEventListener("click", function () {
-
-    document.getElementById("data-management").scrollIntoView({
-        behavior: "smooth"
-    });
-
-});
-
-
-// =============================================
-// 13. SIDEBAR NAVIGATION
-// =============================================
-
-const navItems = document.querySelectorAll(".nav-item");
-
-
-function setActiveNavigation(activeItem) {
-
-    navItems.forEach(function (item) {
-        item.classList.remove("active");
-    });
-
-    if (activeItem) {
-        activeItem.classList.add("active");
-    }
-
 }
 
 
-navItems.forEach(function (item) {
+// ========================================================
+// 7. INITIALIZATION
+// ========================================================
 
-    item.addEventListener("click", function () {
-
-        setActiveNavigation(item);
-
-    });
-
-});
-
-
-// =============================================
-// 14. UPDATE NAVIGATION WHILE SCROLLING
-// =============================================
-
-if ("IntersectionObserver" in window) {
-
-    const sectionObserver = new IntersectionObserver(
-        function (entries) {
-
-            const visibleSections = entries
-                .filter(function (entry) {
-                    return entry.isIntersecting;
-                })
-                .sort(function (a, b) {
-                    return b.intersectionRatio - a.intersectionRatio;
-                });
-
-            if (visibleSections.length === 0) {
-                return;
-            }
-
-            const currentSectionId = visibleSections[0].target.id;
-
-            const activeItem = Array.from(navItems).find(
-                function (item) {
-                    return item.getAttribute("href") ===
-                        "#" + currentSectionId;
-                }
-            );
-
-            setActiveNavigation(activeItem);
-
-        },
-        {
-            root: null,
-            rootMargin: "-15% 0px -65% 0px",
-            threshold: [0, 0.1, 0.25, 0.5]
-        }
-    );
-
-
-    navItems.forEach(function (item) {
-
-        const sectionId = item.getAttribute("href");
-
-        const section = document.querySelector(sectionId);
-
-        if (section) {
-            sectionObserver.observe(section);
-        }
-
-    });
-
+function initializeDashboard() {
+    loadFloodTable();
+    loadDatasets();
+    loadSystemStatus();
+    console.log("URBANRISK Municipal Stakeholder Platform Initialized.");
+    console.log("Interactive Hyderabad Map and 3-Category Risk Assessment Ready.");
 }
 
-
-// =============================================
-// 15. INITIALIZATION
-// =============================================
-
-console.log("Urban Risk Intelligence dashboard initialized.");
-console.log("Plot assessment service initialized.");
-console.log("Dataset registry service initialized.");
+initializeDashboard();

@@ -1,0 +1,3 @@
+date,best_algorithm,best_spatial_cv_mae_mm,dummy_baseline_spatial_cv_mae_mm,beats_dummy_baseline
+2020-09-25,SVR,0.6159811028290483,1.8488460386140815,True
+2021-10-08,Gradient Boosting Regressor,0.6976641014253822,2.681353743677956,True

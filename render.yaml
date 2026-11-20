@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: urbanrisk
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn backend.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: MONGODB_DATABASE
+        value: urban_risk_db
+      - key: MONGODB_URI
+        sync: false

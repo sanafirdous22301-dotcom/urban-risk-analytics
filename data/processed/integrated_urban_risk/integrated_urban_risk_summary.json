@@ -1,0 +1,32 @@
+{
+  "grid_cells": 791,
+  "grid_size_km": 1.0,
+  "spatial_assignment_method": "Nearest master-grid centre",
+  "maximum_assignment_distance_km": 0.75,
+  "weights": {
+    "flood_evidence_score": 0.35,
+    "heat_evidence_score": 0.35,
+    "infrastructure_gap_score": 0.15,
+    "road_representation_gap_score": 0.15
+  },
+  "heat_sources": [
+    "MODIS daytime temperature",
+    "Yale daytime UHI"
+  ],
+  "score_interpretation": "Relative screening and resource-prioritization indicator. Not a validated citywide risk prediction.",
+  "available_priority_scores": 741,
+  "hazard_evidence_cells": 741,
+  "resource_context_gap_cells": 791,
+  "limitations": [
+    "OSM and infrastructure coverage may be incomplete.",
+    "No mapped asset record does not prove that an asset is absent.",
+    "Road data use representative points and do not provide road connectivity or travel time.",
+    "Rainfall observations represent measured dates, not future flood predictions.",
+    "Historical flood events without coordinates are not spatially assigned.",
+    "MODIS temperature and Yale UHI are different measurements.",
+    "Heat scores combine independently normalized source percentiles and are exploratory.",
+    "Infrastructure and road gaps are relative mapped-data proxies, not validated service-adequacy measures.",
+    "The 0.75 km assignment threshold is an approximate nearest-centre tolerance.",
+    "Weights are analytical assumptions, not statistically validated risk weights."
+  ]
+}

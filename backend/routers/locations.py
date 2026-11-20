@@ -1,9 +1,10 @@
 
-from fastapi import APIRouter, Depends
-from sqlalchemy.orm import Session
-from sqlalchemy import text
+from datetime import datetime, timezone
 
-from database.session import get_db
+from fastapi import APIRouter, HTTPException
+
+from database.mongodb import db
+from database.counters import get_next_sequence
 from backend.location_schemas import PlotLocationCreate
 
 
@@ -12,73 +13,75 @@ router = APIRouter(
     tags=["Spatial Locations"]
 )
 
-@router.post("/plots", status_code=201)
-def create_plot_location(
-    location: PlotLocationCreate,
-    db: Session = Depends(get_db)
-):
-    query = text("""
-        INSERT INTO spatial_locations (
-            location_type,
-            latitude,
-            longitude,
-            geom
-        )
-        VALUES (
-            'plot',
-            :latitude,
-            :longitude,
-            ST_GeomFromText(
-                :point_wkt,
-                4326,
-                'axis-order=long-lat'
-            )
-        )
-    """)
 
-    result = db.execute(
-        query,
-        {
+# POST: Save a new plot location
+
+@router.post("/plots", status_code=201)
+def create_plot_location(location: PlotLocationCreate):
+
+    try:
+        location_id = get_next_sequence("location_id")
+
+        location_document = {
+            "_id": location_id,
+            "location_id": location_id,
+            "location_type": "plot",
             "latitude": location.latitude,
             "longitude": location.longitude,
-            "point_wkt": f"POINT({location.longitude} {location.latitude})"
+            "geom": {
+                "type": "Point",
+                "coordinates": [
+                    location.longitude,
+                    location.latitude
+                ]
+            },
+            "created_at": datetime.now(timezone.utc)
         }
-    )
 
-    db.commit()
+        db.spatial_locations.insert_one(location_document)
 
-    return {
-        "message": "Plot location saved successfully",
-        "location_id": result.lastrowid,
-        "location_type": "plot",
-        "latitude": location.latitude,
-        "longitude": location.longitude
-    }
+        return {
+            "message": "Plot location saved successfully",
+            "location_id": location_id,
+            "location_type": "plot",
+            "latitude": location.latitude,
+            "longitude": location.longitude
+        }
+
+    except Exception:
+        raise HTTPException(
+            status_code=500,
+            detail="Unable to save plot location"
+        )
+
 
 # GET: Retrieve all saved plot locations
+
 @router.get("/plots")
-def get_plot_locations(db: Session = Depends(get_db)):
+def get_plot_locations():
 
-    query = text("""
-        SELECT
-            location_id,
-            location_type,
-            latitude,
-            longitude,
-            created_at
-        FROM spatial_locations
-        WHERE location_type = 'plot'
-        ORDER BY location_id DESC
-    """)
+    try:
+        locations = list(
+            db.spatial_locations.find(
+                {"location_type": "plot"},
+                {
+                    "_id": 0,
+                    "location_id": 1,
+                    "location_type": 1,
+                    "latitude": 1,
+                    "longitude": 1,
+                    "created_at": 1
+                }
+            ).sort("location_id", -1)
+        )
 
-    result = db.execute(query)
+        return {
+            "total": len(locations),
+            "locations": locations
+        }
 
-    locations = [
-        dict(row)
-        for row in result.mappings().all()
-    ]
-
-    return {
-        "total": len(locations),
-        "locations": locations
-    }
+    except Exception:
+        raise HTTPException(
+            status_code=500,
+            detail="Unable to retrieve plot locations"
+        )

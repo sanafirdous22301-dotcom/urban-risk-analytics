@@ -1,0 +1,16 @@
+{
+    "dataset": "Hyderabad rainfall observations",
+    "dataset_file": "C:\\Users\\sanaf\\OneDrive\\Desktop\\urban-risk-analytics\\data\\processed\\flood\\hyderabad_rainfall.csv",
+    "observed_date": "2021-10-08",
+    "target": "rainfall_mm",
+    "features": [
+        "latitude",
+        "longitude"
+    ],
+    "algorithm": "Gradient Boosting Regressor",
+    "spatial_cv_mae_mm": 0.6976641014253822,
+    "model_type": "date-specific spatial interpolation candidate",
+    "not_a_forecast": true,
+    "not_a_flood_risk_classifier": true,
+    "deployment_approval": "pending scientific and integration review"
+}
