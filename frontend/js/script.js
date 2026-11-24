@@ -698,7 +698,15 @@ function renderAssessmentResults(data) {
     const roadScore = comp.road_representation_gap_score != null ? (comp.road_representation_gap_score * 100).toFixed(1) : "44.2";
 
     // 2. TOP SUMMARY METRIC CARDS
-    setText("homePriorityScore", priorityScore);
+    const priEl = document.getElementById("homePriorityScore");
+    if (priEl) {
+        priEl.textContent = priorityScore;
+        if (String(priorityScore).length > 6) {
+            priEl.classList.add("long-text");
+        } else {
+            priEl.classList.remove("long-text");
+        }
+    }
     const priBadge = document.getElementById("homePriorityBadge");
     if (priBadge) {
         applyBadgeStyle(priBadge, priorityBand);
@@ -711,19 +719,45 @@ function renderAssessmentResults(data) {
     }
 
     // Flood Card
-    setText("homeFloodVal", floodClass);
+    const floodEl = document.getElementById("homeFloodVal");
+    if (floodEl) {
+        floodEl.textContent = floodClass;
+        if (String(floodClass).length > 8) {
+            floodEl.classList.add("long-text");
+        } else {
+            floodEl.classList.remove("long-text");
+        }
+    }
     setText("homeFloodScoreText", hasFloodScore ? `(${floodScore} / 100)` : "(-- / 100)");
     applyBadgeStyle(document.getElementById("homeFloodBadge"), floodClass);
 
     // Heat Card
-    setText("homeHeatVal", heat.classification || "HIGH");
+    const heatVal = heat.classification || "HIGH";
+    const heatEl = document.getElementById("homeHeatVal");
+    if (heatEl) {
+        heatEl.textContent = heatVal;
+        if (String(heatVal).length > 8) {
+            heatEl.classList.add("long-text");
+        } else {
+            heatEl.classList.remove("long-text");
+        }
+    }
     setText("homeHeatScoreText", `(${heatScore} / 100)`);
-    applyBadgeStyle(document.getElementById("homeHeatBadge"), heat.classification || "HIGH");
+    applyBadgeStyle(document.getElementById("homeHeatBadge"), heatVal);
 
     // Infrastructure Card
-    setText("homeInfraVal", infra.classification || "MEDIUM");
+    const infraVal = infra.classification || "MEDIUM";
+    const infraEl = document.getElementById("homeInfraVal");
+    if (infraEl) {
+        infraEl.textContent = infraVal;
+        if (String(infraVal).length > 8) {
+            infraEl.classList.add("long-text");
+        } else {
+            infraEl.classList.remove("long-text");
+        }
+    }
     setText("homeInfraScoreText", `(${infraScore} / 100)`);
-    applyBadgeStyle(document.getElementById("homeInfraBadge"), infra.classification || "MEDIUM");
+    applyBadgeStyle(document.getElementById("homeInfraBadge"), infraVal);
 
     // 3. LOCATION ANALYSIS PANEL (RIGHT OF MAP)
     setText("analysisPlaceTitle", currentPlaceName);
