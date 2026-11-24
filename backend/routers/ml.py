@@ -172,6 +172,11 @@ def run_modis_prediction(data: HeatPredictRequest) -> dict:
             "heat_risk_level": risk_level,
             "unit": "Celsius (°C)"
         },
+        "estimate_type": "REGRESSION_INFERENCE",
+        "input_nature": "User-supplied input parameter",
+        "is_forecast": False,
+        "is_real_time": False,
+        "baseline_satellite_training_year": 2018,
         "evaluation_metrics": {
             "spatial_cv_mae_c": round(
                 modis_metadata.get("spatial_cv_mae_c", 0.506), 3

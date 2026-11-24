@@ -24,7 +24,7 @@ router = APIRouter(
 
 @router.get("/summary")
 def get_iups_summary():
-    """Return precomputed summary statistics for the Hyderabad 1-km IUPS priority grid."""
+    """Return summary statistics for the Hyderabad 1-km IUPS priority grid."""
     summary_path = (
         PROJECT_ROOT
         / "data"
@@ -33,19 +33,133 @@ def get_iups_summary():
         / "integrated_urban_risk_summary.json"
     )
 
-    if not summary_path.exists():
+    summary_data = {}
+    if summary_path.exists():
+        try:
+            with open(summary_path, "r", encoding="utf-8") as f:
+                summary_data = json.load(f)
+        except Exception:
+            pass
+
+    # Additive enrichment with latest dynamic recalculation run if available
+    try:
+        if db is not None:
+            latest_run = db.grid_recalculation_runs.find_one({}, {"_id": 0}, sort=[("calculation_timestamp", -1)])
+            if latest_run:
+                summary_data["last_calculated_at"] = latest_run.get("calculation_timestamp")
+                summary_data["recalculation_status"] = "active"
+                summary_data["dynamic_score_statistics"] = latest_run.get("score_statistics")
+                summary_data["dynamic_screening_distribution"] = latest_run.get("screening_distribution")
+    except Exception:
+        pass
+
+    if not summary_data:
         raise HTTPException(
             status_code=404,
             detail="Integrated urban risk summary data is unavailable."
         )
 
+    return summary_data
+
+
+@router.get("/priority-grid/top")
+def get_top_priority_grid(limit: int = 15):
+    """Return top-priority 1-km grid cells in Hyderabad from IUPS analysis."""
+    last_calculated_at = None
+    source_type = "precomputed_csv_baseline"
+
+    # 1. Attempt reading dynamically from MongoDB priority_grid_cells
     try:
-        with open(summary_path, "r", encoding="utf-8") as f:
-            return json.load(f)
+        if db is not None and "priority_grid_cells" in db.list_collection_names():
+            total_cells = db.priority_grid_cells.count_documents({})
+            if total_cells == 791:
+                latest_run = db.grid_recalculation_runs.find_one({}, sort=[("calculation_timestamp", -1)])
+                if latest_run:
+                    last_calculated_at = latest_run.get("calculation_timestamp")
+                source_type = "dynamic_mongodb_grid"
+
+                scored_query = {"priority_score_0_100": {"$ne": None}}
+                total_scored = db.priority_grid_cells.count_documents(scored_query)
+                cursor = db.priority_grid_cells.find(scored_query).sort("priority_score_0_100", -1).limit(limit)
+
+                results = []
+                for r in cursor:
+                    results.append({
+                        "grid_id": r.get("grid_id"),
+                        "priority_score": round(float(r["priority_score_0_100"]), 1),
+                        "screening_priority": r.get("screening_priority") or "Higher screening priority",
+                        "latitude": round(float(r["cell_center_latitude"]), 5),
+                        "longitude": round(float(r["cell_center_longitude"]), 5),
+                        "flood_evidence_score": round(float(r["flood_evidence_score"]), 3) if r.get("flood_evidence_score") is not None else None,
+                        "heat_evidence_score": round(float(r["heat_evidence_score"]), 3) if r.get("heat_evidence_score") is not None else None,
+                        "infrastructure_gap_score": round(float(r["infrastructure_gap_score"]), 3) if r.get("infrastructure_gap_score") is not None else None,
+                        "road_gap_score": round(float(r["road_representation_gap_score"]), 3) if r.get("road_representation_gap_score") is not None else None,
+                        "hospitals_count": int(float(r.get("infra_hospital_count") or 0)),
+                        "fire_stations_count": int(float(r.get("infra_fire_station_count") or 0)),
+                        "road_points_count": int(float(r.get("road_representative_point_count") or 0))
+                    })
+
+                return {
+                    "status": "success",
+                    "total_scored_cells": total_scored,
+                    "last_calculated_at": last_calculated_at,
+                    "source_type": source_type,
+                    "top_priority_cells": results
+                }
+    except Exception:
+        pass
+
+    # 2. Fallback to precomputed CSV
+    import csv
+    grid_csv_path = (
+        PROJECT_ROOT
+        / "data"
+        / "processed"
+        / "integrated_urban_risk"
+        / "integrated_urban_risk_priority_grid_1km.csv"
+    )
+
+    if not grid_csv_path.exists():
+        raise HTTPException(
+            status_code=404,
+            detail="Priority grid data file is unavailable."
+        )
+
+    try:
+        with open(grid_csv_path, mode="r", encoding="utf-8") as f:
+            rows = list(csv.DictReader(f))
+
+        valid = [r for r in rows if r.get("priority_score_0_100") and r.get("priority_score_0_100") != ""]
+        valid.sort(key=lambda r: float(r["priority_score_0_100"]), reverse=True)
+
+        results = []
+        for r in valid[:limit]:
+            results.append({
+                "grid_id": r.get("grid_id"),
+                "priority_score": round(float(r["priority_score_0_100"]), 1),
+                "screening_priority": r.get("screening_priority") or "Higher screening priority",
+                "latitude": round(float(r["cell_center_latitude"]), 5),
+                "longitude": round(float(r["cell_center_longitude"]), 5),
+                "flood_evidence_score": round(float(r["flood_evidence_score"]), 3) if r.get("flood_evidence_score") else None,
+                "heat_evidence_score": round(float(r["heat_evidence_score"]), 3) if r.get("heat_evidence_score") else None,
+                "infrastructure_gap_score": round(float(r["infrastructure_gap_score"]), 3) if r.get("infrastructure_gap_score") else None,
+                "road_gap_score": round(float(r["road_representation_gap_score"]), 3) if r.get("road_representation_gap_score") else None,
+                "hospitals_count": int(float(r.get("infra_hospital_count") or 0)),
+                "fire_stations_count": int(float(r.get("infra_fire_station_count") or 0)),
+                "road_points_count": int(float(r.get("road_representative_point_count") or 0))
+            })
+
+        return {
+            "status": "success",
+            "total_scored_cells": len(valid),
+            "last_calculated_at": last_calculated_at,
+            "source_type": source_type,
+            "top_priority_cells": results
+        }
     except Exception as error:
         raise HTTPException(
             status_code=500,
-            detail=f"Unable to load integrated risk summary: {error}"
+            detail=f"Unable to process priority grid: {error}"
         )
 
 
@@ -621,15 +735,15 @@ def run_spatial_assessment(latitude: float, longitude: float, location_id: Optio
             flood_score_val = round(flood_evidence_score * 100, 1)
             flood_class = "HIGH" if flood_score_val >= 50 else ("MEDIUM" if flood_score_val >= 25 else "LOW")
             flood_explanation = (
-                f"Rainfall station observations indicate elevated precipitation exposure ({flood_score_val}/100 normalized score). "
+                f"Rainfall raster extraction indicates elevated precipitation exposure ({flood_score_val}/100 normalized score). "
                 f"Hyderabad district records document 40 historical flood events in regional drainage catchments."
             )
         else:
             flood_score_val = None
-            flood_class = "MEDIUM"
+            flood_class = "REGIONAL CONTEXT ONLY"
             flood_explanation = (
                 "Location is situated in the Greater Hyderabad urban drainage catchment with 40 recorded historical flood events (1969–2022). "
-                "No direct precipitation monitoring station is located within the immediate 1-km cell."
+                "Location has insufficient direct cell-level flood evidence (no local rainfall monitoring raster sample) to calculate a numerical flood-risk score."
             )
 
         heat_evidence_score = components.get("heat_evidence_score")
@@ -655,6 +769,10 @@ def run_spatial_assessment(latitude: float, longitude: float, location_id: Optio
                 "diurnal_temperature_difference_c": ml_pred.get("diurnal_temperature_difference_c"),
                 "heat_risk_level": ml_pred.get("heat_risk_level"),
                 "input_nighttime_temp_c": 24.5,
+                "input_assumed_nighttime_temp_c": 24.5,
+                "input_nature": "Assumed nominal nighttime temperature baseline of 24.5°C; not a measured temperature.",
+                "estimate_type": "ILLUSTRATIVE_REGRESSION_ESTIMATE",
+                "is_forecast": False,
                 "validation_mae_c": 0.506
             }
         except Exception:
@@ -686,12 +804,15 @@ def run_spatial_assessment(latitude: float, longitude: float, location_id: Optio
                 "category_name": "Flood Risk",
                 "score_value": flood_score_val,
                 "score_scale": "0-100",
-                "score_label": "Normalized Rainfall & Hazard Depth Score / 100" if flood_score_val is not None else "Regional Disaster Context",
+                "score_label": "Normalized Rainfall & Hazard Depth Score / 100" if flood_score_val is not None else "Regional Disaster Context (No Direct Cell Evidence)",
                 "classification": flood_class,
                 "classification_explanation": flood_explanation,
-                "data_type": "OBSERVED DATA",
-                "source": "IMD Historical Flood Inventory & NASA POWER Rainfall",
-                "observation_period": "1969–2022 (Floods) · 2020–2021 (Rainfall)",
+                "data_type": "HISTORICAL DISASTER INVENTORY & STORM RASTER EXTRACTS",
+                "source": "India Flood Inventory v3 (IMD Disasters Archive) & CHIRPS v3.0 Daily Rainfall Extraction",
+                "observation_period": "1969–2022 (Floods) · 2020-09-25 & 2021-10-08 (Storm Rasters)",
+                "storm_dates": ["2020-09-25", "2021-10-08"],
+                "raster_samples_count": 84,
+                "rainfall_coverage_note": "Historical precipitation from CHIRPS raster extraction for two extreme storm events (2020-09-25 and 2021-10-08); does not represent real-time telemetry or flood forecasting.",
                 "last_updated": "November 2026",
                 "freshness": "HISTORICAL DISASTER INVENTORY",
                 "warning": "Historical disaster inventory and storm records; does not represent live rainfall forecasting."
@@ -703,7 +824,7 @@ def run_spatial_assessment(latitude: float, longitude: float, location_id: Optio
                 "score_label": "Percentile-Ranked Heat Exposure Score / 100",
                 "classification": heat_class,
                 "classification_explanation": heat_explanation,
-                "data_type": "OBSERVED DATA + ML ESTIMATE",
+                "data_type": "OBSERVED SATELLITE BASELINE + ILLUSTRATIVE ML ESTIMATE",
                 "source": "NASA MODIS Land Surface Temp & Yale Center for Earth Observation UHI",
                 "observation_period": "2003–2018 Multi-Year Summer Satellite Baseline",
                 "last_updated": "November 2026",

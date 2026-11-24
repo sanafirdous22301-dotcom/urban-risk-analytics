@@ -1,10 +1,31 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Query
 from database.mongodb import db
+from backend.services.phase6_analytics_service import AdvancedHazardAnalyticsService
 
 router = APIRouter(
     prefix="/api/heat",
     tags=["Urban Heat Intelligence"]
 )
+
+
+@router.get("/vulnerability-profile")
+def get_heat_vulnerability_profile(
+    latitude: float = Query(17.3850, ge=-90.0, le=90.0),
+    longitude: float = Query(78.4867, ge=-180.0, le=180.0)
+):
+    """
+    Returns locality thermal anomaly relative to citywide baseline, hotspot classification,
+    canopy vegetation density (NDVI), and environmental cooling vulnerability.
+    """
+    service = AdvancedHazardAnalyticsService()
+    return service.get_heat_vulnerability_profile(latitude, longitude)
+
+
+@router.get("/model-metadata")
+def get_heat_model_metadata():
+    """Returns validation metrics, spatial cross-validation, and baseline comparisons for thermal vulnerability model."""
+    service = AdvancedHazardAnalyticsService()
+    return service.train_or_load_heat_vulnerability_model()
 
 
 @router.get("/summary")
@@ -55,6 +76,11 @@ def get_heat_summary():
         return {
             "status": "operational",
             "module": "Urban Heat Intelligence",
+            "modis_observation_year": 2018,
+            "yale_observation_period": "2003–2018",
+            "data_nature": "Historical satellite observations; not current ambient temperatures",
+            "is_real_time": False,
+            "is_forecast": False,
             "total_heat_observations": (
                 len(modis_day_records)
                 + len(modis_night_records)

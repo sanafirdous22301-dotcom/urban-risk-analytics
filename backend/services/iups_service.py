@@ -62,9 +62,16 @@ def to_boolean(value):
     return str(value).strip().lower() in {
         "1", "1.0", "true", "yes"
     }
-@lru_cache(maxsize=1)
 def load_integrated_grid():
-    """Load the integrated priority grid once and cache it."""
+    """Load the integrated priority grid from MongoDB if available, falling back to CSV baseline."""
+    try:
+        from database.mongodb import db
+        if db is not None and "priority_grid_cells" in db.list_collection_names():
+            cnt = db.priority_grid_cells.count_documents({})
+            if cnt == 791:
+                return list(db.priority_grid_cells.find({}, {"_id": 0}))
+    except Exception:
+        pass
 
     if not GRID_CSV.exists():
         raise FileNotFoundError(

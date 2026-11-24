@@ -4,520 +4,1103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>URBANRISK — Integrated Urban Risk Analytics & Resource Prioritization System</title>
+    <title>URBANRISK — Integrated Urban Risk Analytics for a Safer Hyderabad</title>
 
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <!-- Local Leaflet CSS (Offline Vendor Copy) -->
-    <link rel="stylesheet" href="/static/vendor/leaflet/leaflet.css">
+    <link rel="stylesheet" href="../static/vendor/leaflet/leaflet.css">
 </head>
 
 <body>
 
-    <!-- MUNICIPAL BANNER & HEADER -->
-    <header class="site-header">
-        <div class="header-inner">
-            <div class="brand-section">
-                <div class="brand-badge">U<span>R</span></div>
-                <div class="brand-text">
-                    <h1>URBANRISK</h1>
-                    <p>Integrated Urban Risk Analytics and Resource Prioritization System</p>
-                    <div class="brand-location">
-                        <span>◎</span> Hyderabad, Telangana
-                    </div>
-                </div>
-            </div>
-
-            <!-- SECONDARY NAVIGATION PILLS -->
-            <nav class="header-right">
-                <button class="nav-pill-btn active" data-view="main">
-                    <span>Municipal Overview</span>
-                </button>
-                <button class="nav-pill-btn" data-view="evidence">
-                    <span>Detailed Evidence</span>
-                </button>
-                <button class="nav-pill-btn" data-view="hazards">
-                    <span>Hazard Modules</span>
-                </button>
-                <button class="nav-pill-btn" data-view="datasets">
-                    <span>Data Registry</span>
-                </button>
-                <button class="nav-pill-btn" data-view="system">
-                    <span>System Status</span>
-                </button>
-            </nav>
-        </div>
-    </header>
-
-
-    <!-- MAIN CONTENT WRAPPER -->
-    <main class="main-wrapper">
+    <div class="app-layout">
 
         <!-- ========================================================
-             PRIMARY VIEW: MUNICIPAL OVERVIEW
+             1. PERSISTENT LEFT SIDEBAR (SCALED UP & CLEAN NAVY)
         ======================================================== -->
-        <div id="view-municipal-main" class="main-view-container">
-
-            <!-- 1. PROJECT INTRODUCTION -->
-            <section class="intro-banner">
-                <div class="intro-lead">
-                    Integrated Urban Risk Analytics and Resource Prioritization System · Hyderabad, Telangana
-                </div>
-                <p class="intro-desc">
-                    Assess urban risks across Hyderabad, identify vulnerable locations and support better resource prioritisation.
-                    This platform integrates flood hazard history, urban heat island exposure, and emergency infrastructure accessibility into a transparent decision-support framework.
-                </p>
-
-                <div class="workflow-steps-ribbon">
-                    <div class="workflow-step">
-                        <span class="step-num">1</span>
-                        <span>Select a location on the Hyderabad map (or choose a landmark).</span>
-                    </div>
-                    <div class="workflow-step">
-                        <span class="step-num">2</span>
-                        <span>Click <strong>Assess Risk</strong> to generate multi-hazard evaluations.</span>
-                    </div>
-                    <div class="workflow-step">
-                        <span class="step-num">3</span>
-                        <span>Review <strong>Flood</strong>, <strong>Heat</strong>, and <strong>Infrastructure</strong> risk scores with verified data provenance.</span>
-                    </div>
-                </div>
-            </section>
-
-
-            <!-- 2. LOCATION SELECTION MAP -->
-            <section class="map-section-card">
-                <div class="section-head-bar">
-                    <div>
-                        <h2>Location Selection Map · Hyderabad Study Area</h2>
-                        <p>Click anywhere on the map to specify an assessment point, or select a recognized landmark from the dropdown.</p>
-                    </div>
-
-                    <div class="landmark-select-wrap">
-                        <label for="landmarkSelect">Quick Landmark:</label>
-                        <select id="landmarkSelect" class="form-select">
-                            <option value="">Choose a recognized location...</option>
-                            <option value="17.3616,78.4747">Charminar / Old City</option>
-                            <option value="17.4435,78.3772">Hitec City / Madhapur</option>
-                            <option value="17.3705,78.5080">Moosarambagh / Musi River Corridor</option>
-                            <option value="17.4447,78.4664">Begumpet / Secunderabad</option>
-                            <option value="17.4156,78.4350">Banjara Hills / Jubilee Hills</option>
-                            <option value="17.4526,78.5303">Malkajgiri Urban Area</option>
-                            <option value="17.3892,78.5179">Plot #5 (Amberpet / Ramanthapur)</option>
-                            <option value="17.3850,78.4867">Plot #1 (Koti / Sultan Bazar)</option>
-                        </select>
+        <aside class="app-sidebar" aria-label="Main Navigation">
+            <div class="sidebar-top">
+                <div class="sidebar-brand">
+                    <div class="brand-badge-symbol">UR</div>
+                    <div class="brand-text-group">
+                        <span class="brand-title">URBANRISK</span>
+                        <span class="brand-motto">Smarter. Safer. Hyderabad.</span>
                     </div>
                 </div>
 
-                <!-- Leaflet Map Container -->
-                <div id="map" class="map-container"></div>
+                <nav class="sidebar-nav">
+                    <button class="nav-item active" data-tab="home">
+                        <span class="nav-icon">🏠</span>
+                        <span class="nav-label">Home</span>
+                    </button>
+                    <button class="nav-item" data-tab="flood">
+                        <span class="nav-icon">🌊</span>
+                        <span class="nav-label">Flood</span>
+                    </button>
+                    <button class="nav-item" data-tab="heat">
+                        <span class="nav-icon">🔥</span>
+                        <span class="nav-label">Heat</span>
+                    </button>
+                    <button class="nav-item" data-tab="infrastructure">
+                        <span class="nav-icon">🏥</span>
+                        <span class="nav-label">Infrastructure</span>
+                    </button>
+                    <button class="nav-item" data-tab="compare">
+                        <span class="nav-icon">⚖️</span>
+                        <span class="nav-label">Compare</span>
+                    </button>
+                    <button class="nav-item" data-tab="priority">
+                        <span class="nav-icon">🎯</span>
+                        <span class="nav-label">Priority Areas</span>
+                    </button>
+                    <button class="nav-item" data-tab="admin">
+                        <span class="nav-icon">⚙️</span>
+                        <span class="nav-label">Datasets</span>
+                    </button>
+                </nav>
+            </div>
+        </aside>
 
-                <!-- Offline Tile Notice (Displayed when raster tiles fail to load offline) -->
-                <div id="offlineTileNotice" class="offline-tile-notice">
-                    <span class="notice-icon">ℹ</span>
-                    <span><strong>Offline Mode:</strong> Background map tiles require internet access. Spatial infrastructure assets, road networks, landmark selection, coordinate pin positioning, and multi-hazard risk assessment are 100% operational using local databases.</span>
+
+        <!-- ========================================================
+             2. MAIN VIEW AREA (RIGHT OF SIDEBAR)
+        ======================================================== -->
+        <div class="app-main-viewport">
+
+            <!-- TOP HEADER BAR -->
+            <header class="app-topbar">
+                <div class="topbar-left">
+                    <div class="location-badge">
+                        <span class="loc-pin">📍</span>
+                        <span class="loc-text"><strong>Hyderabad</strong>, Telangana</span>
+                    </div>
                 </div>
 
-                <!-- Location Confirmation Action Bar -->
-                <div class="selection-action-bar">
-                    <div class="selection-info-group">
-                        <span class="selection-pin-icon">⌖</span>
-                        <div class="selection-details">
-                            <strong id="selectedLocationLabel">Selected Point: Hyderabad Center (Default)</strong>
-                            <span id="selectedCoordinatesText">Latitude: 17.38500 °N, Longitude: 78.48670 °E</span>
+                <div class="topbar-right">
+                    <div class="current-time-pill" id="currentTimeDisplay">Study Region: 791 km² Grid</div>
+                </div>
+            </header>
+
+
+            <!-- ====================================================
+                 VIEW 1: HOME PAGE (MAIN INTEGRATED RISK ASSESSMENT)
+            ==================================================== -->
+            <main id="tab-home" class="page-view active">
+
+                <!-- TALL & IMPRESSIVE HERO SECTION WITH CHARMINAR SKYLINE -->
+                <section class="home-hero-card">
+                    <div class="hero-content">
+                        <div class="hero-eyebrow-pill">
+                            <span class="pulse-dot"></span>
+                            <span>HYDERABAD METROPOLITAN RISK PLATFORM</span>
+                        </div>
+                        <h1 class="hero-brand-heading">URBANRISK</h1>
+                        <p class="hero-title-sub">Integrated Urban Risk Analytics for a Safer Hyderabad</p>
+                        <p class="hero-desc">
+                            Assess flood, heat and infrastructure risks and prioritize vulnerable areas for a resilient city.
+                        </p>
+
+                        <!-- PROMINENT SEARCH BAR -->
+                        <div class="hero-search-container">
+                            <div class="search-field-box">
+                                <span class="search-lens-icon">🔍</span>
+                                <input type="text" id="placeSearchInput" class="main-search-input"
+                                       placeholder="Search for a location in Hyderabad (e.g. Banjara Hills, Gachibowli, Madhapur, Kukatpally, Secunderabad, LB Nagar, Charminar)..."
+                                       autocomplete="off">
+                                <button type="button" class="search-clear-btn" id="searchClearBtn" title="Clear">✕</button>
+                                <div id="searchSuggestionsBox" class="search-suggestions-dropdown"></div>
+                            </div>
+                            <button type="button" class="btn-primary-action hero-assess-btn" id="assessLocationBtn">
+                                <span>Assess Location</span>
+                                <span>→</span>
+                            </button>
+                        </div>
+
+                        <!-- RECENT LOCATIONS (STORED LOCALLY FROM USER SELECTIONS) -->
+                        <div class="recent-locations-row">
+                            <span class="recent-label">Recent Locations:</span>
+                            <div class="recent-chips-container" id="recentLocationsContainer">
+                                <button type="button" class="recent-chip" data-name="Charminar" data-lat="17.3616" data-lon="78.4747">Charminar</button>
+                                <button type="button" class="recent-chip" data-name="Banjara Hills" data-lat="17.4156" data-lon="78.4350">Banjara Hills</button>
+                                <button type="button" class="recent-chip" data-name="Hitec City" data-lat="17.4435" data-lon="78.3772">Hitec City</button>
+                                <button type="button" class="recent-chip" data-name="Begumpet" data-lat="17.4447" data-lon="78.4664">Begumpet</button>
+                                <button type="button" class="recent-chip" data-name="Moosarambagh" data-lat="17.3705" data-lon="78.5080">Moosarambagh</button>
+                                <button type="button" class="recent-chip" data-name="Kukatpally" data-lat="17.4947" data-lon="78.3996">Kukatpally</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+
+                <!-- 4 LARGE RISK SUMMARY CARDS -->
+                <section class="risk-summary-cards-grid">
+                    <!-- CARD 1: URBAN PRIORITY SCORE -->
+                    <div class="summary-metric-card priority-metric">
+                        <div class="card-top-row">
+                            <div class="card-icon-bubble priority-bubble">🎯</div>
+                            <span class="metric-title-label">Urban Priority Score</span>
+                        </div>
+                        <div class="metric-primary-val">
+                            <span id="homePriorityScore">--</span> <small>/ 100</small>
+                        </div>
+                        <div class="card-bottom-row">
+                            <span class="metric-status-pill badge-neutral" id="homePriorityBadge">EVALUATING...</span>
+                            <span class="metric-sub-note">Composite multi-hazard index</span>
                         </div>
                     </div>
 
-                    <div style="display: flex; gap: 10px; align-items: center;">
-                        <span id="mapStatusMessage" style="font-size: 11px; color: var(--text-muted);">Click on the map or select a landmark</span>
-                        <button type="button" class="btn-assess-primary" id="assessRiskBtn">
-                            <span>Assess Risk</span>
+                    <!-- CARD 2: FLOOD RISK -->
+                    <div class="summary-metric-card flood-metric">
+                        <div class="card-top-row">
+                            <div class="card-icon-bubble flood-bubble">🌊</div>
+                            <span class="metric-title-label">Flood Risk</span>
+                        </div>
+                        <div class="metric-primary-val">
+                            <span id="homeFloodVal">--</span> <small id="homeFloodScoreText" style="font-size: 18px; font-weight: 700; color: var(--text-muted);"></small>
+                        </div>
+                        <div class="card-bottom-row">
+                            <span class="metric-status-pill badge-neutral" id="homeFloodBadge">EVALUATING...</span>
+                            <span class="metric-sub-note">Catchment drainage exposure</span>
+                        </div>
+                    </div>
+
+                    <!-- CARD 3: HEAT RISK -->
+                    <div class="summary-metric-card heat-metric">
+                        <div class="card-top-row">
+                            <div class="card-icon-bubble heat-bubble">🔥</div>
+                            <span class="metric-title-label">Heat Risk</span>
+                        </div>
+                        <div class="metric-primary-val">
+                            <span id="homeHeatVal">--</span> <small id="homeHeatScoreText" style="font-size: 18px; font-weight: 700; color: var(--text-muted);"></small>
+                        </div>
+                        <div class="card-bottom-row">
+                            <span class="metric-status-pill badge-neutral" id="homeHeatBadge">EVALUATING...</span>
+                            <span class="metric-sub-note">MODIS thermal satellite baseline</span>
+                        </div>
+                    </div>
+
+                    <!-- CARD 4: INFRASTRUCTURE -->
+                    <div class="summary-metric-card infra-metric">
+                        <div class="card-top-row">
+                            <div class="card-icon-bubble infra-bubble">🏥</div>
+                            <span class="metric-title-label">Infrastructure Risk</span>
+                        </div>
+                        <div class="metric-primary-val">
+                            <span id="homeInfraVal">--</span> <small id="homeInfraScoreText" style="font-size: 18px; font-weight: 700; color: var(--text-muted);"></small>
+                        </div>
+                        <div class="card-bottom-row">
+                            <span class="metric-status-pill badge-neutral" id="homeInfraBadge">EVALUATING...</span>
+                            <span class="metric-sub-note">Emergency service access deficit</span>
+                        </div>
+                    </div>
+                </section>
+
+
+                <!-- MAIN RISK MAP & COMFORTABLE LOCATION ANALYSIS PANEL -->
+                <section class="map-and-analysis-grid">
+
+                    <!-- LEFT: MAP CARD (MAP FILLS VERTICALLY WITHOUT EMPTY SPACE) -->
+                    <div class="map-panel-card">
+                        <div class="panel-header-row">
+                            <div class="map-title-block">
+                                <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                                    <h3 style="margin: 0;">Hyderabad Risk Map</h3>
+                                    <span id="mapLastCalculatedBadge" class="temporal-chip" style="display: none;"></span>
+                                </div>
+                                <span class="map-sub" id="currentMapStatusText">Precomputed 1-km spatial risk grid covering Greater Hyderabad (741 cells)</span>
+                            </div>
+
+                            <div class="map-layer-controls">
+                                <button type="button" class="layer-pill-btn active" data-layer="overall">Overall Risk</button>
+                                <button type="button" class="layer-pill-btn" data-layer="flood">Flood Layer</button>
+                                <button type="button" class="layer-pill-btn" data-layer="heat">Heat Layer</button>
+                                <button type="button" class="layer-pill-btn" data-layer="infra">Infrastructure</button>
+                                <button type="button" class="layer-pill-btn" data-layer="base">Base Map</button>
+                            </div>
+                        </div>
+
+                        <!-- Leaflet Canvas (Spacious 620px Height Filling Card) -->
+                        <div id="homeMap" class="leaflet-map-canvas"></div>
+
+                        <!-- Offline Notice -->
+                        <div id="offlineNoticeBanner" class="offline-tile-warning">
+                            <span>ℹ</span>
+                            <span><strong>Offline Spatial Cache:</strong> Pre-cached Hyderabad tiles active. All spatial risk assessments operate locally from database.</span>
+                        </div>
+
+                        <!-- Map Legend with Clear Risk Tiers -->
+                        <div class="map-legend-bar">
+                            <span class="legend-title">Risk Intensity:</span>
+                            <div class="legend-tag"><span class="legend-color-dot very-high"></span> Very High (&gt;80)</div>
+                            <div class="legend-tag"><span class="legend-color-dot high"></span> High (60–80)</div>
+                            <div class="legend-tag"><span class="legend-color-dot moderate"></span> Moderate (40–60)</div>
+                            <div class="legend-tag"><span class="legend-color-dot low"></span> Low (&lt;40)</div>
+                            <div class="legend-tag" style="margin-left: auto;">
+                                <span class="legend-color-dot boundary"></span> 791 km² Study Boundary
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RIGHT: EXPANDED LOCATION ANALYSIS PANEL (COMFORTABLE READING WIDTH) -->
+                    <aside class="analysis-panel-card">
+                        <div class="analysis-panel-header">
+                            <span class="eyebrow-accent">LOCALITY RISK PROFILE</span>
+                            <h3 id="analysisPlaceTitle">Location Analysis</h3>
+                            <p class="analysis-place-subtitle" id="analysisPlaceSubtitle">Hyderabad City Center (Default Point)</p>
+                        </div>
+
+                        <div class="analysis-hero-score-box">
+                            <span class="score-box-label">Overall Priority Score</span>
+                            <div class="score-box-val-row">
+                                <strong id="analysisOverallScore">-- / 100</strong>
+                                <span class="metric-status-pill badge-neutral" id="analysisOverallBadge">Evaluating...</span>
+                            </div>
+                        </div>
+
+                        <div class="analysis-scores-list">
+                            <div class="analysis-score-item">
+                                <div class="score-item-left">
+                                    <span class="item-icon">🌊</span>
+                                    <div>
+                                        <div class="item-title">Flood Vulnerability</div>
+                                        <small id="analysisFloodScoreSub" class="item-sub-score">Catchment index: --</small>
+                                    </div>
+                                </div>
+                                <span class="metric-status-pill badge-neutral" id="analysisFloodBadge">--</span>
+                            </div>
+
+                            <div class="analysis-score-item">
+                                <div class="score-item-left">
+                                    <span class="item-icon">🔥</span>
+                                    <div>
+                                        <div class="item-title">Heat Exposure</div>
+                                        <small id="analysisHeatScoreSub" class="item-sub-score">Percentile score: --</small>
+                                    </div>
+                                </div>
+                                <span class="metric-status-pill badge-neutral" id="analysisHeatBadge">--</span>
+                            </div>
+
+                            <div class="analysis-score-item">
+                                <div class="score-item-left">
+                                    <span class="item-icon">🏥</span>
+                                    <div>
+                                        <div class="item-title">Infrastructure Deficit</div>
+                                        <small id="analysisInfraScoreSub" class="item-sub-score">Deficit score: --</small>
+                                    </div>
+                                </div>
+                                <span class="metric-status-pill badge-neutral" id="analysisInfraBadge">--</span>
+                            </div>
+                        </div>
+
+                        <!-- Why is this area risky? -->
+                        <div class="analysis-sub-card">
+                            <h4>Why is this area risky?</h4>
+                            <div id="analysisInsightsBody" class="insights-content">
+                                Select a location on the map or use the search bar to generate location-specific urban risk insights.
+                            </div>
+                        </div>
+
+                        <!-- Recommended Actions -->
+                        <div class="analysis-sub-card actions-accent">
+                            <h4>Recommended Actions</h4>
+                            <div id="analysisActionsBody" class="actions-content">
+                                Recommended municipal interventions will appear here after assessing the locality.
+                            </div>
+                        </div>
+                    </aside>
+
+                </section>
+
+
+                <!-- RISK INSIGHTS PROGRESS SECTION & RECOMMENDATIONS -->
+                <section class="insights-and-recommendations-grid">
+
+                    <!-- RISK INSIGHTS PROGRESS BARS -->
+                    <div class="content-card">
+                        <div class="card-header-styled">
+                            <h4>Risk Insights Overview</h4>
+                            <span class="card-header-sub">Analytical contribution to the Integrated Urban Priority Screening index</span>
+                        </div>
+
+                        <div class="risk-bars-container">
+                            <!-- Flood -->
+                            <div class="risk-bar-group">
+                                <div class="bar-labels-row">
+                                    <span class="bar-name">🌊 Flood Vulnerability (35% Weight)</span>
+                                    <strong id="barFloodScoreText">-- / 100</strong>
+                                </div>
+                                <div class="progress-bar-track">
+                                    <div class="progress-bar-fill flood" id="barFloodFill" style="width: 0%"></div>
+                                </div>
+                                <span class="bar-note" id="barFloodNote">Historical drainage catchment exposure</span>
+                            </div>
+
+                            <!-- Heat -->
+                            <div class="risk-bar-group">
+                                <div class="bar-labels-row">
+                                    <span class="bar-name">🔥 Urban Heat Exposure (35% Weight)</span>
+                                    <strong id="barHeatScoreText">-- / 100</strong>
+                                </div>
+                                <div class="progress-bar-track">
+                                    <div class="progress-bar-fill heat" id="barHeatFill" style="width: 0%"></div>
+                                </div>
+                                <span class="bar-note" id="barHeatNote">Satellite land surface temperature percentile</span>
+                            </div>
+
+                            <!-- Infrastructure -->
+                            <div class="risk-bar-group">
+                                <div class="bar-labels-row">
+                                    <span class="bar-name">🏥 Infrastructure Deficit (15% Weight)</span>
+                                    <strong id="barInfraScoreText">-- / 100</strong>
+                                </div>
+                                <div class="progress-bar-track">
+                                    <div class="progress-bar-fill infra" id="barInfraFill" style="width: 0%"></div>
+                                </div>
+                                <span class="bar-note" id="barInfraNote">Distance to emergency hospitals & fire stations</span>
+                            </div>
+
+                            <!-- Road Gap -->
+                            <div class="risk-bar-group">
+                                <div class="bar-labels-row">
+                                    <span class="bar-name">🛣️ Road Representation Gap (15% Weight)</span>
+                                    <strong id="barRoadScoreText">-- / 100</strong>
+                                </div>
+                                <div class="progress-bar-track">
+                                    <div class="progress-bar-fill road" id="barRoadFill" style="width: 0%"></div>
+                                </div>
+                                <span class="bar-note" id="barRoadNote">Multimodal road network connectivity representation</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- WHAT SHOULD BE PRIORITIZED CARD -->
+                    <div class="content-card recommendations-styled-card">
+                        <div class="card-header-styled">
+                            <h4>What Should Be Prioritized?</h4>
+                            <span class="card-header-sub">Actionable guidance derived directly from empirical evaluation</span>
+                        </div>
+
+                        <div id="homePrioritizedAdviceBody" class="recommendations-list-body">
+                            <div class="rec-bullet-item">
+                                <span class="rec-icon-bullet">💧</span>
+                                <div>
+                                    <strong>Improve Stormwater Drainage:</strong>
+                                    <span>Focus desilting and culvert upgrades along secondary channels and Musi basin corridors.</span>
+                                </div>
+                            </div>
+                            <div class="rec-bullet-item">
+                                <span class="rec-icon-bullet">🌳</span>
+                                <div>
+                                    <strong>Increase Urban Green Cover:</strong>
+                                    <span>Expand shade tree corridors and reflective cool roofs in dense built-up zones with elevated surface temperatures.</span>
+                                </div>
+                            </div>
+                            <div class="rec-bullet-item">
+                                <span class="rec-icon-bullet">🚑</span>
+                                <div>
+                                    <strong>Enhance Emergency Access:</strong>
+                                    <span>Designate priority emergency transit lanes in sectors where hospital access exceeds 1.0 km distance.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </section>
+
+
+                <!-- LATEST WEATHER CONDITIONS (MODEL-BASED CITYWIDE ESTIMATES) -->
+                <section class="content-card weather-section-card" id="homeWeatherSection">
+                    <div class="card-header-styled flex-between">
+                        <div>
+                            <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                                <h4 style="margin: 0;">Latest Weather Conditions — Hyderabad</h4>
+                                <span id="weatherFreshnessBadge" class="temporal-chip" style="display: none;"></span>
+                            </div>
+                            <span class="card-header-sub">Citywide model-based weather estimates via Open-Meteo API (CC BY 4.0)</span>
+                        </div>
+                        <div class="weather-meta-tags">
+                            <span class="weather-provider-tag" id="weatherObservationTime">Model Time: --</span>
+                        </div>
+                    </div>
+
+                    <div class="weather-metrics-grid">
+                        <!-- Metric 1: Temperature & Condition -->
+                        <div class="weather-metric-item">
+                            <div class="weather-item-icon" id="weatherIcon">🌤️</div>
+                            <div class="weather-item-details">
+                                <span class="weather-item-label">Air Temperature</span>
+                                <div class="weather-item-value">
+                                    <span id="weatherTemp">--</span> <small>°C</small>
+                                </div>
+                                <span class="weather-item-sub" id="weatherCondition">Evaluating...</span>
+                            </div>
+                        </div>
+
+                        <!-- Metric 2: Recent Precipitation -->
+                        <div class="weather-metric-item">
+                            <div class="weather-item-icon">🌧️</div>
+                            <div class="weather-item-details">
+                                <span class="weather-item-label">Recent Precipitation (mm)</span>
+                                <div class="weather-item-value">
+                                    <span id="weatherPrecip">--</span> <small>mm</small>
+                                </div>
+                                <span class="weather-item-sub" id="weatherRainStatus">Preceding 15-min interval accumulation</span>
+                            </div>
+                        </div>
+
+                        <!-- Metric 3: Relative Humidity -->
+                        <div class="weather-metric-item">
+                            <div class="weather-item-icon">💧</div>
+                            <div class="weather-item-details">
+                                <span class="weather-item-label">Relative Humidity</span>
+                                <div class="weather-item-value">
+                                    <span id="weatherHumidity">--</span> <small>%</small>
+                                </div>
+                                <span class="weather-item-sub">Surface boundary layer</span>
+                            </div>
+                        </div>
+
+                        <!-- Metric 4: Wind Speed -->
+                        <div class="weather-metric-item">
+                            <div class="weather-item-icon">💨</div>
+                            <div class="weather-item-details">
+                                <span class="weather-item-label">Wind Speed (10m)</span>
+                                <div class="weather-item-value">
+                                    <span id="weatherWind">--</span> <small>km/h</small>
+                                </div>
+                                <span class="weather-item-sub">Surface anemometer</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Explicit Boundary & Transparency Notice -->
+                    <div class="weather-notice-banner" id="weatherNoticeBanner">
+                        <span class="notice-icon">ℹ️</span>
+                        <div class="notice-text">
+                            <strong>Model-Based Weather Conditions:</strong>
+                            <span>Latest weather conditions provided by Open-Meteo weather models for the Hyderabad city-center coordinates (17.385°N, 78.487°E). These are model-based estimates, not direct measurements from a local weather station. Recent precipitation represents accumulation over the preceding 15-minute interval, not an instantaneous precipitation rate. 1-km spatial grid hazard scoring operates independently using verified historical baselines.</span>
+                        </div>
+                    </div>
+                </section>
+
+
+                <!-- UPDATED SATELLITE & ENVIRONMENTAL INTELLIGENCE -->
+                <section class="content-card environmental-section-card" id="homeEnvironmentalSection">
+                    <div class="card-header-styled flex-between">
+                        <div>
+                            <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                                <h4 style="margin: 0;">Updated Satellite & Environmental Intelligence</h4>
+                                <span class="temporal-chip">Multi-Sensor Satellite Feeds</span>
+                            </div>
+                            <span class="card-header-sub">High-resolution Earth observation evidence covering Greater Hyderabad (791 km²)</span>
+                        </div>
+                        <div class="weather-meta-tags">
+                            <span class="weather-provider-tag">791 Verified 1-km Cells</span>
+                        </div>
+                    </div>
+
+                    <div class="weather-metrics-grid">
+                        <!-- Metric 1: Updated Thermal (MODIS 2023) -->
+                        <div class="weather-metric-item">
+                            <div class="weather-item-icon">🛰️</div>
+                            <div class="weather-item-details">
+                                <span class="weather-item-label">Updated Thermal (MODIS LST)</span>
+                                <div class="weather-item-value">
+                                    <span id="envThermalMean">40.8</span> <small>°C (Mean)</small>
+                                </div>
+                                <span class="weather-item-sub">May 25 – Jun 01, 2023 | 1-km Resolution</span>
+                            </div>
+                        </div>
+
+                        <!-- Metric 2: Vegetation (Sentinel-2 NDVI 2024) -->
+                        <div class="weather-metric-item">
+                            <div class="weather-item-icon">🌿</div>
+                            <div class="weather-item-details">
+                                <span class="weather-item-label">Vegetation Index (NDVI)</span>
+                                <div class="weather-item-value">
+                                    <span id="envNdviMean">0.221</span> <small>Canopy Index</small>
+                                </div>
+                                <span class="weather-item-sub">Apr 27, 2024 | 10m Resolution (SCL Masked)</span>
+                            </div>
+                        </div>
+
+                        <!-- Metric 3: Built-Up Land Cover (ESA WorldCover 2021) -->
+                        <div class="weather-metric-item">
+                            <div class="weather-item-icon">🏙️</div>
+                            <div class="weather-item-details">
+                                <span class="weather-item-label">Grid cells containing built-up land</span>
+                                <div class="weather-item-value">
+                                    <span id="envBuiltupDisplay" style="font-size: 18px;">482 / 791 (60.9%)</span>
+                                </div>
+                                <span class="weather-item-sub">ESA WorldCover 2021 | 10m Built-Up Class 50</span>
+                            </div>
+                        </div>
+
+                        <!-- Metric 4: Historical Baseline Context -->
+                        <div class="weather-metric-item">
+                            <div class="weather-item-icon">📜</div>
+                            <div class="weather-item-details">
+                                <span class="weather-item-label">Historical Baselines</span>
+                                <div class="weather-item-value">
+                                    <span style="font-size: 16px; font-weight: 700;">2018 / 2003–18</span>
+                                </div>
+                                <span class="weather-item-sub">MODIS 2018 & Yale Baseline Preserved</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Explanatory Notice & LST vs Air Temp Disclaimer -->
+                    <div class="weather-notice-banner">
+                        <span class="notice-icon">ℹ️</span>
+                        <div class="notice-text">
+                            <strong>Radiometric Skin Temperature vs. Ambient Air Temperature:</strong>
+                            <span>Satellite Land Surface Temperature (LST) measures the radiometric skin temperature of ground surfaces, not 2-meter air temperature. Daytime LST on solar-irradiated impermeable surfaces is typically 5–12°C higher than ambient air. Sentinel-2 NDVI reflects photosynthetic canopy density, not direct cooling degrees. Historical baselines remain strictly uncorrupted.</span>
+                        </div>
+                    </div>
+                </section>
+
+
+                <!-- PRIORITY AREAS PREVIEW TABLE -->
+                <section class="content-card priority-preview-card">
+                    <div class="card-header-styled flex-between">
+                        <div>
+                            <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                                <h4 style="margin: 0;">Priority Areas — High Urgency Screening</h4>
+                                <span id="previewLastCalculatedBadge" class="temporal-chip" style="display: none;"></span>
+                            </div>
+                            <span class="card-header-sub">Top locations requiring municipal capital intervention across Hyderabad</span>
+                        </div>
+                        <button type="button" class="btn-link-action" id="viewAllPriorityBtn">
+                            <span>View All (Full Table)</span>
                             <span>→</span>
                         </button>
                     </div>
-                </div>
-            </section>
+
+                    <div class="table-responsive-wrapper">
+                        <table class="urbanrisk-data-table">
+                            <thead>
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Location</th>
+                                    <th>Priority Score</th>
+                                    <th>Main Risk</th>
+                                    <th>Recommended Action</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="homePriorityTableBody">
+                                <tr>
+                                    <td colspan="6" class="table-loading-cell">Loading priority areas from verified 1-km grid...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+            </main>
 
 
-            <!-- 3. RISK ASSESSMENT RESULTS (REVEALED UPON "ASSESS RISK" CLICK) -->
-            <section class="results-section" id="resultsSection" aria-live="polite">
-
-                <div class="results-header-banner">
+            <!-- ====================================================
+                 VIEW 2: FLOOD INTELLIGENCE PAGE
+            ==================================================== -->
+            <section id="tab-flood" class="page-view">
+                <div class="page-hero-banner flood-theme">
                     <div>
-                        <h2 id="resultsLocationHeading">Risk Assessment Results for Selected Location</h2>
-                        <p id="resultsLocationSub">Evaluated using empirical multi-hazard observations and precomputed 1-km spatial grid analytics.</p>
+                        <span class="page-tag-badge">HYDROLOGICAL INTELLIGENCE</span>
+                        <h2>Flood Intelligence</h2>
+                        <p class="page-subtitle">Analyze flood risk, view historical events and understand drainage vulnerability across Hyderabad.</p>
                     </div>
-                    <span id="resultsPlotTag" class="risk-classification-badge" style="background: var(--navy-soft); color: var(--navy-dark); border: 1px solid var(--border);">
-                        COORDINATES: 17.38500, 78.48670
-                    </span>
+
+                    <div class="tab-toggle-group">
+                        <button type="button" class="toggle-pill-btn active" data-flood-mode="current">Current Risk</button>
+                        <button type="button" class="toggle-pill-btn" data-flood-mode="historical">Historical Events</button>
+                    </div>
                 </div>
 
-                <!-- EXACTLY THREE CATEGORY CARDS -->
-                <div class="three-categories-grid">
-
-                    <!-- CARD 1: FLOOD RISK -->
-                    <article class="risk-category-card" id="cardFloodRisk">
-                        <div class="card-top-stripe flood"></div>
-                        <div class="card-inner-content">
-                            <div class="category-name-badge">
-                                <span>🌊</span>
-                                <span>01 / Flood Risk</span>
-                            </div>
-
-                            <div class="score-and-badge-row">
-                                <div>
-                                    <div class="prominent-score-display" id="floodScoreVal">
-                                        -- <small>/ 100</small>
-                                    </div>
-                                    <div class="score-type-caption" id="floodScoreLabel">Normalized Rainfall Depth Score / 100</div>
-                                </div>
-                                <span class="risk-classification-badge" id="floodBadge">Evaluating...</span>
-                            </div>
-
-                            <p class="risk-explanation-text" id="floodExplanation">
-                                Loading flood and drainage vulnerability evidence...
-                            </p>
-
-                            <div class="card-supporting-metrics">
-                                <div class="supporting-metric-row">
-                                    <span>Regional Flood Events:</span>
-                                    <strong id="floodMetricEvents">40 Historical Events</strong>
-                                </div>
-                                <div class="supporting-metric-row">
-                                    <span>Recorded Fatalities:</span>
-                                    <strong id="floodMetricFatalities">727 in District</strong>
-                                </div>
-                                <div class="supporting-metric-row">
-                                    <span>Rainfall Observations:</span>
-                                    <strong id="floodMetricRain">84 Monitored Dates</strong>
-                                </div>
-                            </div>
-
-                            <div class="card-provenance-footer">
-                                <span class="freshness-badge-tag" id="floodFreshnessTag">HISTORICAL DISASTER INVENTORY</span>
-                                <div><strong>Source:</strong> IMD Historical Disaster Inventory & NASA POWER</div>
-                                <div><strong>Observation Period:</strong> 1969–2022 (Floods) · 2020–2021 (Rainfall)</div>
-                                <div class="freshness-warning-note">
-                                    ⚠ Historical disaster inventory and storm records; does not represent live rainfall forecasting.
-                                </div>
-                            </div>
+                <!-- Stats Counters -->
+                <div class="metrics-quad-grid">
+                    <div class="metric-box">
+                        <span class="box-icon">🌊</span>
+                        <div class="box-text">
+                            <strong class="box-num" id="floodStatEvents">40</strong>
+                            <span class="box-label">Historical Flood Events</span>
                         </div>
-                    </article>
-
-                    <!-- CARD 2: HEAT RISK -->
-                    <article class="risk-category-card" id="cardHeatRisk">
-                        <div class="card-top-stripe heat"></div>
-                        <div class="card-inner-content">
-                            <div class="category-name-badge">
-                                <span>🔥</span>
-                                <span>02 / Heat Risk</span>
-                            </div>
-
-                            <div class="score-and-badge-row">
-                                <div>
-                                    <div class="prominent-score-display" id="heatScoreVal">
-                                        -- <small>/ 100</small>
-                                    </div>
-                                    <div class="score-type-caption" id="heatScoreLabel">Percentile-Ranked Heat Exposure Score / 100</div>
-                                </div>
-                                <span class="risk-classification-badge" id="heatBadge">Evaluating...</span>
-                            </div>
-
-                            <p class="risk-explanation-text" id="heatExplanation">
-                                Loading satellite land surface temperature evidence...
-                            </p>
-
-                            <!-- ML Model Estimate Highlight -->
-                            <div class="ml-estimate-callout" id="heatMlCallout">
-                                <strong>ML Estimate (Random Forest Regressor)</strong>
-                                <span id="heatMlEstimateText">Estimated Daytime Temp: 34.1 °C (Diurnal Delta: +9.6 °C)</span>
-                            </div>
-
-                            <div class="card-supporting-metrics">
-                                <div class="supporting-metric-row">
-                                    <span>Satellite Thermal Observations:</span>
-                                    <strong id="heatMetricObs">14,530 Records</strong>
-                                </div>
-                                <div class="supporting-metric-row">
-                                    <span>MODIS Citywide Baseline Mean:</span>
-                                    <strong id="heatMetricMean">34.3 °C Daytime</strong>
-                                </div>
-                                <div class="supporting-metric-row">
-                                    <span>Yale Surface UHI Indicator:</span>
-                                    <strong id="heatMetricYale">Daytime & Nighttime UHI</strong>
-                                </div>
-                            </div>
-
-                            <div class="card-provenance-footer">
-                                <span class="freshness-badge-tag" id="heatFreshnessTag">HISTORICAL SATELLITE BASELINE</span>
-                                <div><strong>Source:</strong> NASA MODIS (Aqua/Terra) & Yale Center for Earth Observation UHI</div>
-                                <div><strong>Observation Period:</strong> 2003–2018 Multi-Year Summer Baseline</div>
-                                <div class="freshness-warning-note">
-                                    ⚠ Satellite observations represent multi-year historical thermal patterns. ML estimate is model-generated.
-                                </div>
-                            </div>
+                    </div>
+                    <div class="metric-box">
+                        <span class="box-icon">⚠️</span>
+                        <div class="box-text">
+                            <strong class="box-num" id="floodStatFatalities">727</strong>
+                            <span class="box-label">Recorded Fatalities</span>
                         </div>
-                    </article>
-
-                    <!-- CARD 3: INFRASTRUCTURE RISK (DEFICIT / ACCESSIBILITY) -->
-                    <article class="risk-category-card" id="cardInfraRisk">
-                        <div class="card-top-stripe infra"></div>
-                        <div class="card-inner-content">
-                            <div class="category-name-badge">
-                                <span>🏢</span>
-                                <span>03 / Infrastructure Risk</span>
-                            </div>
-
-                            <div class="score-and-badge-row">
-                                <div>
-                                    <div class="prominent-score-display" id="infraScoreVal">
-                                        -- <small>/ 100</small>
-                                    </div>
-                                    <div class="score-type-caption" id="infraScoreLabel">Accessibility & Capacity Deficit Score / 100</div>
-                                </div>
-                                <span class="risk-classification-badge" id="infraBadge">Evaluating...</span>
-                            </div>
-
-                            <p class="risk-explanation-text" id="infraExplanation">
-                                Loading critical infrastructure accessibility and road coverage...
-                            </p>
-
-                            <div class="card-supporting-metrics">
-                                <div class="supporting-metric-row">
-                                    <span>Hospitals / Clinics within 1 km:</span>
-                                    <strong id="infraMetricHosp">-- facilities</strong>
-                                </div>
-                                <div class="supporting-metric-row">
-                                    <span>Nearest Medical Facility:</span>
-                                    <strong id="infraMetricNearHosp">-- m</strong>
-                                </div>
-                                <div class="supporting-metric-row">
-                                    <span>Fire Stations within 1 km:</span>
-                                    <strong id="infraMetricFire">-- stations</strong>
-                                </div>
-                                <div class="supporting-metric-row">
-                                    <span>Road Segments within 1 km:</span>
-                                    <strong id="infraMetricRoads">-- road points</strong>
-                                </div>
-                            </div>
-
-                            <div class="card-provenance-footer">
-                                <span class="freshness-badge-tag" id="infraFreshnessTag">RECENT INVENTORY BASELINE</span>
-                                <div><strong>Source:</strong> OpenStreetMap Civic Amenities & Road Extraction</div>
-                                <div><strong>Last Updated:</strong> November 2026 Snapshot</div>
-                                <div class="freshness-warning-note">
-                                    ⚠ Civic amenities reflect OpenStreetMap mapped facilities. Unmapped features in informal settlements reflect mapping coverage gaps.
-                                </div>
-                            </div>
+                    </div>
+                    <div class="metric-box">
+                        <span class="box-icon">🌧️</span>
+                        <div class="box-text">
+                            <strong class="box-num" id="floodStatRainDates">84</strong>
+                            <span class="box-label">84 Raster Samples · 2 Historical Storm Dates</span>
                         </div>
-                    </article>
-
+                    </div>
+                    <div class="metric-box">
+                        <span class="box-icon">⏱️</span>
+                        <div class="box-text">
+                            <strong class="box-num" id="floodStatDuration">7.7 Days</strong>
+                            <span class="box-label">Avg. Event Duration</span>
+                        </div>
+                    </div>
                 </div>
 
+                <!-- Dedicated Flood Map & Selected Locality Assessment -->
+                <div class="map-and-analysis-grid">
+                    <div class="map-panel-card">
+                        <div class="panel-header-row">
+                            <div>
+                                <h3>Hydrological Risk & Catchment Map</h3>
+                                <span class="map-sub">Hyderabad metropolitan drainage basin & Musi River corridor</span>
+                            </div>
+                        </div>
+                        <div id="floodMapCanvas" class="leaflet-map-canvas" style="height: 520px;"></div>
+                    </div>
 
-                <!-- 4. AREA-LEVEL PRIORITISATION (IUPS) -->
-                <div class="area-priority-card">
-                    <div class="priority-card-top">
-                        <div>
-                            <span style="font-size: 10px; font-weight: 800; color: var(--blue-accent); letter-spacing: 1px; text-transform: uppercase;">
-                                DECISION SUPPORT · AREA-LEVEL SCREENING
-                            </span>
-                            <h3>Integrated Urban Priority Screening (IUPS)</h3>
-                            <p style="font-size: 13px; color: var(--text-secondary); margin-top: 2px;">
-                                Citywide 1.0-km spatial grid evaluation combining multi-hazard exposure and accessibility deficits into an objective screening index.
+                    <div class="analysis-panel-card">
+                        <div class="analysis-panel-header">
+                            <span class="eyebrow-accent">FLOOD ASSESSMENT</span>
+                            <h3 id="floodSelectedPlaceTitle">Selected Location</h3>
+                            <p class="analysis-place-subtitle" id="floodSelectedPlaceSubtitle">Evaluated against regional drainage inventory</p>
+                        </div>
+
+                        <div class="analysis-scores-list">
+                            <div class="analysis-score-item">
+                                <span class="item-label">Flood Vulnerability</span>
+                                <span class="metric-status-pill badge-neutral" id="floodLocBadge">MEDIUM</span>
+                            </div>
+                            <div class="analysis-score-item">
+                                <span class="item-label">Rainfall Exposure Index</span>
+                                <strong id="floodLocScore">35.0 / 100</strong>
+                            </div>
+                        </div>
+
+                        <div class="analysis-sub-card">
+                            <h4>Key Flood Factors & Evidence Attribution</h4>
+                            <p id="floodFactorsText" style="font-size: 15px; color: var(--text-secondary); line-height: 1.6;">
+                                Situated in the greater urban catchment with 40 recorded historical flood events (1969–2022). Low elevation sectors along natural drainage lines show highest pooling risk.
+                            </p>
+                            <div id="floodEvidenceBadgeContainer" style="margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap;">
+                                <span class="pill-badge-blue" id="floodEvidenceTypeBadge">Regional Context</span>
+                                <span class="pill-badge-muted" id="floodRunoffContextBadge">Land-Cover Context</span>
+                            </div>
+                        </div>
+
+                        <div class="analysis-sub-card actions-accent">
+                            <h4>Drainage Interventions</h4>
+                            <p id="floodActionsText" style="font-size: 15px; color: var(--text-secondary); line-height: 1.6;">
+                                Pre-monsoon desilting of stormwater culverts, installation of flood check-valves, and monitoring of Musi river release channels.
                             </p>
                         </div>
-
-                        <div class="priority-score-pill" id="overallPriorityPill" style="background: var(--navy-soft); color: var(--navy-dark); border: 1px solid var(--border);">
-                            <span>Overall Priority Score:</span>
-                            <strong id="overallPriorityScoreText">-- / 100</strong>
-                            <span class="risk-classification-badge" id="overallPriorityBadge">--</span>
-                        </div>
                     </div>
-
-                    <!-- Analytical Weights Breakdown -->
-                    <div class="priority-weights-row">
-                        <div class="weight-mini-box">
-                            <div class="pct">35%</div>
-                            <div class="label">Flood Evidence</div>
-                            <div style="font-size: 10px; color: var(--text-muted); margin-top: 2px;">Rainfall depth & drainage exposure</div>
-                        </div>
-                        <div class="weight-mini-box">
-                            <div class="pct">35%</div>
-                            <div class="label">Heat Exposure</div>
-                            <div style="font-size: 10px; color: var(--text-muted); margin-top: 2px;">Land surface temp & UHI percentiles</div>
-                        </div>
-                        <div class="weight-mini-box">
-                            <div class="pct">15%</div>
-                            <div class="label">Infrastructure Gap</div>
-                            <div style="font-size: 10px; color: var(--text-muted); margin-top: 2px;">Proximity deficit to emergency facilities</div>
-                        </div>
-                        <div class="weight-mini-box">
-                            <div class="pct">15%</div>
-                            <div class="label">Road Gap</div>
-                            <div style="font-size: 10px; color: var(--text-muted); margin-top: 2px;">Network representation density</div>
-                        </div>
-                    </div>
-
-                    <!-- Actionable Municipal Recommendations -->
-                    <div class="municipal-action-box" id="municipalActionBox">
-                        <strong>Suggested Municipal Intervention Guidance:</strong>
-                        <div id="municipalActionText">
-                            Select a location and click Assess Risk to generate prioritized operational recommendations for municipal authorities.
-                        </div>
-                    </div>
-
-                    <!-- Recalculation Notice (Section 11) -->
-                    <p class="recalc-notice">
-                        <strong>Data Ingestion & Recalculation:</strong> When new rainfall telemetry, satellite thermal files, or civic asset inventories are ingested into MongoDB via the Data Registry, the 1-km analytical grid can be re-executed via integration scripts to update area priorities.
-                    </p>
                 </div>
 
+                <!-- Historical Flood Events Section -->
+                <div class="content-card" style="margin-top: 24px;">
+                    <div class="card-header-styled">
+                        <h4>Historical Disaster Inventory — Hyderabad District</h4>
+                        <span class="card-header-sub">Documented flood disasters from India Flood Inventory v3 (IMD Disasters Archive, 1969–2022). Not a live storm forecast.</span>
+                    </div>
+
+                    <div id="floodCompactEventsList" class="compact-events-grid">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                </div>
             </section>
 
-        </div>
 
+            <!-- ====================================================
+                 VIEW 3: URBAN HEAT INTELLIGENCE PAGE
+            ==================================================== -->
+            <section id="tab-heat" class="page-view">
+                <div class="page-hero-banner heat-theme">
+                    <div>
+                        <span class="page-tag-badge">MICROCLIMATE INTELLIGENCE</span>
+                        <h2>Urban Heat Intelligence</h2>
+                        <p class="page-subtitle">Explore heat risk using satellite thermal observation data and predictive surface temperature modeling.</p>
+                    </div>
+                </div>
 
-        <!-- ========================================================
-             SECONDARY VIEW: DETAILED EVIDENCE (PROGRESSIVE DISCLOSURE)
-        ======================================================== -->
-        <div id="view-evidence-tab" class="technical-view-section">
-            <div class="tech-panel">
-                <h2 style="font-size: 18px; font-weight: 800; color: var(--navy-dark); margin-bottom: 6px;">Detailed Spatial Evidence Tables</h2>
-                <p style="font-size: 12px; color: var(--text-secondary); margin-bottom: 16px;">
-                    In-depth raw data tables, road proximity distributions, and facility distance breakdowns for GIS analysts and technical officers.
-                </p>
-
-                <h3 style="font-size: 14px; font-weight: 700; margin: 16px 0 8px;">1. Ten Nearest Infrastructure Assets</h3>
-                <div id="techTableInfra" class="evidence-table-wrap"></div>
-
-                <h3 style="font-size: 14px; font-weight: 700; margin: 20px 0 8px;">2. Five Nearest Road Segments</h3>
-                <div id="techTableRoads" class="evidence-table-wrap"></div>
-
-                <h3 style="font-size: 14px; font-weight: 700; margin: 20px 0 8px;">3. Nearby Hazard Observations</h3>
-                <div id="techTableHazards" class="evidence-table-wrap"></div>
-            </div>
-        </div>
-
-
-        <!-- ========================================================
-             SECONDARY VIEW: HAZARD MODULES (FLOOD / HEAT / INFRA)
-        ======================================================== -->
-        <div id="view-hazards-tab" class="technical-view-section">
-            <div class="tech-panel">
-                <h2 style="font-size: 18px; font-weight: 800; color: var(--navy-dark); margin-bottom: 6px;">Hazard Modules & Machine Learning Tools</h2>
-                <p style="font-size: 12px; color: var(--text-secondary); margin-bottom: 20px;">
-                    Independent analytical modules powering the multi-hazard framework.
-                </p>
-
-                <h3 style="font-size: 14px; font-weight: 700; margin-bottom: 8px;">Historical Flood Inventory (40 Documented Events in Hyderabad)</h3>
-                <div id="techTableFloods" class="evidence-table-wrap"></div>
-
-                <div style="margin-top: 24px; padding: 20px; background: var(--bg-muted); border-radius: var(--radius-sm); border: 1px solid var(--border);">
-                    <h3 style="font-size: 14px; font-weight: 700; color: var(--navy-dark); margin-bottom: 8px;">Live ML Surface Temperature Predictor</h3>
-                    <p style="font-size: 12px; color: var(--text-secondary); margin-bottom: 12px;">
-                        Candidate Random Forest Regressor trained on MODIS spatial observations (Spatial CV MAE: 0.506 °C, Held-out R²: 0.357).
-                    </p>
-                    <form id="standaloneMlForm" style="display: flex; gap: 12px; flex-wrap: wrap; align-items: flex-end;">
-                        <div>
-                            <label style="font-size: 11px; font-weight: 700;">Latitude (°N):</label>
-                            <input type="number" step="0.0001" id="customMlLat" class="form-select" value="17.3850" required>
+                <!-- Heat Stats -->
+                <div class="metrics-quad-grid">
+                    <div class="metric-box">
+                        <span class="box-icon">🛰️</span>
+                        <div class="box-text">
+                            <strong class="box-num" id="heatStatObs">14,530</strong>
+                            <span class="box-label">Satellite Thermal Observations</span>
                         </div>
-                        <div>
-                            <label style="font-size: 11px; font-weight: 700;">Longitude (°E):</label>
-                            <input type="number" step="0.0001" id="customMlLon" class="form-select" value="78.4867" required>
+                    </div>
+                    <div class="metric-box">
+                        <span class="box-icon">🌡️</span>
+                        <div class="box-text">
+                            <strong class="box-num" id="heatStatDayMean">34.32 °C</strong>
+                            <span class="box-label">Citywide Summer Day Mean</span>
                         </div>
-                        <div>
-                            <label style="font-size: 11px; font-weight: 700;">Night Temp (°C):</label>
-                            <input type="number" step="0.1" id="customMlNight" class="form-select" value="24.5" required>
+                    </div>
+                    <div class="metric-box">
+                        <span class="box-icon">🌙</span>
+                        <div class="box-text">
+                            <strong class="box-num" id="heatStatNightMean">22.47 °C</strong>
+                            <span class="box-label">Baseline Night Surface Temp</span>
                         </div>
-                        <button type="submit" class="btn-assess-primary" style="padding: 6px 14px; font-size: 12px;">
-                            Predict Daytime Temp
+                    </div>
+                    <div class="metric-box">
+                        <span class="box-icon">🏙️</span>
+                        <div class="box-text">
+                            <strong class="box-num" id="heatStatUhi">+1.48 °C</strong>
+                            <span class="box-label">Surface UHI Night Anomaly</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Heat Map & Estimator Grid -->
+                <div class="map-and-analysis-grid">
+                    <div class="map-panel-card">
+                        <div class="panel-header-row">
+                            <div>
+                                <h3>Surface Thermal Distribution</h3>
+                                <span class="map-sub">NASA MODIS thermal summer baseline & Yale Center for Earth Observation UHI</span>
+                            </div>
+                        </div>
+                        <div id="heatMapCanvas" class="leaflet-map-canvas" style="height: 520px;"></div>
+                    </div>
+
+                    <!-- Temperature Predictor -->
+                    <div class="analysis-panel-card">
+                        <div class="analysis-panel-header">
+                            <span class="eyebrow-accent">MACHINE LEARNING</span>
+                            <h3>Daytime Temperature Estimator</h3>
+                            <p class="analysis-place-subtitle">Predict daytime surface temp based on nighttime reading & location</p>
+                        </div>
+
+                        <div class="predictor-form-block">
+                            <div class="form-input-group">
+                                <label for="heatLocalitySelect">Select Locality:</label>
+                                <select id="heatLocalitySelect" class="styled-select-input">
+                                    <option value="17.3616,78.4747">Charminar / Old City</option>
+                                    <option value="17.4435,78.3772">Hitec City / Madhapur</option>
+                                    <option value="17.3705,78.5080">Moosarambagh Corridor</option>
+                                    <option value="17.4447,78.4664">Begumpet / Secunderabad</option>
+                                    <option value="17.4156,78.4350">Banjara Hills</option>
+                                    <option value="17.4526,78.5303">Malkajgiri Urban Area</option>
+                                    <option value="17.3892,78.5179">Amberpet / Ramanthapur</option>
+                                </select>
+                            </div>
+
+                            <div class="form-input-group">
+                                <label for="heatNightInput">Measured Nighttime Temp (°C):</label>
+                                <input type="number" step="0.5" id="heatNightInput" class="styled-text-input" value="24.5" min="15" max="35">
+                                <small style="color: var(--text-muted); font-size: 13px;">Average summer nighttime temp: 22 °C – 26 °C</small>
+                            </div>
+
+                            <button type="button" class="btn-primary-action" id="runHeatPredictionBtn" style="width: 100%; justify-content: center; margin-top: 10px;">
+                                Predict Daytime Surface Temperature
+                            </button>
+                        </div>
+
+                        <!-- Predictor Result -->
+                        <div id="heatPredictionResultBox" class="prediction-result-display">
+                            <div class="pred-placeholder">Click 'Predict' to run inference using trained Random Forest regressor.</div>
+                        </div>
+
+                        <!-- Heat Mitigation Recommendations -->
+                        <div class="analysis-sub-card actions-accent" style="margin-top: 16px;">
+                            <h4>Thermal Anomaly & Heat Screening Evidence</h4>
+                            <div id="heatHotspotBadgeContainer" style="margin-bottom: 8px; display: flex; gap: 8px; flex-wrap: wrap;">
+                                <span class="pill-badge-green" id="heatHotspotClassBadge">MODIS 2023 Summer Anomaly</span>
+                                <span class="pill-badge-blue" id="heatCanopyDeficitBadge">NDVI Canopy Status</span>
+                            </div>
+                            <h4>Urban Heat Mitigation</h4>
+                            <p style="font-size: 14.5px; color: var(--text-secondary); line-height: 1.6;">
+                                High solar-reflective cool roof coatings on buildings, green canopy buffers in high-density corridors, and decentralized public hydration points.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- ====================================================
+                 VIEW 4: INFRASTRUCTURE INTELLIGENCE PAGE
+            ==================================================== -->
+            <section id="tab-infrastructure" class="page-view">
+                <div class="page-hero-banner infra-theme">
+                    <div>
+                        <span class="page-tag-badge">ACCESSIBILITY INTELLIGENCE</span>
+                        <h2>Infrastructure Intelligence</h2>
+                        <p class="page-subtitle">Assess accessibility to essential services, emergency response facilities and identify spatial gaps.</p>
+                    </div>
+                </div>
+
+                <!-- Stats -->
+                <div class="metrics-quad-grid">
+                    <div class="metric-box">
+                        <span class="box-icon">🏥</span>
+                        <div class="box-text">
+                            <strong class="box-num" id="infraStatHospitals">1,073</strong>
+                            <span class="box-label">Hospitals & Health Clinics</span>
+                        </div>
+                    </div>
+                    <div class="metric-box">
+                        <span class="box-icon">🚒</span>
+                        <div class="box-text">
+                            <strong class="box-num" id="infraStatFire">7</strong>
+                            <span class="box-label">Fire Stations</span>
+                        </div>
+                    </div>
+                    <div class="metric-box">
+                        <span class="box-icon">🏢</span>
+                        <div class="box-text">
+                            <strong class="box-num" id="infraStatBuildings">1,003</strong>
+                            <span class="box-label">Civic Buildings & Shelters</span>
+                        </div>
+                    </div>
+                    <div class="metric-box">
+                        <span class="box-icon">🛣️</span>
+                        <div class="box-text">
+                            <strong class="box-num" id="infraStatRoads">93,437</strong>
+                            <span class="box-label">Road Network Segments</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Infrastructure Map & Selected Locality Audit -->
+                <div class="map-and-analysis-grid">
+                    <div class="map-panel-card">
+                        <div class="panel-header-row">
+                            <div>
+                                <h3>Civic Amenities & Road Network Map</h3>
+                                <span class="map-sub">OpenStreetMap infrastructure spatial snapshot</span>
+                            </div>
+                        </div>
+                        <div id="infraMapCanvas" class="leaflet-map-canvas" style="height: 520px;"></div>
+                    </div>
+
+                    <div class="analysis-panel-card">
+                        <div class="analysis-panel-header">
+                            <span class="eyebrow-accent">EMERGENCY ACCESS AUDIT</span>
+                            <h3 id="infraSelectedPlaceTitle">Selected Location</h3>
+                            <p class="analysis-place-subtitle" id="infraSelectedPlaceSubtitle">Proximity to emergency dispatch & facilities</p>
+                        </div>
+
+                        <div class="analysis-scores-list">
+                            <div class="analysis-score-item">
+                                <span class="item-label">Nearest Hospital / Clinic</span>
+                                <strong id="infraAuditNearHosp">-- m</strong>
+                            </div>
+                            <div class="analysis-score-item">
+                                <span class="item-label">Nearest Fire Station</span>
+                                <strong id="infraAuditNearFire">-- km</strong>
+                            </div>
+                            <div class="analysis-score-item">
+                                <span class="item-label">Hospital Coverage Band</span>
+                                <span class="pill-badge-green" id="infraAuditHospBand">Good Mapped Facility Coverage</span>
+                            </div>
+                            <div class="analysis-score-item">
+                                <span class="item-label">Fire Station Coverage Band</span>
+                                <span class="pill-badge-blue" id="infraAuditFireBand">Limited Mapped Facility Coverage</span>
+                            </div>
+                            <div class="analysis-score-item">
+                                <span class="item-label">Road Network Representation</span>
+                                <strong id="infraAuditRoadStatus">Road-Network Data Available</strong>
+                            </div>
+                        </div>
+
+                        <div class="analysis-sub-card actions-accent">
+                            <h4>Service Gap & Planning Recommendations</h4>
+                            <p id="infraGapSummaryText" style="font-size: 14.5px; color: var(--text-secondary); line-height: 1.6;">
+                                Mapped hospital and fire station proximities are straight-line screening distances. Operational readiness, staffing, beds, or vehicle availability require on-site verification.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- ====================================================
+                 VIEW 5: COMPARE TWO PLACES PAGE
+            ==================================================== -->
+            <section id="tab-compare" class="page-view">
+                <div class="page-hero-banner compare-theme">
+                    <div>
+                        <span class="page-tag-badge">COMPARATIVE ANALYSIS</span>
+                        <h2>Compare Two Places</h2>
+                        <p class="page-subtitle">Select two Hyderabad locations to compare their multi-hazard exposure and understand which requires more attention.</p>
+                    </div>
+                </div>
+
+                <!-- Locality Selectors -->
+                <div class="content-card compare-picker-card">
+                    <div class="compare-selector-grid">
+                        <div class="picker-column">
+                            <label for="comparePlaceSelectA">Location A:</label>
+                            <select id="comparePlaceSelectA" class="styled-select-input-lg">
+                                <option value="17.3616,78.4747">Charminar / Old City</option>
+                                <option value="17.4435,78.3772">Hitec City / Madhapur</option>
+                                <option value="17.3705,78.5080">Moosarambagh / Musi Basin</option>
+                                <option value="17.4447,78.4664">Begumpet / Secunderabad</option>
+                                <option value="17.4156,78.4350">Banjara Hills</option>
+                                <option value="17.4526,78.5303">Malkajgiri Urban Area</option>
+                                <option value="17.3892,78.5179">Amberpet / Ramanthapur</option>
+                                <option value="17.3850,78.4867">Koti / Sultan Bazar</option>
+                            </select>
+                        </div>
+
+                        <div class="compare-vs-badge">VS</div>
+
+                        <div class="picker-column">
+                            <label for="comparePlaceSelectB">Location B:</label>
+                            <select id="comparePlaceSelectB" class="styled-select-input-lg">
+                                <option value="17.4435,78.3772">Hitec City / Madhapur</option>
+                                <option value="17.3616,78.4747">Charminar / Old City</option>
+                                <option value="17.3705,78.5080">Moosarambagh / Musi Basin</option>
+                                <option value="17.4447,78.4664">Begumpet / Secunderabad</option>
+                                <option value="17.4156,78.4350">Banjara Hills</option>
+                                <option value="17.4526,78.5303">Malkajgiri Urban Area</option>
+                                <option value="17.3892,78.5179">Amberpet / Ramanthapur</option>
+                                <option value="17.3850,78.4867">Koti / Sultan Bazar</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div style="text-align: right; margin-top: 20px;">
+                        <button type="button" class="btn-primary-action" id="executeCompareBtn">
+                            <span>Compare Risk Profiles</span>
+                            <span>⚖️</span>
                         </button>
-                    </form>
-                    <div id="standaloneMlResult" style="margin-top: 10px; font-size: 12px; font-weight: 600; color: var(--navy-dark);"></div>
-                </div>
-            </div>
-        </div>
-
-
-        <!-- ========================================================
-             SECONDARY VIEW: DATA REGISTRY
-        ======================================================== -->
-        <div id="view-datasets-tab" class="technical-view-section">
-            <div class="tech-panel">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
-                    <div>
-                        <h2 style="font-size: 18px; font-weight: 800; color: var(--navy-dark);">Dataset Registry & Provenance</h2>
-                        <p style="font-size: 12px; color: var(--text-secondary);">Verified dataset records persisted in MongoDB.</p>
                     </div>
-                    <button type="button" class="btn-assess-primary" id="refreshDatasetsBtn" style="padding: 6px 12px; font-size: 11px;">
-                        Refresh ↻
-                    </button>
                 </div>
 
-                <div class="evidence-table-wrap">
-                    <table class="evidence-table">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>DATASET NAME</th>
-                                <th>SOURCE</th>
-                                <th>VERSION</th>
-                                <th>DATE COVERAGE</th>
-                                <th>RECORDS</th>
-                                <th>REGISTERED</th>
-                            </tr>
-                        </thead>
-                        <tbody id="datasetTableBody">
-                            <tr>
-                                <td colspan="7" style="text-align: center; padding: 20px; color: var(--text-muted);">
-                                    Loading registered datasets from MongoDB...
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <!-- Comparison Matrix Output -->
+                <div id="compareResultsSection" class="compare-results-wrap">
+                    <div class="compare-empty-prompt">
+                        Select two distinct locations above and click 'Compare Risk Profiles' to generate the comparison matrix.
+                    </div>
                 </div>
-            </div>
-        </div>
+            </section>
 
 
-        <!-- ========================================================
-             SECONDARY VIEW: SYSTEM STATUS
-        ======================================================== -->
-        <div id="view-system-tab" class="technical-view-section">
-            <div class="tech-panel">
-                <h2 style="font-size: 18px; font-weight: 800; color: var(--navy-dark); margin-bottom: 6px;">System Telemetry & Database Health</h2>
-                <p style="font-size: 12px; color: var(--text-secondary); margin-bottom: 16px;">
-                    Live operational telemetry and document counts across all 9 migrated MongoDB collections.
-                </p>
-
-                <div id="systemCollectionsGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px;">
-                    <!-- Dynamically populated from /api/system-status -->
+            <!-- ====================================================
+                 VIEW 6: PRIORITY AREAS PAGE (FULL TABLE)
+            ==================================================== -->
+            <section id="tab-priority" class="page-view">
+                <div class="page-hero-banner priority-theme">
+                    <div>
+                        <span class="page-tag-badge">CAPITAL INTERVENTION ALLOCATION</span>
+                        <h2>Priority Areas</h2>
+                        <p class="page-subtitle">Locations that need attention based on integrated multi-hazard risk analysis (741 scored 1-km grid cells).</p>
+                    </div>
                 </div>
-            </div>
+
+                <!-- Full Priority Table -->
+                <div class="content-card">
+                    <div class="card-header-styled flex-between">
+                        <div>
+                            <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                                <h4 style="margin: 0;">Ranked 1-km Priority Screening Grid</h4>
+                                <span id="priorityLastCalculatedBadge" class="temporal-chip" style="display: none;"></span>
+                            </div>
+                            <span class="card-header-sub">Precomputed using weights: Flood Evidence (35%), Heat Exposure (35%), Infra Gap (15%), Road Gap (15%)</span>
+                        </div>
+                        <span class="pill-badge-blue">741 Validated Cells</span>
+                    </div>
+
+                    <div class="table-responsive-wrapper">
+                        <table class="urbanrisk-data-table full-table">
+                            <thead>
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Location</th>
+                                    <th>Overall Priority</th>
+                                    <th>Main Risk</th>
+                                    <th>Recommended Action</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="fullPriorityTableBody">
+                                <tr>
+                                    <td colspan="6" class="table-loading-cell">Loading complete priority screening table...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            <!-- ========================================================
+                 7. DATASET MANAGEMENT & INGESTION TAB (PHASE 5)
+            ======================================================== -->
+            <section id="tab-admin" class="tab-pane">
+                <div class="view-header-row">
+                    <div>
+                        <h2 class="view-title">Dataset Management & Ingestion History</h2>
+                        <p class="view-subtitle">Monitor provider publishing cadences, inspect dataset operational status, and trigger authorized ingestions.</p>
+                    </div>
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <button type="button" class="btn btn-secondary" id="refreshIngestionStatusBtn">🔄 Refresh Status</button>
+                    </div>
+                </div>
+
+                <!-- Provider Cadence & Status Cards Grid -->
+                <div class="content-card">
+                    <div class="card-header-styled flex-between">
+                        <div>
+                            <h4 style="margin: 0;">Registered Datasets & Provider Cadences</h4>
+                            <span class="card-header-sub">Operational status and minimum update intervals respecting provider publishing schedules</span>
+                        </div>
+                        <span class="pill-badge-blue" id="registeredDatasetsCountBadge">5 Datasets Registered</span>
+                    </div>
+
+                    <div id="datasetCardsContainer" class="card-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; margin-top: 14px;">
+                        <div class="info-card" style="padding: 16px;">Loading registered datasets...</div>
+                    </div>
+                </div>
+
+                <!-- Recent Ingestion Run History Table -->
+                <div class="content-card" style="margin-top: 24px;">
+                    <div class="card-header-styled flex-between">
+                        <div>
+                            <h4 style="margin: 0;">Ingestion Run Audit History</h4>
+                            <span class="card-header-sub">Immutable audit log of recent ingestion runs, record counts, and status</span>
+                        </div>
+                        <span class="pill-badge-green" id="ingestionHistoryCountBadge">Runs</span>
+                    </div>
+
+                    <div class="table-responsive-wrapper">
+                        <table class="urbanrisk-data-table full-table">
+                            <thead>
+                                <tr>
+                                    <th>Run ID</th>
+                                    <th>Dataset</th>
+                                    <th>Trigger Type</th>
+                                    <th>Status</th>
+                                    <th>Time</th>
+                                    <th>Duration</th>
+                                    <th>Records Fetched / Upserted</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ingestionHistoryTableBody">
+                                <tr>
+                                    <td colspan="7" class="table-loading-cell">Loading ingestion history...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
         </div>
-
-    </main>
-
-
-    <!-- MUNICIPAL FOOTER -->
-    <footer class="site-footer">
-        <div class="footer-inner">
-            <div>
-                <strong>URBANRISK</strong> — Integrated Urban Risk Analytics and Resource Prioritization System
-            </div>
-            <div>
-                Hyderabad, Telangana · Academic & Municipal Demonstration Edition 2026
-            </div>
-        </div>
-    </footer>
+    </div>
 
 
     <!-- Local Leaflet JS (Offline Vendor Copy) -->
-    <script src="/static/vendor/leaflet/leaflet.js"></script>
+    <script src="../static/vendor/leaflet/leaflet.js"></script>
 
     <!-- Main Application JavaScript -->
-    <script src="/js/script.js"></script>
+    <script src="../js/script.js"></script>
 
 </body>
 </html>

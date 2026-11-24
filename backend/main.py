@@ -1,10 +1,13 @@
 
 from contextlib import asynccontextmanager
 from datetime import datetime, timezone
+import os
 from pathlib import Path
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
+from fastapi.responses import RedirectResponse, Response
 from fastapi.staticfiles import StaticFiles
+from fastapi.middleware.cors import CORSMiddleware
 
 from database.mongodb import db, check_mongodb_connection
 from database.counters import initialize_counter
@@ -17,6 +20,10 @@ from backend.routers.ml import router as ml_router
 from backend.routers.flood import router as flood_router
 from backend.routers.heat import router as heat_router
 from backend.routers.infrastructure import router as infrastructure_router
+from backend.routers.weather import router as weather_router
+from backend.routers.environmental import router as environmental_router
+from backend.routers.admin_ingestion import router as admin_ingestion_router
+
 
 
 # 1. LIFESPAN MANAGEMENT (MONGODB COUNTER INITIALIZATION)
@@ -64,6 +71,37 @@ app = FastAPI(
     lifespan=lifespan
 )
 
+# 2.1 CONFIGURE CORS (RESTRICTED TO CONFIGURED ORIGINS)
+allowed_origins_env = os.environ.get("ALLOWED_ORIGINS", "")
+allowed_origins = [o.strip() for o in allowed_origins_env.split(",") if o.strip()]
+if not allowed_origins:
+    # Default local dev origins
+    allowed_origins = [
+        "http://localhost:8000",
+        "http://127.0.0.1:8000",
+        "http://localhost:3000",
+        "http://127.0.0.1:3000"
+    ]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=allowed_origins,
+    allow_credentials=True,
+    allow_methods=["GET", "POST", "OPTIONS"],
+    allow_headers=["*"],
+)
+
+# 2.2 SECURITY HEADERS MIDDLEWARE
+@app.middleware("http")
+async def add_security_headers(request: Request, call_next):
+    response: Response = await call_next(request)
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["X-Frame-Options"] = "DENY"
+    response.headers["X-XSS-Protection"] = "1; mode=block"
+    response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
+    response.headers["Permissions-Policy"] = "geolocation=(self), camera=(), microphone=()"
+    return response
+
 
 # 3. REGISTER API ROUTERS
 
@@ -75,12 +113,20 @@ app.include_router(ml_router)
 app.include_router(flood_router)
 app.include_router(heat_router)
 app.include_router(infrastructure_router)
+app.include_router(weather_router)
+app.include_router(environmental_router)
+app.include_router(admin_ingestion_router)
+
 
 
 # 3. HOME ENDPOINT
 
 @app.get("/")
-def home():
+def home(request: Request = None):
+    if request is not None:
+        accept = request.headers.get("accept", "")
+        if "text/html" in accept and "application/json" not in accept:
+            return RedirectResponse(url="/app/")
     return {
         "message": "Urban Risk Analytics API is running",
         "status": "success",

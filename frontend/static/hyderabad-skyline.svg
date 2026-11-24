@@ -1,0 +1,140 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 480" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="skyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#071527"/>
+      <stop offset="40%" stop-color="#0c2340"/>
+      <stop offset="100%" stop-color="#14375e"/>
+    </linearGradient>
+    <linearGradient id="charminarGlow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#0284c7" stop-opacity="0.05"/>
+    </linearGradient>
+    <linearGradient id="skylineGrad1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1e3a8a" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#0f172a" stop-opacity="0.8"/>
+    </linearGradient>
+    <linearGradient id="skylineGrad2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2563eb" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#091424" stop-opacity="0.9"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Sky Base -->
+  <rect width="1600" height="480" fill="url(#skyGrad)"/>
+
+  <!-- Subtle Atmospheric Stars / Constellation Dots -->
+  <circle cx="120" cy="70" r="1.5" fill="#93c5fd" opacity="0.4"/>
+  <circle cx="280" cy="90" r="1.2" fill="#93c5fd" opacity="0.3"/>
+  <circle cx="450" cy="50" r="1.8" fill="#bae6fd" opacity="0.5"/>
+  <circle cx="680" cy="110" r="1.2" fill="#93c5fd" opacity="0.3"/>
+  <circle cx="950" cy="65" r="1.5" fill="#bae6fd" opacity="0.4"/>
+  <circle cx="1180" cy="95" r="1.2" fill="#93c5fd" opacity="0.3"/>
+  <circle cx="1380" cy="45" r="1.8" fill="#bae6fd" opacity="0.6"/>
+  <circle cx="1520" cy="120" r="1.2" fill="#93c5fd" opacity="0.3"/>
+
+  <!-- Back Layer: Modern Tech City & Highrises (HITEC City / Financial District) -->
+  <g fill="url(#skylineGrad1)">
+    <!-- Towers Left -->
+    <rect x="40" y="220" width="45" height="260" rx="3"/>
+    <rect x="95" y="180" width="60" height="300" rx="4"/>
+    <polygon points="125,140 105,180 145,180" fill="#38bdf8" opacity="0.3"/>
+    <rect x="165" y="240" width="50" height="240" rx="3"/>
+    <rect x="225" y="200" width="70" height="280" rx="4"/>
+    <rect x="305" y="250" width="40" height="230"/>
+    <rect x="355" y="190" width="75" height="290" rx="4"/>
+    <polygon points="392,155 375,190 410,190" fill="#38bdf8" opacity="0.25"/>
+
+    <!-- Towers Right -->
+    <rect x="1140" y="210" width="55" height="270" rx="3"/>
+    <rect x="1205" y="170" width="70" height="310" rx="4"/>
+    <polygon points="1240,130 1220,170 1260,170" fill="#38bdf8" opacity="0.3"/>
+    <rect x="1285" y="230" width="65" height="250" rx="3"/>
+    <rect x="1360" y="195" width="55" height="285" rx="3"/>
+    <rect x="1425" y="160" width="80" height="320" rx="4"/>
+    <polygon points="1465,115 1445,160 1485,160" fill="#38bdf8" opacity="0.35"/>
+    <rect x="1515" y="225" width="60" height="255"/>
+  </g>
+
+  <!-- Midground: Modern Architectural Silhouettes & Bridges (Durgam Cheruvu / Cable Bridge) -->
+  <g fill="url(#skylineGrad2)">
+    <!-- Cable Bridge Pylons (Left-Center) -->
+    <polygon points="460,480 475,200 485,200 500,480" opacity="0.5"/>
+    <polygon points="560,480 575,200 585,200 600,480" opacity="0.5"/>
+    <!-- Stay Cables -->
+    <line x1="480" y1="220" x2="420" y2="440" stroke="#38bdf8" stroke-width="1.2" opacity="0.3"/>
+    <line x1="480" y1="240" x2="435" y2="440" stroke="#38bdf8" stroke-width="1.2" opacity="0.3"/>
+    <line x1="480" y1="260" x2="450" y2="440" stroke="#38bdf8" stroke-width="1.2" opacity="0.3"/>
+    <line x1="480" y1="220" x2="540" y2="440" stroke="#38bdf8" stroke-width="1.2" opacity="0.3"/>
+    <line x1="480" y1="240" x2="525" y2="440" stroke="#38bdf8" stroke-width="1.2" opacity="0.3"/>
+    <line x1="580" y1="220" x2="640" y2="440" stroke="#38bdf8" stroke-width="1.2" opacity="0.3"/>
+    <line x1="580" y1="240" x2="625" y2="440" stroke="#38bdf8" stroke-width="1.2" opacity="0.3"/>
+    <line x1="580" y1="220" x2="520" y2="440" stroke="#38bdf8" stroke-width="1.2" opacity="0.3"/>
+    <line x1="580" y1="240" x2="535" y2="440" stroke="#38bdf8" stroke-width="1.2" opacity="0.3"/>
+
+    <!-- Building Blocks -->
+    <rect x="250" y="270" width="85" height="210" opacity="0.6"/>
+    <rect x="1030" y="250" width="90" height="230" opacity="0.6"/>
+  </g>
+
+  <!-- Centerpiece: THE MAJESTIC CHARMINAR (Heritage Landmark of Hyderabad) -->
+  <g transform="translate(680, 80)">
+    <!-- Charminar Glow Halo -->
+    <ellipse cx="120" cy="220" rx="190" ry="170" fill="url(#charminarGlow)"/>
+
+    <!-- Base Structure Plinth -->
+    <rect x="20" y="310" width="200" height="90" fill="#0f2647" rx="3"/>
+
+    <!-- Grand Four Arches (Central Opening) -->
+    <path d="M 60,400 L 60,300 Q 120,230 180,300 L 180,400 Z" fill="#08182b"/>
+
+    <!-- Balcony / First Tier Gallery -->
+    <rect x="15" y="250" width="210" height="25" fill="#15365e" rx="2"/>
+    <!-- Balcony Railing Details -->
+    <rect x="20" y="244" width="200" height="6" fill="#2563eb" opacity="0.5"/>
+
+    <!-- Second Tier Gallery with Arched Windows -->
+    <rect x="35" y="195" width="170" height="55" fill="#102b4d"/>
+    <path d="M 50,235 L 50,215 Q 65,200 80,215 L 80,235 Z" fill="#08192d"/>
+    <path d="M 95,235 L 95,215 Q 110,200 125,215 L 125,235 Z" fill="#08192d"/>
+    <path d="M 140,235 L 140,215 Q 155,200 170,215 L 170,235 Z" fill="#08192d"/>
+    <path d="M 185,235 L 185,215 Q 192,205 200,215 L 200,235 Z" fill="#08192d"/>
+
+    <!-- Third Tier Parapet -->
+    <rect x="45" y="175" width="150" height="20" fill="#183d6a"/>
+    <!-- Small Domes along parapet -->
+    <ellipse cx="65" cy="173" rx="7" ry="5" fill="#38bdf8" opacity="0.4"/>
+    <ellipse cx="90" cy="173" rx="7" ry="5" fill="#38bdf8" opacity="0.4"/>
+    <ellipse cx="120" cy="173" rx="8" ry="6" fill="#38bdf8" opacity="0.5"/>
+    <ellipse cx="150" cy="173" rx="7" ry="5" fill="#38bdf8" opacity="0.4"/>
+    <ellipse cx="175" cy="173" rx="7" ry="5" fill="#38bdf8" opacity="0.4"/>
+
+    <!-- LEFT CORNER MINARET (Tower 1) -->
+    <rect x="5" y="110" width="24" height="290" fill="#173a65"/>
+    <!-- Minaret Balconies -->
+    <rect x="2" y="230" width="30" height="8" fill="#38bdf8" opacity="0.6"/>
+    <rect x="4" y="160" width="26" height="7" fill="#38bdf8" opacity="0.6"/>
+    <!-- Minaret Dome & Finial -->
+    <ellipse cx="17" cy="108" rx="14" ry="16" fill="#1e40af"/>
+    <polygon points="17,65 14,100 20,100" fill="#38bdf8"/>
+    <circle cx="17" cy="62" r="3" fill="#67e8f9"/>
+
+    <!-- INNER-LEFT MINARET FLANK -->
+    <rect x="38" y="140" width="12" height="60" fill="#132f53"/>
+
+    <!-- RIGHT CORNER MINARET (Tower 2) -->
+    <rect x="211" y="110" width="24" height="290" fill="#173a65"/>
+    <!-- Minaret Balconies -->
+    <rect x="208" y="230" width="30" height="8" fill="#38bdf8" opacity="0.6"/>
+    <rect x="210" y="160" width="26" height="7" fill="#38bdf8" opacity="0.6"/>
+    <!-- Minaret Dome & Finial -->
+    <ellipse cx="223" cy="108" rx="14" ry="16" fill="#1e40af"/>
+    <polygon points="223,65 220,100 226,100" fill="#38bdf8"/>
+    <circle cx="223" cy="62" r="3" fill="#67e8f9"/>
+
+    <!-- INNER-RIGHT MINARET FLANK -->
+    <rect x="190" y="140" width="12" height="60" fill="#132f53"/>
+  </g>
+
+  <!-- Foreground Atmospheric Gradient Wash -->
+  <rect y="380" width="1600" height="100" fill="url(#skyGrad)" opacity="0.85"/>
+</svg>

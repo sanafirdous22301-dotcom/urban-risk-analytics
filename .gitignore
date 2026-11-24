@@ -34,3 +34,10 @@ data/raw/flood/rainfall/*.cog
 mongo_backup/
 mongo_dump/
 *.zip
+
+# Local database backups - never publish
+atlas_backup_before_migration/
+database/backups/
+
+# Generated ML experiment outputs
+kaggle_package/urbanrisk_ml_outputs/

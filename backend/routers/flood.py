@@ -1,10 +1,31 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Query
 from database.mongodb import db
+from backend.services.phase6_analytics_service import AdvancedHazardAnalyticsService
 
 router = APIRouter(
     prefix="/api/flood",
     tags=["Flood Intelligence"]
 )
+
+
+@router.get("/climatology")
+def get_flood_rainfall_climatology():
+    """Returns 42-year daily rainfall climatological recurrence percentiles and statistics (NASA POWER)."""
+    service = AdvancedHazardAnalyticsService()
+    return service.get_climatological_rainfall_stats()
+
+
+@router.get("/evidence-profile")
+def get_flood_evidence_profile(
+    latitude: float = Query(17.3850, ge=-90.0, le=90.0),
+    longitude: float = Query(78.4867, ge=-180.0, le=180.0)
+):
+    """
+    Evaluates locality flood context: direct cell flood evidence vs regional context,
+    historical events proximity, and environmental runoff imperviousness context.
+    """
+    service = AdvancedHazardAnalyticsService()
+    return service.evaluate_flood_evidence_profile(latitude, longitude)
 
 
 @router.get("/summary")
@@ -93,11 +114,22 @@ def get_flood_summary():
             ],
             "rainfall_observations": {
                 "total_records": len(rainfall_records),
+                "raster_samples_count": len(rainfall_records),
+                "distinct_storm_dates_count": len(rainfall_dates),
                 "dates_recorded": rainfall_dates,
+                "storm_events": ["2020-09-25", "2021-10-08"],
+                "rainfall_data_nature": "Historical extreme storm raster extraction (CHIRPS v3.0)",
+                "is_real_time": False,
+                "is_forecast": False,
                 "mean_rainfall_mm": round(sum(rainfall_values) / len(rainfall_values), 1) if rainfall_values else 0,
                 "max_rainfall_mm": max(rainfall_values) if rainfall_values else 0,
                 "min_rainfall_mm": min(rainfall_values) if rainfall_values else 0
             },
+            "storm_events": ["2020-09-25", "2021-10-08"],
+            "raster_samples_count": len(rainfall_records),
+            "rainfall_data_nature": "Historical extreme storm raster extraction (CHIRPS v3.0)",
+            "is_real_time": False,
+            "is_forecast": False,
             "recent_events": flood_records[:15],
             "all_events": flood_records
         }
