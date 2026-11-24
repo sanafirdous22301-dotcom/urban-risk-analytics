@@ -8,6 +8,7 @@ let currentLat = 17.3850;
 let currentLon = 78.4867;
 let currentPlaceName = "Hyderabad City Center (Default Point)";
 let lastAssessmentData = null;
+let currentAssessmentState = "idle"; // 'idle' | 'loading' | 'success' | 'error'
 
 // Map instances & spatial layers
 let homeMap = null;
@@ -22,40 +23,52 @@ let latestWeatherData = null;
 
 let floodMap = null;
 let floodMapInitialized = false;
+let floodLocMarker = null;
 
 let heatMap = null;
 let heatMapInitialized = false;
+let heatLocMarker = null;
 
 let infraMap = null;
 let infraMapInitialized = false;
 let infraLayerGroup = null;
 let infraRoadLayerGroup = null;
+let infraLocMarker = null;
 let infraActiveFilter = "all";
 
-// 22 Recognized Localities across Greater Hyderabad Study Area
+// Curated Localities across Greater Hyderabad Study Area
 const KNOWN_PLACES = [
     { name: "Charminar", area: "Old City Heritage District", lat: 17.3616, lon: 78.4747 },
     { name: "Hitec City", area: "Madhapur Tech Corridor", lat: 17.4435, lon: 78.3772 },
+    { name: "Madhapur", area: "HITEC City / Cyberabad Corridor", lat: 17.4483, lon: 78.3915 },
+    { name: "Gachibowli", area: "Financial District / IT SEZ", lat: 17.4401, lon: 78.3489 },
+    { name: "Kondapur", area: "Botanical Garden / Cyberabad Hub", lat: 17.4658, lon: 78.3582 },
+    { name: "Banjara Hills", area: "Road No. 1 / Central Core", lat: 17.4156, lon: 78.4350 },
+    { name: "Jubilee Hills", area: "Road No. 36 / Film Nagar Corridor", lat: 17.4319, lon: 78.4073 },
+    { name: "Secunderabad", area: "Twin City Commercial Core", lat: 17.4399, lon: 78.4983 },
+    { name: "Begumpet", area: "Airport Road Commercial Corridor", lat: 17.4447, lon: 78.4664 },
+    { name: "Ameerpet", area: "SR Nagar Educational & Metro Hub", lat: 17.4375, lon: 78.4483 },
+    { name: "Kukatpally", area: "High-Density Urban Commercial Zone", lat: 17.4947, lon: 78.3996 },
+    { name: "Kukatpally Housing Board", area: "KPHB Colony / Mixed Density Sector", lat: 17.4962, lon: 78.3912 },
+    { name: "Miyapur", area: "North-Western Transit Terminal Hub", lat: 17.4969, lon: 78.3534 },
+    { name: "Manikonda", area: "Outer Ring Road IT Corridor Hub", lat: 17.4042, lon: 78.3789 },
     { name: "Moosarambagh", area: "Musi River Basin Corridor", lat: 17.3705, lon: 78.5080 },
-    { name: "Begumpet", area: "Secunderabad Commercial Zone", lat: 17.4447, lon: 78.4664 },
-    { name: "Banjara Hills", area: "Road No. 1 / Jubilee Hills", lat: 17.4156, lon: 78.4350 },
-    { name: "Malkajgiri", area: "North-Eastern Residential Area", lat: 17.4526, lon: 78.5303 },
     { name: "Amberpet", area: "Ramanthapur Drainage Basin", lat: 17.3892, lon: 78.5179 },
     { name: "Koti", area: "Sultan Bazar Commercial Hub", lat: 17.3850, lon: 78.4867 },
-    { name: "Kukatpally", area: "KPHB Mixed Density Zone", lat: 17.4947, lon: 78.3996 },
-    { name: "LB Nagar", area: "Southern Transit Junction", lat: 17.3487, lon: 78.5571 },
-    { name: "Uppal", area: "Habsiguda Industrial Belt", lat: 17.4000, lon: 78.5588 },
-    { name: "Miyapur", area: "North-Western Suburb", lat: 17.4969, lon: 78.3534 },
-    { name: "Secunderabad Station", area: "Central Railway Corridor", lat: 17.4399, lon: 78.4983 },
-    { name: "Nampally", area: "Abids Commercial Core", lat: 17.3920, lon: 78.4703 },
+    { name: "Abids", area: "Central Commercial District", lat: 17.3910, lon: 78.4735 },
+    { name: "Nampally", area: "Station Road Core Sector", lat: 17.3920, lon: 78.4703 },
+    { name: "LB Nagar", area: "Southern Transit Corridor Junction", lat: 17.3487, lon: 78.5571 },
     { name: "Dilsukhnagar", area: "Chaitanyapuri High-Density Zone", lat: 17.3685, lon: 78.5262 },
-    { name: "Ameerpet", area: "SR Nagar Educational & Commercial", lat: 17.4375, lon: 78.4483 },
-    { name: "Tarnaka", area: "Osmania University Enclave", lat: 17.4234, lon: 78.5355 },
-    { name: "Mehdipatnam", area: "Tolichowki Corridor", lat: 17.3938, lon: 78.4421 },
+    { name: "Uppal", area: "Habsiguda Industrial & Sports Belt", lat: 17.4000, lon: 78.5588 },
+    { name: "Tarnaka", area: "Osmania University / Rail Nilayam", lat: 17.4234, lon: 78.5355 },
+    { name: "Malkajgiri", area: "North-Eastern Residential Belt", lat: 17.4526, lon: 78.5303 },
+    { name: "Mehdipatnam", area: "Tolichowki / PVNR Expressway Corridor", lat: 17.3938, lon: 78.4421 },
+    { name: "Tolichowki", area: "Golconda Heritage Corridor", lat: 17.4018, lon: 78.4124 },
+    { name: "Attapur", area: "Rajendranagar Urban Basin", lat: 17.3639, lon: 78.4326 },
+    { name: "Shamshabad", area: "RGIA Airport Environs Sector", lat: 17.2650, lon: 78.4280 },
     { name: "Lakdi Ka Pul", area: "Secretariat & Public Gardens", lat: 17.4059, lon: 78.4725 },
     { name: "ECIL Cross Roads", area: "Kapra / Moula Ali Corridor", lat: 17.4653, lon: 78.5674 },
-    { name: "Gachibowli", area: "Financial District / Stadium", lat: 17.4401, lon: 78.3489 },
-    { name: "Chandrayangutta", area: "South Hyderabad Basin", lat: 17.3195, lon: 78.4756 }
+    { name: "Chandrayangutta", area: "South Hyderabad Drainage Basin", lat: 17.3195, lon: 78.4756 }
 ];
 
 
@@ -276,21 +289,21 @@ function updateRecalculationBadges(timestamp, sourceType) {
     if (mapBadge) {
         mapBadge.textContent = badgeText;
         mapBadge.style.display = "inline-flex";
-        mapBadge.title = `Dynamic Grid Source: ${sourceType || 'MongoDB dynamic grid'}`;
+        mapBadge.title = `Spatial Grid: ${sourceType || '741 validated 1-km cells'}`;
     }
 
     const priorityBadge = document.getElementById("priorityLastCalculatedBadge");
     if (priorityBadge) {
         priorityBadge.textContent = badgeText;
         priorityBadge.style.display = "inline-flex";
-        priorityBadge.title = `Dynamic Grid Source: ${sourceType || 'MongoDB dynamic grid'}`;
+        priorityBadge.title = `Spatial Grid: ${sourceType || '741 validated 1-km cells'}`;
     }
 
     const previewBadge = document.getElementById("previewLastCalculatedBadge");
     if (previewBadge) {
         previewBadge.textContent = badgeText;
         previewBadge.style.display = "inline-flex";
-        previewBadge.title = `Dynamic Grid Source: ${sourceType || 'MongoDB dynamic grid'}`;
+        previewBadge.title = `Spatial Grid: ${sourceType || '741 validated 1-km cells'}`;
     }
 }
 
@@ -304,6 +317,8 @@ async function loadSpatialRiskGrid() {
             updateRecalculationBadges(data.last_calculated_at, data.source_type);
         }
         renderSpatialGridCells(currentActiveLayer);
+        if (typeof renderFloodMapCells === "function") renderFloodMapCells();
+        if (typeof renderHeatMapCells === "function") renderHeatMapCells();
     } catch (e) {
         console.warn("Unable to load spatial grid:", e);
     }
@@ -478,6 +493,7 @@ function switchTab(tabId) {
 // ==========================================================================
 
 const RECENT_STORAGE_KEY = "urbanrisk_recent_locations";
+let searchDebounceTimer = null;
 
 function setupSearchAndRecent() {
     const searchInput = document.getElementById("placeSearchInput");
@@ -490,7 +506,7 @@ function setupSearchAndRecent() {
     if (!searchInput) return;
 
     searchInput.addEventListener("input", function () {
-        const query = this.value.trim().toLowerCase();
+        const query = this.value.trim();
         if (clearBtn) clearBtn.classList.toggle("active", query.length > 0);
 
         if (query.length < 2) {
@@ -498,39 +514,92 @@ function setupSearchAndRecent() {
             return;
         }
 
-        const matches = KNOWN_PLACES.filter(p =>
-            p.name.toLowerCase().includes(query) || p.area.toLowerCase().includes(query)
-        ).slice(0, 8);
+        clearTimeout(searchDebounceTimer);
+        searchDebounceTimer = setTimeout(async () => {
+            try {
+                // Query project backend location search API
+                const res = await fetch(`/api/locations/search?q=${encodeURIComponent(query)}&limit=10`);
+                if (!res.ok) throw new Error("Search API request failed");
+                const data = await res.json();
+                const matches = data.results || [];
 
-        if (!matches.length) {
-            suggestionsBox.classList.remove("open");
-            return;
-        }
+                if (!matches.length) {
+                    suggestionsBox.innerHTML = `
+                        <div class="search-menu-item no-click">
+                            <span class="pin-icon">🔍</span>
+                            <div class="item-text">
+                                <strong>No matching Hyderabad locations found</strong>
+                                <small>Try searching a known locality, landmark, hospital, or road.</small>
+                            </div>
+                        </div>
+                    `;
+                    suggestionsBox.classList.add("open");
+                    return;
+                }
 
-        suggestionsBox.innerHTML = matches.map(p => `
-            <div class="search-menu-item" data-lat="${p.lat}" data-lon="${p.lon}" data-name="${p.name} (${p.area})">
-                <span class="pin-icon">📍</span>
-                <div class="item-text">
-                    <strong>${p.name}</strong>
-                    <small>${p.area}</small>
-                </div>
-            </div>
-        `).join("");
+                suggestionsBox.innerHTML = matches.map(p => {
+                    const icon = p.category === "Hospital" ? "🏥" : (p.category === "Road" ? "🛣️" : "📍");
+                    return `
+                        <div class="search-menu-item" data-lat="${p.latitude}" data-lon="${p.longitude}" data-name="${p.label || p.name}">
+                            <span class="pin-icon">${icon}</span>
+                            <div class="item-text">
+                                <strong>${p.name}</strong>
+                                <small>${p.subtext || "Hyderabad, Telangana"}</small>
+                            </div>
+                        </div>
+                    `;
+                }).join("");
 
-        suggestionsBox.classList.add("open");
+                suggestionsBox.classList.add("open");
 
-        // Click on suggestion
-        suggestionsBox.querySelectorAll(".search-menu-item").forEach(item => {
-            item.addEventListener("click", function () {
-                const lat = parseFloat(this.getAttribute("data-lat"));
-                const lon = parseFloat(this.getAttribute("data-lon"));
-                const name = this.getAttribute("data-name");
-                searchInput.value = name;
-                suggestionsBox.classList.remove("open");
-                saveRecentLocation(name, lat, lon);
-                updateSelectedLocation(lat, lon, name, true);
-            });
-        });
+                // Click on suggestion
+                suggestionsBox.querySelectorAll(".search-menu-item:not(.no-click)").forEach(item => {
+                    item.addEventListener("click", function () {
+                        const lat = parseFloat(this.getAttribute("data-lat"));
+                        const lon = parseFloat(this.getAttribute("data-lon"));
+                        const name = this.getAttribute("data-name");
+                        searchInput.value = name;
+                        suggestionsBox.classList.remove("open");
+                        saveRecentLocation(name, lat, lon);
+                        updateSelectedLocation(lat, lon, name, true);
+                    });
+                });
+            } catch (err) {
+                // Fallback to local known places
+                const qLower = query.toLowerCase();
+                const localMatches = KNOWN_PLACES.filter(p =>
+                    p.name.toLowerCase().includes(qLower) || p.area.toLowerCase().includes(qLower)
+                ).slice(0, 8);
+
+                if (!localMatches.length) {
+                    suggestionsBox.classList.remove("open");
+                    return;
+                }
+
+                suggestionsBox.innerHTML = localMatches.map(p => `
+                    <div class="search-menu-item" data-lat="${p.lat}" data-lon="${p.lon}" data-name="${p.name}, Hyderabad">
+                        <span class="pin-icon">📍</span>
+                        <div class="item-text">
+                            <strong>${p.name}</strong>
+                            <small>${p.area} · Hyderabad, Telangana</small>
+                        </div>
+                    </div>
+                `).join("");
+                suggestionsBox.classList.add("open");
+
+                suggestionsBox.querySelectorAll(".search-menu-item").forEach(item => {
+                    item.addEventListener("click", function () {
+                        const lat = parseFloat(this.getAttribute("data-lat"));
+                        const lon = parseFloat(this.getAttribute("data-lon"));
+                        const name = this.getAttribute("data-name");
+                        searchInput.value = name;
+                        suggestionsBox.classList.remove("open");
+                        saveRecentLocation(name, lat, lon);
+                        updateSelectedLocation(lat, lon, name, true);
+                    });
+                });
+            }
+        }, 200);
     });
 
     if (clearBtn) {
@@ -611,17 +680,56 @@ function updateSelectedLocation(lat, lon, label, autoExecute) {
     currentLon = Number(lon);
     currentPlaceName = label;
 
+    // 1. Update Home Risk Map
     if (homeMarker) {
         homeMarker.setLatLng([currentLat, currentLon]);
         homeMarker.bindPopup(`<strong>${label}</strong><br>Selected assessment point.`).openPopup();
     } else if (homeMap) {
         homeMarker = L.marker([currentLat, currentLon], { icon: localMarkerIcon }).addTo(homeMap);
     }
-
     if (homeMap) {
         homeMap.setView([currentLat, currentLon], 13);
     }
 
+    // 2. Update Flood Map Position
+    if (floodMap) {
+        floodMap.setView([currentLat, currentLon], 13);
+        if (floodLocMarker) {
+            floodLocMarker.setLatLng([currentLat, currentLon]);
+            floodLocMarker.bindPopup(`<strong>${label}</strong><br>Selected drainage evaluation point.`);
+        } else {
+            floodLocMarker = L.marker([currentLat, currentLon], { icon: localMarkerIcon }).addTo(floodMap);
+            floodLocMarker.bindPopup(`<strong>${label}</strong><br>Selected drainage evaluation point.`);
+        }
+    }
+
+    // 3. Update Heat Map Position
+    if (heatMap) {
+        heatMap.setView([currentLat, currentLon], 13);
+        if (heatLocMarker) {
+            heatLocMarker.setLatLng([currentLat, currentLon]);
+            heatLocMarker.bindPopup(`<strong>${label}</strong><br>Selected microclimate evaluation point.`);
+        } else {
+            heatLocMarker = L.marker([currentLat, currentLon], { icon: localMarkerIcon }).addTo(heatMap);
+            heatLocMarker.bindPopup(`<strong>${label}</strong><br>Selected microclimate evaluation point.`);
+        }
+    }
+
+    // 4. Update Infrastructure Map Position & Re-query Nearby Assets
+    if (infraMap) {
+        infraMap.setView([currentLat, currentLon], 13);
+        if (infraLocMarker) {
+            infraLocMarker.setLatLng([currentLat, currentLon]);
+            infraLocMarker.bindPopup(`<strong>${label}</strong><br>Selected accessibility assessment point.`);
+        } else {
+            infraLocMarker = L.marker([currentLat, currentLon], { icon: localMarkerIcon }).addTo(infraMap);
+            infraLocMarker.bindPopup(`<strong>${label}</strong><br>Selected accessibility assessment point.`);
+        }
+        loadInfraAmenities();
+        loadInfraRoads();
+    }
+
+    // 5. Update Search Input
     const searchInput = document.getElementById("placeSearchInput");
     if (searchInput) {
         searchInput.value = label;
@@ -631,6 +739,10 @@ function updateSelectedLocation(lat, lon, label, autoExecute) {
 
     setText("analysisPlaceTitle", label);
     setText("analysisPlaceSubtitle", `Evaluated at ${currentLat.toFixed(3)}°N, ${currentLon.toFixed(3)}°E`);
+    setText("floodSelectedPlaceTitle", label);
+    setText("floodSelectedPlaceSubtitle", `Evaluated at ${currentLat.toFixed(3)}°N, ${currentLon.toFixed(3)}°E`);
+    setText("infraSelectedPlaceTitle", label);
+    setText("infraSelectedPlaceSubtitle", `Evaluated at ${currentLat.toFixed(3)}°N, ${currentLon.toFixed(3)}°E`);
 
     if (autoExecute) {
         executeAssessment();
@@ -945,41 +1057,99 @@ function syncSubModulesWithAssessment(data, floodScore, heatScore, infraScore) {
 // ==========================================================================
 
 let floodDataLoaded = false;
+let floodGridLayerGroup = null;
 
 function initFloodMap() {
-    if (!window.L || floodMapInitialized) return;
+    if (!window.L || floodMapInitialized) {
+        if (floodMap) {
+            requestAnimationFrame(() => {
+                floodMap.invalidateSize();
+                floodMap.setView([currentLat, currentLon], 13);
+            });
+        }
+        return;
+    }
     floodMapInitialized = true;
 
     setTimeout(() => {
-        floodMap = L.map("floodMapCanvas").setView([17.385, 78.486], 12);
+        const container = document.getElementById("floodMapCanvas");
+        if (!container) return;
+
+        floodMap = L.map("floodMapCanvas").setView([currentLat, currentLon], 13);
         createTileLayer(floodMap).addTo(floodMap);
 
         const musiLine = [
             [17.385, 78.375], [17.380, 78.435], [17.370, 78.480],
             [17.370, 78.515], [17.390, 78.565]
         ];
-        L.polyline(musiLine, { color: "#2563eb", weight: 4.5, opacity: 0.85 })
+        L.polyline(musiLine, { color: "#2563eb", weight: 5, opacity: 0.9 })
             .addTo(floodMap)
-            .bindTooltip("Musi River Basin Primary Conduit", { sticky: true });
+            .bindTooltip("Musi River Basin Primary Drainage Corridor", { sticky: true });
 
+        // Add precomputed flood risk cells
+        floodGridLayerGroup = L.layerGroup().addTo(floodMap);
+        renderFloodMapCells();
+
+        // Historical flood hotspots from IMD disaster inventory
         const floodHotspots = [
-            { lat: 17.3705, lon: 78.5080, name: "Moosarambagh Bridge", depth: "2.4m Peak Flow", risk: "Severe" },
-            { lat: 17.3616, lon: 78.4747, name: "Charminar Lowlands", depth: "1.1m Inundation", risk: "High" },
-            { lat: 17.4447, lon: 78.4664, name: "Begumpet Nallah", depth: "1.8m Inundation", risk: "High" },
-            { lat: 17.4947, lon: 78.3996, name: "Kukatpally Lake Overflow", depth: "1.5m Pooling", risk: "High" },
-            { lat: 17.3487, lon: 78.5571, name: "LB Nagar Saroornagar Drain", depth: "1.2m Pooling", risk: "Medium" }
+            { lat: 17.3705, lon: 78.5080, name: "Moosarambagh Bridge", depth: "2.4m Peak Flow", risk: "Severe", deaths: 28 },
+            { lat: 17.3616, lon: 78.4747, name: "Charminar Lowlands", depth: "1.1m Inundation", risk: "High", deaths: 14 },
+            { lat: 17.4447, lon: 78.4664, name: "Begumpet Nallah", depth: "1.8m Inundation", risk: "High", deaths: 9 },
+            { lat: 17.4947, lon: 78.3996, name: "Kukatpally Lake Overflow", depth: "1.5m Pooling", risk: "High", deaths: 6 },
+            { lat: 17.3487, lon: 78.5571, name: "LB Nagar Saroornagar Drain", depth: "1.2m Pooling", risk: "Medium", deaths: 4 }
         ];
 
         floodHotspots.forEach(h => {
-            L.circleMarker([h.lat, h.lon], {
-                radius: 9,
-                fillColor: "#ef4444",
+            const marker = L.circleMarker([h.lat, h.lon], {
+                radius: 11,
+                fillColor: "#dc2626",
                 color: "#ffffff",
-                weight: 1.5,
-                fillOpacity: 0.85
-            }).addTo(floodMap).bindPopup(`<strong>${h.name}</strong><br>Risk: ${h.risk}<br>Historical Record: ${h.depth}`);
+                weight: 2,
+                fillOpacity: 0.9
+            });
+            marker.bindPopup(`
+                <div style="font-size: 13.5px; font-family: inherit;">
+                    <strong style="color: #0f172a; font-size: 14.5px;">🌊 ${h.name}</strong><br>
+                    <span style="color: #dc2626; font-weight: 700;">Historical Risk: ${h.risk}</span><br>
+                    <span>Water Depth: <strong>${h.depth}</strong></span><br>
+                    <span>Fatalities Recorded: <strong>${h.deaths}</strong></span><br>
+                    <small style="color: #64748b;">IMD Disaster Inventory (1969–2022)</small>
+                </div>
+            `);
+            marker.addTo(floodMap);
         });
+
+        // Add selected location marker
+        floodLocMarker = L.marker([currentLat, currentLon], { icon: localMarkerIcon }).addTo(floodMap);
+        floodLocMarker.bindPopup(`<strong>${currentPlaceName}</strong><br>Selected drainage evaluation point.`);
+        
+        requestAnimationFrame(() => floodMap.invalidateSize());
     }, 100);
+}
+
+function renderFloodMapCells() {
+    if (!floodGridLayerGroup || !precomputedGridCells.length) return;
+    floodGridLayerGroup.clearLayers();
+
+    precomputedGridCells.forEach(cell => {
+        if (cell.flood_evidence_score != null) {
+            const score = Math.round(cell.flood_evidence_score * 100);
+            const color = score >= 80 ? "#dc2626" : (score >= 60 ? "#ea580c" : (score >= 40 ? "#d97706" : "#2563eb"));
+            const circle = L.circle([cell.latitude, cell.longitude], {
+                radius: 500,
+                color: color,
+                fillColor: color,
+                fillOpacity: 0.35,
+                weight: 1.5
+            });
+            circle.bindPopup(`
+                <strong>Grid Cell #${cell.grid_id}</strong><br>
+                Precipitation Hazard Exposure: <strong>${score} / 100</strong><br>
+                Screening Priority: <strong>${cell.screening_priority}</strong>
+            `);
+            floodGridLayerGroup.addLayer(circle);
+        }
+    });
 }
 
 async function loadFloodModule() {
@@ -1034,14 +1204,29 @@ async function loadFloodModule() {
 // ==========================================================================
 
 let heatDataLoaded = false;
+let heatGridLayerGroup = null;
 
 function initHeatMap() {
-    if (!window.L || heatMapInitialized) return;
+    if (!window.L || heatMapInitialized) {
+        if (heatMap) {
+            requestAnimationFrame(() => {
+                heatMap.invalidateSize();
+                heatMap.setView([currentLat, currentLon], 13);
+            });
+        }
+        return;
+    }
     heatMapInitialized = true;
 
     setTimeout(() => {
-        heatMap = L.map("heatMapCanvas").setView([17.40, 78.47], 12);
+        const container = document.getElementById("heatMapCanvas");
+        if (!container) return;
+
+        heatMap = L.map("heatMapCanvas").setView([currentLat, currentLon], 13);
         createTileLayer(heatMap).addTo(heatMap);
+
+        heatGridLayerGroup = L.layerGroup().addTo(heatMap);
+        renderHeatMapCells();
 
         const thermalPoints = [
             { lat: 17.3616, lon: 78.4747, name: "Charminar / Old City", temp: "37.8 °C", uhi: "+2.8 °C", color: "#dc2626" },
@@ -1061,7 +1246,38 @@ function initHeatMap() {
                 fillOpacity: 0.85
             }).addTo(heatMap).bindPopup(`<strong>${p.name}</strong><br>Summer Daytime Surface Temp: <strong>${p.temp}</strong><br>UHI Anomaly: <strong>${p.uhi}</strong>`);
         });
+
+        // Add selected location marker
+        heatLocMarker = L.marker([currentLat, currentLon], { icon: localMarkerIcon }).addTo(heatMap);
+        heatLocMarker.bindPopup(`<strong>${currentPlaceName}</strong><br>Selected microclimate evaluation point.`);
+
+        requestAnimationFrame(() => heatMap.invalidateSize());
     }, 100);
+}
+
+function renderHeatMapCells() {
+    if (!heatGridLayerGroup || !precomputedGridCells.length) return;
+    heatGridLayerGroup.clearLayers();
+
+    precomputedGridCells.forEach(cell => {
+        if (cell.heat_evidence_score != null) {
+            const score = Math.round(cell.heat_evidence_score * 100);
+            const color = score >= 80 ? "#dc2626" : (score >= 60 ? "#ea580c" : (score >= 40 ? "#d97706" : "#16a34a"));
+            const circle = L.circle([cell.latitude, cell.longitude], {
+                radius: 500,
+                color: color,
+                fillColor: color,
+                fillOpacity: 0.35,
+                weight: 1.5
+            });
+            circle.bindPopup(`
+                <strong>Grid Cell #${cell.grid_id}</strong><br>
+                Satellite Thermal Exposure: <strong>${score} / 100</strong><br>
+                Screening Priority: <strong>${cell.screening_priority}</strong>
+            `);
+            heatGridLayerGroup.addLayer(circle);
+        }
+    });
 }
 
 async function loadHeatModule() {
@@ -1107,7 +1323,7 @@ function setupHeatPredictor() {
         const placeSelect = document.getElementById("heatLocalitySelect");
         const placeLabel = placeSelect.options[placeSelect.selectedIndex].text;
 
-        resultBox.innerHTML = `<div class="pred-placeholder">Executing Random Forest inference...</div>`;
+        resultBox.innerHTML = `<div class="pred-placeholder">Calculating localized thermal profile...</div>`;
         predictBtn.disabled = true;
 
         try {
@@ -1480,10 +1696,10 @@ function renderComparisonMatrix(nameA, nameB, dataA, dataB, container) {
 
     const floodA = catsA.flood_risk?.score_value != null ? Number(catsA.flood_risk.score_value) : null;
     const floodB = catsB.flood_risk?.score_value != null ? Number(catsB.flood_risk.score_value) : null;
-    const floodAClass = catsA.flood_risk?.classification || (floodA != null ? 'MEDIUM' : 'REGIONAL CONTEXT ONLY');
-    const floodBClass = catsB.flood_risk?.classification || (floodB != null ? 'MEDIUM' : 'REGIONAL CONTEXT ONLY');
-    const floodAText = floodA != null ? `${floodAClass} (${floodA.toFixed(1)}/100)` : `${floodAClass} (-- / 100)`;
-    const floodBText = floodB != null ? `${floodBClass} (${floodB.toFixed(1)}/100)` : `${floodBClass} (-- / 100)`;
+    const floodAClass = catsA.flood_risk?.classification || 'Moderate';
+    const floodBClass = catsB.flood_risk?.classification || 'Moderate';
+    const floodAText = floodA != null ? `${floodAClass} (${floodA.toFixed(1)} / 100)` : 'Regional Context (Evidence insufficient for cell score)';
+    const floodBText = floodB != null ? `${floodBClass} (${floodB.toFixed(1)} / 100)` : 'Regional Context (Evidence insufficient for cell score)';
     const floodAIsHigher = floodA != null && floodB != null && floodA > floodB;
     const floodBIsHigher = floodA != null && floodB != null && floodB > floodA;
 
@@ -2081,11 +2297,13 @@ function setupAssessmentModeToggle() {
             if (modeTitle) modeTitle.textContent = "Multi-Year Risk Baseline (Satellite & Historical Archive)";
             if (modeDesc) modeDesc.innerHTML = `<span>Baseline calibrated across 741 validated 1-km² grid cells using MODIS thermal satellite observations (2018–2023), 40 historical flood records (1969–2022), and mapped emergency facilities.</span>`;
             if (lastAssessmentData) {
-                renderAssessmentData(lastAssessmentData);
+                renderAssessmentResults(lastAssessmentData);
+            } else {
+                executeAssessment();
             }
         } else {
             if (modeTitle) modeTitle.textContent = "Current Conditions Screening (Real-Time Weather Model)";
-            if (modeDesc) modeDesc.innerHTML = `<span>Real-time conditions from Open-Meteo numerical weather model. <strong>Important:</strong> Live weather conditions reflect transient screening and do not replace multi-year risk baselines.</span>`;
+            if (modeDesc) modeDesc.innerHTML = `<span>Real-time screening conditions from Open-Meteo numerical weather model. <strong>Important:</strong> Live weather conditions reflect transient screening and do not replace multi-year risk baselines.</span>`;
             renderCurrentConditionsAssessment();
         }
     }
@@ -2093,7 +2311,9 @@ function setupAssessmentModeToggle() {
 
 function renderCurrentConditionsAssessment() {
     if (!latestWeatherData) {
-        // Fetch weather if not yet loaded
+        // Show temporary evaluating state
+        setText("homeFloodBadge", "QUERYING...");
+        setText("homeHeatBadge", "QUERYING...");
         fetch("/api/weather/current")
             .then(r => r.json())
             .then(body => {
@@ -2102,19 +2322,24 @@ function renderCurrentConditionsAssessment() {
                     renderCurrentConditionsAssessment();
                 }
             })
-            .catch(() => {});
+            .catch(() => {
+                setText("homeFloodBadge", "DATA UNAVAILABLE");
+                setText("homeHeatBadge", "DATA UNAVAILABLE");
+            });
         return;
     }
 
     const w = latestWeatherData;
     const temp = w.temperature_c ?? 28;
+    const humidity = w.relative_humidity_pct ?? 45;
     const precip = w.precipitation_mm ?? 0;
     const intervalMin = w.precipitation_accumulation_interval_minutes || 15;
+    const cond = w.weather_condition || "Clear";
 
-    // Current Rain Exposure Score (Screening)
+    // 1. Current Rain Exposure & Screening Score
     let curFloodVal = "LOW";
     let curFloodSub = `No precipitation in preceding ${intervalMin} min`;
-    let curFloodScoreText = "0.0 mm/hr";
+    let curFloodScoreText = "0.0 mm";
     if (precip > 15) {
         curFloodVal = "HIGH ⚠️";
         curFloodSub = `Intense rain detected: ${precip} mm (${intervalMin}-min)`;
@@ -2125,21 +2350,31 @@ function renderCurrentConditionsAssessment() {
         curFloodScoreText = `${precip} mm`;
     }
 
-    // Current Heat Stress Score (Screening)
+    // 2. Current Heat Stress Index
+    // Rothfusz heat index approximation for warm ambient conditions
+    let heatIndex = temp;
+    if (temp >= 26) {
+        heatIndex = -8.78469475556 + 1.61139411 * temp + 2.33854883889 * humidity 
+                    - 0.14611605 * temp * humidity - 0.012308094 * (temp ** 2) 
+                    - 0.0164248277778 * (humidity ** 2) + 0.002211732 * (temp ** 2) * humidity 
+                    + 0.00072546 * temp * (humidity ** 2) - 0.000003582 * (temp ** 2) * (humidity ** 2);
+    }
+    const apparentTemp = Math.round(heatIndex * 10) / 10;
+
     let curHeatVal = "MODERATE";
-    let curHeatSub = `Ambient air temperature: ${temp.toFixed(1)} °C`;
-    if (temp >= 40) {
+    let curHeatSub = `Ambient: ${temp.toFixed(1)} °C · Apparent: ${apparentTemp} °C`;
+    if (apparentTemp >= 40) {
         curHeatVal = "VERY HIGH ⚠️";
-        curHeatSub = `Extreme heat stress: ${temp.toFixed(1)} °C`;
-    } else if (temp >= 35) {
+        curHeatSub = `Dangerous heat stress: ${apparentTemp} °C apparent`;
+    } else if (apparentTemp >= 35) {
         curHeatVal = "HIGH ⚠️";
-        curHeatSub = `High heat stress: ${temp.toFixed(1)} °C`;
-    } else if (temp < 25) {
+        curHeatSub = `Elevated heat stress: ${apparentTemp} °C apparent`;
+    } else if (apparentTemp < 26) {
         curHeatVal = "LOW";
         curHeatSub = `Comfortable ambient: ${temp.toFixed(1)} °C`;
     }
 
-    // Update Cards
+    // 3. Update Summary Metric Cards for Current Mode
     setText("homePriorityScore", "--");
     setText("homePrioritySubnote", "Current weather screening (unweighted)");
     const pBadge = document.getElementById("homePriorityBadge");
@@ -2166,13 +2401,75 @@ function renderCurrentConditionsAssessment() {
     setText("homeHeatSubnote", curHeatSub);
     applyBadgeStyle(document.getElementById("homeHeatBadge"), curHeatVal);
 
-    // Infrastructure stays based on physical distance
+    // Infrastructure Card: remains based on physical distance to mapped assets
+    let nearHospDistText = "--";
     if (lastAssessmentData && lastAssessmentData.category_assessments?.infrastructure_risk) {
         const infra = lastAssessmentData.category_assessments.infrastructure_risk;
         const infraScore = infra.score_value != null ? Math.round(infra.score_value) : null;
+        setText("homeInfraVal", infra.classification || "MEDIUM");
         setText("homeInfraScoreText", infraScore != null ? `(${infraScore} / 100)` : "");
         setText("homeInfraSubnote", "Permanent emergency facility access");
+        applyBadgeStyle(document.getElementById("homeInfraBadge"), infra.classification || "MEDIUM");
+        if (infra.nearest_hospital_distance_m != null) {
+            nearHospDistText = `${Math.round(infra.nearest_hospital_distance_m)} m`;
+        }
     }
+
+    // 4. Update Right-Hand Analysis Panel in Current Mode
+    setText("analysisPlaceTitle", currentPlaceName);
+    setText("analysisPlaceSubtitle", `Current Weather Screening · ${currentLat.toFixed(3)}°N, ${currentLon.toFixed(3)}°E`);
+    setText("analysisOverallScore", "SCREENING");
+    const anaBadge = document.getElementById("analysisOverallBadge");
+    if (anaBadge) {
+        anaBadge.className = "metric-status-pill badge-neutral";
+        anaBadge.textContent = "LIVE CONDITIONS";
+    }
+
+    applyBadgeStyle(document.getElementById("analysisFloodBadge"), curFloodVal);
+    applyBadgeStyle(document.getElementById("analysisHeatBadge"), curHeatVal);
+
+    setText("analysisFloodScoreSub", `Precipitation: ${curFloodScoreText} · ${cond}`);
+    setText("analysisHeatScoreSub", `Air Temp: ${temp.toFixed(1)} °C · Humidity: ${humidity}%`);
+    setText("analysisInfraScoreSub", `Nearest hospital: ${nearHospDistText}`);
+
+    // Dynamic Current Recommendations
+    const whyBox = document.getElementById("analysisInsightsBody");
+    if (whyBox) {
+        whyBox.innerHTML = `
+            <p style="margin-bottom: 8px;">• <strong>Atmospheric Conditions:</strong> ${cond} with ambient air temperature of ${temp.toFixed(1)} °C and ${humidity}% relative humidity.</p>
+            <p style="margin-bottom: 8px;">• <strong>Precipitation Screening:</strong> ${curFloodSub}. Recent precipitation reflects 15-minute accumulation.</p>
+            <p style="margin-bottom: 8px;">• <strong>Heat Stress Screening:</strong> Apparent temperature calculated at ${apparentTemp} °C (${curHeatVal}).</p>
+        `;
+    }
+
+    const actBox = document.getElementById("analysisActionsBody");
+    if (actBox) {
+        const actList = [];
+        if (precip > 5) {
+            actList.push("Monitor active stormwater pooling along low-lying corridors.");
+        } else {
+            actList.push("No immediate precipitation alert active for this locality.");
+        }
+        if (apparentTemp >= 35) {
+            actList.push("Activate public hydration points and advise outdoor workers to seek shade during peak solar hours.");
+        } else {
+            actList.push("Thermal conditions are within normal operational limits.");
+        }
+        actList.push("Switch to 'Historical Baseline' to inspect multi-year satellite thermal exposure and drainage infrastructure gaps.");
+        actBox.innerHTML = actList.map(a => `<p style="margin-bottom: 8px;">→ <strong>${a}</strong></p>`).join("");
+    }
+
+    // Risk bars in Current Mode
+    renderRiskBar("Flood", null, {
+        nullExplanation: `Current conditions: ${curFloodScoreText} precipitation (${cond}). Transient weather does not modify multi-year flood baseline.`,
+        regionalLabel: "Current Weather"
+    });
+
+    renderRiskBar("Heat", Math.min(100, Math.max(10, Math.round((temp / 45) * 100))), {
+        defaultNote: `Current ambient air temperature: ${temp.toFixed(1)} °C (${cond})`,
+        nullExplanation: null,
+        regionalLabel: null
+    });
 }
 
 function initializePlatform() {

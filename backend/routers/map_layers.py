@@ -192,3 +192,69 @@ def get_roads(
             status_code=503,
             detail="Unable to retrieve road map data"
         )
+
+
+@router.get("/risk-grid")
+def get_risk_grid():
+    """
+    Return all 791 1-km grid cells in Greater Hyderabad as a GeoJSON FeatureCollection
+    for live map rendering (overall IUPS, flood, heat, and infrastructure layers).
+    """
+    try:
+        cells = list(db.priority_grid_cells.find())
+        features = []
+        for c in cells:
+            clat = c.get("cell_center_latitude")
+            clon = c.get("cell_center_longitude")
+            if clat is None or clon is None:
+                continue
+
+            pri_score = c.get("priority_score_0_100")
+            if pri_score is not None:
+                pri_score = round(float(pri_score), 1)
+
+            flood_score = c.get("flood_evidence_score")
+            if flood_score is not None:
+                flood_score = round(float(flood_score), 3)
+
+            heat_score = c.get("heat_evidence_score")
+            if heat_score is not None:
+                heat_score = round(float(heat_score), 3)
+
+            infra_score = c.get("infrastructure_gap_score")
+            if infra_score is not None:
+                infra_score = round(float(infra_score), 3)
+
+            road_score = c.get("road_representation_gap_score")
+            if road_score is not None:
+                road_score = round(float(road_score), 3)
+
+            features.append({
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [float(clon), float(clat)]
+                },
+                "properties": {
+                    "grid_id": c.get("grid_id"),
+                    "priority_score": pri_score,
+                    "screening_priority": c.get("screening_priority") or "Not scored",
+                    "flood_evidence_score": flood_score,
+                    "heat_evidence_score": heat_score,
+                    "infrastructure_gap_score": infra_score,
+                    "road_representation_gap_score": road_score,
+                    "is_scored": c.get("screening_priority") != "Not scored"
+                }
+            })
+
+        return {
+            "type": "FeatureCollection",
+            "total": len(features),
+            "features": features
+        }
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Unable to retrieve risk grid GeoJSON: {str(e)}"
+        )
+

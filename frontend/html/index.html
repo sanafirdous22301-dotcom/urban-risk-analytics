@@ -829,7 +829,7 @@
 
                         <!-- Predictor Result -->
                         <div id="heatPredictionResultBox" class="prediction-result-display">
-                            <div class="pred-placeholder">Click 'Predict' to run inference using trained Random Forest regressor.</div>
+                            <div class="pred-placeholder">Click 'Predict' to estimate daytime surface temperature based on local environmental factors.</div>
                         </div>
 
                         <!-- Heat Mitigation Recommendations -->
@@ -987,14 +987,33 @@
                         <div class="picker-column">
                             <label for="comparePlaceSelectA">Location A:</label>
                             <select id="comparePlaceSelectA" class="styled-select-input-lg">
-                                <option value="17.3616,78.4747">Charminar / Old City</option>
-                                <option value="17.4435,78.3772">Hitec City / Madhapur</option>
-                                <option value="17.3705,78.5080">Moosarambagh / Musi Basin</option>
-                                <option value="17.4447,78.4664">Begumpet / Secunderabad</option>
-                                <option value="17.4156,78.4350">Banjara Hills</option>
-                                <option value="17.4526,78.5303">Malkajgiri Urban Area</option>
-                                <option value="17.3892,78.5179">Amberpet / Ramanthapur</option>
-                                <option value="17.3850,78.4867">Koti / Sultan Bazar</option>
+                                <option value="17.3616,78.4747">Charminar / Old City Heritage District</option>
+                                <option value="17.4435,78.3772">Hitec City / Cyberabad Corridor</option>
+                                <option value="17.4483,78.3915">Madhapur / Tech Zone</option>
+                                <option value="17.4401,78.3489">Gachibowli / Financial District</option>
+                                <option value="17.4658,78.3582">Kondapur / Botanical Garden Hub</option>
+                                <option value="17.4156,78.4350">Banjara Hills / Central Core</option>
+                                <option value="17.4319,78.4073">Jubilee Hills / Road No. 36</option>
+                                <option value="17.4399,78.4983">Secunderabad / Commercial Hub</option>
+                                <option value="17.4447,78.4664">Begumpet / Airport Road Corridor</option>
+                                <option value="17.4375,78.4483">Ameerpet / Metro Transit Hub</option>
+                                <option value="17.4947,78.3996">Kukatpally / High-Density Commercial Zone</option>
+                                <option value="17.4969,78.3534">Miyapur / North-Western Hub</option>
+                                <option value="17.3705,78.5080">Moosarambagh / Musi River Basin</option>
+                                <option value="17.3892,78.5179">Amberpet / Ramanthapur Drainage Basin</option>
+                                <option value="17.3850,78.4867">Koti / Sultan Bazar Core</option>
+                                <option value="17.3910,78.4735">Abids / Central Commercial District</option>
+                                <option value="17.3920,78.4703">Nampally / Station Road Sector</option>
+                                <option value="17.3487,78.5571">LB Nagar / Southern Transit Corridor</option>
+                                <option value="17.3685,78.5262">Dilsukhnagar / High-Density Corridor</option>
+                                <option value="17.4000,78.5588">Uppal / East Industrial Hub</option>
+                                <option value="17.4234,78.5355">Tarnaka / Osmania University Sector</option>
+                                <option value="17.4526,78.5303">Malkajgiri / North-East Residential Zone</option>
+                                <option value="17.3938,78.4421">Mehdipatnam / Tolichowki Corridor</option>
+                                <option value="17.4018,78.4124">Tolichowki / Golconda Corridor</option>
+                                <option value="17.2650,78.4280">Shamshabad / Airport Environs</option>
+                                <option value="17.3195,78.4756">Chandrayangutta / South Drainage Basin</option>
+                                <option value="17.5400,78.4840">Kompally / Medchal Highway</option>
                             </select>
                         </div>
 
@@ -1003,14 +1022,33 @@
                         <div class="picker-column">
                             <label for="comparePlaceSelectB">Location B:</label>
                             <select id="comparePlaceSelectB" class="styled-select-input-lg">
-                                <option value="17.4435,78.3772">Hitec City / Madhapur</option>
-                                <option value="17.3616,78.4747">Charminar / Old City</option>
-                                <option value="17.3705,78.5080">Moosarambagh / Musi Basin</option>
-                                <option value="17.4447,78.4664">Begumpet / Secunderabad</option>
-                                <option value="17.4156,78.4350">Banjara Hills</option>
-                                <option value="17.4526,78.5303">Malkajgiri Urban Area</option>
-                                <option value="17.3892,78.5179">Amberpet / Ramanthapur</option>
-                                <option value="17.3850,78.4867">Koti / Sultan Bazar</option>
+                                <option value="17.4435,78.3772">Hitec City / Cyberabad Corridor</option>
+                                <option value="17.3616,78.4747">Charminar / Old City Heritage District</option>
+                                <option value="17.4483,78.3915">Madhapur / Tech Zone</option>
+                                <option value="17.4401,78.3489">Gachibowli / Financial District</option>
+                                <option value="17.4658,78.3582">Kondapur / Botanical Garden Hub</option>
+                                <option value="17.4156,78.4350">Banjara Hills / Central Core</option>
+                                <option value="17.4319,78.4073">Jubilee Hills / Road No. 36</option>
+                                <option value="17.4399,78.4983">Secunderabad / Commercial Hub</option>
+                                <option value="17.4447,78.4664">Begumpet / Airport Road Corridor</option>
+                                <option value="17.4375,78.4483">Ameerpet / Metro Transit Hub</option>
+                                <option value="17.4947,78.3996">Kukatpally / High-Density Commercial Zone</option>
+                                <option value="17.4969,78.3534">Miyapur / North-Western Hub</option>
+                                <option value="17.3705,78.5080">Moosarambagh / Musi River Basin</option>
+                                <option value="17.3892,78.5179">Amberpet / Ramanthapur Drainage Basin</option>
+                                <option value="17.3850,78.4867">Koti / Sultan Bazar Core</option>
+                                <option value="17.3910,78.4735">Abids / Central Commercial District</option>
+                                <option value="17.3920,78.4703">Nampally / Station Road Sector</option>
+                                <option value="17.3487,78.5571">LB Nagar / Southern Transit Corridor</option>
+                                <option value="17.3685,78.5262">Dilsukhnagar / High-Density Corridor</option>
+                                <option value="17.4000,78.5588">Uppal / East Industrial Hub</option>
+                                <option value="17.4234,78.5355">Tarnaka / Osmania University Sector</option>
+                                <option value="17.4526,78.5303">Malkajgiri / North-East Residential Zone</option>
+                                <option value="17.3938,78.4421">Mehdipatnam / Tolichowki Corridor</option>
+                                <option value="17.4018,78.4124">Tolichowki / Golconda Corridor</option>
+                                <option value="17.2650,78.4280">Shamshabad / Airport Environs</option>
+                                <option value="17.3195,78.4756">Chandrayangutta / South Drainage Basin</option>
+                                <option value="17.5400,78.4840">Kompally / Medchal Highway</option>
                             </select>
                         </div>
                     </div>
