@@ -16,6 +16,10 @@ let gridLayerGroup = null;
 let currentActiveLayer = "overall"; // 'overall', 'flood', 'heat', 'infra', 'base'
 let precomputedGridCells = [];
 
+// Assessment Mode: 'historical' | 'current'
+let currentAssessmentMode = "historical";
+let latestWeatherData = null;
+
 let floodMap = null;
 let floodMapInitialized = false;
 
@@ -24,6 +28,9 @@ let heatMapInitialized = false;
 
 let infraMap = null;
 let infraMapInitialized = false;
+let infraLayerGroup = null;
+let infraRoadLayerGroup = null;
+let infraActiveFilter = "all";
 
 // 22 Recognized Localities across Greater Hyderabad Study Area
 const KNOWN_PLACES = [
@@ -1155,23 +1162,186 @@ function setupHeatPredictor() {
 
 
 // ==========================================================================
-// 10. INFRASTRUCTURE MODULE
+// 10. INFRASTRUCTURE MODULE (ENHANCED CIVIC AMENITIES & ROAD NETWORK)
 // ==========================================================================
 
 let infraDataLoaded = false;
+let infraMarkersData = [];
+let infraRoadsData = [];
 
 function initInfraMap() {
-    if (!window.L || infraMapInitialized) return;
+    if (!window.L || infraMapInitialized) {
+        if (infraMap) {
+            requestAnimationFrame(() => infraMap.invalidateSize());
+        }
+        return;
+    }
     infraMapInitialized = true;
 
     setTimeout(() => {
-        infraMap = L.map("infraMapCanvas").setView([17.41, 78.47], 12);
+        const mapContainer = document.getElementById("infraMapCanvas");
+        if (!mapContainer) return;
+
+        infraMap = L.map("infraMapCanvas", {
+            zoomControl: true,
+            scrollWheelZoom: true
+        }).setView([17.41, 78.47], 12);
+
         createTileLayer(infraMap).addTo(infraMap);
 
-        const infraLayerGroup = L.layerGroup().addTo(infraMap);
-        loadAmenitiesOverlay(infraMap, infraLayerGroup);
-        infraMap.on("moveend", () => loadAmenitiesOverlay(infraMap, infraLayerGroup));
+        infraRoadLayerGroup = L.layerGroup().addTo(infraMap);
+        infraLayerGroup = L.layerGroup().addTo(infraMap);
+
+        setupInfraFilterControls();
+        loadInfraAmenities();
+        loadInfraRoads();
+
+        infraMap.on("moveend", () => {
+            loadInfraAmenities();
+        });
+
+        requestAnimationFrame(() => infraMap.invalidateSize());
     }, 100);
+}
+
+function setupInfraFilterControls() {
+    const filterButtons = document.querySelectorAll("#infraFilterControls .layer-pill-btn");
+    filterButtons.forEach(btn => {
+        btn.addEventListener("click", function () {
+            filterButtons.forEach(b => b.classList.remove("active"));
+            this.classList.add("active");
+            infraActiveFilter = this.getAttribute("data-filter") || "all";
+            applyInfraFilter();
+        });
+    });
+}
+
+function applyInfraFilter() {
+    if (!infraLayerGroup || !infraRoadLayerGroup) return;
+
+    infraLayerGroup.clearLayers();
+    infraRoadLayerGroup.clearLayers();
+
+    // Render road network if applicable
+    if (infraActiveFilter === "all" || infraActiveFilter === "roads") {
+        infraRoadsData.forEach(r => {
+            const circle = L.circleMarker([r.lat, r.lon], {
+                radius: 3,
+                color: "#64748b",
+                weight: 1,
+                fillColor: "#94a3b8",
+                fillOpacity: 0.65
+            });
+            circle.bindPopup(`<strong>Road Corridor: ${r.type}</strong><br>Length: ${r.length_km ? r.length_km.toFixed(2) + ' km' : 'Segment'}`);
+            infraRoadLayerGroup.addLayer(circle);
+        });
+    }
+
+    // Render amenities if applicable
+    if (infraActiveFilter !== "roads") {
+        infraMarkersData.forEach(item => {
+            if (infraActiveFilter === "hospitals" && item.category !== "hospital") return;
+            if (infraActiveFilter === "fire" && item.category !== "fire_station") return;
+
+            const iconChar = item.category === "hospital" ? "🏥" : (item.category === "fire_station" ? "🚒" : "🏢");
+            const cssClass = item.category === "hospital" ? "marker-hospital" : (item.category === "fire_station" ? "marker-fire" : "marker-civic");
+
+            const icon = L.divIcon({
+                className: "amenity-div-icon",
+                html: `<div class="amenity-marker-icon ${cssClass}">${iconChar}</div>`,
+                iconSize: [26, 26],
+                iconAnchor: [13, 13]
+            });
+
+            const marker = L.marker([item.lat, item.lon], { icon });
+            marker.bindPopup(`
+                <div style="font-size: 13.5px; font-family: inherit;">
+                    <strong style="color: #0f172a; font-size: 14.5px;">${item.name}</strong><br>
+                    <span style="color: #64748b; font-size: 12px; text-transform: uppercase; font-weight: 700;">${item.category.replace('_', ' ')}</span>
+                    <hr style="margin: 6px 0; border: none; border-top: 1px solid #e2e8f0;">
+                    <div>Coordinates: ${item.lat.toFixed(4)}°N, ${item.lon.toFixed(4)}°E</div>
+                </div>
+            `);
+            infraLayerGroup.addLayer(marker);
+        });
+    }
+}
+
+let amenitiesFetchAbort = null;
+async function loadInfraAmenities() {
+    if (!infraMap || !infraLayerGroup) return;
+    const b = infraMap.getBounds();
+    if (!Number.isFinite(b.getWest()) || b.getWest() >= b.getEast()) return;
+
+    if (amenitiesFetchAbort) amenitiesFetchAbort.abort();
+    amenitiesFetchAbort = new AbortController();
+
+    const loadingOverlay = document.getElementById("infraMapLoading");
+    if (loadingOverlay) loadingOverlay.style.display = "flex";
+
+    try {
+        const params = new URLSearchParams({
+            west: b.getWest(),
+            south: b.getSouth(),
+            east: b.getEast(),
+            north: b.getNorth(),
+            limit: 400
+        });
+
+        const res = await fetch("/api/map-layers/infrastructure?" + params.toString(), { signal: amenitiesFetchAbort.signal });
+        if (!res.ok) throw new Error("Infrastructure layer fetch failed");
+        const data = await res.json();
+
+        infraMarkersData = (data.features || []).map(f => {
+            const coords = f.geometry?.coordinates || [78.48, 17.38];
+            const p = f.properties || {};
+            return {
+                name: p.asset_name || p.name || (p.category === "hospital" ? "Medical Facility" : (p.category === "fire_station" ? "Fire Station" : "Civic Building")),
+                category: p.category || "civic",
+                lat: coords[1],
+                lon: coords[0]
+            };
+        });
+
+        applyInfraFilter();
+    } catch (e) {
+        if (e.name !== "AbortError") console.warn("Amenities overlay error:", e);
+    } finally {
+        if (loadingOverlay) loadingOverlay.style.display = "none";
+    }
+}
+
+async function loadInfraRoads() {
+    if (!infraMap) return;
+    const b = infraMap.getBounds();
+    if (!Number.isFinite(b.getWest()) || b.getWest() >= b.getEast()) return;
+
+    try {
+        const params = new URLSearchParams({
+            west: b.getWest(),
+            south: b.getSouth(),
+            east: b.getEast(),
+            north: b.getNorth(),
+            limit: 250
+        });
+
+        const res = await fetch("/api/map-layers/roads?" + params.toString());
+        if (!res.ok) return;
+        const data = await res.json();
+        infraRoadsData = (data.features || []).map(f => {
+            const coords = f.geometry?.coordinates || [78.48, 17.38];
+            const p = f.properties || {};
+            return {
+                lat: coords[1],
+                lon: coords[0],
+                type: p.road_type || "Corridor",
+                length_km: p.length_km
+            };
+        });
+        applyInfraFilter();
+    } catch (e) {
+        console.warn("Roads layer error:", e);
+    }
 }
 
 async function loadInfraModule() {
@@ -1561,6 +1731,7 @@ async function loadLatestWeather() {
         }
 
         const data = body.data;
+        latestWeatherData = data;
         const freshness = body.freshness || "unknown";
 
         const tempEl = document.getElementById("weatherTemp");
@@ -1840,7 +2011,173 @@ async function loadIngestionDashboard() {
     }
 }
 
+// ==========================================================================
+// 14. THEME TOGGLE (LIGHT / DARK) & ASSESSMENT MODE PERSISTENCE
+// ==========================================================================
+
+const THEME_STORAGE_KEY = "urbanrisk_theme_preference";
+
+function initThemeToggle() {
+    const themeBtn = document.getElementById("themeToggleBtn");
+    const themeIcon = document.getElementById("themeToggleIcon");
+    const themeText = document.getElementById("themeToggleText");
+
+    // Load saved or default to light theme
+    const savedTheme = localStorage.getItem(THEME_STORAGE_KEY) || "light";
+    applyTheme(savedTheme);
+
+    if (themeBtn) {
+        themeBtn.addEventListener("click", () => {
+            const currentTheme = document.documentElement.getAttribute("data-theme") || "light";
+            const newTheme = currentTheme === "dark" ? "light" : "dark";
+            applyTheme(newTheme);
+            localStorage.setItem(THEME_STORAGE_KEY, newTheme);
+        });
+    }
+
+    function applyTheme(theme) {
+        if (theme === "dark") {
+            document.documentElement.setAttribute("data-theme", "dark");
+            if (themeIcon) themeIcon.textContent = "☀️";
+            if (themeText) themeText.textContent = "Light";
+        } else {
+            document.documentElement.removeAttribute("data-theme");
+            if (themeIcon) themeIcon.textContent = "🌙";
+            if (themeText) themeText.textContent = "Dark";
+        }
+    }
+}
+
+function setupAssessmentModeToggle() {
+    const btnHistorical = document.getElementById("btnModeHistorical");
+    const btnCurrent = document.getElementById("btnModeCurrent");
+    const modeTitle = document.getElementById("activeModeTitle");
+    const modeDesc = document.getElementById("modeContextDescription");
+
+    if (btnHistorical) {
+        btnHistorical.addEventListener("click", () => {
+            setAssessmentMode("historical");
+        });
+    }
+
+    if (btnCurrent) {
+        btnCurrent.addEventListener("click", () => {
+            setAssessmentMode("current");
+        });
+    }
+
+    function setAssessmentMode(mode) {
+        currentAssessmentMode = mode;
+        if (btnHistorical) {
+            btnHistorical.classList.toggle("active", mode === "historical");
+            btnHistorical.setAttribute("aria-selected", mode === "historical" ? "true" : "false");
+        }
+        if (btnCurrent) {
+            btnCurrent.classList.toggle("active", mode === "current");
+            btnCurrent.setAttribute("aria-selected", mode === "current" ? "true" : "false");
+        }
+
+        if (mode === "historical") {
+            if (modeTitle) modeTitle.textContent = "Multi-Year Risk Baseline (Satellite & Historical Archive)";
+            if (modeDesc) modeDesc.innerHTML = `<span>Baseline calibrated across 741 validated 1-km² grid cells using MODIS thermal satellite observations (2018–2023), 40 historical flood records (1969–2022), and mapped emergency facilities.</span>`;
+            if (lastAssessmentData) {
+                renderAssessmentData(lastAssessmentData);
+            }
+        } else {
+            if (modeTitle) modeTitle.textContent = "Current Conditions Screening (Real-Time Weather Model)";
+            if (modeDesc) modeDesc.innerHTML = `<span>Real-time conditions from Open-Meteo numerical weather model. <strong>Important:</strong> Live weather conditions reflect transient screening and do not replace multi-year risk baselines.</span>`;
+            renderCurrentConditionsAssessment();
+        }
+    }
+}
+
+function renderCurrentConditionsAssessment() {
+    if (!latestWeatherData) {
+        // Fetch weather if not yet loaded
+        fetch("/api/weather/current")
+            .then(r => r.json())
+            .then(body => {
+                if (body && body.data) {
+                    latestWeatherData = body.data;
+                    renderCurrentConditionsAssessment();
+                }
+            })
+            .catch(() => {});
+        return;
+    }
+
+    const w = latestWeatherData;
+    const temp = w.temperature_c ?? 28;
+    const precip = w.precipitation_mm ?? 0;
+    const intervalMin = w.precipitation_accumulation_interval_minutes || 15;
+
+    // Current Rain Exposure Score (Screening)
+    let curFloodVal = "LOW";
+    let curFloodSub = `No precipitation in preceding ${intervalMin} min`;
+    let curFloodScoreText = "0.0 mm/hr";
+    if (precip > 15) {
+        curFloodVal = "HIGH ⚠️";
+        curFloodSub = `Intense rain detected: ${precip} mm (${intervalMin}-min)`;
+        curFloodScoreText = `${precip} mm`;
+    } else if (precip > 2) {
+        curFloodVal = "MODERATE";
+        curFloodSub = `Moderate rain: ${precip} mm (${intervalMin}-min)`;
+        curFloodScoreText = `${precip} mm`;
+    }
+
+    // Current Heat Stress Score (Screening)
+    let curHeatVal = "MODERATE";
+    let curHeatSub = `Ambient air temperature: ${temp.toFixed(1)} °C`;
+    if (temp >= 40) {
+        curHeatVal = "VERY HIGH ⚠️";
+        curHeatSub = `Extreme heat stress: ${temp.toFixed(1)} °C`;
+    } else if (temp >= 35) {
+        curHeatVal = "HIGH ⚠️";
+        curHeatSub = `High heat stress: ${temp.toFixed(1)} °C`;
+    } else if (temp < 25) {
+        curHeatVal = "LOW";
+        curHeatSub = `Comfortable ambient: ${temp.toFixed(1)} °C`;
+    }
+
+    // Update Cards
+    setText("homePriorityScore", "--");
+    setText("homePrioritySubnote", "Current weather screening (unweighted)");
+    const pBadge = document.getElementById("homePriorityBadge");
+    if (pBadge) {
+        pBadge.className = "metric-status-pill badge-neutral";
+        pBadge.textContent = "CURRENT SCREENING";
+    }
+
+    const floodEl = document.getElementById("homeFloodVal");
+    if (floodEl) {
+        floodEl.textContent = curFloodVal;
+        floodEl.className = "metric-val-large";
+    }
+    setText("homeFloodScoreText", `(${curFloodScoreText})`);
+    setText("homeFloodSubnote", curFloodSub);
+    applyBadgeStyle(document.getElementById("homeFloodBadge"), curFloodVal);
+
+    const heatEl = document.getElementById("homeHeatVal");
+    if (heatEl) {
+        heatEl.textContent = curHeatVal;
+        heatEl.className = "metric-val-large";
+    }
+    setText("homeHeatScoreText", `(${temp.toFixed(1)} °C)`);
+    setText("homeHeatSubnote", curHeatSub);
+    applyBadgeStyle(document.getElementById("homeHeatBadge"), curHeatVal);
+
+    // Infrastructure stays based on physical distance
+    if (lastAssessmentData && lastAssessmentData.category_assessments?.infrastructure_risk) {
+        const infra = lastAssessmentData.category_assessments.infrastructure_risk;
+        const infraScore = infra.score_value != null ? Math.round(infra.score_value) : null;
+        setText("homeInfraScoreText", infraScore != null ? `(${infraScore} / 100)` : "");
+        setText("homeInfraSubnote", "Permanent emergency facility access");
+    }
+}
+
 function initializePlatform() {
+    initThemeToggle();
+    setupAssessmentModeToggle();
     initHomeMap();
     setupNavigation();
     setupSearchAndRecent();
@@ -1849,12 +2186,6 @@ function initializePlatform() {
     loadHomePriorityPreview();
     loadLatestWeather();
     loadEnvironmentalSummary();
-    loadIngestionDashboard();
-
-    const refreshBtn = document.getElementById("refreshIngestionStatusBtn");
-    if (refreshBtn) {
-        refreshBtn.addEventListener("click", loadIngestionDashboard);
-    }
 
     // Initial assessment on default Hyderabad center
     executeAssessment();

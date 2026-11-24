@@ -1768,4 +1768,307 @@ button {
     }
 }
 
+/* ==========================================================================
+   THEME TOGGLE & DARK MODE PALETTE
+   ========================================================================== */
+
+.theme-toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 13px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.theme-toggle-btn:hover {
+    background: rgba(255, 255, 255, 0.22);
+    border-color: rgba(255, 255, 255, 0.38);
+}
+
+.theme-icon {
+    font-size: 15px;
+    line-height: 1;
+}
+
+/* Dark Theme Overrides */
+html[data-theme="dark"] {
+    --bg-page: #0b1120;
+    --bg-card: #131c31;
+    --bg-card-subtle: #19243d;
+    --bg-input: #1a2540;
+
+    --border-subtle: #1e2e4f;
+    --border-card: #24355a;
+    --border-accent: #334d7d;
+
+    --text-primary: #f8fafc;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
+    --text-link: #60a5fa;
+
+    --blue-soft-bg: #14223d;
+
+    --risk-vhigh-bg: #451010;
+    --risk-vhigh-text: #fca5a5;
+    --risk-vhigh-border: #7f1d1d;
+
+    --risk-high-bg: #431b0a;
+    --risk-high-text: #fdba74;
+    --risk-high-border: #7c2d12;
+
+    --risk-mod-bg: #3d2b09;
+    --risk-mod-text: #fde68a;
+    --risk-mod-border: #713f12;
+
+    --risk-low-bg: #0d351e;
+    --risk-low-text: #86efac;
+    --risk-low-border: #14532d;
+}
+
+html[data-theme="dark"] body {
+    background-color: var(--bg-page);
+    color: var(--text-primary);
+}
+
+html[data-theme="dark"] .app-topbar {
+    background: #0f1c34;
+    border-bottom-color: #1e2e4f;
+}
+
+html[data-theme="dark"] .summary-metric-card,
+html[data-theme="dark"] .map-panel-card,
+html[data-theme="dark"] .analysis-panel-card,
+html[data-theme="dark"] .content-card,
+html[data-theme="dark"] .info-card,
+html[data-theme="dark"] .analysis-sub-card,
+html[data-theme="dark"] .metric-box {
+    background-color: var(--bg-card);
+    border-color: var(--border-card);
+    color: var(--text-primary);
+}
+
+html[data-theme="dark"] .search-input-wrapper,
+html[data-theme="dark"] .search-text-input,
+html[data-theme="dark"] select,
+html[data-theme="dark"] input[type="text"] {
+    background-color: var(--bg-input);
+    color: var(--text-primary);
+    border-color: var(--border-subtle);
+}
+
+html[data-theme="dark"] .recent-chip,
+html[data-theme="dark"] .layer-pill-btn {
+    background-color: #172440;
+    border-color: #2b3d63;
+    color: #cbd5e1;
+}
+
+html[data-theme="dark"] .recent-chip:hover,
+html[data-theme="dark"] .layer-pill-btn:hover {
+    background-color: #23355b;
+    color: #ffffff;
+}
+
+html[data-theme="dark"] .layer-pill-btn.active {
+    background-color: #2563eb;
+    color: #ffffff;
+    border-color: #3b82f6;
+}
+
+html[data-theme="dark"] .map-legend-bar {
+    background: #101a2f;
+    border-color: #1f3052;
+    color: #94a3b8;
+}
+
+html[data-theme="dark"] .urbanrisk-data-table th {
+    background-color: #172440;
+    color: #cbd5e1;
+    border-bottom-color: #2b3d63;
+}
+
+html[data-theme="dark"] .urbanrisk-data-table td {
+    border-bottom-color: #1f3052;
+    color: #e2e8f0;
+}
+
+html[data-theme="dark"] .urbanrisk-data-table tr:hover {
+    background-color: #1a2744;
+}
+
+/* ==========================================================================
+   ASSESSMENT MODE SELECTOR BAR
+   ========================================================================== */
+
+.assessment-mode-bar {
+    background: var(--bg-card);
+    border: 1px solid var(--border-card);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 22px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.mode-bar-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.mode-bar-info {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.mode-bar-eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--navy-accent);
+    text-transform: uppercase;
+}
+
+.mode-bar-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.mode-toggle-group {
+    display: inline-flex;
+    background: var(--blue-soft-bg);
+    padding: 4px;
+    border-radius: 9px;
+    gap: 4px;
+    border: 1px solid var(--border-subtle);
+}
+
+.mode-toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: 7px;
+    border: none;
+    background: transparent;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.mode-toggle-btn:hover {
+    color: var(--text-primary);
+}
+
+.mode-toggle-btn.active {
+    background: var(--navy-accent);
+    color: #ffffff;
+    box-shadow: 0 2px 5px rgba(37, 99, 235, 0.35);
+}
+
+.mode-bar-context {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--border-subtle);
+    font-size: 12.5px;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+/* ==========================================================================
+   CIVIC AMENITIES MAP ENHANCEMENTS
+   ========================================================================== */
+
+.amenity-marker-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+    border: 2px solid #ffffff;
+    font-size: 14px;
+    line-height: 1;
+    transition: transform 0.15s ease;
+}
+
+.amenity-marker-icon:hover {
+    transform: scale(1.2);
+}
+
+.marker-hospital {
+    background: #ef4444;
+}
+
+.marker-fire {
+    background: #f97316;
+}
+
+.marker-civic {
+    background: #3b82f6;
+}
+
+.legend-icon-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 6px;
+    font-size: 11px;
+}
+
+.legend-icon-badge.hosp-badge {
+    background: #ef4444;
+    color: #ffffff;
+}
+
+.legend-icon-badge.fire-badge {
+    background: #f97316;
+    color: #ffffff;
+}
+
+.legend-icon-badge.civic-badge {
+    background: #3b82f6;
+    color: #ffffff;
+}
+
+.legend-road-line {
+    display: inline-block;
+    width: 20px;
+    height: 4px;
+    background: #64748b;
+    border-radius: 2px;
+    margin-right: 6px;
+}
+
+.infra-map-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    z-index: 1000;
+    backdrop-filter: blur(2px);
+    border-radius: 8px;
+}
+
+
 

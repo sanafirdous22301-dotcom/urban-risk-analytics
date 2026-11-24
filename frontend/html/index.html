@@ -51,11 +51,7 @@
                     </button>
                     <button class="nav-item" data-tab="priority">
                         <span class="nav-icon">🎯</span>
-                        <span class="nav-label">Priority Areas</span>
-                    </button>
-                    <button class="nav-item" data-tab="admin">
-                        <span class="nav-icon">⚙️</span>
-                        <span class="nav-label">Datasets</span>
+                        <span class="nav-label">Areas Requiring Attention</span>
                     </button>
                 </nav>
             </div>
@@ -67,7 +63,7 @@
         ======================================================== -->
         <div class="app-main-viewport">
 
-            <!-- TOP HEADER BAR -->
+            <!-- TOP HEADER BAR WITH VISIBLE LIGHT/DARK THEME TOGGLE -->
             <header class="app-topbar">
                 <div class="topbar-left">
                     <div class="location-badge">
@@ -78,6 +74,10 @@
 
                 <div class="topbar-right">
                     <div class="current-time-pill" id="currentTimeDisplay">Study Region: 791 km² Grid</div>
+                    <button type="button" class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle Light/Dark Theme" title="Toggle Light/Dark Theme">
+                        <span class="theme-toggle-icon" id="themeToggleIcon">🌙</span>
+                        <span class="theme-toggle-text" id="themeToggleText">Dark Mode</span>
+                    </button>
                 </div>
             </header>
 
@@ -133,20 +133,44 @@
                 </section>
 
 
+                <!-- ASSESSMENT MODE SELECTOR -->
+                <section class="assessment-mode-bar" aria-label="Risk Assessment Mode">
+                    <div class="mode-bar-content">
+                        <div class="mode-bar-info">
+                            <span class="mode-bar-eyebrow">ASSESSMENT PERSPECTIVE</span>
+                            <span class="mode-bar-title" id="activeModeTitle">Multi-Year Risk Baseline (Satellite & Historical Archive)</span>
+                        </div>
+                        <div class="mode-toggle-group" role="tablist">
+                            <button type="button" class="mode-toggle-btn active" id="btnModeHistorical" role="tab" aria-selected="true" data-mode="historical">
+                                <span class="mode-btn-icon">🏛️</span>
+                                <span class="mode-btn-text">Historical Baseline</span>
+                            </button>
+                            <button type="button" class="mode-toggle-btn" id="btnModeCurrent" role="tab" aria-selected="false" data-mode="current">
+                                <span class="mode-btn-icon">🌦️</span>
+                                <span class="mode-btn-text">Current Conditions</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="mode-bar-context" id="modeContextDescription">
+                        <span>Baseline calibrated across 741 validated 1-km² grid cells using MODIS thermal satellite observations (2018–2023), 40 historical flood records (1969–2022), and mapped emergency facilities.</span>
+                    </div>
+                </section>
+
+
                 <!-- 4 LARGE RISK SUMMARY CARDS -->
                 <section class="risk-summary-cards-grid">
-                    <!-- CARD 1: URBAN PRIORITY SCORE -->
+                    <!-- CARD 1: OVERALL RISK PRIORITY -->
                     <div class="summary-metric-card priority-metric">
                         <div class="card-top-row">
                             <div class="card-icon-bubble priority-bubble">🎯</div>
-                            <span class="metric-title-label">Urban Priority Score</span>
+                            <span class="metric-title-label">Overall Risk Priority</span>
                         </div>
                         <div class="metric-primary-val">
                             <span id="homePriorityScore">--</span> <small>/ 100</small>
                         </div>
                         <div class="card-bottom-row">
                             <span class="metric-status-pill badge-neutral" id="homePriorityBadge">EVALUATING...</span>
-                            <span class="metric-sub-note">Composite multi-hazard index</span>
+                            <span class="metric-sub-note" id="homePrioritySubnote">Composite multi-hazard priority</span>
                         </div>
                     </div>
 
@@ -154,14 +178,14 @@
                     <div class="summary-metric-card flood-metric">
                         <div class="card-top-row">
                             <div class="card-icon-bubble flood-bubble">🌊</div>
-                            <span class="metric-title-label">Flood Risk</span>
+                            <span class="metric-title-label">Flood Risk Assessment</span>
                         </div>
                         <div class="metric-primary-val">
                             <span id="homeFloodVal">--</span> <small id="homeFloodScoreText"></small>
                         </div>
                         <div class="card-bottom-row">
                             <span class="metric-status-pill badge-neutral" id="homeFloodBadge">EVALUATING...</span>
-                            <span class="metric-sub-note">Catchment drainage exposure</span>
+                            <span class="metric-sub-note" id="homeFloodSubnote">Catchment drainage exposure</span>
                         </div>
                     </div>
 
@@ -169,14 +193,14 @@
                     <div class="summary-metric-card heat-metric">
                         <div class="card-top-row">
                             <div class="card-icon-bubble heat-bubble">🔥</div>
-                            <span class="metric-title-label">Heat Risk</span>
+                            <span class="metric-title-label">Heat Exposure</span>
                         </div>
                         <div class="metric-primary-val">
                             <span id="homeHeatVal">--</span> <small id="homeHeatScoreText"></small>
                         </div>
                         <div class="card-bottom-row">
                             <span class="metric-status-pill badge-neutral" id="homeHeatBadge">EVALUATING...</span>
-                            <span class="metric-sub-note">MODIS thermal satellite baseline</span>
+                            <span class="metric-sub-note" id="homeHeatSubnote">MODIS thermal satellite baseline</span>
                         </div>
                     </div>
 
@@ -184,14 +208,14 @@
                     <div class="summary-metric-card infra-metric">
                         <div class="card-top-row">
                             <div class="card-icon-bubble infra-bubble">🏥</div>
-                            <span class="metric-title-label">Infrastructure Risk</span>
+                            <span class="metric-title-label">Infrastructure Access</span>
                         </div>
                         <div class="metric-primary-val">
                             <span id="homeInfraVal">--</span> <small id="homeInfraScoreText"></small>
                         </div>
                         <div class="card-bottom-row">
                             <span class="metric-status-pill badge-neutral" id="homeInfraBadge">EVALUATING...</span>
-                            <span class="metric-sub-note">Emergency service access deficit</span>
+                            <span class="metric-sub-note" id="homeInfraSubnote">Emergency service access deficit</span>
                         </div>
                     </div>
                 </section>
@@ -875,10 +899,33 @@
                         <div class="panel-header-row">
                             <div>
                                 <h3>Civic Amenities & Road Network Map</h3>
-                                <span class="map-sub">OpenStreetMap infrastructure spatial snapshot</span>
+                                <span class="map-sub">Validated OpenStreetMap infrastructure assets & road network centroids</span>
+                            </div>
+                            <!-- Amenities Layer Controls -->
+                            <div class="map-layer-controls" id="infraFilterControls">
+                                <button type="button" class="layer-pill-btn active" data-filter="all">All Amenities</button>
+                                <button type="button" class="layer-pill-btn" data-filter="hospitals">🏥 Hospitals (1,073)</button>
+                                <button type="button" class="layer-pill-btn" data-filter="fire">🚒 Fire Stations (7)</button>
+                                <button type="button" class="layer-pill-btn" data-filter="roads">🛣️ Major Roads</button>
                             </div>
                         </div>
-                        <div id="infraMapCanvas" class="leaflet-map-canvas" style="height: 520px;"></div>
+
+                        <!-- Infrastructure Map Canvas -->
+                        <div style="position: relative;">
+                            <div id="infraMapCanvas" class="leaflet-map-canvas" style="height: 520px;"></div>
+                            <div id="infraMapLoading" class="infra-map-overlay" style="display: none;">
+                                <span>Loading mapped civic amenities...</span>
+                            </div>
+                        </div>
+
+                        <!-- Amenities Map Legend -->
+                        <div class="map-legend-bar" id="infraLegendBar">
+                            <span class="legend-title">Amenities Legend:</span>
+                            <div class="legend-tag"><span class="legend-icon-badge hosp-badge">🏥</span> Hospital / Clinic</div>
+                            <div class="legend-tag"><span class="legend-icon-badge fire-badge">🚒</span> Fire Station</div>
+                            <div class="legend-tag"><span class="legend-icon-badge civic-badge">🏢</span> Civic Center</div>
+                            <div class="legend-tag"><span class="legend-road-line"></span> Mapped Road Corridor</div>
+                        </div>
                     </div>
 
                     <div class="analysis-panel-card">
@@ -1031,66 +1078,9 @@
                     </div>
                 </div>
             <!-- ========================================================
-                 7. DATASET MANAGEMENT & INGESTION TAB (PHASE 5)
+                 7. DATASET MANAGEMENT & INGESTION (REMOVED FROM PUBLIC VIEW)
+                 Dataset ingestion endpoints remain operational in backend API.
             ======================================================== -->
-            <section id="tab-admin" class="tab-pane">
-                <div class="view-header-row">
-                    <div>
-                        <h2 class="view-title">Dataset Management & Ingestion History</h2>
-                        <p class="view-subtitle">Monitor provider publishing cadences, inspect dataset operational status, and trigger authorized ingestions.</p>
-                    </div>
-                    <div style="display: flex; gap: 10px; align-items: center;">
-                        <button type="button" class="btn btn-secondary" id="refreshIngestionStatusBtn">🔄 Refresh Status</button>
-                    </div>
-                </div>
-
-                <!-- Provider Cadence & Status Cards Grid -->
-                <div class="content-card">
-                    <div class="card-header-styled flex-between">
-                        <div>
-                            <h4 style="margin: 0;">Registered Datasets & Provider Cadences</h4>
-                            <span class="card-header-sub">Operational status and minimum update intervals respecting provider publishing schedules</span>
-                        </div>
-                        <span class="pill-badge-blue" id="registeredDatasetsCountBadge">5 Datasets Registered</span>
-                    </div>
-
-                    <div id="datasetCardsContainer" class="card-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; margin-top: 14px;">
-                        <div class="info-card" style="padding: 16px;">Loading registered datasets...</div>
-                    </div>
-                </div>
-
-                <!-- Recent Ingestion Run History Table -->
-                <div class="content-card" style="margin-top: 24px;">
-                    <div class="card-header-styled flex-between">
-                        <div>
-                            <h4 style="margin: 0;">Ingestion Run Audit History</h4>
-                            <span class="card-header-sub">Immutable audit log of recent ingestion runs, record counts, and status</span>
-                        </div>
-                        <span class="pill-badge-green" id="ingestionHistoryCountBadge">Runs</span>
-                    </div>
-
-                    <div class="table-responsive-wrapper">
-                        <table class="urbanrisk-data-table full-table">
-                            <thead>
-                                <tr>
-                                    <th>Run ID</th>
-                                    <th>Dataset</th>
-                                    <th>Trigger Type</th>
-                                    <th>Status</th>
-                                    <th>Time</th>
-                                    <th>Duration</th>
-                                    <th>Records Fetched / Upserted</th>
-                                </tr>
-                            </thead>
-                            <tbody id="ingestionHistoryTableBody">
-                                <tr>
-                                    <td colspan="7" class="table-loading-cell">Loading ingestion history...</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </section>
 
         </div>
     </div>

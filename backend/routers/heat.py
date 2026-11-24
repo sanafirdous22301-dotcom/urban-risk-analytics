@@ -1,6 +1,9 @@
+import logging
 from fastapi import APIRouter, HTTPException, Query
 from database.mongodb import db
 from backend.services.phase6_analytics_service import AdvancedHazardAnalyticsService
+
+logger = logging.getLogger("urbanrisk.heat")
 
 router = APIRouter(
     prefix="/api/heat",
@@ -17,8 +20,15 @@ def get_heat_vulnerability_profile(
     Returns locality thermal anomaly relative to citywide baseline, hotspot classification,
     canopy vegetation density (NDVI), and environmental cooling vulnerability.
     """
-    service = AdvancedHazardAnalyticsService()
-    return service.get_heat_vulnerability_profile(latitude, longitude)
+    try:
+        service = AdvancedHazardAnalyticsService()
+        return service.get_heat_vulnerability_profile(latitude, longitude)
+    except Exception as e:
+        logger.error("Heat vulnerability profile error: %s", e)
+        raise HTTPException(
+            status_code=500,
+            detail="Unable to compute heat vulnerability profile for the specified coordinates."
+        )
 
 
 @router.get("/model-metadata")

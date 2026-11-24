@@ -56,6 +56,31 @@ async def lifespan(app: FastAPI):
             },
             upsert=True
         )
+
+        # Ensure environmental indicators are seeded if collection is unpopulated (e.g. Render production)
+        try:
+            if db.environmental_indicators.count_documents({}) == 0:
+                import pandas as pd
+                import pymongo
+                env_csv = Path(__file__).resolve().parent.parent / "data" / "processed" / "environmental" / "hyderabad_environmental_indicators_1km.csv"
+                if env_csv.exists():
+                    df_env = pd.read_csv(env_csv)
+                    col = db.environmental_indicators
+                    col.create_index([("grid_id", pymongo.ASCENDING)], unique=True)
+                    ops = [
+                        pymongo.UpdateOne(
+                            {"grid_id": row["grid_id"]},
+                            {"$set": {k: (None if pd.isna(v) else v) for k, v in row.items()}},
+                            upsert=True
+                        )
+                        for _, row in df_env.iterrows()
+                    ]
+                    if ops:
+                        col.bulk_write(ops, ordered=False)
+                        print(f"Seeded {len(ops)} environmental indicators on startup.")
+        except Exception as seed_err:
+            print(f"Notice: Environmental indicators seeding deferred: {seed_err}")
+
         print("MongoDB sequence counters and model registry initialized successfully.")
     except Exception as error:
         print(f"Notice: MongoDB counter initialization skipped or deferred: {error}")

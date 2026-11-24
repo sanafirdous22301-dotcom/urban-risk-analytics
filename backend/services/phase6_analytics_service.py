@@ -284,32 +284,93 @@ class AdvancedHazardAnalyticsService:
     def get_heat_vulnerability_profile(self, latitude: float, longitude: float) -> Dict[str, Any]:
         """
         Evaluates a locality's microclimate thermal hotspot status and canopy deficiency.
+        Resilient to unseeded production databases and coordinates outside project bounds.
         """
-        # Find nearest 1-km environmental grid cell
-        nearest_cell = self.db.environmental_indicators.find_one(
-            {
-                "latitude": {"$gte": latitude - 0.015, "$lte": latitude + 0.015},
-                "longitude": {"$gte": longitude - 0.015, "$lte": longitude + 0.015}
-            }
-        )
+        csv_path = PROJECT_ROOT / "data" / "processed" / "environmental" / "hyderabad_environmental_indicators_1km.csv"
+        nearest_cell = None
 
-        if not nearest_cell:
-            # Fallback to general city-level context
-            nearest_cell = self.db.environmental_indicators.find_one()
+        # 1. Attempt lookup from MongoDB environmental_indicators collection
+        if self.db is not None and "environmental_indicators" in self.db.list_collection_names():
+            try:
+                nearest_cell = self.db.environmental_indicators.find_one(
+                    {
+                        "latitude": {"$gte": latitude - 0.015, "$lte": latitude + 0.015},
+                        "longitude": {"$gte": longitude - 0.015, "$lte": longitude + 0.015}
+                    }
+                )
+                if not nearest_cell:
+                    # Fallback to general city center record if within Hyderabad
+                    nearest_cell = self.db.environmental_indicators.find_one()
+            except Exception as e:
+                logger.warning("MongoDB environmental_indicators lookup failed: %s", e)
+                nearest_cell = None
+
+        # 2. Resilient fallback to CSV if MongoDB collection is empty or missing
+        if nearest_cell is None and csv_path.exists():
+            try:
+                df = pd.read_csv(csv_path)
+                if not df.empty:
+                    # Calculate Euclidean distance to find nearest cell
+                    df["dist"] = np.sqrt((df["latitude"] - latitude)**2 + (df["longitude"] - longitude)**2)
+                    min_row = df.loc[df["dist"].idxmin()]
+                    nearest_cell = min_row.to_dict()
+            except Exception as e:
+                logger.warning("CSV fallback lookup failed: %s", e)
+                nearest_cell = None
+
+        # 3. Graceful fallback if completely unavailable
+        if nearest_cell is None:
+            return {
+                "grid_id": "out_of_bounds",
+                "latitude": latitude,
+                "longitude": longitude,
+                "radiometric_lst_day_2023_c": None,
+                "citywide_mean_lst_day_c": 40.79,
+                "thermal_anomaly_relative_to_city_c": 0.0,
+                "hotspot_classification": "OUTSIDE STUDY REGION",
+                "canopy_vegetation_ndvi_2024": None,
+                "citywide_mean_ndvi": 0.221,
+                "canopy_deficit": None,
+                "is_builtup_surface": False,
+                "cooling_vulnerability": "Insufficient local thermal evidence for coordinates outside study boundary.",
+                "data_attribution": {
+                    "thermal_sensor": "MODIS Aqua MYD11A2 8-Day 1-km LST (Peak Summer 2023)",
+                    "vegetation_sensor": "Sentinel-2 MSI Level-2A 10m NDVI (April 2024)",
+                    "builtup_sensor": "ESA WorldCover 10m Land Cover v200 (2021 Baseline)"
+                }
+            }
 
         lst_2023 = nearest_cell.get("modis_lst_day_2023_c")
+        if lst_2023 is not None and not pd.isna(lst_2023):
+            lst_2023 = round(float(lst_2023), 2)
+        else:
+            lst_2023 = None
+
         ndvi_2024 = nearest_cell.get("sentinel2_ndvi_2024")
-        is_builtup = nearest_cell.get("is_builtup_surface", False)
+        if ndvi_2024 is not None and not pd.isna(ndvi_2024):
+            ndvi_2024 = round(float(ndvi_2024), 4)
+        else:
+            ndvi_2024 = None
 
-        # Baseline city-wide distribution
-        all_lst = [doc["modis_lst_day_2023_c"] for doc in self.db.environmental_indicators.find({}, {"modis_lst_day_2023_c": 1}) if doc.get("modis_lst_day_2023_c")]
-        all_ndvi = [doc["sentinel2_ndvi_2024"] for doc in self.db.environmental_indicators.find({}, {"sentinel2_ndvi_2024": 1}) if doc.get("sentinel2_ndvi_2024")]
+        is_builtup = bool(nearest_cell.get("is_builtup_surface", False))
 
-        city_mean_lst = float(np.mean(all_lst)) if all_lst else 40.79
-        city_mean_ndvi = float(np.mean(all_ndvi)) if all_ndvi else 0.221
+        # Baseline city-wide distribution (fallback to known validated constants if DB unseeded)
+        city_mean_lst = 40.79
+        city_mean_ndvi = 0.221
 
-        thermal_anomaly = round(lst_2023 - city_mean_lst, 2) if lst_2023 is not None else None
-        ndvi_deficit = round(city_mean_ndvi - ndvi_2024, 3) if ndvi_2024 is not None else None
+        if self.db is not None and "environmental_indicators" in self.db.list_collection_names():
+            try:
+                all_lst = [doc["modis_lst_day_2023_c"] for doc in self.db.environmental_indicators.find({}, {"modis_lst_day_2023_c": 1}) if doc.get("modis_lst_day_2023_c")]
+                all_ndvi = [doc["sentinel2_ndvi_2024"] for doc in self.db.environmental_indicators.find({}, {"sentinel2_ndvi_2024": 1}) if doc.get("sentinel2_ndvi_2024")]
+                if all_lst:
+                    city_mean_lst = float(np.mean(all_lst))
+                if all_ndvi:
+                    city_mean_ndvi = float(np.mean(all_ndvi))
+            except Exception:
+                pass
+
+        thermal_anomaly = round(lst_2023 - city_mean_lst, 2) if lst_2023 is not None else 0.0
+        ndvi_deficit = round(city_mean_ndvi - ndvi_2024, 3) if ndvi_2024 is not None else 0.0
 
         # Determine hotspot classification
         if thermal_anomaly is not None and thermal_anomaly > 1.5:
@@ -322,9 +383,9 @@ class AdvancedHazardAnalyticsService:
             hotspot_class = "MODERATE / CITY AVERAGE"
 
         return {
-            "grid_id": nearest_cell.get("grid_id"),
-            "latitude": nearest_cell.get("latitude"),
-            "longitude": nearest_cell.get("longitude"),
+            "grid_id": str(nearest_cell.get("grid_id", "unknown")),
+            "latitude": float(nearest_cell.get("latitude", latitude)),
+            "longitude": float(nearest_cell.get("longitude", longitude)),
             "radiometric_lst_day_2023_c": lst_2023,
             "citywide_mean_lst_day_c": round(city_mean_lst, 2),
             "thermal_anomaly_relative_to_city_c": thermal_anomaly,
