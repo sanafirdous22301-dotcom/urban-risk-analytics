@@ -325,48 +325,48 @@
 
                         <div class="risk-bars-container">
                             <!-- Flood -->
-                            <div class="risk-bar-group">
+                            <div class="risk-bar-group" id="barFloodGroup">
                                 <div class="bar-labels-row">
                                     <span class="bar-name">🌊 Flood Vulnerability (35% Weight)</span>
                                     <strong id="barFloodScoreText">-- / 100</strong>
                                 </div>
-                                <div class="progress-bar-track">
+                                <div class="progress-bar-track" id="barFloodTrack">
                                     <div class="progress-bar-fill flood" id="barFloodFill" style="width: 0%"></div>
                                 </div>
                                 <span class="bar-note" id="barFloodNote">Historical drainage catchment exposure</span>
                             </div>
 
                             <!-- Heat -->
-                            <div class="risk-bar-group">
+                            <div class="risk-bar-group" id="barHeatGroup">
                                 <div class="bar-labels-row">
                                     <span class="bar-name">🔥 Urban Heat Exposure (35% Weight)</span>
                                     <strong id="barHeatScoreText">-- / 100</strong>
                                 </div>
-                                <div class="progress-bar-track">
+                                <div class="progress-bar-track" id="barHeatTrack">
                                     <div class="progress-bar-fill heat" id="barHeatFill" style="width: 0%"></div>
                                 </div>
                                 <span class="bar-note" id="barHeatNote">Satellite land surface temperature percentile</span>
                             </div>
 
                             <!-- Infrastructure -->
-                            <div class="risk-bar-group">
+                            <div class="risk-bar-group" id="barInfraGroup">
                                 <div class="bar-labels-row">
                                     <span class="bar-name">🏥 Infrastructure Deficit (15% Weight)</span>
                                     <strong id="barInfraScoreText">-- / 100</strong>
                                 </div>
-                                <div class="progress-bar-track">
+                                <div class="progress-bar-track" id="barInfraTrack">
                                     <div class="progress-bar-fill infra" id="barInfraFill" style="width: 0%"></div>
                                 </div>
                                 <span class="bar-note" id="barInfraNote">Distance to emergency hospitals & fire stations</span>
                             </div>
 
                             <!-- Road Gap -->
-                            <div class="risk-bar-group">
+                            <div class="risk-bar-group" id="barRoadGroup">
                                 <div class="bar-labels-row">
                                     <span class="bar-name">🛣️ Road Representation Gap (15% Weight)</span>
                                     <strong id="barRoadScoreText">-- / 100</strong>
                                 </div>
-                                <div class="progress-bar-track">
+                                <div class="progress-bar-track" id="barRoadTrack">
                                     <div class="progress-bar-fill road" id="barRoadFill" style="width: 0%"></div>
                                 </div>
                                 <span class="bar-note" id="barRoadNote">Multimodal road network connectivity representation</span>

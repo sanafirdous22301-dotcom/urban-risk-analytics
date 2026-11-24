@@ -684,10 +684,10 @@ function renderAssessmentResults(data) {
     const priorityBand = isUnscored ? "NOT SCORED (Insufficient Hazard Evidence)" : (iups.priority_band || (Number(priorityScore) >= 60 ? "High Priority" : "Moderate Priority"));
 
     // Heat: exact score from heat.score_value (e.g. 81.2) or comp.heat_evidence_score
-    const heatScore = heat.score_value != null ? Number(heat.score_value).toFixed(1) : (comp.heat_evidence_score != null ? (comp.heat_evidence_score * 100).toFixed(1) : "81.2");
+    const heatScore = heat.score_value != null ? Number(heat.score_value).toFixed(1) : (comp.heat_evidence_score != null ? (comp.heat_evidence_score * 100).toFixed(1) : null);
 
     // Infrastructure: exact score from infra.score_value (e.g. 44.3) or comp.infrastructure_gap_score
-    const infraScore = infra.score_value != null ? Number(infra.score_value).toFixed(1) : (comp.infrastructure_gap_score != null ? (comp.infrastructure_gap_score * 100).toFixed(1) : "44.3");
+    const infraScore = infra.score_value != null ? Number(infra.score_value).toFixed(1) : (comp.infrastructure_gap_score != null ? (comp.infrastructure_gap_score * 100).toFixed(1) : null);
 
     // Flood: score from flood.score_value (null if no direct cell evidence)
     const hasFloodScore = flood.score_value != null;
@@ -695,7 +695,7 @@ function renderAssessmentResults(data) {
     const floodClass = flood.classification || (hasFloodScore ? "MEDIUM" : "REGIONAL CONTEXT ONLY");
 
     // Road representation gap score
-    const roadScore = comp.road_representation_gap_score != null ? (comp.road_representation_gap_score * 100).toFixed(1) : "44.2";
+    const roadScore = comp.road_representation_gap_score != null ? (comp.road_representation_gap_score * 100).toFixed(1) : null;
 
     // 2. TOP SUMMARY METRIC CARDS
     const priEl = document.getElementById("homePriorityScore");
@@ -728,7 +728,7 @@ function renderAssessmentResults(data) {
             floodEl.classList.remove("long-text");
         }
     }
-    setText("homeFloodScoreText", hasFloodScore ? `(${floodScore} / 100)` : "(-- / 100)");
+    setText("homeFloodScoreText", hasFloodScore ? `(${floodScore} / 100)` : "");
     applyBadgeStyle(document.getElementById("homeFloodBadge"), floodClass);
 
     // Heat Card
@@ -742,7 +742,7 @@ function renderAssessmentResults(data) {
             heatEl.classList.remove("long-text");
         }
     }
-    setText("homeHeatScoreText", `(${heatScore} / 100)`);
+    setText("homeHeatScoreText", heatScore != null ? `(${heatScore} / 100)` : "");
     applyBadgeStyle(document.getElementById("homeHeatBadge"), heatVal);
 
     // Infrastructure Card
@@ -756,7 +756,7 @@ function renderAssessmentResults(data) {
             infraEl.classList.remove("long-text");
         }
     }
-    setText("homeInfraScoreText", `(${infraScore} / 100)`);
+    setText("homeInfraScoreText", infraScore != null ? `(${infraScore} / 100)` : "");
     applyBadgeStyle(document.getElementById("homeInfraBadge"), infraVal);
 
     // 3. LOCATION ANALYSIS PANEL (RIGHT OF MAP)
@@ -775,8 +775,8 @@ function renderAssessmentResults(data) {
     applyBadgeStyle(document.getElementById("analysisInfraBadge"), infra.classification || "MEDIUM");
 
     setText("analysisFloodScoreSub", hasFloodScore ? `Precipitation index: ${floodScore} / 100` : "Regional drainage context only");
-    setText("analysisHeatScoreSub", `Percentile score: ${heatScore} / 100`);
-    setText("analysisInfraScoreSub", `Deficit score: ${infraScore} / 100`);
+    setText("analysisHeatScoreSub", heatScore != null ? `Percentile score: ${heatScore} / 100` : "Insufficient thermal evidence");
+    setText("analysisInfraScoreSub", infraScore != null ? `Deficit score: ${infraScore} / 100` : "Insufficient infrastructure evidence");
 
     // Meaningful "Why is this area risky?" Explanations
     populateWhySection(flood, heat, infra, priorityScore);
@@ -791,18 +791,78 @@ function renderAssessmentResults(data) {
     populateActionsSection(flood, heat, infra);
 
     // 4. RISK INSIGHTS PROGRESS BARS (SYNCHRONIZED WITH SUMMARY CARDS)
-    setText("barFloodScoreText", `${floodScore} / 100`);
-    setText("barHeatScoreText", `${heatScore} / 100`);
-    setText("barInfraScoreText", `${infraScore} / 100`);
-    setText("barRoadScoreText", `${roadScore} / 100`);
+    renderRiskBar("Flood", floodScore, {
+        defaultNote: "Historical drainage catchment exposure",
+        nullExplanation: "Insufficient local flood-hazard evidence is available to calculate this indicator. This does not mean the location is free from flood risk.",
+        regionalLabel: !hasFloodScore ? "Regional Context" : null
+    });
 
-    setBarWidth("barFloodFill", floodScore);
-    setBarWidth("barHeatFill", heatScore);
-    setBarWidth("barInfraFill", infraScore);
-    setBarWidth("barRoadFill", roadScore);
+    renderRiskBar("Heat", heatScore, {
+        defaultNote: "Satellite land surface temperature percentile",
+        nullExplanation: "Insufficient local thermal evidence is available to calculate this indicator. This does not mean the location is free from heat risk.",
+        regionalLabel: null
+    });
+
+    renderRiskBar("Infra", infraScore, {
+        defaultNote: "Distance to emergency hospitals & fire stations",
+        nullExplanation: "Insufficient local infrastructure evidence is available to calculate this indicator. Lack of evidence does not indicate low vulnerability.",
+        regionalLabel: null
+    });
+
+    renderRiskBar("Road", roadScore, {
+        defaultNote: "Multimodal road network connectivity representation",
+        nullExplanation: "Insufficient road connectivity evidence is available to calculate this indicator.",
+        regionalLabel: null
+    });
 
     // Synchronize Dedicated Sub-Views
     syncSubModulesWithAssessment(data, floodScore, heatScore, infraScore);
+}
+
+function renderRiskBar(indicatorKey, score, options = {}) {
+    const scoreEl = document.getElementById(`bar${indicatorKey}ScoreText`);
+    const trackEl = document.getElementById(`bar${indicatorKey}Track`) || document.getElementById(`bar${indicatorKey}Fill`)?.parentElement;
+    const fillEl = document.getElementById(`bar${indicatorKey}Fill`);
+    const noteEl = document.getElementById(`bar${indicatorKey}Note`);
+
+    const hasScore = score !== null && score !== undefined && !isNaN(parseFloat(score));
+
+    if (hasScore) {
+        const numScore = Number(score).toFixed(1);
+        if (scoreEl) {
+            scoreEl.textContent = `${numScore} / 100`;
+            scoreEl.className = "";
+        }
+        if (trackEl) {
+            trackEl.style.display = "";
+        }
+        if (fillEl) {
+            fillEl.style.width = `${Math.min(100, Math.max(6, parseFloat(numScore)))}%`;
+        }
+        if (noteEl && options.defaultNote) {
+            noteEl.textContent = options.defaultNote;
+        }
+    } else {
+        // NULL OR UNDEFINED SCORE
+        if (scoreEl) {
+            // Status: NOT SCORED (no numerical /100)
+            scoreEl.innerHTML = `<span class="not-scored-tag">NOT SCORED</span>`;
+        }
+        if (trackEl) {
+            // Hide numerical score track/bar when no score exists
+            trackEl.style.display = "none";
+        }
+        if (fillEl) {
+            fillEl.style.width = "0%";
+        }
+        if (noteEl && options.nullExplanation) {
+            if (options.regionalLabel) {
+                noteEl.innerHTML = `<span class="badge-context" style="display:inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; margin-right: 6px; font-weight: 700; text-transform: uppercase;">${options.regionalLabel}</span> ${options.nullExplanation}`;
+            } else {
+                noteEl.textContent = options.nullExplanation;
+            }
+        }
+    }
 }
 
 function setBarWidth(id, pct) {
@@ -861,8 +921,8 @@ function syncSubModulesWithAssessment(data, floodScore, heatScore, infraScore) {
 
     // Flood Sub-view Sync
     setText("floodSelectedPlaceTitle", currentPlaceName);
-    setText("floodLocScore", `${floodScore} / 100`);
-    applyBadgeStyle(document.getElementById("floodLocBadge"), flood.classification || "MEDIUM");
+    setText("floodLocScore", floodScore != null ? `${floodScore} / 100` : "NOT SCORED");
+    applyBadgeStyle(document.getElementById("floodLocBadge"), flood.classification || (floodScore != null ? "MEDIUM" : "REGIONAL CONTEXT ONLY"));
 
     // Infrastructure Sub-view Sync
     setText("infraSelectedPlaceTitle", currentPlaceName);
