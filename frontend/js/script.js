@@ -1485,21 +1485,26 @@ function setupHeatPredictor() {
             const risk = pred.heat_risk_level || "High";
 
             let riskBadgeClass = "badge-medium";
-            if (risk.toLowerCase().includes("high") || risk.toLowerCase().includes("severe")) riskBadgeClass = "badge-high";
+            const isHighRisk = risk.toLowerCase().includes("high") || risk.toLowerCase().includes("severe");
+            if (isHighRisk) riskBadgeClass = "badge-high";
             if (risk.toLowerCase().includes("low")) riskBadgeClass = "badge-low";
+            const alertIcon = isHighRisk ? " ⚠️" : "";
 
             resultBox.innerHTML = `
                 <div class="outcome-metric-card">
                     <div>
-                        <span style="font-size: 12px; font-weight: 800; color: var(--navy-header); text-transform: uppercase;">PREDICTED DAYTIME SURFACE TEMP</span>
+                        <span style="font-size: 12px; font-weight: 800; color: var(--navy-header); text-transform: uppercase;">ESTIMATED DAYTIME SURFACE TEMP</span>
                         <div class="metric-gauge-temp">${dayTemp} °C</div>
                         <div style="font-size: 13.5px; color: var(--text-secondary); margin-top: 3px;">
                             Locality: <strong>${placeLabel}</strong> · Input Night Temp: ${nightVal} °C
                         </div>
+                        <div style="font-size: 11.5px; color: var(--text-muted); margin-top: 4px;">
+                            Regression estimate based on multi-year MODIS thermal patterns; not a weather forecast.
+                        </div>
                     </div>
                     <div style="text-align: right;">
                         <span class="metric-status-pill ${riskBadgeClass}" style="font-size: 14px; padding: 7px 16px;">
-                            ${risk.toUpperCase()} HEAT RISK ⚠️
+                            ${risk.toUpperCase()} HEAT RISK${alertIcon}
                         </span>
                         <div style="font-size: 13px; color: var(--text-muted); margin-top: 6px;">
                             Diurnal Swing: <strong>+${delta} °C</strong>
@@ -2243,7 +2248,7 @@ async function loadLocalityInfrastructureAudit(lat, lon) {
 
             const gapSummaryEl = document.getElementById("infraGapSummaryText");
             if (gapSummaryEl && pData.combined_infrastructure_assessment) {
-                gapSummaryEl.textContent = `Overall Status: ${pData.combined_infrastructure_assessment.classification}. Nearest Hospital: ${hosp.nearest_hospital_name} (${hosp.nearest_hospital_straight_line_km} km). Nearest Fire Station: ${fs.nearest_fire_station_name} (${fs.nearest_fire_station_km || fs.nearest_fire_station_straight_line_km} km). Straight-line geodesic distance; operational staffing, beds, or vehicle readiness require on-site field verification.`;
+                gapSummaryEl.textContent = `Overall Status: ${pData.combined_infrastructure_assessment.classification}. Nearest Hospital: ${hosp.nearest_hospital_name} (${hosp.nearest_hospital_straight_line_km} km). Nearest Fire Station: ${fs.nearest_fire_station_name} (${fs.nearest_fire_station_km || fs.nearest_fire_station_straight_line_km} km). Straight-line screening distance based on open spatial inventory; not road-network travel time. Missing records represent inventory data gaps, not confirmed physical absence.`;
             }
         }
 
