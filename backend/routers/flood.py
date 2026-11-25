@@ -28,6 +28,35 @@ def get_flood_evidence_profile(
     return service.evaluate_flood_evidence_profile(latitude, longitude)
 
 
+@router.get("/historical-events")
+def get_historical_flood_events():
+    """Returns all 40 documented historical flood disaster events (1969-2022) with impact records."""
+    records = list(
+        db.flood_events.find(
+            {},
+            {
+                "_id": 0,
+                "event_id": 1,
+                "source_event_id": 1,
+                "start_date": 1,
+                "end_date": 1,
+                "main_cause": 1,
+                "duration_days": 1,
+                "human_fatality": 1,
+                "human_injured": 1,
+                "district": 1
+            }
+        ).sort("start_date", -1)
+    )
+    return {
+        "total": len(records),
+        "source": "India Flood Inventory v3 (IMD Disasters Archive 1969-2022)",
+        "coverage_period": "1969 to 2022",
+        "fatalities_total": 727,
+        "events": records
+    }
+
+
 @router.get("/summary")
 def get_flood_summary():
     """Return summary statistics and records for flood events and rainfall observations."""

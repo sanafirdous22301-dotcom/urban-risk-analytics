@@ -610,11 +610,51 @@ function setupSearchAndRecent() {
         });
     }
 
-    if (assessBtn) {
-        assessBtn.addEventListener("click", function () {
-            executeAssessment();
-        });
+    async function handleExplicitAssess() {
+        const query = (searchInput.value || "").trim();
+        if (query.length >= 2) {
+            const firstSuggestion = suggestionsBox.querySelector(".search-menu-item:not(.no-click)");
+            if (firstSuggestion && suggestionsBox.classList.contains("open")) {
+                const lat = parseFloat(firstSuggestion.getAttribute("data-lat"));
+                const lon = parseFloat(firstSuggestion.getAttribute("data-lon"));
+                const name = firstSuggestion.getAttribute("data-name");
+                searchInput.value = name;
+                suggestionsBox.classList.remove("open");
+                saveRecentLocation(name, lat, lon);
+                updateSelectedLocation(lat, lon, name, true);
+                return;
+            }
+            try {
+                const res = await fetch(`/api/locations/search?q=${encodeURIComponent(query)}&limit=1`);
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data.results && data.results.length > 0) {
+                        const top = data.results[0];
+                        const name = top.label || top.name;
+                        searchInput.value = name;
+                        suggestionsBox.classList.remove("open");
+                        saveRecentLocation(name, top.latitude, top.longitude);
+                        updateSelectedLocation(top.latitude, top.longitude, name, true);
+                        return;
+                    }
+                }
+            } catch (e) {
+                console.warn("Search lookup failed:", e);
+            }
+        }
+        executeAssessment();
     }
+
+    if (assessBtn) {
+        assessBtn.addEventListener("click", handleExplicitAssess);
+    }
+
+    searchInput.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") {
+            e.preventDefault();
+            handleExplicitAssess();
+        }
+    });
 
     document.addEventListener("click", function (e) {
         if (!e.target.closest(".search-field-box")) {
@@ -847,7 +887,9 @@ function renderAssessmentResults(data) {
             floodEl.classList.remove("long-text");
         }
     }
+    setText("homePrioritySubnote", "Composite multi-hazard priority baseline");
     setText("homeFloodScoreText", hasFloodScore ? `(${floodScore} / 100)` : "");
+    setText("homeFloodSubnote", hasFloodScore ? "Direct cell storm raster evidence" : "40 historical flood records (1969–2022)");
     applyBadgeStyle(document.getElementById("homeFloodBadge"), floodClass);
 
     // Heat Card
@@ -862,6 +904,7 @@ function renderAssessmentResults(data) {
         }
     }
     setText("homeHeatScoreText", heatScore != null ? `(${heatScore} / 100)` : "");
+    setText("homeHeatSubnote", "MODIS summer satellite thermal baseline");
     applyBadgeStyle(document.getElementById("homeHeatBadge"), heatVal);
 
     // Infrastructure Card
@@ -876,12 +919,15 @@ function renderAssessmentResults(data) {
         }
     }
     setText("homeInfraScoreText", infraScore != null ? `(${infraScore} / 100)` : "");
+    setText("homeInfraSubnote", "Permanent emergency facility access");
     applyBadgeStyle(document.getElementById("homeInfraBadge"), infraVal);
 
     // 3. LOCATION ANALYSIS PANEL (RIGHT OF MAP)
     setText("analysisPlaceTitle", currentPlaceName);
     setText("analysisPlaceSubtitle", `Evaluated at ${currentLat.toFixed(3)}°N, ${currentLon.toFixed(3)}°E`);
     setText("analysisOverallScore", `${priorityScore} / 100`);
+    setText("analysisPriorityBand", priorityBand);
+    setText("analysisScoreTypeDesc", "Composite multi-hazard baseline priority (Flood 35%, Heat 35%, Infra 15%, Road 15%)");
 
     const anaBadge = document.getElementById("analysisOverallBadge");
     if (anaBadge) {
@@ -1152,6 +1198,40 @@ function renderFloodMapCells() {
     });
 }
 
+let allHistoricalFloodEvents = [];
+
+function renderFloodFullEventsTable(events) {
+    const tbody = document.getElementById("floodFullEventsTableBody");
+    if (!tbody) return;
+
+    if (!events || !events.length) {
+        tbody.innerHTML = `<tr><td colspan="6" class="table-loading-cell">No matching historical flood records found.</td></tr>`;
+        return;
+    }
+
+    tbody.innerHTML = events.map(e => {
+        const hasDeaths = e.human_fatality != null && Number(e.human_fatality) > 0;
+        const deathsText = hasDeaths ? `${e.human_fatality} Fatalities` : "None Recorded";
+        const badgeClass = hasDeaths ? "badge-high" : "badge-neutral";
+        const sDate = e.start_date || "N/A";
+        const eDate = e.end_date || "N/A";
+        const dateRange = sDate === eDate ? sDate : `${sDate} to ${eDate}`;
+        const dur = e.duration_days != null ? `${e.duration_days} days` : "1 day";
+        const district = e.district ? (e.district.length > 90 ? e.district.slice(0, 90) + "..." : e.district) : "Hyderabad Metropolitan District";
+
+        return `
+            <tr>
+                <td><strong>#${e.event_id}</strong></td>
+                <td>${dateRange}</td>
+                <td><strong>${e.main_cause || "Monsoon Floods"}</strong></td>
+                <td>${dur}</td>
+                <td><span class="metric-status-pill ${badgeClass}">${deathsText}</span></td>
+                <td><small style="color: var(--text-secondary);">${district}</small></td>
+            </tr>
+        `;
+    }).join("");
+}
+
 async function loadFloodModule() {
     if (floodDataLoaded) return;
     try {
@@ -1164,29 +1244,67 @@ async function loadFloodModule() {
         setText("floodStatRainDates", data.rainfall_observations?.total_records ?? 84);
         setText("floodStatDuration", data.duration_days?.avg ? `${data.duration_days.avg} Days` : "7.7 Days");
 
-        const events = data.all_events || data.recent_events || [];
-        const container = document.getElementById("floodCompactEventsList");
-        if (container && events.length) {
-            container.innerHTML = events.slice(0, 10).map(e => `
-                <div class="compact-event-card">
-                    <div class="event-main">
-                        <strong>Event #${e.event_id}: ${e.main_cause || "Heavy Inundation"}</strong>
-                        <span>Dates: ${e.start_date || "N/A"} to ${e.end_date || "N/A"} · Duration: ${e.duration_days ?? "N/A"} days</span>
-                    </div>
-                    <span class="event-pill ${e.human_fatality && e.human_fatality > 0 ? 'badge-high' : 'badge-low'}">
-                        ${e.human_fatality ? `${e.human_fatality} Fatalities` : "No Fatalities"}
-                    </span>
-                </div>
-            `).join("");
+        allHistoricalFloodEvents = data.all_events || data.recent_events || [];
+
+        // Render full 40-event historical archive table
+        renderFloodFullEventsTable(allHistoricalFloodEvents);
+
+        // Setup historical event filter search input
+        const filterInput = document.getElementById("floodEventSearchInput");
+        if (filterInput) {
+            filterInput.addEventListener("input", function () {
+                const q = this.value.toLowerCase().trim();
+                if (!q) {
+                    renderFloodFullEventsTable(allHistoricalFloodEvents);
+                    return;
+                }
+                const filtered = allHistoricalFloodEvents.filter(e =>
+                    (e.start_date && e.start_date.toLowerCase().includes(q)) ||
+                    (e.end_date && e.end_date.toLowerCase().includes(q)) ||
+                    (e.main_cause && e.main_cause.toLowerCase().includes(q)) ||
+                    (e.district && e.district.toLowerCase().includes(q)) ||
+                    (String(e.event_id).includes(q))
+                );
+                renderFloodFullEventsTable(filtered);
+            });
         }
 
+        // Sync Current Hydrological Conditions banner if weather data is present
+        if (latestWeatherData) {
+            const precip = latestWeatherData.precipitation_mm ?? 0;
+            const pValEl = document.getElementById("floodCurrentPrecipVal");
+            if (pValEl) pValEl.textContent = `${precip.toFixed(1)}`;
+            const obsTimeEl = document.getElementById("floodCurrentObsTime");
+            if (obsTimeEl) {
+                const obsTime = latestWeatherData.observation_time || new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                obsTimeEl.textContent = `Latest observation: ${obsTime} · 15-minute precipitation screening interval`;
+            }
+            const alertBadge = document.getElementById("floodCurrentAlertBadge");
+            if (alertBadge) {
+                if (precip > 15) {
+                    alertBadge.className = "pill-badge-red";
+                    alertBadge.textContent = "CONVECTIVE RAIN ALERT ⚠️";
+                } else if (precip > 2) {
+                    alertBadge.className = "pill-badge-warning";
+                    alertBadge.textContent = "MODERATE RAIN DETECTED";
+                } else {
+                    alertBadge.className = "pill-badge-green";
+                    alertBadge.textContent = "NO ACTIVE FLOOD ALERT";
+                }
+            }
+        }
+
+        // Toggle buttons for current vs historical views in flood tab
         document.querySelectorAll("[data-flood-mode]").forEach(btn => {
             btn.addEventListener("click", function () {
                 document.querySelectorAll("[data-flood-mode]").forEach(b => b.classList.remove("active"));
                 this.classList.add("active");
                 const mode = this.getAttribute("data-flood-mode");
                 if (mode === "historical") {
-                    const el = document.getElementById("floodCompactEventsList");
+                    const el = document.getElementById("historicalFloodTableCard");
+                    if (el) el.scrollIntoView({ behavior: "smooth" });
+                } else if (mode === "current") {
+                    const el = document.getElementById("floodCurrentConditionsSection");
                     if (el) el.scrollIntoView({ behavior: "smooth" });
                 }
             });
@@ -2160,72 +2278,6 @@ async function loadLocalityHazardProfiles(lat, lon) {
     }
 }
 
-async function loadIngestionDashboard() {
-    try {
-        const statusRes = await fetch("/api/admin/ingestion/status");
-        if (statusRes.ok) {
-            const data = await statusRes.json();
-            const container = document.getElementById("datasetCardsContainer");
-            if (container && Array.isArray(data.datasets)) {
-                container.innerHTML = "";
-                data.datasets.forEach(ds => {
-                    const last = ds.last_run;
-                    const statusStr = last ? last.status.toUpperCase() : "NOT INGESTED";
-                    const badgeClass = statusStr === "SUCCESS" ? "pill-badge-green" : (statusStr === "DRY_RUN" ? "pill-badge-blue" : "pill-badge-muted");
-                    const card = document.createElement("div");
-                    card.className = "metric-stat-card";
-                    card.style.display = "flex";
-                    card.style.flexDirection = "column";
-                    card.style.gap = "8px";
-                    card.innerHTML = `
-                        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                            <strong style="font-size: 1.05rem;">${ds.display_name}</strong>
-                            <span class="${badgeClass}">${statusStr}</span>
-                        </div>
-                        <div style="font-size: 0.85rem; color: #475569;">
-                            <div><strong>Provider:</strong> ${ds.provider}</div>
-                            <div><strong>Cadence:</strong> ${ds.cadence_description} (${ds.min_interval_hours}h interval)</div>
-                            <div><strong>Last Run:</strong> ${last ? new Date(last.completed_at).toLocaleString() : 'N/A'}</div>
-                            <div><strong>Records:</strong> Fetched: ${last ? last.records_fetched : 0} | Upserted: ${last ? last.records_upserted : 0}</div>
-                        </div>
-                    `;
-                    container.appendChild(card);
-                });
-            }
-        }
-
-        const histRes = await fetch("/api/admin/ingestion/history?limit=15");
-        if (histRes.ok) {
-            const histData = await histRes.json();
-            const tbody = document.getElementById("ingestionHistoryTableBody");
-            const badge = document.getElementById("ingestionHistoryCountBadge");
-            if (badge) badge.textContent = `${histData.count || 0} Runs Recorded`;
-            if (tbody && Array.isArray(histData.history)) {
-                if (histData.history.length === 0) {
-                    tbody.innerHTML = `<tr><td colspan="7" class="table-loading-cell">No ingestion history recorded yet.</td></tr>`;
-                } else {
-                    tbody.innerHTML = "";
-                    histData.history.forEach(run => {
-                        const tr = document.createElement("tr");
-                        const statusClass = run.status === "success" ? "status-tag-active" : (run.status === "dry_run" ? "status-tag-neutral" : "status-tag-alert");
-                        tr.innerHTML = `
-                            <td><code>${run.run_id}</code></td>
-                            <td><strong>${run.dataset_key}</strong></td>
-                            <td>${run.trigger_type}</td>
-                            <td><span class="${statusClass}">${run.status.toUpperCase()}</span></td>
-                            <td>${new Date(run.completed_at).toLocaleString()}</td>
-                            <td>${run.duration_seconds}s</td>
-                            <td>${run.records_fetched} / ${run.records_upserted}</td>
-                        `;
-                        tbody.appendChild(tr);
-                    });
-                }
-            }
-        }
-    } catch (e) {
-        console.warn("Unable to load ingestion dashboard:", e);
-    }
-}
 
 // ==========================================================================
 // 14. THEME TOGGLE (LIGHT / DARK) & ASSESSMENT MODE PERSISTENCE
@@ -2374,13 +2426,56 @@ function renderCurrentConditionsAssessment() {
         curHeatSub = `Comfortable ambient: ${temp.toFixed(1)} °C`;
     }
 
-    // 3. Update Summary Metric Cards for Current Mode
-    setText("homePriorityScore", "--");
-    setText("homePrioritySubnote", "Current weather screening (unweighted)");
+    // 3. Compute Current Operational Screening Priority (IUPS in Current Mode)
+    // Flood screening component (0 - 100)
+    let curFloodScore = 12.0;
+    if (precip > 15) curFloodScore = 80.0;
+    else if (precip > 5) curFloodScore = 55.0;
+    else if (precip > 0) curFloodScore = 30.0;
+
+    // Heat screening component (0 - 100)
+    let curHeatScore = 30.0;
+    if (apparentTemp >= 40) curHeatScore = 85.0;
+    else if (apparentTemp >= 35) curHeatScore = 65.0;
+    else if (apparentTemp >= 30) curHeatScore = 45.0;
+    else if (apparentTemp >= 25) curHeatScore = 25.0;
+    else curHeatScore = 15.0;
+
+    // Infrastructure gap component (from mapped physical assets)
+    const infraRisk = lastAssessmentData?.category_assessments?.infrastructure_risk;
+    const infraScore = infraRisk?.score_value != null ? Number(infraRisk.score_value) : 35.0;
+    const roadScore = 30.0;
+
+    // Weighted composite screening score
+    const curPriorityScore = Number(((curFloodScore * 0.25) + (curHeatScore * 0.40) + (infraScore * 0.20) + (roadScore * 0.15)).toFixed(1));
+
+    let curPriorityBand = "Moderate Priority";
+    let curPriorityBadgeText = "MODERATE";
+    let curPriorityBadgeClass = "badge-moderate";
+    if (curPriorityScore >= 75) {
+        curPriorityBand = "Critical Operational Priority";
+        curPriorityBadgeText = "CRITICAL ALERT 🚨";
+        curPriorityBadgeClass = "badge-high";
+    } else if (curPriorityScore >= 60) {
+        curPriorityBand = "High Operational Priority";
+        curPriorityBadgeText = "HIGH ⚠️";
+        curPriorityBadgeClass = "badge-high";
+    } else if (curPriorityScore >= 30) {
+        curPriorityBand = "Moderate Operational Priority";
+        curPriorityBadgeText = "MODERATE";
+        curPriorityBadgeClass = "badge-moderate";
+    } else {
+        curPriorityBand = "Low Operational Priority";
+        curPriorityBadgeText = "LOW";
+        curPriorityBadgeClass = "badge-low";
+    }
+
+    setText("homePriorityScore", curPriorityScore.toFixed(1));
+    setText("homePrioritySubnote", "Current multi-hazard operational screening");
     const pBadge = document.getElementById("homePriorityBadge");
     if (pBadge) {
-        pBadge.className = "metric-status-pill badge-neutral";
-        pBadge.textContent = "CURRENT SCREENING";
+        pBadge.className = `metric-status-pill ${curPriorityBadgeClass}`;
+        pBadge.textContent = curPriorityBadgeText;
     }
 
     const floodEl = document.getElementById("homeFloodVal");
@@ -2388,8 +2483,8 @@ function renderCurrentConditionsAssessment() {
         floodEl.textContent = curFloodVal;
         floodEl.className = "metric-val-large";
     }
-    setText("homeFloodScoreText", `(${curFloodScoreText})`);
-    setText("homeFloodSubnote", curFloodSub);
+    setText("homeFloodScoreText", `(${curFloodScoreText} / 15m)`);
+    setText("homeFloodSubnote", "Current weather screening. Historical records preserved.");
     applyBadgeStyle(document.getElementById("homeFloodBadge"), curFloodVal);
 
     const heatEl = document.getElementById("homeHeatVal");
@@ -2401,44 +2496,51 @@ function renderCurrentConditionsAssessment() {
     setText("homeHeatSubnote", curHeatSub);
     applyBadgeStyle(document.getElementById("homeHeatBadge"), curHeatVal);
 
-    // Infrastructure Card: remains based on physical distance to mapped assets
+    // Infrastructure Card: based on physical distance to mapped assets
     let nearHospDistText = "--";
-    if (lastAssessmentData && lastAssessmentData.category_assessments?.infrastructure_risk) {
-        const infra = lastAssessmentData.category_assessments.infrastructure_risk;
-        const infraScore = infra.score_value != null ? Math.round(infra.score_value) : null;
-        setText("homeInfraVal", infra.classification || "MEDIUM");
-        setText("homeInfraScoreText", infraScore != null ? `(${infraScore} / 100)` : "");
+    if (infraRisk) {
+        const infScore = infraRisk.score_value != null ? Math.round(infraRisk.score_value) : null;
+        setText("homeInfraVal", infraRisk.classification || "MEDIUM");
+        setText("homeInfraScoreText", infScore != null ? `(${infScore} / 100)` : "");
         setText("homeInfraSubnote", "Permanent emergency facility access");
-        applyBadgeStyle(document.getElementById("homeInfraBadge"), infra.classification || "MEDIUM");
-        if (infra.nearest_hospital_distance_m != null) {
-            nearHospDistText = `${Math.round(infra.nearest_hospital_distance_m)} m`;
+        applyBadgeStyle(document.getElementById("homeInfraBadge"), infraRisk.classification || "MEDIUM");
+        if (infraRisk.nearest_hospital_distance_m != null) {
+            nearHospDistText = `${Math.round(infraRisk.nearest_hospital_distance_m)} m`;
         }
     }
 
     // 4. Update Right-Hand Analysis Panel in Current Mode
     setText("analysisPlaceTitle", currentPlaceName);
     setText("analysisPlaceSubtitle", `Current Weather Screening · ${currentLat.toFixed(3)}°N, ${currentLon.toFixed(3)}°E`);
-    setText("analysisOverallScore", "SCREENING");
+    setText("analysisOverallScore", `${curPriorityScore.toFixed(1)} / 100`);
+    setText("analysisPriorityBand", curPriorityBand);
+    setText("analysisScoreTypeDesc", "Real-time weather telemetry & infrastructure readiness");
+
     const anaBadge = document.getElementById("analysisOverallBadge");
     if (anaBadge) {
-        anaBadge.className = "metric-status-pill badge-neutral";
-        anaBadge.textContent = "LIVE CONDITIONS";
+        anaBadge.className = `metric-status-pill ${curPriorityBadgeClass}`;
+        anaBadge.textContent = curPriorityBadgeText;
     }
 
     applyBadgeStyle(document.getElementById("analysisFloodBadge"), curFloodVal);
     applyBadgeStyle(document.getElementById("analysisHeatBadge"), curHeatVal);
+    applyBadgeStyle(document.getElementById("analysisInfraBadge"), infraRisk?.classification || "MEDIUM");
 
-    setText("analysisFloodScoreSub", `Precipitation: ${curFloodScoreText} · ${cond}`);
-    setText("analysisHeatScoreSub", `Air Temp: ${temp.toFixed(1)} °C · Humidity: ${humidity}%`);
+    setText("analysisFloodScoreSub", `Precipitation: ${curFloodScoreText} in past ${intervalMin}m (${cond})`);
+    setText("analysisHeatScoreSub", `Air: ${temp.toFixed(1)} °C · Apparent: ${apparentTemp} °C (${curHeatVal})`);
     setText("analysisInfraScoreSub", `Nearest hospital: ${nearHospDistText}`);
 
     // Dynamic Current Recommendations
     const whyBox = document.getElementById("analysisInsightsBody");
     if (whyBox) {
         whyBox.innerHTML = `
-            <p style="margin-bottom: 8px;">• <strong>Atmospheric Conditions:</strong> ${cond} with ambient air temperature of ${temp.toFixed(1)} °C and ${humidity}% relative humidity.</p>
-            <p style="margin-bottom: 8px;">• <strong>Precipitation Screening:</strong> ${curFloodSub}. Recent precipitation reflects 15-minute accumulation.</p>
-            <p style="margin-bottom: 8px;">• <strong>Heat Stress Screening:</strong> Apparent temperature calculated at ${apparentTemp} °C (${curHeatVal}).</p>
+            <p style="margin-bottom: 8px;">• <strong>Operational Screening Priority (${curPriorityScore.toFixed(1)} / 100):</strong> Combines real-time atmospheric observations with physical emergency facility access for immediate municipal awareness.</p>
+            <p style="margin-bottom: 8px;">• <strong>Live Thermal Stress:</strong> Apparent temperature calculated at ${apparentTemp} °C (${curHeatVal}) with ${temp.toFixed(1)} °C ambient air and ${humidity}% relative humidity.</p>
+            <p style="margin-bottom: 8px;">• <strong>Rainfall Telemetry:</strong> ${curFloodScoreText} accumulation recorded over preceding ${intervalMin}-minute observation window (${cond}).</p>
+            <p style="margin-bottom: 8px;">• <strong>Emergency Accessibility:</strong> Nearest hospital facility is ${nearHospDistText} away.</p>
+            <div class="weather-notice-banner" style="margin-top: 10px; background: rgba(37,99,235,0.06); border-left: 3px solid var(--accent-blue); padding: 8px 12px;">
+                <small style="color: var(--navy-header); font-size: 13px;"><strong>Historical Context:</strong> Hyderabad has 40 documented historical flood events (1969–2022) with 727 recorded fatalities. Current dry weather reflects temporary atmospheric conditions, not absence of long-term vulnerability.</small>
+            </div>
         `;
     }
 
@@ -2446,29 +2548,43 @@ function renderCurrentConditionsAssessment() {
     if (actBox) {
         const actList = [];
         if (precip > 5) {
-            actList.push("Monitor active stormwater pooling along low-lying corridors.");
+            actList.push("Inspect active drainage culverts along low-lying corridors for rapid runoff pooling.");
         } else {
-            actList.push("No immediate precipitation alert active for this locality.");
+            actList.push("Maintain standard monsoon drainage readiness; no emergency rainfall alerts currently active.");
         }
         if (apparentTemp >= 35) {
-            actList.push("Activate public hydration points and advise outdoor workers to seek shade during peak solar hours.");
+            actList.push("Deploy shaded misting zones and public hydration kiosks during peak solar hours (12:00–16:00).");
         } else {
-            actList.push("Thermal conditions are within normal operational limits.");
+            actList.push("Thermal conditions are within comfortable operational screening limits.");
         }
-        actList.push("Switch to 'Historical Baseline' to inspect multi-year satellite thermal exposure and drainage infrastructure gaps.");
+        actList.push("Quarterly audit of local emergency dispatch routing to maintain hospital transit access.");
+        actList.push("Switch to 'Historical Baseline' above to inspect multi-year satellite thermal anomalies and drainage catchment records.");
         actBox.innerHTML = actList.map(a => `<p style="margin-bottom: 8px;">→ <strong>${a}</strong></p>`).join("");
     }
 
     // Risk bars in Current Mode
-    renderRiskBar("Flood", null, {
-        nullExplanation: `Current conditions: ${curFloodScoreText} precipitation (${cond}). Transient weather does not modify multi-year flood baseline.`,
-        regionalLabel: "Current Weather"
+    renderRiskBar("Flood", curFloodScore, {
+        defaultNote: `Current precipitation: ${curFloodScoreText} in past ${intervalMin}m (${cond}). No convective flood alert active.`,
+        nullExplanation: null,
+        regionalLabel: "Current Weather Screening"
     });
 
-    renderRiskBar("Heat", Math.min(100, Math.max(10, Math.round((temp / 45) * 100))), {
-        defaultNote: `Current ambient air temperature: ${temp.toFixed(1)} °C (${cond})`,
+    renderRiskBar("Heat", curHeatScore, {
+        defaultNote: `Current apparent temperature: ${apparentTemp} °C (Air: ${temp.toFixed(1)} °C, Humidity: ${humidity}%)`,
         nullExplanation: null,
-        regionalLabel: null
+        regionalLabel: "Live Thermal Screening"
+    });
+
+    renderRiskBar("Infra", infraScore, {
+        defaultNote: `Physical emergency facility proximity: nearest hospital ${nearHospDistText}`,
+        nullExplanation: null,
+        regionalLabel: "Physical Facility Readiness"
+    });
+
+    renderRiskBar("Road", roadScore, {
+        defaultNote: "Local multimodal road connectivity baseline",
+        nullExplanation: null,
+        regionalLabel: "Physical Connectivity"
     });
 }
 

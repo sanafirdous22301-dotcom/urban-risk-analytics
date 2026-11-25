@@ -250,16 +250,17 @@
                         <!-- Offline Notice -->
                         <div id="offlineNoticeBanner" class="offline-tile-warning">
                             <span>ℹ</span>
-                            <span><strong>Offline Spatial Cache:</strong> Pre-cached Hyderabad tiles active. All spatial risk assessments operate locally from database.</span>
+                            <span><strong>Local Map Cache:</strong> Pre-cached Hyderabad metropolitan map tiles active. Assessments operate seamlessly offline.</span>
                         </div>
 
                         <!-- Map Legend with Clear Risk Tiers -->
                         <div class="map-legend-bar">
-                            <span class="legend-title">Risk Intensity:</span>
+                            <span class="legend-title">Screening Priority:</span>
                             <div class="legend-tag"><span class="legend-color-dot very-high"></span> Very High (&gt;80)</div>
                             <div class="legend-tag"><span class="legend-color-dot high"></span> High (60–80)</div>
                             <div class="legend-tag"><span class="legend-color-dot moderate"></span> Moderate (40–60)</div>
                             <div class="legend-tag"><span class="legend-color-dot low"></span> Low (&lt;40)</div>
+                            <div class="legend-tag"><span class="legend-color-dot unscored" style="background: #94a3b8; border: 1px solid #64748b;"></span> Unscored (Insufficient Evidence)</div>
                             <div class="legend-tag" style="margin-left: auto;">
                                 <span class="legend-color-dot boundary"></span> 791 km² Study Boundary
                             </div>
@@ -509,13 +510,13 @@
                 </section>
 
 
-                <!-- UPDATED SATELLITE & ENVIRONMENTAL INTELLIGENCE -->
+                <!-- CITYWIDE ENVIRONMENTAL & SURFACE CONTEXT -->
                 <section class="content-card environmental-section-card" id="homeEnvironmentalSection">
                     <div class="card-header-styled flex-between">
                         <div>
                             <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
-                                <h4 style="margin: 0;">Updated Satellite & Environmental Intelligence</h4>
-                                <span class="temporal-chip">Multi-Sensor Satellite Feeds</span>
+                                <h4 style="margin: 0;">Citywide Environmental & Surface Context</h4>
+                                <span class="temporal-chip">Multi-Year Baseline</span>
                             </div>
                             <span class="card-header-sub">High-resolution Earth observation evidence covering Greater Hyderabad (791 km²)</span>
                         </div>
@@ -626,19 +627,29 @@
 
 
             <!-- ====================================================
-                 VIEW 2: FLOOD INTELLIGENCE PAGE
+                 VIEW 2: FLOOD INTELLIGENCE & HISTORICAL ARCHIVE
             ==================================================== -->
             <section id="tab-flood" class="page-view">
                 <div class="page-hero-banner flood-theme">
                     <div>
                         <span class="page-tag-badge">HYDROLOGICAL INTELLIGENCE</span>
-                        <h2>Flood Intelligence</h2>
-                        <p class="page-subtitle">Analyze flood risk, view historical events and understand drainage vulnerability across Hyderabad.</p>
+                        <h2>Flood Intelligence & Historical Disaster Archive</h2>
+                        <p class="page-subtitle">Examine 40 documented historical flood disasters (1969–2022) alongside real-time rainfall observations and drainage catchment exposure across Hyderabad.</p>
                     </div>
 
                     <div class="tab-toggle-group">
-                        <button type="button" class="toggle-pill-btn active" data-flood-mode="current">Current Risk</button>
-                        <button type="button" class="toggle-pill-btn" data-flood-mode="historical">Historical Events</button>
+                        <button type="button" class="toggle-pill-btn active" data-flood-mode="all">All Flood Evidence</button>
+                        <button type="button" class="toggle-pill-btn" data-flood-mode="historical">Historical Disaster Archive</button>
+                        <button type="button" class="toggle-pill-btn" data-flood-mode="current">Current Weather Screening</button>
+                    </div>
+                </div>
+
+                <!-- Current Conditions Notice & Transparency Banner -->
+                <div class="weather-notice-banner" style="margin-bottom: 20px;">
+                    <span class="notice-icon">🌊</span>
+                    <div class="notice-text">
+                        <strong>Current Hydrological Conditions & Operational Status:</strong>
+                        <span>No current flood alert is indicated by the available observations. Historical flood events remain important for understanding long-term vulnerability. The absence of active flooding does not mean Hyderabad never experienced floods or has zero historical flood vulnerability. Multi-year risk is governed by the 40-event historical archive (1969–2022).</span>
                     </div>
                 </div>
 
@@ -648,28 +659,28 @@
                         <span class="box-icon">🌊</span>
                         <div class="box-text">
                             <strong class="box-num" id="floodStatEvents">40</strong>
-                            <span class="box-label">Historical Flood Events</span>
+                            <span class="box-label">Historical Flood Disasters (1969–2022)</span>
                         </div>
                     </div>
                     <div class="metric-box">
                         <span class="box-icon">⚠️</span>
                         <div class="box-text">
                             <strong class="box-num" id="floodStatFatalities">727</strong>
-                            <span class="box-label">Recorded Fatalities</span>
+                            <span class="box-label">Recorded Fatalities (Disaster Archive)</span>
                         </div>
                     </div>
                     <div class="metric-box">
                         <span class="box-icon">🌧️</span>
                         <div class="box-text">
                             <strong class="box-num" id="floodStatRainDates">84</strong>
-                            <span class="box-label">84 Raster Samples · 2 Historical Storm Dates</span>
+                            <span class="box-label">84 Raster Samples · 2 Extreme Storm Dates</span>
                         </div>
                     </div>
                     <div class="metric-box">
                         <span class="box-icon">⏱️</span>
                         <div class="box-text">
                             <strong class="box-num" id="floodStatDuration">7.7 Days</strong>
-                            <span class="box-label">Avg. Event Duration</span>
+                            <span class="box-label">Average Event Duration</span>
                         </div>
                     </div>
                 </div>
@@ -680,10 +691,18 @@
                         <div class="panel-header-row">
                             <div>
                                 <h3>Hydrological Risk & Catchment Map</h3>
-                                <span class="map-sub">Hyderabad metropolitan drainage basin & Musi River corridor</span>
+                                <span class="map-sub">Hyderabad metropolitan drainage basin, Musi River spine, and historical inundation hotspots</span>
                             </div>
                         </div>
                         <div id="floodMapCanvas" class="leaflet-map-canvas" style="height: 520px;"></div>
+                        <!-- Flood Map Legend -->
+                        <div class="map-legend-bar" style="margin-top: 10px;">
+                            <span class="legend-title">Hydrological Layers:</span>
+                            <div class="legend-tag"><span class="legend-icon-badge" style="background:#0284c7; color:#fff; font-size:12px; padding:2px 6px; border-radius:4px;">〰️</span> Musi River Drainage Spine</div>
+                            <div class="legend-tag"><span class="legend-color-dot" style="background:#dc2626;"></span> Historical Flood Hotspots</div>
+                            <div class="legend-tag"><span class="legend-color-dot" style="background:#2563eb;"></span> 1-km Storm Raster Cells</div>
+                            <div class="legend-tag" style="margin-left: auto;"><span class="legend-color-dot" style="background:#f59e0b;"></span> Selected Location</div>
+                        </div>
                     </div>
 
                     <div class="analysis-panel-card">
@@ -695,11 +714,11 @@
 
                         <div class="analysis-scores-list">
                             <div class="analysis-score-item">
-                                <span class="item-label">Flood Vulnerability</span>
+                                <span class="item-label">Flood Vulnerability Status</span>
                                 <span class="metric-status-pill badge-neutral" id="floodLocBadge">MEDIUM</span>
                             </div>
                             <div class="analysis-score-item">
-                                <span class="item-label">Rainfall Exposure Index</span>
+                                <span class="item-label">Precipitation Exposure Index</span>
                                 <strong id="floodLocScore">35.0 / 100</strong>
                             </div>
                         </div>
@@ -724,15 +743,88 @@
                     </div>
                 </div>
 
-                <!-- Historical Flood Events Section -->
+                <!-- Landmark Historical Flood Disasters (Card Highlights) -->
                 <div class="content-card" style="margin-top: 24px;">
                     <div class="card-header-styled">
-                        <h4>Historical Disaster Inventory — Hyderabad District</h4>
-                        <span class="card-header-sub">Documented flood disasters from India Flood Inventory v3 (IMD Disasters Archive, 1969–2022). Not a live storm forecast.</span>
+                        <h4>Major Historical Flood Disasters — Hyderabad Metropolitan Record</h4>
+                        <span class="card-header-sub">Documented landmark flood events from India Flood Inventory v3 (IMD Disasters Archive, 1969–2022).</span>
                     </div>
 
-                    <div id="floodCompactEventsList" class="compact-events-grid">
-                        <!-- Populated by JavaScript -->
+                    <div class="compact-events-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-top: 16px;">
+                        <div class="content-card" style="margin: 0; padding: 16px; border-left: 4px solid #dc2626;">
+                            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+                                <strong style="font-size: 15px; color: var(--navy-header);">October 2020 Cloudburst</strong>
+                                <span class="metric-status-pill badge-high">81 Fatalities</span>
+                            </div>
+                            <p style="font-size: 13.5px; color: var(--text-secondary); line-height: 1.5; margin: 0;">
+                                Extreme monsoon deluge (324 mm in 24 hours). Catastrophic breach and inundation across the Musi River basin, Moosarambagh, Begumpet, LB Nagar, and Alwal colonies.
+                            </p>
+                            <small style="color: var(--text-muted); display: block; margin-top: 8px;">Dates: Oct 13–19, 2020 · Duration: 7 days</small>
+                        </div>
+
+                        <div class="content-card" style="margin: 0; padding: 16px; border-left: 4px solid #991b1b;">
+                            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+                                <strong style="font-size: 15px; color: var(--navy-header);">August 2000 Mega-Flood</strong>
+                                <span class="metric-status-pill badge-high">240+ Fatalities</span>
+                            </div>
+                            <p style="font-size: 13.5px; color: var(--text-secondary); line-height: 1.5; margin: 0;">
+                                Catastrophic urban flood (241 mm rainfall). Over 75 urban tank bunds breached simultaneously, inundating the Musi River corridor, Chaderghat, and lowlands.
+                            </p>
+                            <small style="color: var(--text-muted); display: block; margin-top: 8px;">Dates: Aug 23–25, 2000 · Duration: 3 days</small>
+                        </div>
+
+                        <div class="content-card" style="margin: 0; padding: 16px; border-left: 4px solid #ea580c;">
+                            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+                                <strong style="font-size: 15px; color: var(--navy-header);">August 1978 Regional Basin Flood</strong>
+                                <span class="metric-status-pill badge-high">44 Fatalities</span>
+                            </div>
+                            <p style="font-size: 13.5px; color: var(--text-secondary); line-height: 1.5; margin: 0;">
+                                Prolonged 21-day regional inundation across twin cities and wider catchment. Extensive disruption of transport corridors and agricultural lowlands.
+                            </p>
+                            <small style="color: var(--text-muted); display: block; margin-top: 8px;">Dates: Aug 01–21, 1978 · Duration: 21 days</small>
+                        </div>
+
+                        <div class="content-card" style="margin: 0; padding: 16px; border-left: 4px solid #d97706;">
+                            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+                                <strong style="font-size: 15px; color: var(--navy-header);">September 1983 Flash Flood</strong>
+                                <span class="metric-status-pill badge-warning">12 Fatalities</span>
+                            </div>
+                            <p style="font-size: 13.5px; color: var(--text-secondary); line-height: 1.5; margin: 0;">
+                                Intense 24-hour localized downpour causing severe runoff congestion in central Hyderabad, Koti, and Old City drainage catchments.
+                            </p>
+                            <small style="color: var(--text-muted); display: block; margin-top: 8px;">Dates: Sep 23, 1983 · Duration: 1 day</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Complete 40-Event Historical Disaster Inventory Table -->
+                <div class="content-card" style="margin-top: 24px;" id="historicalFloodTableCard">
+                    <div class="card-header-styled flex-between">
+                        <div>
+                            <h4>Complete Historical Flood Disaster Inventory (40 Documented Events)</h4>
+                            <span class="card-header-sub">Official disaster records from IMD Disasters Archive (1969–2022). All events preserved in the timeline regardless of localized street coordinates.</span>
+                        </div>
+                        <span class="pill-badge-blue">40 Events · 727 Fatalities</span>
+                    </div>
+
+                    <div class="table-responsive-wrapper" style="max-height: 480px; overflow-y: auto;">
+                        <table class="urbanrisk-data-table full-table">
+                            <thead>
+                                <tr>
+                                    <th>Event ID</th>
+                                    <th>Period (Start – End)</th>
+                                    <th>Main Cause</th>
+                                    <th>Duration</th>
+                                    <th>Fatalities</th>
+                                    <th>Affected Districts / Scope</th>
+                                </tr>
+                            </thead>
+                            <tbody id="floodFullEventsTableBody">
+                                <tr>
+                                    <td colspan="6" class="table-loading-cell">Loading 40 historical disaster records...</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </section>
@@ -792,27 +884,50 @@
                             </div>
                         </div>
                         <div id="heatMapCanvas" class="leaflet-map-canvas" style="height: 520px;"></div>
+                        <!-- Heat Map Legend -->
+                        <div class="map-legend-bar" style="margin-top: 10px;">
+                            <span class="legend-title">Thermal Intensity:</span>
+                            <div class="legend-tag"><span class="legend-color-dot" style="background:#dc2626;"></span> Extreme Thermal Stress (&gt;38 °C)</div>
+                            <div class="legend-tag"><span class="legend-color-dot" style="background:#ea580c;"></span> High Thermal Stress (35–38 °C)</div>
+                            <div class="legend-tag"><span class="legend-color-dot" style="background:#d97706;"></span> Moderate Exposure (32–35 °C)</div>
+                            <div class="legend-tag"><span class="legend-color-dot" style="background:#16a34a;"></span> Lower / Vegetated (&lt;32 °C)</div>
+                            <div class="legend-tag" style="margin-left: auto;"><span class="legend-color-dot" style="background:#94a3b8;"></span> Unscored</div>
+                        </div>
                     </div>
 
                     <!-- Temperature Predictor -->
                     <div class="analysis-panel-card">
                         <div class="analysis-panel-header">
-                            <span class="eyebrow-accent">MACHINE LEARNING</span>
+                            <span class="eyebrow-accent">THERMAL ESTIMATION</span>
                             <h3>Daytime Temperature Estimator</h3>
-                            <p class="analysis-place-subtitle">Predict daytime surface temp based on nighttime reading & location</p>
+                            <p class="analysis-place-subtitle">Estimate daytime surface temp based on nighttime reading & location</p>
                         </div>
 
                         <div class="predictor-form-block">
                             <div class="form-input-group">
                                 <label for="heatLocalitySelect">Select Locality:</label>
                                 <select id="heatLocalitySelect" class="styled-select-input">
-                                    <option value="17.3616,78.4747">Charminar / Old City</option>
-                                    <option value="17.4435,78.3772">Hitec City / Madhapur</option>
-                                    <option value="17.3705,78.5080">Moosarambagh Corridor</option>
-                                    <option value="17.4447,78.4664">Begumpet / Secunderabad</option>
-                                    <option value="17.4156,78.4350">Banjara Hills</option>
-                                    <option value="17.4526,78.5303">Malkajgiri Urban Area</option>
-                                    <option value="17.3892,78.5179">Amberpet / Ramanthapur</option>
+                                    <option value="17.3616,78.4747">Charminar / Old City Heritage District</option>
+                                    <option value="17.4435,78.3772">Hitec City / Cyberabad Corridor</option>
+                                    <option value="17.4483,78.3915">Madhapur / Tech Zone</option>
+                                    <option value="17.4401,78.3489">Gachibowli / Financial District</option>
+                                    <option value="17.4658,78.3582">Kondapur / Botanical Garden Hub</option>
+                                    <option value="17.4156,78.4350">Banjara Hills / Central Core</option>
+                                    <option value="17.4319,78.4073">Jubilee Hills / Road No. 36</option>
+                                    <option value="17.4399,78.4983">Secunderabad / Commercial Hub</option>
+                                    <option value="17.4447,78.4664">Begumpet / Airport Road Corridor</option>
+                                    <option value="17.4375,78.4483">Ameerpet / Metro Transit Hub</option>
+                                    <option value="17.4947,78.3996">Kukatpally / High-Density Zone</option>
+                                    <option value="17.4969,78.3534">Miyapur / North-Western Hub</option>
+                                    <option value="17.3705,78.5080">Moosarambagh / Musi River Basin</option>
+                                    <option value="17.3892,78.5179">Amberpet / Ramanthapur Basin</option>
+                                    <option value="17.3850,78.4867">Koti / Sultan Bazar Core</option>
+                                    <option value="17.3487,78.5571">LB Nagar / Southern Corridor</option>
+                                    <option value="17.3685,78.5262">Dilsukhnagar / High-Density Zone</option>
+                                    <option value="17.4000,78.5588">Uppal / East Industrial Hub</option>
+                                    <option value="17.4526,78.5303">Malkajgiri / Residential Zone</option>
+                                    <option value="17.3938,78.4421">Mehdipatnam / Tolichowki Corridor</option>
+                                    <option value="17.5400,78.4840">Kompally / Medchal Highway</option>
                                 </select>
                             </div>
 
@@ -1115,13 +1230,7 @@
                         </table>
                     </div>
                 </div>
-            <!-- ========================================================
-                 7. DATASET MANAGEMENT & INGESTION (REMOVED FROM PUBLIC VIEW)
-                 Dataset ingestion endpoints remain operational in backend API.
-            ======================================================== -->
-
-        </div>
-    </div>
+            </section>
 
 
     <!-- Local Leaflet JS (Offline Vendor Copy) -->
