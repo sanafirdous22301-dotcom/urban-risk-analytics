@@ -199,9 +199,29 @@ def get_risk_grid():
     """
     Return all 791 1-km grid cells in Greater Hyderabad as a GeoJSON FeatureCollection
     for live map rendering (overall IUPS, flood, heat, and infrastructure layers).
+    Falls back to processed CSV if DB collection is empty.
     """
     try:
         cells = list(db.priority_grid_cells.find())
+        if not cells:
+            from pathlib import Path
+            import pandas as pd
+            csv_path = Path(__file__).resolve().parent.parent.parent / "data" / "processed" / "integrated_urban_risk" / "integrated_urban_risk_priority_grid_1km.csv"
+            if csv_path.exists():
+                df = pd.read_csv(csv_path)
+                for _, row in df.iterrows():
+                    cells.append({
+                        "grid_id": str(row.get("grid_id", "")),
+                        "cell_center_latitude": row.get("cell_center_latitude"),
+                        "cell_center_longitude": row.get("cell_center_longitude"),
+                        "priority_score_0_100": row.get("priority_score_0_100") if pd.notna(row.get("priority_score_0_100")) else None,
+                        "screening_priority": row.get("screening_priority") if pd.notna(row.get("screening_priority")) else "Not scored",
+                        "flood_evidence_score": row.get("flood_evidence_score") if pd.notna(row.get("flood_evidence_score")) else None,
+                        "heat_evidence_score": row.get("heat_evidence_score") if pd.notna(row.get("heat_evidence_score")) else None,
+                        "infrastructure_gap_score": row.get("infrastructure_gap_score") if pd.notna(row.get("infrastructure_gap_score")) else None,
+                        "road_representation_gap_score": row.get("road_representation_gap_score") if pd.notna(row.get("road_representation_gap_score")) else None,
+                    })
+
         features = []
         for c in cells:
             clat = c.get("cell_center_latitude")

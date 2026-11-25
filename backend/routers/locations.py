@@ -96,7 +96,21 @@ CURATED_HYDERABAD_LOCALITIES = [
     {"name": "Golconda", "area": "Fort Heritage Enclave", "latitude": 17.3830, "longitude": 78.4010, "type": "locality"},
     {"name": "Attapur", "area": "Rajendranagar Urban Basin", "latitude": 17.3639, "longitude": 78.4326, "type": "locality"},
     {"name": "Rajendranagar", "area": "Agricultural University Corridor", "latitude": 17.3180, "longitude": 78.4080, "type": "locality"},
-    {"name": "Shamshabad", "area": "RGIA Airport Environs Sector", "latitude": 17.2650, "longitude": 78.4280, "type": "locality"}
+    {"name": "Shamshabad", "area": "RGIA Airport Environs Sector", "latitude": 17.2650, "longitude": 78.4280, "type": "locality"},
+    # Major Emergency Healthcare & Fire Response Facilities
+    {"name": "Apollo Hospitals Jubilee Hills", "area": "Road No. 72, Jubilee Hills", "latitude": 17.4168, "longitude": 78.4116, "type": "hospital"},
+    {"name": "Osmania General Hospital", "area": "Afzalgunj, Musi River Bank", "latitude": 17.3753, "longitude": 78.4756, "type": "hospital"},
+    {"name": "Gandhi Hospital", "area": "Musheerabad, Secunderabad", "latitude": 17.4244, "longitude": 78.5034, "type": "hospital"},
+    {"name": "NIMS Hospital", "area": "Punjagutta Main Road", "latitude": 17.4216, "longitude": 78.4528, "type": "hospital"},
+    {"name": "CARE Hospitals Banjara Hills", "area": "Road No. 1, Banjara Hills", "latitude": 17.4162, "longitude": 78.4485, "type": "hospital"},
+    {"name": "Yashoda Hospital Secunderabad", "area": "Alexander Road, Secunderabad", "latitude": 17.4395, "longitude": 78.4986, "type": "hospital"},
+    {"name": "AIG Hospitals Gachibowli", "area": "Mindspace Road, Gachibowli", "latitude": 17.4431, "longitude": 78.3662, "type": "hospital"},
+    {"name": "KIMS Hospitals Begumpet", "area": "Minister Road, Begumpet", "latitude": 17.4338, "longitude": 78.4842, "type": "hospital"},
+    {"name": "Secunderabad Fire Station", "area": "Clock Tower Road, Secunderabad", "latitude": 17.4390, "longitude": 78.4990, "type": "fire_station"},
+    {"name": "Secretariat Fire Station", "area": "Tank Bund Road", "latitude": 17.4080, "longitude": 78.4720, "type": "fire_station"},
+    {"name": "Gowliguda Fire Station", "area": "Central Hyderabad / Koti", "latitude": 17.3790, "longitude": 78.4830, "type": "fire_station"},
+    {"name": "Punjagutta Fire Station", "area": "Punjagutta Central Corridor", "latitude": 17.4260, "longitude": 78.4520, "type": "fire_station"},
+    {"name": "Madhapur Fire Station", "area": "HITEC City Corridor", "latitude": 17.4470, "longitude": 78.3880, "type": "fire_station"}
 ]
 
 
@@ -116,22 +130,25 @@ def search_locations(
     results = []
     seen = set()
 
-    # 1. Match against Curated Localities (highest priority for primary urban localities)
+    # 1. Match against Curated Localities and Major Emergency Facilities
     for loc in CURATED_HYDERABAD_LOCALITIES:
         name = loc["name"]
         area = loc["area"]
-        if query in name.lower() or query in area.lower():
-            seen.add(name.lower())
-            results.append({
-                "name": name,
-                "label": f"{name}, Hyderabad",
-                "subtext": f"{area} · Hyderabad, Telangana",
-                "category": "Locality",
-                "latitude": loc["latitude"],
-                "longitude": loc["longitude"]
-            })
-            if len(results) >= limit:
-                return {"query": q, "total": len(results), "results": results}
+        loc_type = loc.get("type", "locality").capitalize()
+        cat = "Hospital" if ("hospital" in loc_type.lower() or "hospital" in name.lower()) else ("Fire Station" if ("fire" in loc_type.lower() or "fire" in name.lower()) else "Locality")
+        if query in name.lower() or query in area.lower() or query in cat.lower():
+            if name.lower() not in seen:
+                seen.add(name.lower())
+                results.append({
+                    "name": name,
+                    "label": f"{name}, Hyderabad",
+                    "subtext": f"{area} · Hyderabad, Telangana",
+                    "category": cat,
+                    "latitude": loc["latitude"],
+                    "longitude": loc["longitude"]
+                })
+                if len(results) >= limit:
+                    return {"query": q, "total": len(results), "results": results}
 
     # 2. Match against OpenStreetMap Named Infrastructure Assets (hospitals, clinics, civic centers)
     if db is not None:

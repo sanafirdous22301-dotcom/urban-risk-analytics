@@ -1,3 +1,4 @@
+from pathlib import Path
 from fastapi import APIRouter, HTTPException, Query
 from database.mongodb import db
 from backend.services.phase6_analytics_service import AdvancedHazardAnalyticsService
@@ -6,6 +7,71 @@ router = APIRouter(
     prefix="/api/flood",
     tags=["Flood Intelligence"]
 )
+
+
+def load_historical_flood_records():
+    """Returns 40 historical flood records from DB, falling back to source CSV if DB collection is empty."""
+    records = []
+    try:
+        records = list(
+            db.flood_events.find(
+                {},
+                {
+                    "_id": 0,
+                    "event_id": 1,
+                    "source_event_id": 1,
+                    "start_date": 1,
+                    "end_date": 1,
+                    "main_cause": 1,
+                    "duration_days": 1,
+                    "human_fatality": 1,
+                    "human_injured": 1,
+                    "district": 1
+                }
+            ).sort("start_date", -1)
+        )
+    except Exception:
+        pass
+
+    if not records:
+        csv_path = Path(__file__).resolve().parent.parent.parent / "data" / "processed" / "flood" / "hyderabad_historical_flood_events.csv"
+        if csv_path.exists():
+            import pandas as pd
+            df = pd.read_csv(csv_path)
+            for idx, row in df.iterrows():
+                fatalities = None
+                if pd.notna(row.get("Human fatality")):
+                    try:
+                        fatalities = int(float(row["Human fatality"]))
+                    except (ValueError, TypeError):
+                        pass
+                
+                injured = None
+                if pd.notna(row.get("Human injured")):
+                    try:
+                        injured = int(float(row["Human injured"]))
+                    except (ValueError, TypeError):
+                        pass
+                        
+                dur = None
+                if pd.notna(row.get("Duration(Days)")):
+                    try:
+                        dur = float(row["Duration(Days)"])
+                    except (ValueError, TypeError):
+                        pass
+
+                records.append({
+                    "event_id": idx + 1,
+                    "source_event_id": str(row.get("UEI", f"EVT-{idx+1}")),
+                    "start_date": str(row.get("Start_Date_Parsed", row.get("Start Date", ""))),
+                    "end_date": str(row.get("End_Date_Parsed", row.get("End Date", ""))),
+                    "main_cause": str(row.get("Main Cause", "Heavy Rains & Floods")),
+                    "duration_days": dur,
+                    "human_fatality": fatalities,
+                    "human_injured": injured,
+                    "district": str(row.get("Districts", "Hyderabad District"))
+                })
+    return records
 
 
 @router.get("/climatology")
@@ -31,23 +97,7 @@ def get_flood_evidence_profile(
 @router.get("/historical-events")
 def get_historical_flood_events():
     """Returns all 40 documented historical flood disaster events (1969-2022) with impact records."""
-    records = list(
-        db.flood_events.find(
-            {},
-            {
-                "_id": 0,
-                "event_id": 1,
-                "source_event_id": 1,
-                "start_date": 1,
-                "end_date": 1,
-                "main_cause": 1,
-                "duration_days": 1,
-                "human_fatality": 1,
-                "human_injured": 1,
-                "district": 1
-            }
-        ).sort("start_date", -1)
-    )
+    records = load_historical_flood_records()
     return {
         "total": len(records),
         "source": "India Flood Inventory v3 (IMD Disasters Archive 1969-2022)",
@@ -61,23 +111,7 @@ def get_historical_flood_events():
 def get_flood_summary():
     """Return summary statistics and records for flood events and rainfall observations."""
     try:
-        flood_records = list(
-            db.flood_events.find(
-                {},
-                {
-                    "_id": 0,
-                    "event_id": 1,
-                    "source_event_id": 1,
-                    "start_date": 1,
-                    "end_date": 1,
-                    "main_cause": 1,
-                    "duration_days": 1,
-                    "human_fatality": 1,
-                    "human_injured": 1,
-                    "district": 1
-                }
-            ).sort("start_date", -1)
-        )
+        flood_records = load_historical_flood_records()
 
         rainfall_records = list(
             db.hazard_observations.find(
