@@ -163,14 +163,14 @@
                     <div class="summary-metric-card priority-metric">
                         <div class="card-top-row">
                             <div class="card-icon-bubble priority-bubble">🎯</div>
-                            <span class="metric-title-label">Overall Risk Priority</span>
+                            <span class="metric-title-label" id="homePriorityTitleLabel">Integrated Urban Priority (IUPS)</span>
                         </div>
                         <div class="metric-primary-val">
                             <span id="homePriorityScore">--</span> <small>/ 100</small>
                         </div>
                         <div class="card-bottom-row">
                             <span class="metric-status-pill badge-neutral" id="homePriorityBadge">EVALUATING...</span>
-                            <span class="metric-sub-note" id="homePrioritySubnote">Composite multi-hazard priority</span>
+                            <span class="metric-sub-note" id="homePrioritySubnote">Historical baseline (Flood 35%, Heat 35%, Infra 15%, Road 15%)</span>
                         </div>
                     </div>
 
@@ -232,7 +232,7 @@
                                     <h3 style="margin: 0;">Hyderabad Risk Map</h3>
                                     <span id="mapLastCalculatedBadge" class="temporal-chip" style="display: none;"></span>
                                 </div>
-                                <span class="map-sub" id="currentMapStatusText">Precomputed 1-km spatial risk grid covering Greater Hyderabad (741 cells)</span>
+                                <span class="map-sub" id="currentMapStatusText">Integrated spatial risk grid covering Greater Hyderabad (741 assessment sectors)</span>
                             </div>
 
                             <div class="map-layer-controls">
@@ -247,10 +247,10 @@
                         <!-- Leaflet Canvas (Spacious 620px Height Filling Card) -->
                         <div id="homeMap" class="leaflet-map-canvas"></div>
 
-                        <!-- Offline Notice -->
+                        <!-- Base Map Notice -->
                         <div id="offlineNoticeBanner" class="offline-tile-warning">
                             <span>ℹ</span>
-                            <span><strong>Local Map Cache:</strong> Pre-cached Hyderabad metropolitan map tiles active. Assessments operate seamlessly offline.</span>
+                            <span><strong>Base Map Notice:</strong> Displaying standard metropolitan view. Hazard assessment data remains fully active for all locations.</span>
                         </div>
 
                         <!-- Map Legend with Clear Risk Tiers -->
@@ -270,17 +270,18 @@
                     <!-- RIGHT: EXPANDED LOCATION ANALYSIS PANEL (COMFORTABLE READING WIDTH) -->
                     <aside class="analysis-panel-card">
                         <div class="analysis-panel-header">
-                            <span class="eyebrow-accent">LOCALITY RISK PROFILE</span>
+                            <span class="eyebrow-accent" id="analysisEyebrow">HISTORICAL IUPS ASSESSMENT</span>
                             <h3 id="analysisPlaceTitle">Location Analysis</h3>
                             <p class="analysis-place-subtitle" id="analysisPlaceSubtitle">Hyderabad City Center (Default Point)</p>
                         </div>
 
                         <div class="analysis-hero-score-box">
-                            <span class="score-box-label">Overall Priority Score</span>
+                            <span class="score-box-label" id="analysisScoreBoxLabel">Integrated Urban Priority Screening (IUPS)</span>
                             <div class="score-box-val-row">
                                 <strong id="analysisOverallScore">-- / 100</strong>
                                 <span class="metric-status-pill badge-neutral" id="analysisOverallBadge">Evaluating...</span>
                             </div>
+                            <small class="score-type-desc" id="analysisScoreTypeDesc">Historical baseline priority screening (Flood 35%, Heat 35%, Infra 15%, Road 15%)</small>
                         </div>
 
                         <div class="analysis-scores-list">
@@ -442,10 +443,10 @@
                                 <h4 style="margin: 0;">Latest Weather Conditions — Hyderabad</h4>
                                 <span id="weatherFreshnessBadge" class="temporal-chip" style="display: none;"></span>
                             </div>
-                            <span class="card-header-sub">Citywide model-based weather estimates via Open-Meteo API (CC BY 4.0)</span>
+                            <span class="card-header-sub">Citywide weather indicators & atmospheric screening (CC BY 4.0)</span>
                         </div>
                         <div class="weather-meta-tags">
-                            <span class="weather-provider-tag" id="weatherObservationTime">Model Time: --</span>
+                            <span class="weather-provider-tag" id="weatherObservationTime">Indicator Time: --</span>
                         </div>
                     </div>
 
@@ -503,8 +504,8 @@
                     <div class="weather-notice-banner" id="weatherNoticeBanner">
                         <span class="notice-icon">ℹ️</span>
                         <div class="notice-text">
-                            <strong>Model-Based Weather Conditions:</strong>
-                            <span>Latest weather conditions provided by Open-Meteo weather models for the Hyderabad city-center coordinates (17.385°N, 78.487°E). These are model-based estimates, not direct measurements from a local weather station. Recent precipitation represents accumulation over the preceding 15-minute interval, not an instantaneous precipitation rate. 1-km spatial grid hazard scoring operates independently using verified historical baselines.</span>
+                            <strong>Atmospheric Weather Indicators:</strong>
+                            <span>Current weather screening represents citywide atmospheric indicators for Hyderabad metropolitan center (17.385°N, 78.487°E). These provide estimated screening indicators, not direct measurements from a local weather station. Recent precipitation represents accumulation over the preceding 15-minute interval. 1-km spatial multi-hazard priority scoring operates independently using verified historical baselines.</span>
                         </div>
                     </div>
                 </section>
@@ -838,7 +839,7 @@
                     <div>
                         <span class="page-tag-badge">MICROCLIMATE INTELLIGENCE</span>
                         <h2>Urban Heat Intelligence</h2>
-                        <p class="page-subtitle">Explore heat risk using satellite thermal observation data and predictive surface temperature modeling.</p>
+                        <p class="page-subtitle">Explore urban heat exposure using multi-year satellite thermal observations and neighborhood surface temperature analysis.</p>
                     </div>
                 </div>
 

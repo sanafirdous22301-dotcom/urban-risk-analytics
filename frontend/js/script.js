@@ -815,7 +815,11 @@ async function executeAssessment() {
         const data = await res.json();
         lastAssessmentData = data;
 
-        renderAssessmentResults(data);
+        if (currentAssessmentMode === "current") {
+            renderCurrentConditionsAssessment();
+        } else {
+            renderAssessmentResults(data);
+        }
     } catch (err) {
         console.error("Evaluation error:", err);
     } finally {
@@ -854,6 +858,7 @@ function renderAssessmentResults(data) {
     const roadScore = comp.road_representation_gap_score != null ? (comp.road_representation_gap_score * 100).toFixed(1) : null;
 
     // 2. TOP SUMMARY METRIC CARDS
+    setText("homePriorityTitleLabel", "Integrated Urban Priority (IUPS)");
     const priEl = document.getElementById("homePriorityScore");
     if (priEl) {
         priEl.textContent = priorityScore;
@@ -884,7 +889,7 @@ function renderAssessmentResults(data) {
             floodEl.classList.remove("long-text");
         }
     }
-    setText("homePrioritySubnote", "Composite multi-hazard priority baseline");
+    setText("homePrioritySubnote", "Historical baseline (Flood 35%, Heat 35%, Infra 15%, Road 15%)");
     setText("homeFloodScoreText", hasFloodScore ? `(${floodScore} / 100)` : "");
     setText("homeFloodSubnote", hasFloodScore ? "Direct cell storm raster evidence" : "Insufficient local evidence · 40 historical flood records");
     applyBadgeStyle(document.getElementById("homeFloodBadge"), floodClass);
@@ -920,11 +925,13 @@ function renderAssessmentResults(data) {
     applyBadgeStyle(document.getElementById("homeInfraBadge"), infraVal);
 
     // 3. LOCATION ANALYSIS PANEL (RIGHT OF MAP)
+    setText("analysisEyebrow", "HISTORICAL IUPS ASSESSMENT");
+    setText("analysisScoreBoxLabel", "Integrated Urban Priority Screening (IUPS)");
     setText("analysisPlaceTitle", currentPlaceName);
     setText("analysisPlaceSubtitle", `Evaluated at ${currentLat.toFixed(3)}°N, ${currentLon.toFixed(3)}°E`);
-    setText("analysisOverallScore", `${priorityScore} / 100`);
+    setText("analysisOverallScore", isUnscored ? "NOT SCORED" : `${priorityScore} / 100`);
     setText("analysisPriorityBand", priorityBand);
-    setText("analysisScoreTypeDesc", "Composite multi-hazard baseline priority (Flood 35%, Heat 35%, Infra 15%, Road 15%)");
+    setText("analysisScoreTypeDesc", "Historical baseline priority screening (Flood 35%, Heat 35%, Infra 15%, Road 15%)");
 
     const anaBadge = document.getElementById("analysisOverallBadge");
     if (anaBadge) {
@@ -2171,7 +2178,7 @@ function setWeatherUnavailable(msg) {
             <span class="notice-icon">⚠️</span>
             <div class="notice-text">
                 <strong>Weather Data Unavailable:</strong>
-                <span>${msg}. Historical 1-km risk grid and IUPS assessments operate uninterrupted from local databases.</span>
+                <span>${msg}. Spatial risk grid and priority assessments remain fully active for all localities.</span>
             </div>
         `;
     }
@@ -2361,15 +2368,15 @@ function setupAssessmentModeToggle() {
 
         if (mode === "historical") {
             if (modeTitle) modeTitle.textContent = "Multi-Year Risk Baseline (Satellite & Historical Archive)";
-            if (modeDesc) modeDesc.innerHTML = `<span>Baseline calibrated across 741 validated 1-km² grid cells using MODIS thermal satellite observations (2018–2023), 40 historical flood records (1969–2022), and mapped emergency facilities.</span>`;
+            if (modeDesc) modeDesc.innerHTML = `<span>Baseline calibrated across 741 validated 1-km² grid cells using MODIS thermal satellite observations (35%), 40 historical flood disaster records (35%), and emergency facility accessibility (Hospital 15%, Road 15%).</span>`;
             if (lastAssessmentData) {
                 renderAssessmentResults(lastAssessmentData);
             } else {
                 executeAssessment();
             }
         } else {
-            if (modeTitle) modeTitle.textContent = "Current Conditions Screening (Real-Time Weather Model)";
-            if (modeDesc) modeDesc.innerHTML = `<span>Real-time screening conditions from Open-Meteo numerical weather model. <strong>Important:</strong> Live weather conditions reflect transient screening and do not replace multi-year risk baselines.</span>`;
+            if (modeTitle) modeTitle.textContent = "Current Conditions Screening (Real-Time Weather Indicators)";
+            if (modeDesc) modeDesc.innerHTML = `<span>Real-time screening combining current atmospheric indicators (Heat Stress 40%, Rainfall 25%) with mapped infrastructure readiness (Hospital 20%, Road 15%). <strong>Notice:</strong> Current weather reflects transient conditions and does not replace multi-year risk baselines.</span>`;
             renderCurrentConditionsAssessment();
         }
     }
@@ -2484,8 +2491,9 @@ function renderCurrentConditionsAssessment() {
         curPriorityBadgeClass = "badge-low";
     }
 
+    setText("homePriorityTitleLabel", "Current Operational Screening Priority");
     setText("homePriorityScore", curPriorityScore.toFixed(1));
-    setText("homePrioritySubnote", "Current multi-hazard operational screening");
+    setText("homePrioritySubnote", "Real-time screening (Heat 40%, Rain 25%, Infra 20%, Road 15%)");
     const pBadge = document.getElementById("homePriorityBadge");
     if (pBadge) {
         pBadge.className = `metric-status-pill ${curPriorityBadgeClass}`;
@@ -2498,7 +2506,7 @@ function renderCurrentConditionsAssessment() {
         floodEl.className = "metric-val-large";
     }
     setText("homeFloodScoreText", `(${curFloodScoreText} / 15m)`);
-    setText("homeFloodSubnote", "Current weather screening. Historical records preserved.");
+    setText("homeFloodSubnote", "Current weather screening · 40 historical flood records preserved below");
     applyBadgeStyle(document.getElementById("homeFloodBadge"), curFloodVal);
 
     const heatEl = document.getElementById("homeHeatVal");
@@ -2524,11 +2532,13 @@ function renderCurrentConditionsAssessment() {
     }
 
     // 4. Update Right-Hand Analysis Panel in Current Mode
+    setText("analysisEyebrow", "CURRENT OPERATIONAL SCREENING");
+    setText("analysisScoreBoxLabel", "Current Operational Screening Priority");
     setText("analysisPlaceTitle", currentPlaceName);
     setText("analysisPlaceSubtitle", `Current Weather Screening · ${currentLat.toFixed(3)}°N, ${currentLon.toFixed(3)}°E`);
     setText("analysisOverallScore", `${curPriorityScore.toFixed(1)} / 100`);
     setText("analysisPriorityBand", curPriorityBand);
-    setText("analysisScoreTypeDesc", "Real-time weather telemetry & infrastructure readiness");
+    setText("analysisScoreTypeDesc", "Current operational screening combining real-time weather indicators (Heat 40%, Rain 25%) with mapped infrastructure accessibility (Infra 20%, Road 15%)");
 
     const anaBadge = document.getElementById("analysisOverallBadge");
     if (anaBadge) {
@@ -2600,6 +2610,16 @@ function renderCurrentConditionsAssessment() {
         nullExplanation: null,
         regionalLabel: "Physical Connectivity"
     });
+
+    if (lastAssessmentData) {
+        const cats = lastAssessmentData.category_assessments || {};
+        syncSubModulesWithAssessment(
+            lastAssessmentData,
+            cats.flood_risk?.score_value,
+            cats.heat_risk?.score_value,
+            cats.infrastructure_risk?.score_value
+        );
+    }
 }
 
 function initializePlatform() {
