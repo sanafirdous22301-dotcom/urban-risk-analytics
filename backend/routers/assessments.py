@@ -734,16 +734,19 @@ def run_spatial_assessment(latitude: float, longitude: float, location_id: Optio
         if flood_evidence_score is not None:
             flood_score_val = round(flood_evidence_score * 100, 1)
             flood_class = "HIGH" if flood_score_val >= 50 else ("MEDIUM" if flood_score_val >= 25 else "LOW")
+            flood_reason = None
             flood_explanation = (
                 f"Rainfall raster extraction indicates elevated precipitation exposure ({flood_score_val}/100 normalized score). "
                 f"Hyderabad district records document 40 historical flood events in regional drainage catchments."
             )
         else:
             flood_score_val = None
-            flood_class = "REGIONAL CONTEXT ONLY"
+            flood_class = "NOT SCORED"
+            flood_reason = "Insufficient local flood-hazard evidence"
             flood_explanation = (
-                "Location is situated in the Greater Hyderabad urban drainage catchment with 40 recorded historical flood events (1969–2022). "
-                "Location has insufficient direct cell-level flood evidence (no local rainfall monitoring raster sample) to calculate a numerical flood-risk score."
+                "Location has insufficient direct local flood-hazard evidence (no local rainfall monitoring raster sample) to calculate a cell-specific score. "
+                "This does not mean the location is free from flood risk. The locality is evaluated under Greater Hyderabad's documented disaster inventory "
+                "of 40 historical flood events (1969–2022) with 727 recorded fatalities."
             )
 
         heat_evidence_score = components.get("heat_evidence_score")
@@ -804,9 +807,13 @@ def run_spatial_assessment(latitude: float, longitude: float, location_id: Optio
                 "category_name": "Flood Risk",
                 "score_value": flood_score_val,
                 "score_scale": "0-100",
-                "score_label": "Normalized Rainfall & Hazard Depth Score / 100" if flood_score_val is not None else "Regional Disaster Context (No Direct Cell Evidence)",
+                "score_label": "Normalized Rainfall & Hazard Depth Score / 100" if flood_score_val is not None else "Not Scored (Insufficient Local Evidence)",
                 "classification": flood_class,
                 "classification_explanation": flood_explanation,
+                "is_scored": flood_score_val is not None,
+                "reason": flood_reason if flood_score_val is None else None,
+                "historical_events_count": 40,
+                "historical_fatalities_count": 727,
                 "data_type": "HISTORICAL DISASTER INVENTORY & STORM RASTER EXTRACTS",
                 "source": "India Flood Inventory v3 (IMD Disasters Archive) & CHIRPS v3.0 Daily Rainfall Extraction",
                 "observation_period": "1969–2022 (Floods) · 2020-09-25 & 2021-10-08 (Storm Rasters)",

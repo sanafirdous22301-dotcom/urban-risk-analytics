@@ -112,14 +112,10 @@ function applyBadgeStyle(el, classification) {
     el.className = "metric-status-pill";
     const cls = String(classification || "LOW").toUpperCase();
 
-    if (cls.includes("REGIONAL") || cls.includes("CONTEXT")) {
-        el.textContent = "REGIONAL CONTEXT ONLY";
-        el.classList.add("badge-context");
-        el.title = "Location is within the Greater Hyderabad drainage catchment but has no direct cell-level rainfall monitoring sample. Numerical flood-risk score is not evaluated.";
-    } else if (cls.includes("NOT SCORED") || cls.includes("INSUFFICIENT")) {
-        el.textContent = "NOT SCORED (Insufficient Hazard Evidence)";
+    if (cls.includes("NOT SCORED") || cls.includes("INSUFFICIENT") || cls.includes("REGIONAL") || cls.includes("CONTEXT")) {
+        el.textContent = "NOT SCORED";
         el.classList.add("badge-unscored");
-        el.title = "This grid cell has insufficient flood or satellite thermal hazard evidence to calculate a priority score. Lack of available evidence does not indicate low vulnerability.";
+        el.title = "Insufficient local flood or thermal hazard evidence is available to calculate a cell score. Lack of direct evidence does not indicate low vulnerability.";
     } else if (cls.includes("VERY HIGH") || cls.includes("HIGHER")) {
         el.textContent = "VERY HIGH ⚠️";
         el.classList.add("badge-very-high");
@@ -382,7 +378,7 @@ function renderSpatialGridCells(layerType) {
         if (isUnscored && layerType === "overall") {
             scoreText = `<strong style="color: #64748b;">NOT SCORED</strong>`;
         } else if (layerType === "flood" && displayScore == null) {
-            scoreText = `<strong style="color: #0369a1;">REGIONAL CONTEXT ONLY (-- / 100)</strong>`;
+            scoreText = `<strong style="color: #64748b;">NOT SCORED</strong> <span style="font-size: 11.5px; color: #64748b;">(Insufficient local evidence · 40 historical flood records)</span>`;
         } else {
             scoreText = `<strong style="font-size: 15px; color: ${colors.border};">${displayScore} / 100</strong>`;
         }
@@ -734,12 +730,13 @@ function updateSelectedLocation(lat, lon, label, autoExecute) {
     // 2. Update Flood Map Position
     if (floodMap) {
         floodMap.setView([currentLat, currentLon], 13);
+        const fMarkerText = `Selected drainage evaluation point.<br><small style="color: #64748b;">Historical Archive: 40 documented Hyderabad events</small>`;
         if (floodLocMarker) {
             floodLocMarker.setLatLng([currentLat, currentLon]);
-            floodLocMarker.bindPopup(`<strong>${label}</strong><br>Selected drainage evaluation point.`);
+            floodLocMarker.bindPopup(`<strong>${label}</strong><br>${fMarkerText}`);
         } else {
             floodLocMarker = L.marker([currentLat, currentLon], { icon: localMarkerIcon }).addTo(floodMap);
-            floodLocMarker.bindPopup(`<strong>${label}</strong><br>Selected drainage evaluation point.`);
+            floodLocMarker.bindPopup(`<strong>${label}</strong><br>${fMarkerText}`);
         }
     }
 
@@ -851,7 +848,7 @@ function renderAssessmentResults(data) {
     // Flood: score from flood.score_value (null if no direct cell evidence)
     const hasFloodScore = flood.score_value != null;
     const floodScore = hasFloodScore ? Number(flood.score_value).toFixed(1) : null;
-    const floodClass = flood.classification || (hasFloodScore ? "MEDIUM" : "REGIONAL CONTEXT ONLY");
+    const floodClass = hasFloodScore ? (flood.classification || "MEDIUM") : "NOT SCORED";
 
     // Road representation gap score
     const roadScore = comp.road_representation_gap_score != null ? (comp.road_representation_gap_score * 100).toFixed(1) : null;
@@ -889,7 +886,7 @@ function renderAssessmentResults(data) {
     }
     setText("homePrioritySubnote", "Composite multi-hazard priority baseline");
     setText("homeFloodScoreText", hasFloodScore ? `(${floodScore} / 100)` : "");
-    setText("homeFloodSubnote", hasFloodScore ? "Direct cell storm raster evidence" : "40 historical flood records (1969–2022)");
+    setText("homeFloodSubnote", hasFloodScore ? "Direct cell storm raster evidence" : "Insufficient local evidence · 40 historical flood records");
     applyBadgeStyle(document.getElementById("homeFloodBadge"), floodClass);
 
     // Heat Card
@@ -939,7 +936,7 @@ function renderAssessmentResults(data) {
     applyBadgeStyle(document.getElementById("analysisHeatBadge"), heat.classification || "HIGH");
     applyBadgeStyle(document.getElementById("analysisInfraBadge"), infra.classification || "MEDIUM");
 
-    setText("analysisFloodScoreSub", hasFloodScore ? `Precipitation index: ${floodScore} / 100` : "Regional drainage context only");
+    setText("analysisFloodScoreSub", hasFloodScore ? `Precipitation index: ${floodScore} / 100` : "Insufficient local evidence · 40 historical records");
     setText("analysisHeatScoreSub", heatScore != null ? `Percentile score: ${heatScore} / 100` : "Insufficient thermal evidence");
     setText("analysisInfraScoreSub", infraScore != null ? `Deficit score: ${infraScore} / 100` : "Insufficient infrastructure evidence");
 
@@ -958,8 +955,8 @@ function renderAssessmentResults(data) {
     // 4. RISK INSIGHTS PROGRESS BARS (SYNCHRONIZED WITH SUMMARY CARDS)
     renderRiskBar("Flood", floodScore, {
         defaultNote: "Historical drainage catchment exposure",
-        nullExplanation: "Insufficient local flood-hazard evidence is available to calculate this indicator. This does not mean the location is free from flood risk.",
-        regionalLabel: !hasFloodScore ? "Regional Context" : null
+        nullExplanation: "Insufficient local flood-hazard evidence is available to calculate this indicator. This does not mean the location is free from flood risk. Evaluated under Greater Hyderabad's 40-event historical disaster archive (1969–2022).",
+        regionalLabel: null
     });
 
     renderRiskBar("Heat", heatScore, {
@@ -1047,8 +1044,10 @@ function populateWhySection(flood, heat, infra, score) {
         points.push(`<strong>Moderate Thermal Exposure:</strong> Surface temperatures align with Hyderabad baseline summer averages.`);
     }
 
-    if (flood.classification === "HIGH" || flood.classification === "MEDIUM") {
-        points.push(`<strong>Drainage Vulnerability:</strong> Located within regional catchment with documented historical monsoon inundation records.`);
+    if (flood.score_value != null) {
+        points.push(`<strong>Drainage Vulnerability:</strong> Rainfall raster extraction indicates elevated precipitation exposure (${flood.score_value}/100) within Musi river catchment.`);
+    } else {
+        points.push(`<strong>Drainage Context:</strong> Insufficient direct local flood-hazard evidence for a cell score. Evaluated under Hyderabad's 40-event historical flood disaster archive (1969–2022) with 727 recorded fatalities. This does not mean the locality is safe from flooding.`);
     }
 
     if (infra.classification === "HIGH" || infra.hospitals_within_1km === 0) {
@@ -1086,8 +1085,23 @@ function syncSubModulesWithAssessment(data, floodScore, heatScore, infraScore) {
 
     // Flood Sub-view Sync
     setText("floodSelectedPlaceTitle", currentPlaceName);
-    setText("floodLocScore", floodScore != null ? `${floodScore} / 100` : "NOT SCORED");
-    applyBadgeStyle(document.getElementById("floodLocBadge"), flood.classification || (floodScore != null ? "MEDIUM" : "REGIONAL CONTEXT ONLY"));
+    setText("floodSelectedPlaceSubtitle", `Evaluated at ${currentLat.toFixed(3)}°N, ${currentLon.toFixed(3)}°E · Musi River Drainage Basin`);
+    if (floodScore != null) {
+        setText("floodLocScore", `${floodScore} / 100`);
+        applyBadgeStyle(document.getElementById("floodLocBadge"), flood.classification || "MEDIUM");
+        setText("floodFactorsText", `Direct cell rainfall raster extraction indicates ${floodScore} / 100 normalized precipitation exposure. The locality is situated in Hyderabad's urban drainage network with 40 recorded historical flood events (1969–2022) and 727 recorded fatalities.`);
+    } else {
+        setText("floodLocScore", "Not Scored (Insufficient Local Evidence)");
+        applyBadgeStyle(document.getElementById("floodLocBadge"), "NOT SCORED");
+        setText("floodFactorsText", `Insufficient local flood-hazard evidence is available to calculate a cell-specific score. This does not mean the location is free from flood risk. The locality is situated in Hyderabad's urban drainage network with 40 recorded historical flood events (1969–2022) and 727 recorded fatalities. Landmark incidents include October 2020 (81 deaths) and August 2000 (240+ deaths).`);
+    }
+
+    if (floodLocMarker) {
+        const markerScoreText = floodScore != null
+            ? `Precipitation Index: <strong>${floodScore} / 100</strong>`
+            : `Flood Vulnerability: <strong>Not Scored</strong> (Insufficient local evidence)<br>Historical Archive: 40 documented events`;
+        floodLocMarker.bindPopup(`<strong>${currentPlaceName}</strong><br>${markerScoreText}`);
+    }
 
     // Infrastructure Sub-view Sync
     setText("infraSelectedPlaceTitle", currentPlaceName);
@@ -1816,8 +1830,8 @@ function renderComparisonMatrix(nameA, nameB, dataA, dataB, container) {
     const floodB = catsB.flood_risk?.score_value != null ? Number(catsB.flood_risk.score_value) : null;
     const floodAClass = catsA.flood_risk?.classification || 'Moderate';
     const floodBClass = catsB.flood_risk?.classification || 'Moderate';
-    const floodAText = floodA != null ? `${floodAClass} (${floodA.toFixed(1)} / 100)` : 'Regional Context (Evidence insufficient for cell score)';
-    const floodBText = floodB != null ? `${floodBClass} (${floodB.toFixed(1)} / 100)` : 'Regional Context (Evidence insufficient for cell score)';
+    const floodAText = floodA != null ? `${floodAClass} (${floodA.toFixed(1)} / 100)` : 'Not Scored (Insufficient Local Evidence)';
+    const floodBText = floodB != null ? `${floodBClass} (${floodB.toFixed(1)} / 100)` : 'Not Scored (Insufficient Local Evidence)';
     const floodAIsHigher = floodA != null && floodB != null && floodA > floodB;
     const floodBIsHigher = floodA != null && floodB != null && floodB > floodA;
 
@@ -2249,7 +2263,7 @@ async function loadLocalityHazardProfiles(lat, lon) {
             const runoffBadge = document.getElementById("floodRunoffContextBadge");
             if (typeBadge) {
                 typeBadge.textContent = fData.evidence_classification;
-                typeBadge.className = fData.has_direct_cell_evidence ? "pill-badge-green" : "pill-badge-blue";
+                typeBadge.className = fData.has_direct_cell_evidence ? "pill-badge-green" : "pill-badge-muted";
             }
             if (runoffBadge && fData.environmental_landcover_context) {
                 const label = fData.environmental_landcover_context.landcover_classification_label;

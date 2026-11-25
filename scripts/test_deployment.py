@@ -286,7 +286,7 @@ def run_comprehensive_tests():
         i_cls = cats.get("infrastructure_risk", {}).get("classification")
         record_test(
             "Three Category Assessments (/api/assessments/evaluate)",
-            has_3 and f_cls in ["LOW", "MEDIUM", "HIGH", "REGIONAL CONTEXT ONLY"] and h_cls in ["LOW", "MEDIUM", "HIGH"] and i_cls in ["LOW", "MEDIUM", "HIGH"],
+            has_3 and f_cls in ["LOW", "MEDIUM", "HIGH", "NOT SCORED"] and h_cls in ["LOW", "MEDIUM", "HIGH"] and i_cls in ["LOW", "MEDIUM", "HIGH"],
             f"Flood: {f_cls}, Heat: {h_cls} ({cats.get('heat_risk', {}).get('score_value')}/100), Infra: {i_cls} ({cats.get('infrastructure_risk', {}).get('score_value')}/100)"
         )
     except Exception as e:

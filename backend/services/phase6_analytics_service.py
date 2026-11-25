@@ -123,8 +123,10 @@ class AdvancedHazardAnalyticsService:
             "has_direct_cell_evidence": has_direct_cell_evidence,
             "direct_flood_evidence_score": direct_cell_score,
             "evidence_classification": (
-                "DIRECT EVIDENCE AVAILABLE" if has_direct_cell_evidence else "REGIONAL CONTEXT ONLY"
+                "DIRECT EVIDENCE AVAILABLE" if has_direct_cell_evidence else "NOT SCORED (Insufficient Cell Evidence)"
             ),
+            "scoring_status": "SCORED" if has_direct_cell_evidence else "NOT SCORED",
+            "scoring_reason": None if has_direct_cell_evidence else "Insufficient local flood-hazard evidence",
             "regional_context": {
                 "historical_events_registered": len(flood_events),
                 "historical_event_inventory_coverage": "Hyderabad Metropolitan District (1969-2023)",
